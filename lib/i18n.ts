@@ -57,7 +57,7 @@ const dictionaryBg = {
       "Вярваме, че всеки добре поддържан двор носи повече спокойствие и стойност на имота. Подхождаме индивидуално към всеки проект и следим качеството през всеки сезон.",
     statsSqm: "поддържани зелени площи (ориентир)",
     statsClients: "доволни клиенти и обекти",
-    statsTeam: "професионалист с опит",
+    statsWorkHoursLine: "Понеделник – Петък от 9:00 до 18:00",
     whyTitle: "Защо да ни изберете",
     why1Title: "Локален фокус — София",
     why1Body:
@@ -177,7 +177,7 @@ const dictionaryEn: Messages = {
       "We believe a well-maintained yard adds calm and value to every property. Each project is approached individually, with quality monitored across every season.",
     statsSqm: "maintained green areas (indicative)",
     statsClients: "clients & sites served",
-    statsTeam: "experienced professional",
+    statsWorkHoursLine: "Monday – Friday, 9:00 – 18:00",
     whyTitle: "Why choose us",
     why1Title: "Local focus — Sofia",
     why1Body:

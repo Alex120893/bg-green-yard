@@ -32,8 +32,8 @@ export default async function AboutPage({
   const stats = [
     { value: "15 000+", label: t.about.statsSqm },
     { value: "120+", label: t.about.statsClients },
-    { value: "24/7", label: t.about.statsTeam },
-  ];
+    { full: t.about.statsWorkHoursLine },
+  ] as const;
 
   const why = [
     { title: t.about.why1Title, body: t.about.why1Body },
@@ -155,13 +155,21 @@ export default async function AboutPage({
               <div className="grid gap-4 rounded-2xl border border-border bg-white p-8 shadow-sm">
                 {stats.map((s) => (
                   <div
-                    key={s.label}
+                    key={"full" in s ? s.full : s.label}
                     className="border-b border-border pb-4 last:border-0 last:pb-0"
                   >
-                    <p className="text-3xl font-semibold text-brand-dark">
-                      {s.value}
-                    </p>
-                    <p className="mt-1 text-sm text-muted">{s.label}</p>
+                    {"full" in s ? (
+                      <p className="text-lg font-semibold leading-snug text-brand-dark sm:text-xl">
+                        {s.full}
+                      </p>
+                    ) : (
+                      <>
+                        <p className="text-3xl font-semibold text-brand-dark">
+                          {s.value}
+                        </p>
+                        <p className="mt-1 text-sm text-muted">{s.label}</p>
+                      </>
+                    )}
                   </div>
                 ))}
               </div>
