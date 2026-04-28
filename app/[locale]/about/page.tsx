@@ -42,7 +42,57 @@ export default async function AboutPage({
   ];
 
   return (
-    <PlantFrame>
+    <PlantFrame clipDecorations={false}>
+      <div className="relative">
+        <div
+          className="pointer-events-none absolute inset-0 z-[1] md:hidden"
+          aria-hidden
+        >
+          <Image
+            src="/plant.png"
+            alt=""
+            width={80}
+            height={80}
+            className="absolute left-[-6%] top-[6%] h-auto w-10 rotate-[-16deg] opacity-45"
+          />
+          <Image
+            src="/plant.png"
+            alt=""
+            width={72}
+            height={72}
+            className="absolute right-[-4%] top-[14%] h-auto w-9 rotate-[14deg] opacity-40"
+          />
+          <Image
+            src="/plant.png"
+            alt=""
+            width={64}
+            height={64}
+            className="absolute left-[3%] top-[38%] h-auto w-8 -scale-x-100 rotate-[10deg] opacity-35"
+          />
+          <Image
+            src="/plant.png"
+            alt=""
+            width={72}
+            height={72}
+            className="absolute right-[-2%] top-[52%] h-auto w-9 -rotate-[12deg] opacity-40"
+          />
+          <Image
+            src="/plant.png"
+            alt=""
+            width={64}
+            height={64}
+            className="absolute left-[-4%] bottom-[28%] h-auto w-8 rotate-[18deg] opacity-38"
+          />
+          <Image
+            src="/plant.png"
+            alt=""
+            width={64}
+            height={64}
+            className="absolute right-[2%] bottom-[18%] h-auto w-8 rotate-[-8deg] opacity-42"
+          />
+        </div>
+
+        <div className="relative z-[2]">
       <section className="border-b border-border bg-white">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-2 md:items-center md:gap-16 md:px-6 md:py-20">
           <Reveal>
@@ -120,7 +170,7 @@ export default async function AboutPage({
 
           <Reveal delayMs={40}>
             <div
-              className="mt-12 flex flex-wrap items-end justify-center gap-6 px-2 sm:gap-10 md:mt-14 md:gap-14"
+              className="mt-12 flex flex-nowrap items-end justify-center gap-2 px-1 md:mt-14 md:flex-wrap md:gap-14 md:px-2"
               aria-hidden
             >
               <Image
@@ -128,21 +178,21 @@ export default async function AboutPage({
                 alt=""
                 width={180}
                 height={180}
-                className="h-auto w-[min(30vw,9.5rem)] -rotate-[10deg] object-contain opacity-90 drop-shadow-md sm:w-40"
+                className="h-auto w-11 max-w-[28%] shrink-0 object-contain opacity-90 drop-shadow-md -rotate-[10deg] min-[480px]:w-14 md:max-w-none md:w-40"
               />
               <Image
                 src="/plant.png"
                 alt=""
                 width={200}
                 height={200}
-                className="h-auto w-[min(34vw,11rem)] -scale-x-100 rotate-[8deg] object-contain opacity-95 drop-shadow-md sm:w-44"
+                className="h-auto w-12 max-w-[30%] shrink-0 object-contain opacity-95 drop-shadow-md -scale-x-100 rotate-[8deg] min-[480px]:w-16 md:max-w-none md:w-44"
               />
               <Image
                 src="/plant.png"
                 alt=""
                 width={180}
                 height={180}
-                className="h-auto w-[min(30vw,9.5rem)] rotate-[12deg] object-contain opacity-90 drop-shadow-md sm:w-40"
+                className="h-auto w-11 max-w-[28%] shrink-0 object-contain opacity-90 drop-shadow-md rotate-[12deg] min-[480px]:w-14 md:max-w-none md:w-40"
               />
             </div>
           </Reveal>
@@ -189,6 +239,8 @@ export default async function AboutPage({
           </div>
         </div>
       </section>
+        </div>
+      </div>
     </PlantFrame>
   );
 }

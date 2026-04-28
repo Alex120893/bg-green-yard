@@ -100,12 +100,17 @@ export function PlantDecoration({
 export function PlantFrame({
   children,
   className = "",
+  clipDecorations = true,
 }: {
   children: React.ReactNode;
   className?: string;
+  /** false — ъгловите растения не се режат (за допълнителни декорации към ръба) */
+  clipDecorations?: boolean;
 }) {
   return (
-    <div className={`relative isolate overflow-hidden ${className}`}>
+    <div
+      className={`relative isolate ${clipDecorations ? "overflow-hidden" : ""} ${className}`}
+    >
       <PlantDecoration corner="tr" kind="avif" size={180} opacity={0.45} />
       <PlantDecoration corner="bl" kind="avif" size={140} opacity={0.4} />
       <PlantDecoration corner="tl" kind="png" size={130} opacity={0.34} />

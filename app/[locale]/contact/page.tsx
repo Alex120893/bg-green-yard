@@ -35,12 +35,12 @@ export default async function ContactPage({
   return (
     <div className="relative">
       <PlantDecoration corner="bl" kind="avif" className="opacity-35" size={190} />
-      <PlantDecoration corner="tl" kind="png" className="opacity-27" size={128} />
+      <PlantDecoration corner="tr" kind="png" className="opacity-27" size={128} />
 
       <section className="border-b border-border bg-white">
         <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
           <Reveal>
-            <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+            <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-start">
               <div>
                 <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
                   {t.contact.title}
@@ -54,20 +54,30 @@ export default async function ContactPage({
                       {t.contact.addressLabel}
                     </dt>
                   </div>
-                  <div>
-                    <dt className="text-muted">{t.contact.hoursLabel}</dt>
-                    <dd className="font-medium text-foreground">
-                      {t.contact.hoursValue}
-                    </dd>
+                  <div className="flex items-center justify-between gap-4 md:block md:space-y-0">
+                    <div>
+                      <dt className="text-muted">{t.contact.hoursLabel}</dt>
+                      <dd className="font-medium text-foreground">
+                        {t.contact.hoursValue}
+                      </dd>
+                    </div>
+                    <Image
+                      src="/logo-removebg-preview.png"
+                      alt="BG Green Yard"
+                      width={100}
+                      height={100}
+                      className="h-14 w-auto shrink-0 md:hidden"
+                    />
                   </div>
                 </dl>
               </div>
               <Image
                 src="/logo-removebg-preview.png"
-                alt="BG Green Yard"
+                alt=""
                 width={100}
                 height={100}
-                className="justify-self-start md:justify-self-end"
+                className="hidden self-start md:block md:justify-self-end"
+                aria-hidden
               />
             </div>
           </Reveal>

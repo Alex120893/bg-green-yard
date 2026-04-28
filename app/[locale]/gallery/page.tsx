@@ -38,11 +38,11 @@ export default async function GalleryPage({
   const t = getMessages(loc as Locale);
 
   return (
-    <div className="relative isolate overflow-hidden">
-      <PlantDecoration corner="tr" kind="avif" size={180} opacity={0.45} />
-      <PlantDecoration corner="bl" kind="avif" size={140} opacity={0.4} />
-      <PlantDecoration corner="tl" kind="png" size={130} opacity={0.34} />
-      <PlantDecoration corner="br" kind="png" size={145} opacity={0.32} />
+    <div className="relative isolate">
+      <PlantDecoration corner="tl" kind="png" size={135} opacity={0.38} />
+      <PlantDecoration corner="tr" kind="avif" size={185} opacity={0.48} />
+      <PlantDecoration corner="bl" kind="avif" size={150} opacity={0.42} />
+      <PlantDecoration corner="br" kind="png" size={150} opacity={0.36} />
       <div className="relative z-10">
         <section className="border-b border-border bg-white">
           <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
