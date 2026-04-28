@@ -2,19 +2,43 @@ import Image from "next/image";
 
 type Corner = "tl" | "tr" | "bl" | "br";
 
-const cornerClass: Record<Corner, string> = {
-  tl: "top-0 left-0 -translate-x-1/4 -translate-y-1/4 rotate-[-8deg]",
-  tr: "top-0 right-0 translate-x-1/4 -translate-y-1/4 rotate-[10deg]",
-  bl: "bottom-0 left-0 -translate-x-1/5 translate-y-1/5 rotate-[6deg]",
-  br: "bottom-0 right-0 translate-x-1/5 translate-y-1/5 rotate-[-12deg]",
+/** Позиция без завъртане */
+const cornerPos: Record<Corner, string> = {
+  tl: "top-0 left-0 -translate-x-1/4 -translate-y-1/4",
+  tr: "top-0 right-0 translate-x-1/4 -translate-y-1/4",
+  bl: "bottom-0 left-0 -translate-x-1/5 translate-y-1/5",
+  br: "bottom-0 right-0 translate-x-1/5 translate-y-1/5",
 };
 
-/** Допълнително завъртане и огледалност за plant.png — различно по ъгли */
+/** Завъртане на контейнера по ъгъл */
+const cornerRot: Record<Corner, string> = {
+  tl: "rotate-[-8deg]",
+  tr: "rotate-[10deg]",
+  bl: "rotate-[6deg]",
+  br: "rotate-[-12deg]",
+};
+
+/** Същите ъгли с обратен знак (ляво ↔ дясно наклон) */
+const cornerRotFlipped: Record<Corner, string> = {
+  tl: "rotate-[8deg]",
+  tr: "rotate-[-10deg]",
+  bl: "rotate-[-6deg]",
+  br: "rotate-[12deg]",
+};
+
+/** Допълнително завъртане и огледалност за plant.png */
 const pngAccent: Record<Corner, { mirror: boolean; spin: string }> = {
   tl: { mirror: true, spin: "-rotate-[11deg]" },
   tr: { mirror: false, spin: "rotate-[17deg]" },
   bl: { mirror: true, spin: "rotate-[9deg]" },
   br: { mirror: false, spin: "-rotate-[14deg]" },
+};
+
+const pngAccentFlipped: Record<Corner, { mirror: boolean; spin: string }> = {
+  tl: { mirror: true, spin: "rotate-[11deg]" },
+  tr: { mirror: false, spin: "-rotate-[17deg]" },
+  bl: { mirror: true, spin: "-rotate-[9deg]" },
+  br: { mirror: false, spin: "rotate-[14deg]" },
 };
 
 export function PlantDecoration({
@@ -23,16 +47,19 @@ export function PlantDecoration({
   size = 160,
   opacity = 0.55,
   kind = "avif",
+  /** Обръща посоката на наклона при същия абсолютен ъгъл */
+  flipTilt = false,
 }: {
   corner: Corner;
   className?: string;
   size?: number;
   opacity?: number;
-  /** avif — основна илюстрация; png — допълнителна, с огледалност и завъртане по ъгъл */
   kind?: "avif" | "png";
+  flipTilt?: boolean;
 }) {
-  const src = kind === "png" ? "/plant.png" : "/plant.avif";
-  const png = pngAccent[corner];
+  const src = "/plant.png";
+  const png = (flipTilt ? pngAccentFlipped : pngAccent)[corner];
+  const outerRot = flipTilt ? cornerRotFlipped[corner] : cornerRot[corner];
 
   const inner =
     kind === "png" ? (
@@ -61,7 +88,7 @@ export function PlantDecoration({
 
   return (
     <div
-      className={`pointer-events-none absolute z-0 select-none ${cornerClass[corner]} ${className}`}
+      className={`pointer-events-none absolute z-0 select-none ${cornerPos[corner]} ${outerRot} ${className}`}
       style={{ opacity }}
       aria-hidden
     >

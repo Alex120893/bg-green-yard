@@ -117,6 +117,35 @@ export default async function AboutPage({
               </div>
             </Reveal>
           </div>
+
+          <Reveal delayMs={40}>
+            <div
+              className="mt-12 flex flex-wrap items-end justify-center gap-6 px-2 sm:gap-10 md:mt-14 md:gap-14"
+              aria-hidden
+            >
+              <Image
+                src="/plant.png"
+                alt=""
+                width={180}
+                height={180}
+                className="h-auto w-[min(30vw,9.5rem)] -rotate-[10deg] object-contain opacity-90 drop-shadow-md sm:w-40"
+              />
+              <Image
+                src="/plant.png"
+                alt=""
+                width={200}
+                height={200}
+                className="h-auto w-[min(34vw,11rem)] -scale-x-100 rotate-[8deg] object-contain opacity-95 drop-shadow-md sm:w-44"
+              />
+              <Image
+                src="/plant.png"
+                alt=""
+                width={180}
+                height={180}
+                className="h-auto w-[min(30vw,9.5rem)] rotate-[12deg] object-contain opacity-90 drop-shadow-md sm:w-40"
+              />
+            </div>
+          </Reveal>
         </div>
       </section>
 

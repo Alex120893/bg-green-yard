@@ -42,7 +42,13 @@ export default async function HomePage({
       />
 
       <section className="relative border-b border-border bg-white">
-        <PlantDecoration corner="tl" kind="avif" className="opacity-40" size={200} />
+        <PlantDecoration
+          corner="tl"
+          kind="avif"
+          flipTilt
+          className="opacity-40"
+          size={200}
+        />
         <PlantDecoration corner="tr" kind="png" className="opacity-30" size={155} />
         <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
           <Reveal>

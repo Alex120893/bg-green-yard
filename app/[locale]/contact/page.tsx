@@ -35,7 +35,6 @@ export default async function ContactPage({
   return (
     <div className="relative">
       <PlantDecoration corner="bl" kind="avif" className="opacity-35" size={190} />
-      <PlantDecoration corner="tr" kind="png" className="opacity-30" size={138} />
       <PlantDecoration corner="tl" kind="png" className="opacity-27" size={128} />
 
       <section className="border-b border-border bg-white">
@@ -97,6 +96,10 @@ export default async function ContactPage({
               </div>
             </div>
           </Reveal>
+        </div>
+
+        <div className="relative mx-auto min-h-[160px] max-w-6xl px-4 pb-12 pt-4 md:px-6 md:pb-14">
+          <PlantDecoration corner="br" kind="png" className="opacity-30" size={138} />
         </div>
       </section>
     </div>
