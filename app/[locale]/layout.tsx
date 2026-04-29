@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { SiteShell } from "@/components/SiteShell";
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getMessages } from "@/lib/i18n";
+import { PRODUCTION_SITE_ORIGIN, ogImageAbsoluteUrl } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -12,12 +13,14 @@ export async function generateMetadata({
   const { locale: loc } = await params;
   const locale = isLocale(loc) ? loc : "bg";
   const t = getMessages(locale);
-  const ogImage = "/logo-removebg-preview.png";
+  const pageUrl = `${PRODUCTION_SITE_ORIGIN}/${locale}`;
 
   return {
     title: t.meta.defaultTitle,
     description: t.meta.defaultDesc,
+    alternates: { canonical: pageUrl },
     openGraph: {
+      url: pageUrl,
       title: t.meta.defaultTitle,
       description: t.meta.defaultDesc,
       locale: locale === "bg" ? "bg_BG" : "en_US",
@@ -25,11 +28,11 @@ export async function generateMetadata({
       type: "website",
       images: [
         {
-          url: ogImage,
-          width: 512,
-          height: 512,
+          url: ogImageAbsoluteUrl,
+          width: 1024,
+          height: 686,
           alt: t.meta.siteName,
-          type: "image/png",
+          type: "image/jpeg",
         },
       ],
     },
@@ -37,7 +40,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: t.meta.defaultTitle,
       description: t.meta.defaultDesc,
-      images: [ogImage],
+      images: [ogImageAbsoluteUrl],
     },
   };
 }

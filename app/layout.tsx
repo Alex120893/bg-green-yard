@@ -1,18 +1,14 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { PRODUCTION_SITE_ORIGIN, ogImageAbsoluteUrl } from "@/lib/site";
 import "./globals.css";
 
 const sans = Inter({
   variable: "--font-geist-sans",
   subsets: ["latin", "cyrillic"],
 });
-//ааа
-const socialImage = "/logo-removebg-preview.png";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  ),
+  metadataBase: new URL(PRODUCTION_SITE_ORIGIN),
   title: {
     default: "BG Green Yard",
     template: "%s | BG Green Yard",
@@ -27,11 +23,11 @@ export const metadata: Metadata = {
       "Озеленяване, поддръжка на градини и поливни системи в София.",
     images: [
       {
-        url: socialImage,
-        width: 512,
-        height: 512,
+        url: ogImageAbsoluteUrl,
+        width: 1024,
+        height: 686,
         alt: "BG Green Yard",
-        type: "image/png",
+        type: "image/jpeg",
       },
     ],
   },
@@ -40,7 +36,7 @@ export const metadata: Metadata = {
     title: "BG Green Yard",
     description:
       "Озеленяване, поддръжка на градини и поливни системи в София.",
-    images: [socialImage],
+    images: [ogImageAbsoluteUrl],
   },
 };
 
