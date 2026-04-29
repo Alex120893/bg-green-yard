@@ -53,7 +53,7 @@ export default async function AboutPage({
             alt=""
             width={80}
             height={80}
-            className="absolute left-[-6%] top-[6%] h-auto w-10 rotate-[-16deg] opacity-45"
+            className="absolute left-[-6%] top-[14%] h-auto w-10 rotate-[-16deg] opacity-45"
           />
           <Image
             src="/plant.png"
@@ -119,7 +119,7 @@ export default async function AboutPage({
                 />
               </div>
               <div
-                className="pointer-events-none absolute -bottom-2 -left-2 z-10 w-[min(36%,8rem)] -rotate-[8deg] drop-shadow-md sm:-bottom-3 sm:-left-3 sm:w-[min(34%,9rem)]"
+                className="pointer-events-none absolute -bottom-7 -left-2 z-10 w-[min(36%,8rem)] -rotate-[8deg] drop-shadow-md sm:-bottom-9 sm:-left-3 sm:w-[min(34%,9rem)]"
                 aria-hidden
               >
                 <Image

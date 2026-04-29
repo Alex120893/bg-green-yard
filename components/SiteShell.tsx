@@ -16,7 +16,7 @@ export function SiteShell({
   return (
     <>
       <HtmlLang locale={locale} />
-      <div className="flex min-h-full flex-col">
+      <div className="flex min-h-full min-w-0 flex-col overflow-x-clip">
         <Navbar locale={locale} nav={t.nav} />
         <main className="flex-1">{children}</main>
         <Footer locale={locale} nav={t.nav} footer={t.footer} />
