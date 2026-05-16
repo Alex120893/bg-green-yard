@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SocialContactLinks } from "@/components/SocialContactLinks";
 import type { Locale, Messages } from "@/lib/i18n";
 
 const links = [
@@ -84,18 +85,23 @@ export function Footer({
               </ul>
             </nav>
 
-            {/* Brand meta */}
+            {/* Contact */}
             <div className="md:col-span-3">
               <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-muted">
-                {footer.brandHeading}
+                {footer.contactHeading}
               </p>
-              <p className="mt-2.5 text-xs leading-snug text-muted sm:text-[13px]">
-                <span className="font-medium text-foreground/90">
-                  {footer.locationLine}
-                </span>
-                <span className="mx-1.5 text-border">·</span>
-                <span>{footer.tagline}</span>
+              <p className="mt-2 text-xs font-medium text-foreground/90">
+                {footer.locationLine}
               </p>
+              <SocialContactLinks
+                className="mt-3"
+                labels={{
+                  email: footer.emailLabel,
+                  phone: footer.phoneLabel,
+                  instagram: footer.instagramLabel,
+                  facebook: footer.facebookLabel,
+                }}
+              />
             </div>
           </div>
         </div>

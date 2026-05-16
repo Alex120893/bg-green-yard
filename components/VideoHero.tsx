@@ -42,7 +42,7 @@ export function VideoHero({
         muted
         loop
         playsInline
-        poster="/garden.jpg"
+        poster="/grass.jpg"
         aria-hidden
       >
         <source src="/main.mp4" type="video/mp4" />

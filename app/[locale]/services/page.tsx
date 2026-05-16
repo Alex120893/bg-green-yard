@@ -35,11 +35,11 @@ export default async function ServicesPage({
     },
     {
       ...t.services.irrigation,
-      image: "/garden.jpg",
+      image: "/grass.jpg",
     },
     {
       ...t.services.snow,
-      image: "/snowremove.jpg",
+      image: "/snow.jpg",
     },
   ];
 

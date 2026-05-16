@@ -12,7 +12,7 @@ const photos = [
   "/1000017927.jpg",
   "/1000017936.jpg",
   "/1000018008.jpg",
-  "/garden.jpg",
+  "/grass.jpg",
 ] as const;
 
 export async function generateMetadata({
