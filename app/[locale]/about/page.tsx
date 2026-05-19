@@ -53,42 +53,42 @@ export default async function AboutPage({
             alt=""
             width={80}
             height={80}
-            className="absolute left-[-6%] top-[14%] h-auto w-10 rotate-[-16deg] opacity-45"
+            className="absolute left-[-34%] top-[14%] h-auto w-12 rotate-[-16deg] opacity-45"
           />
           <Image
             src="/plant.png"
             alt=""
             width={72}
             height={72}
-            className="absolute right-[-4%] top-[14%] h-auto w-9 rotate-[14deg] opacity-40"
+            className="absolute right-[-32%] top-[14%] h-auto w-11 rotate-[14deg] opacity-40"
           />
           <Image
             src="/plant.png"
             alt=""
             width={64}
             height={64}
-            className="absolute left-[3%] top-[38%] h-auto w-8 -scale-x-100 rotate-[10deg] opacity-35"
+            className="absolute left-[-28%] top-[38%] h-auto w-10 -scale-x-100 rotate-[10deg] opacity-35"
           />
           <Image
             src="/plant.png"
             alt=""
             width={72}
             height={72}
-            className="absolute right-[-2%] top-[52%] h-auto w-9 -rotate-[12deg] opacity-40"
+            className="absolute right-[-30%] top-[52%] h-auto w-11 -rotate-[12deg] opacity-40"
           />
           <Image
             src="/plant.png"
             alt=""
             width={64}
             height={64}
-            className="absolute left-[-4%] bottom-[28%] h-auto w-8 rotate-[18deg] opacity-38"
+            className="absolute left-[-30%] bottom-[28%] h-auto w-10 rotate-[18deg] opacity-38"
           />
           <Image
             src="/plant.png"
             alt=""
             width={64}
             height={64}
-            className="absolute right-[2%] bottom-[18%] h-auto w-8 rotate-[-8deg] opacity-42"
+            className="absolute right-[-28%] bottom-[18%] h-auto w-10 rotate-[-8deg] opacity-42"
           />
         </div>
 
@@ -116,18 +116,6 @@ export default async function AboutPage({
                   className="object-cover"
                   sizes="(min-width: 768px) 50vw, 100vw"
                   priority
-                />
-              </div>
-              <div
-                className="pointer-events-none absolute -bottom-7 -left-2 z-10 w-[min(36%,8rem)] -rotate-[8deg] drop-shadow-md sm:-bottom-9 sm:-left-3 sm:w-[min(34%,9rem)]"
-                aria-hidden
-              >
-                <Image
-                  src="/plant.png"
-                  alt=""
-                  width={220}
-                  height={220}
-                  className="h-auto w-full object-contain"
                 />
               </div>
             </div>

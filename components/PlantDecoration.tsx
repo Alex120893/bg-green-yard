@@ -2,12 +2,12 @@ import Image from "next/image";
 
 type Corner = "tl" | "tr" | "bl" | "br";
 
-/** Позиция без завъртане */
+/** Позиция без завъртане — на мобилен по-навън, за частично изрязване от ръба */
 const cornerPos: Record<Corner, string> = {
-  tl: "top-0 left-0 -translate-x-1/4 -translate-y-1/4",
-  tr: "top-0 right-0 translate-x-1/4 -translate-y-1/4",
-  bl: "bottom-0 left-0 -translate-x-1/5 translate-y-1/5",
-  br: "bottom-0 right-0 translate-x-1/5 translate-y-1/5",
+  tl: "top-0 left-0 max-md:-translate-x-[62%] max-md:-translate-y-[28%] md:-translate-x-1/4 md:-translate-y-1/4",
+  tr: "top-0 right-0 max-md:translate-x-[62%] max-md:-translate-y-[28%] md:translate-x-1/4 md:-translate-y-1/4",
+  bl: "bottom-0 left-0 max-md:-translate-x-[58%] max-md:translate-y-[24%] md:-translate-x-1/5 md:translate-y-1/5",
+  br: "bottom-0 right-0 max-md:translate-x-[58%] max-md:translate-y-[24%] md:translate-x-1/5 md:translate-y-1/5",
 };
 
 /** Завъртане на контейнера по ъгъл */
@@ -71,7 +71,7 @@ export function PlantDecoration({
           alt=""
           width={size}
           height={size}
-          className="h-auto w-[min(38vw,260px)] max-w-none drop-shadow-sm"
+          className="h-auto w-[min(50vw,300px)] max-w-none drop-shadow-sm md:w-[min(38vw,260px)]"
           sizes="260px"
         />
       </div>
@@ -81,7 +81,7 @@ export function PlantDecoration({
         alt=""
         width={size}
         height={size}
-        className="h-auto w-[min(40vw,280px)] max-w-none drop-shadow-sm"
+        className="h-auto w-[min(52vw,320px)] max-w-none drop-shadow-sm md:w-[min(40vw,280px)]"
         sizes="280px"
       />
     );
