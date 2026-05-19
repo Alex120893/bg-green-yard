@@ -107,7 +107,11 @@ export default async function ContactPage({
       <section className="bg-surface">
         <div className="mx-auto grid max-w-6xl gap-12 px-4 py-14 md:grid-cols-2 md:px-6 md:py-20">
           <Reveal>
-            <ContactForm contact={t.contact} serviceOptions={t.serviceOptions} />
+            <ContactForm
+              locale={locale}
+              contact={t.contact}
+              serviceOptions={t.serviceOptions}
+            />
           </Reveal>
           <Reveal delayMs={80}>
             <div className="flex h-full flex-col gap-4">
