@@ -44,54 +44,6 @@ export default async function AboutPage({
   return (
     <PlantFrame clipDecorations={false}>
       <div className="relative">
-        <div
-          className="pointer-events-none absolute inset-0 z-[1] md:hidden"
-          aria-hidden
-        >
-          <Image
-            src="/plant.png"
-            alt=""
-            width={80}
-            height={80}
-            className="absolute left-[-34%] top-[14%] h-auto w-12 rotate-[-16deg] opacity-45"
-          />
-          <Image
-            src="/plant.png"
-            alt=""
-            width={72}
-            height={72}
-            className="absolute right-[-32%] top-[14%] h-auto w-11 rotate-[14deg] opacity-40"
-          />
-          <Image
-            src="/plant.png"
-            alt=""
-            width={64}
-            height={64}
-            className="absolute left-[-28%] top-[38%] h-auto w-10 -scale-x-100 rotate-[10deg] opacity-35"
-          />
-          <Image
-            src="/plant.png"
-            alt=""
-            width={72}
-            height={72}
-            className="absolute right-[-30%] top-[52%] h-auto w-11 -rotate-[12deg] opacity-40"
-          />
-          <Image
-            src="/plant.png"
-            alt=""
-            width={64}
-            height={64}
-            className="absolute left-[-30%] bottom-[28%] h-auto w-10 rotate-[18deg] opacity-38"
-          />
-          <Image
-            src="/plant.png"
-            alt=""
-            width={64}
-            height={64}
-            className="absolute right-[-28%] bottom-[18%] h-auto w-10 rotate-[-8deg] opacity-42"
-          />
-        </div>
-
         <div className="relative z-[2]">
       <section className="border-b border-border bg-white">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-2 md:items-center md:gap-16 md:px-6 md:py-20">

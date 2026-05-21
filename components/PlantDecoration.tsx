@@ -88,7 +88,7 @@ export function PlantDecoration({
 
   return (
     <div
-      className={`pointer-events-none absolute z-0 select-none ${cornerPos[corner]} ${outerRot} ${className}`}
+      className={`pointer-events-none absolute z-0 select-none max-md:hidden ${cornerPos[corner]} ${outerRot} ${className}`}
       style={{ opacity }}
       aria-hidden
     >
