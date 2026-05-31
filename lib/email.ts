@@ -22,12 +22,14 @@ function escapeHtml(value: string): string {
 
 export async function sendContactEmail(payload: ContactEmailPayload) {
   const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL;
+  const to = process.env.CONTACT_TO_EMAIL ?? process.env.CONTACT_EMAIL;
   const from =
     process.env.RESEND_FROM_EMAIL ?? "BG Green Yard <onboarding@resend.dev>";
 
   if (!apiKey || !to) {
-    throw new Error("Email is not configured (RESEND_API_KEY, CONTACT_TO_EMAIL).");
+    throw new Error(
+      "Email is not configured (RESEND_API_KEY, CONTACT_TO_EMAIL or CONTACT_EMAIL).",
+    );
   }
 
   const { name, email, phone, service, serviceLabel, message, locale } = payload;
