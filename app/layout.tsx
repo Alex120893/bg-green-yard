@@ -9,9 +9,15 @@ const sans = Inter({
 });
 export const metadata: Metadata = {
   metadataBase: new URL(PRODUCTION_SITE_ORIGIN),
+  applicationName: "BG Green Yard",
   title: {
     default: "BG Green Yard",
     template: "%s | BG Green Yard",
+  },
+  icons: {
+    icon: "/logo.jpg",
+    shortcut: "/logo.jpg",
+    apple: "/logo.jpg",
   },
   description:
     "Озеленяване, поддръжка на градини и поливни системи в София.",
@@ -45,6 +51,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const websiteStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "BG Green Yard",
+    alternateName: "BG Green Yard",
+    url: PRODUCTION_SITE_ORIGIN,
+    inLanguage: ["bg", "en"],
+  };
+
   return (
     <html
       lang="bg"
@@ -55,6 +70,12 @@ export default function RootLayout({
       <body
         className={`${sans.variable} min-h-full bg-background text-foreground antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteStructuredData),
+          }}
+        />
         {children}
       </body>
     </html>
