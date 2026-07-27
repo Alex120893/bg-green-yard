@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { PRODUCTION_SITE_ORIGIN, ogImageAbsoluteUrl } from "@/lib/site";
 import "./globals.css";
+import Script from "next/script";
 
 const sans = Inter({
   variable: "--font-geist-sans",
@@ -19,18 +20,6 @@ export const metadata: Metadata = {
     shortcut: "/logo.jpg",
     apple: "/logo.jpg",
   },
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQMY7RMSV1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LQMY7RMSV1');
-</script>
-
-
-  
   description:
     "Озеленяване, поддръжка на градини и поливни системи в София.",
   openGraph: {
@@ -82,6 +71,16 @@ export default function RootLayout({
       <body
         className={`${sans.variable} min-h-full bg-background text-foreground antialiased`}
       >
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-LQMY7RMSV1"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LQMY7RMSV1');`}
+        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
