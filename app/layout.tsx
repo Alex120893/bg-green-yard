@@ -68,10 +68,10 @@ export default function RootLayout({
       className="h-full"
       data-scroll-behavior="smooth"
     >
-      <body
-        className={`${sans.variable} min-h-full bg-background text-foreground antialiased`}
-      >
+      <head>
+        {/* Google Analytics */}
         <Script
+          async
           src="https://www.googletagmanager.com/gtag/js?id=G-LQMY7RMSV1"
           strategy="afterInteractive"
         />
@@ -87,9 +87,12 @@ gtag('config', 'G-LQMY7RMSV1');`}
             __html: JSON.stringify(websiteStructuredData),
           }}
         />
+      </head>
+      <body
+        className={`${sans.variable} min-h-full bg-background text-foreground antialiased`}
+      >
         {children}
       </body>
     </html>
   );
 }
-
