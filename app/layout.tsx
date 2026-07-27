@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { PRODUCTION_SITE_ORIGIN, ogImageAbsoluteUrl } from "@/lib/site";
 import "./globals.css";
+import Script from "next/script";
 
 const sans = Inter({
   variable: "--font-geist-sans",
   subsets: ["latin", "cyrillic"],
 });
+
 export const metadata: Metadata = {
   metadataBase: new URL(PRODUCTION_SITE_ORIGIN),
   applicationName: "BG Green Yard",
@@ -19,20 +21,19 @@ export const metadata: Metadata = {
     shortcut: "/logo.jpg",
     apple: "/logo.jpg",
   },
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQMY7RMSV1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LQMY7RMSV1');
-</script>
-
-
-  
   description:
     "Озеленяване, поддръжка на градини и поливни системи в София.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     type: "website",
     siteName: "BG Green Yard",
@@ -70,6 +71,14 @@ export default function RootLayout({
     alternateName: "BG Green Yard",
     url: PRODUCTION_SITE_ORIGIN,
     inLanguage: ["bg", "en"],
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${PRODUCTION_SITE_ORIGIN}/search?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
   };
 
   return (
@@ -79,18 +88,36 @@ export default function RootLayout({
       className="h-full"
       data-scroll-behavior="smooth"
     >
-      <body
-        className={`${sans.variable} min-h-full bg-background text-foreground antialiased`}
-      >
+      <head>
+        {/* Google Tag Manager (Head) */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-LQMY7RMSV1"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-LQMY7RMSV1');`}
+        </Script>
+
+        {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(websiteStructuredData),
           }}
         />
+
+        {/* Canonical URL */}
+        <link rel="canonical" href={PRODUCTION_SITE_ORIGIN} />
+      </head>
+      <body
+        className={`${sans.variable} min-h-full bg-background text-foreground antialiased`}
+      >
         {children}
       </body>
     </html>
   );
 }
-
