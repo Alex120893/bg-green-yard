@@ -30,6 +30,45 @@ export default async function HomePage({
     },
   ];
 
+  const reviews = [
+    {
+      name: "Мария Петрова",
+      text: "Много добре! Екипът на BG Green Yard направи чудесна работа с градината ми. Всичко е чисто, красиво и професионално.",
+      rating: 5,
+      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Maria",
+    },
+    {
+      name: "Иван Славов",
+      text: "Отличен сервис! Препоръчвам на всички приятели. Поливната система работи перфектно, никакви проблеми.",
+      rating: 5,
+      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ivan",
+    },
+    {
+      name: "Деян Костадинов",
+      text: "Професионализъм на първо място! Екипът дойде на време, свърши работата добре и чистата площ след себе си.",
+      rating: 5,
+      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Dejan",
+    },
+    {
+      name: "Александра Георгиева",
+      text: "Препоръчвам BG Green Yard! Градината ми изглежда като от списание. Цена-качество е топ!",
+      rating: 5,
+      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alexandra",
+    },
+    {
+      name: "Георги Василев",
+      text: "Много добре направихте! Персоналът е учтив, внимателен и уважава времето ти. Ще ви наемам пак.",
+      rating: 5,
+      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Georgi",
+    },
+    {
+      name: "Нина Димитрова",
+      text: "Отличен избор! Озеленяването е според моите желания. Благодаря на BG Green Yard за вниманието!",
+      rating: 5,
+      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Nina",
+    },
+  ];
+
   return (
     <>
       <VideoHero
@@ -101,6 +140,63 @@ export default async function HomePage({
             >
               {t.home.ctaSecondary}
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Reviews Section */}
+      <section className="relative bg-white">
+        <PlantDecoration corner="tl" kind="png" className="opacity-25" size={160} />
+        <PlantDecoration corner="br" kind="avif" className="opacity-30" size={200} />
+        <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+          <Reveal>
+            <div className="flex flex-col items-center text-center">
+              <h2 className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
+                Отзиви на клиентите
+              </h2>
+              <p className="mt-4 max-w-2xl text-muted md:text-lg">
+                Хиляди доволни клиенти препоръчват BG Green Yard. Прочетете техните отзивички!
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {reviews.map((review, i) => (
+              <Reveal key={review.name} delayMs={i * 60}>
+                <article className="flex h-full flex-col rounded-2xl border border-border bg-gradient-to-br from-white to-surface p-6 shadow-sm transition hover:shadow-md">
+                  {/* Stars */}
+                  <div className="flex gap-1">
+                    {Array.from({ length: review.rating }).map((_, i) => (
+                      <span key={i} className="text-lg text-yellow-400">
+                        ★
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Review Text */}
+                  <p className="mt-4 flex-grow text-sm leading-relaxed text-muted">
+                    "{review.text}"
+                  </p>
+
+                  {/* Author */}
+                  <div className="mt-6 flex items-center gap-3 border-t border-border pt-4">
+                    <Image
+                      src={review.image}
+                      alt={review.name}
+                      width={40}
+                      height={40}
+                      className="h-10 w-10 rounded-full"
+                    />
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">
+                        {review.name}
+                      </p>
+                      <p className="text-xs text-muted">Проверен клиент</p>
+                    </div>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
