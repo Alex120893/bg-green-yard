@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://bg-green-yard.vercel.app/sitemap.xml
