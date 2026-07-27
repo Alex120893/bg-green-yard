@@ -35,37 +35,43 @@ export default async function HomePage({
       name: "Мария Петрова",
       text: "Много добре! Екипът на BG Green Yard направи чудесна работа с градината ми. Всичко е чисто, красиво и професионално.",
       rating: 5,
-      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Maria",
+      initials: "МП",
+      color: "bg-blue-500",
     },
     {
       name: "Иван Славов",
       text: "Отличен сервис! Препоръчвам на всички приятели. Поливната система работи перфектно, никакви проблеми.",
       rating: 5,
-      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ivan",
+      initials: "ИС",
+      color: "bg-green-500",
     },
     {
       name: "Деян Костадинов",
       text: "Професионализъм на първо място! Екипът дойде на време, свърши работата добре и чистата площ след себе си.",
       rating: 5,
-      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Dejan",
+      initials: "ДК",
+      color: "bg-purple-500",
     },
     {
       name: "Александра Георгиева",
       text: "Препоръчвам BG Green Yard! Градината ми изглежда като от списание. Цена-качество е топ!",
       rating: 5,
-      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alexandra",
+      initials: "АГ",
+      color: "bg-pink-500",
     },
     {
       name: "Георги Василев",
       text: "Много добре направихте! Персоналът е учтив, внимателен и уважава времето ти. Ще ви наемам пак.",
       rating: 5,
-      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Georgi",
+      initials: "ГВ",
+      color: "bg-orange-500",
     },
     {
       name: "Нина Димитрова",
       text: "Отличен избор! Озеленяването е според моите желания. Благодаря на BG Green Yard за вниманието!",
       rating: 5,
-      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Nina",
+      initials: "НД",
+      color: "bg-red-500",
     },
   ];
 
@@ -154,9 +160,6 @@ export default async function HomePage({
               <h2 className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
                 Отзиви на клиентите
               </h2>
-              <p className="mt-4 max-w-2xl text-muted md:text-lg">
-                Хиляди доволни клиенти препоръчват BG Green Yard. Прочетете техните отзивички!
-              </p>
             </div>
           </Reveal>
 
@@ -180,13 +183,9 @@ export default async function HomePage({
 
                   {/* Author */}
                   <div className="mt-6 flex items-center gap-3 border-t border-border pt-4">
-                    <Image
-                      src={review.image}
-                      alt={review.name}
-                      width={40}
-                      height={40}
-                      className="h-10 w-10 rounded-full"
-                    />
+                    <div className={`flex h-10 w-10 items-center justify-center rounded-full ${review.color} text-white font-semibold text-sm`}>
+                      {review.initials}
+                    </div>
                     <div>
                       <p className="text-sm font-semibold text-foreground">
                         {review.name}
