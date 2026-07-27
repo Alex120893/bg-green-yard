@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  /* Disable Vercel toolbar and branding */
+  poweredByHeader: false,
 };
 
 export default nextConfig;
