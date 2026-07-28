@@ -28,27 +28,20 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 md:gap-4 md:px-6 md:py-4">
         <Link
           href={`/${locale}`}
-          className="flex shrink-0 items-center gap-2.5 rounded-full bg-white/15 px-3 py-2 hover:bg-white/25 transition-all duration-300 hover:shadow-lg"
+          className="flex shrink-0 items-center gap-2 rounded-lg bg-white/10 px-3 py-2 hover:bg-white/20 transition-all duration-300 hover:shadow-lg border border-white/20"
           onClick={() => setOpen(false)}
         >
-          <div className="relative h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 flex items-center justify-center">
-            <Image
-              src="/logo-removebg-preview.png"
-              alt="BG Green Yard"
-              fill
-              className="object-contain"
-              priority
-              sizes="(max-width: 640px) 40px, (max-width: 768px) 48px, 56px"
-            />
-          </div>
-          <div className="hidden sm:flex flex-col gap-0">
-            <span className="text-sm font-bold tracking-tight text-white leading-tight">
-              BG Green
-            </span>
-            <span className="text-sm font-bold tracking-tight text-white leading-tight">
-              Yard
-            </span>
-          </div>
+          <Image
+            src="/logo-removebg-preview.png"
+            alt="BG Green Yard"
+            width={48}
+            height={48}
+            className="h-12 w-12 object-contain"
+            priority
+          />
+          <span className="hidden sm:block text-base font-bold tracking-tight text-white whitespace-nowrap">
+            BG Green Yard
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
