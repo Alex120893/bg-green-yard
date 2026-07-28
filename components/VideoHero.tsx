@@ -65,25 +65,6 @@ export function VideoHero({
             </Link>
           </div>
         </div>
-
-        {/* Floating Stats */}
-        <div className="mt-24 flex flex-wrap gap-6 md:mt-32">
-          {[
-            { value: "15 000+", label: "м² поддържани площи" },
-            { value: "120+", label: "доволни клиенти" },
-            { value: "3", label: "вида услуги" },
-          ].map((stat) => (
-            <div
-              key={stat.label}
-              className="flex items-center gap-3 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 px-6 py-4"
-            >
-              <span className="text-2xl font-bold text-emerald-300">
-                {stat.value}
-              </span>
-              <span className="text-sm text-white/80">{stat.label}</span>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
