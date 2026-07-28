@@ -74,7 +74,7 @@ export function ContactForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="grid gap-5 rounded-2xl border border-border bg-white p-6 shadow-sm md:p-8"
+      className="grid gap-5 rounded-3xl bg-white p-6 shadow-[0_10px_40px_rgba(0,0,0,0.08)] md:p-8"
       noValidate
     >
       {error && (
@@ -86,7 +86,7 @@ export function ContactForm({
         </p>
       )}
       <div className="grid gap-2">
-        <label htmlFor="name" className="text-sm font-medium text-foreground">
+        <label htmlFor="name" className="text-sm font-semibold text-foreground">
           {contact.formName} *
         </label>
         <input
@@ -95,12 +95,12 @@ export function ContactForm({
           required
           disabled={sending}
           autoComplete="name"
-          className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none ring-brand/30 transition focus:ring-2 disabled:opacity-60"
+          className="rounded-xl border border-border bg-surface px-4 py-3 text-sm outline-none ring-brand/30 transition-all duration-200 focus:border-brand/40 focus:ring-2 disabled:opacity-60"
         />
       </div>
       <div className="grid gap-2 md:grid-cols-2 md:gap-4">
         <div className="grid gap-2">
-          <label htmlFor="email" className="text-sm font-medium text-foreground">
+          <label htmlFor="email" className="text-sm font-semibold text-foreground">
             {contact.formEmail} *
           </label>
           <input
@@ -110,11 +110,11 @@ export function ContactForm({
             required
             disabled={sending}
             autoComplete="email"
-            className="rounded-xl border border-border px-4 py-3 text-sm outline-none ring-brand/30 transition focus:ring-2 disabled:opacity-60"
+            className="rounded-xl border border-border bg-surface px-4 py-3 text-sm outline-none ring-brand/30 transition-all duration-200 focus:border-brand/40 focus:ring-2 disabled:opacity-60"
           />
         </div>
         <div className="grid gap-2">
-          <label htmlFor="phone" className="text-sm font-medium text-foreground">
+          <label htmlFor="phone" className="text-sm font-semibold text-foreground">
             {contact.formPhone} *
           </label>
           <input
@@ -124,12 +124,12 @@ export function ContactForm({
             required
             disabled={sending}
             autoComplete="tel"
-            className="rounded-xl border border-border px-4 py-3 text-sm outline-none ring-brand/30 transition focus:ring-2 disabled:opacity-60"
+            className="rounded-xl border border-border bg-surface px-4 py-3 text-sm outline-none ring-brand/30 transition-all duration-200 focus:border-brand/40 focus:ring-2 disabled:opacity-60"
           />
         </div>
       </div>
       <div className="grid gap-2">
-        <label htmlFor="service" className="text-sm font-medium text-foreground">
+        <label htmlFor="service" className="text-sm font-semibold text-foreground">
           {contact.formService}
         </label>
         <select
@@ -137,7 +137,7 @@ export function ContactForm({
           name="service"
           defaultValue=""
           disabled={sending}
-          className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none ring-brand/30 transition focus:ring-2 disabled:opacity-60"
+          className="rounded-xl border border-border bg-surface px-4 py-3 text-sm outline-none ring-brand/30 transition-all duration-200 focus:border-brand/40 focus:ring-2 disabled:opacity-60"
         >
           <option value="" disabled>
             {contact.formServicePlaceholder}
@@ -150,7 +150,7 @@ export function ContactForm({
         </select>
       </div>
       <div className="grid gap-2">
-        <label htmlFor="message" className="text-sm font-medium text-foreground">
+        <label htmlFor="message" className="text-sm font-semibold text-foreground">
           {contact.formMessage}
         </label>
         <textarea
@@ -158,13 +158,13 @@ export function ContactForm({
           name="message"
           rows={5}
           disabled={sending}
-          className="resize-y rounded-xl border border-border px-4 py-3 text-sm outline-none ring-brand/30 transition focus:ring-2 disabled:opacity-60"
+          className="resize-y rounded-xl border border-border bg-surface px-4 py-3 text-sm outline-none ring-brand/30 transition-all duration-200 focus:border-brand/40 focus:ring-2 disabled:opacity-60"
         />
       </div>
       <button
         type="submit"
         disabled={sending}
-        className="mt-2 inline-flex h-12 items-center justify-center rounded-full bg-brand px-8 text-sm font-semibold text-white transition hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-60"
+        className="mt-1 inline-flex h-12 items-center justify-center rounded-full bg-brand px-8 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-dark hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60"
       >
         {sending ? contact.formSending : contact.formSubmit}
       </button>

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 import { GalleryVideo } from "@/components/GalleryVideo";
-import { PlantDecoration } from "@/components/PlantDecoration";
 import { Reveal } from "@/components/Reveal";
 import type { Locale } from "@/lib/i18n";
 import { getMessages, isLocale } from "@/lib/i18n";
@@ -38,74 +37,62 @@ export default async function GalleryPage({
   const t = getMessages(loc as Locale);
 
   return (
-    <div className="relative isolate">
-      <PlantDecoration corner="tl" kind="png" size={135} opacity={0.38} />
-      <PlantDecoration corner="tr" kind="avif" size={185} opacity={0.48} />
-      <PlantDecoration corner="bl" kind="avif" size={150} opacity={0.42} />
-      <PlantDecoration corner="br" kind="png" size={150} opacity={0.36} />
-      <div className="relative z-10">
-        <section className="border-b border-border bg-white">
-          <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-            <Reveal>
-              <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
-                <div>
-                  <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-                    {t.gallery.title}
-                  </h1>
-                  <p className="mt-3 max-w-xl text-lg text-muted">
-                    {t.gallery.subtitle}
-                  </p>
-                </div>
-                <Image
-                  src="/logo-removebg-preview.png"
-                  alt="BG Green Yard"
-                  width={88}
-                  height={88}
-                  className="opacity-95"
-                />
-              </div>
-            </Reveal>
-          </div>
-        </section>
+    <>
+      {/* ── Hero ── */}
+      <section className="relative overflow-hidden bg-white py-20 md:py-28">
+        <div className="pointer-events-none absolute -top-32 -right-32 h-80 w-80 rounded-full bg-brand/5 blur-3xl" aria-hidden />
+        <div className="mx-auto max-w-6xl px-4 md:px-6">
+          <Reveal>
+            <h1 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+              {t.gallery.title}
+            </h1>
+            <p className="mt-4 max-w-xl text-lg text-muted">
+              {t.gallery.subtitle}
+            </p>
+          </Reveal>
+        </div>
+      </section>
 
-        <section className="bg-surface">
-          <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
-            <Reveal>
-              <div>
-                <p className="mb-4 text-sm font-medium text-muted">
-                  {t.gallery.videoNote}
-                </p>
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 lg:gap-8">
-                  <div className="overflow-hidden rounded-2xl border border-border bg-black shadow-sm">
-                    <GalleryVideo src="/1000011543.mp4" />
-                  </div>
-                  <div className="overflow-hidden rounded-2xl border border-border bg-black shadow-sm">
-                    <GalleryVideo src="/main.mp4" />
-                  </div>
-                </div>
+      {/* ── Videos ── */}
+      <section className="bg-surface py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-4 md:px-6">
+          <Reveal>
+            <p className="mb-6 text-sm font-semibold uppercase tracking-[0.16em] text-muted">
+              {t.gallery.videoNote}
+            </p>
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              <div className="overflow-hidden rounded-2xl bg-black shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                <GalleryVideo src="/1000011543.mp4" />
               </div>
-            </Reveal>
-
-            <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {photos.map((src, i) => (
-                <Reveal key={src} delayMs={(i % 3) * 50}>
-                  <figure className="group overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
-                    <div className="relative aspect-[4/3]">
-                      <Image
-                        src={src}
-                        alt=""
-                        fill
-                        className="object-cover transition duration-500 group-hover:scale-[1.02]"
-                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                      />
-                    </div>
-                  </figure>
-                </Reveal>
-              ))}
+              <div className="overflow-hidden rounded-2xl bg-black shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                <GalleryVideo src="/main.mp4" />
+              </div>
             </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── Photo Grid ── */}
+      <section className="bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-4 md:px-6">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+            {photos.map((src, i) => (
+              <Reveal key={src} delayMs={(i % 3) * 55}>
+                <div className="group relative aspect-[4/3] overflow-hidden rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
+                  <Image
+                    src={src}
+                    alt=""
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 50vw"
+                  />
+                  <div className="absolute inset-0 bg-black/0 transition-colors duration-400 group-hover:bg-black/25" />
+                </div>
+              </Reveal>
+            ))}
           </div>
-        </section>
-      </div>
-    </div>
+        </div>
+      </section>
+    </>
   );
 }

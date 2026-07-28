@@ -1,7 +1,5 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export type ContactEmailPayload = {
   name: string;
   email: string;
@@ -31,6 +29,8 @@ export async function sendContactEmail(payload: ContactEmailPayload) {
       "Email is not configured (RESEND_API_KEY, CONTACT_TO_EMAIL or CONTACT_EMAIL).",
     );
   }
+
+  const resend = new Resend(apiKey);
 
   const { name, email, phone, service, serviceLabel, message, locale } = payload;
   const subject = `Ново запитване от ${name} — BG Green Yard`;

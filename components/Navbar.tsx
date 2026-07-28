@@ -24,23 +24,25 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
   const enHref = `/en${pathSuffix}`;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-white/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-border bg-white/95 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 md:gap-4 md:px-6 md:py-4">
         <Link
           href={`/${locale}`}
-          className="flex shrink-0 items-center gap-2"
+          className="flex shrink-0 items-center gap-2.5"
           onClick={() => setOpen(false)}
         >
           <Image
             src="/logo-removebg-preview.png"
             alt="BG Green Yard"
-            width={200}
-            height={200}
-            className="h-[4.5rem] w-auto sm:h-24 md:h-28 lg:h-32"
+            width={160}
+            height={160}
+            className="h-12 w-auto sm:h-14 md:h-16"
             priority
-            sizes="(max-width: 768px) 180px, 220px"
+            sizes="(max-width: 768px) 140px, 160px"
           />
-          <span className="sr-only">BG Green Yard</span>
+          <span className="hidden text-base font-bold tracking-tight text-foreground sm:block">
+            BG Green Yard
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
@@ -54,7 +56,7 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
               <Link
                 key={key}
                 href={path}
-                className={`rounded-full px-3 py-2 text-sm font-medium transition-colors ${
+                className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
                   active
                     ? "bg-brand-soft text-brand-dark"
                     : "text-muted hover:bg-surface hover:text-foreground"

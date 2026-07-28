@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { PRODUCTION_SITE_ORIGIN, ogImageAbsoluteUrl } from "@/lib/site";
 import "./globals.css";
 import Script from "next/script";
-
-const sans = Inter({
-  variable: "--font-geist-sans",
-  subsets: ["latin", "cyrillic"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(PRODUCTION_SITE_ORIGIN),
@@ -114,7 +108,7 @@ gtag('config', 'G-LQMY7RMSV1');`}
         <link rel="canonical" href={PRODUCTION_SITE_ORIGIN} />
       </head>
       <body
-        className={`${sans.variable} min-h-full bg-background text-foreground antialiased`}
+        className="min-h-full bg-background text-foreground antialiased"
       >
         {children}
       </body>
