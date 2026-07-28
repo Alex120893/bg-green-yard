@@ -85,38 +85,37 @@ export function ChatBot() {
 
   return (
     <>
-      {/* Бутон за чат */}
+      {/* Бутон за чат - малка иконка */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-40 w-14 h-14 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center"
+        className="fixed bottom-6 right-6 z-40 w-12 h-12 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center"
         aria-label="Отворете чата"
+        title="Помощник за растенията"
       >
         {isOpen ? (
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         ) : (
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-          </svg>
+          <span className="text-lg">🌿</span>
         )}
       </button>
 
       {/* Прозорец на чата */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-40 w-96 h-[500px] bg-white rounded-lg shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-2">
+        <div className="fixed bottom-20 right-6 z-40 w-80 h-96 bg-white rounded-lg shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-2">
           {/* Заглавие */}
-          <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-4">
+          <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-3">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-bold text-lg">🌿 BG Green Yard</h3>
-                <p className="text-xs text-green-100">Помощник за растенията</p>
+                <h3 className="font-bold text-sm">🌿 BG Green Yard</h3>
+                <p className="text-xs text-green-100">Помощник</p>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
                 className="text-green-100 hover:text-white"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
@@ -124,20 +123,20 @@ export function ChatBot() {
           </div>
 
           {/* Сообщения */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+          <div className="flex-1 overflow-y-auto p-3 space-y-3 bg-gray-50">
             {messages.map((message) => (
               <div
                 key={message.id}
                 className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-xs px-4 py-2 rounded-lg ${
+                  className={`max-w-xs px-3 py-2 rounded-lg text-sm ${
                     message.role === "user"
                       ? "bg-green-600 text-white rounded-br-none"
                       : "bg-white text-gray-800 border border-gray-200 rounded-bl-none"
                   }`}
                 >
-                  <p className="text-sm leading-relaxed whitespace-pre-wrap">
+                  <p className="text-xs leading-relaxed whitespace-pre-wrap">
                     {message.content}
                   </p>
                   <span className={`text-xs mt-1 block ${
@@ -153,11 +152,11 @@ export function ChatBot() {
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-white text-gray-800 border border-gray-200 px-4 py-2 rounded-lg rounded-bl-none">
-                  <div className="flex space-x-2">
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100"></div>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200"></div>
+                <div className="bg-white text-gray-800 border border-gray-200 px-3 py-2 rounded-lg rounded-bl-none">
+                  <div className="flex space-x-1">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce delay-100"></div>
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce delay-200"></div>
                   </div>
                 </div>
               </div>
@@ -166,30 +165,27 @@ export function ChatBot() {
           </div>
 
           {/* Вход */}
-          <form onSubmit={handleSendMessage} className="border-t p-3 bg-white">
-            <div className="flex gap-2">
+          <form onSubmit={handleSendMessage} className="border-t p-2 bg-white">
+            <div className="flex gap-1">
               <input
                 ref={inputRef}
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Напишете вашия вопрос..."
+                placeholder="Вопрос..."
                 disabled={isLoading}
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-600 disabled:bg-gray-100 text-sm"
+                className="flex-1 px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:border-green-600 disabled:bg-gray-100"
               />
               <button
                 type="submit"
                 disabled={isLoading || !input.trim()}
-                className="bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg transition-colors"
+                className="bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white px-2 py-1 rounded transition-colors"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                 </svg>
               </button>
             </div>
-            <p className="text-xs text-gray-500 mt-2">
-              Захранен от ИИ • Отговорите се базират на съдържанието на нашия сайт
-            </p>
           </form>
         </div>
       )}
