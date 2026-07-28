@@ -24,8 +24,8 @@ export default async function HomePage({
           <circle cx="12" cy="10" r="3"/>
         </svg>
       ),
-      gradient: "from-emerald-50 to-teal-50",
-      iconBg: "bg-emerald-100 text-emerald-700",
+      gradient: "from-amber-50 to-orange-50",
+      iconBg: "bg-amber-100 text-amber-700",
     },
     {
       title: t.home.trust2Title,
@@ -35,8 +35,8 @@ export default async function HomePage({
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
         </svg>
       ),
-      gradient: "from-sky-50 to-blue-50",
-      iconBg: "bg-sky-100 text-sky-700",
+      gradient: "from-green-50 to-emerald-50",
+      iconBg: "bg-green-100 text-green-700",
     },
     {
       title: t.home.trust3Title,
@@ -49,8 +49,8 @@ export default async function HomePage({
           <path d="M5 22h14"/>
         </svg>
       ),
-      gradient: "from-violet-50 to-purple-50",
-      iconBg: "bg-violet-100 text-violet-700",
+      gradient: "from-stone-50 to-slate-50",
+      iconBg: "bg-stone-100 text-stone-700",
     },
   ];
 
@@ -70,8 +70,8 @@ export default async function HomePage({
       rating: 5,
       initials: "МП",
       role: "Проверен клиент",
-      gradient: "from-emerald-50 to-teal-50",
-      iconColor: "bg-emerald-500",
+      gradient: "from-green-50 to-emerald-50",
+      iconColor: "bg-brand",
     },
     {
       name: "Иван Славов",
@@ -79,8 +79,8 @@ export default async function HomePage({
       rating: 5,
       initials: "ИС",
       role: "Проверен клиент",
-      gradient: "from-sky-50 to-blue-50",
-      iconColor: "bg-sky-500",
+      gradient: "from-amber-50 to-orange-50",
+      iconColor: "bg-brand",
     },
     {
       name: "Деян Костадинов",
@@ -88,8 +88,8 @@ export default async function HomePage({
       rating: 5,
       initials: "ДК",
       role: "Проверен клиент",
-      gradient: "from-violet-50 to-purple-50",
-      iconColor: "bg-violet-500",
+      gradient: "from-stone-50 to-slate-50",
+      iconColor: "bg-brand",
     },
     {
       name: "Александра Георгиева",
@@ -97,8 +97,8 @@ export default async function HomePage({
       rating: 5,
       initials: "АГ",
       role: "Проверен клиент",
-      gradient: "from-rose-50 to-pink-50",
-      iconColor: "bg-rose-500",
+      gradient: "from-green-50 to-emerald-50",
+      iconColor: "bg-brand",
     },
     {
       name: "Георги Василев",
@@ -106,8 +106,8 @@ export default async function HomePage({
       rating: 5,
       initials: "ГВ",
       role: "Проверен клиент",
-      gradient: "from-orange-50 to-amber-50",
-      iconColor: "bg-orange-500",
+      gradient: "from-amber-50 to-orange-50",
+      iconColor: "bg-brand",
     },
     {
       name: "Нина Димитрова",
@@ -115,8 +115,8 @@ export default async function HomePage({
       rating: 5,
       initials: "НД",
       role: "Проверен клиент",
-      gradient: "from-teal-50 to-cyan-50",
-      iconColor: "bg-teal-500",
+      gradient: "from-stone-50 to-slate-50",
+      iconColor: "bg-brand",
     },
   ];
 
@@ -137,7 +137,7 @@ export default async function HomePage({
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal>
             <div className="text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+              <h2 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
                 {t.home.trustTitle}
               </h2>
               <p className="mx-auto mt-4 max-w-2xl text-lg text-muted">
@@ -150,9 +150,9 @@ export default async function HomePage({
             {features.map((f, i) => (
               <Reveal key={f.title} delayMs={i * 80}>
                 <article
-                  className={`group h-full rounded-2xl bg-gradient-to-br ${f.gradient} p-8 shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(0,0,0,0.1)]`}
+                  className={`group h-full rounded-[40px] bg-gradient-to-br ${f.gradient} p-8 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border border-black/5 backdrop-blur-sm`}
                 >
-                  <div className={`inline-flex h-14 w-14 items-center justify-center rounded-2xl ${f.iconBg} transition-transform duration-300 group-hover:scale-110`}>
+                  <div className={`inline-flex h-14 w-14 items-center justify-center rounded-[24px] ${f.iconBg} transition-transform duration-300 group-hover:scale-110`}>
                     {f.icon}
                   </div>
                   <h3 className="mt-5 text-lg font-semibold text-foreground">
@@ -169,12 +169,12 @@ export default async function HomePage({
       </section>
 
       {/* ── Gallery Preview ── */}
-      <section className="bg-white py-20 md:py-28">
+      <section className="bg-background py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal>
             <div className="flex flex-col items-center text-center md:flex-row md:items-end md:justify-between md:text-left">
               <div>
-                <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+                <h2 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
                   Нашите проекти
                 </h2>
                 <p className="mt-3 max-w-xl text-lg text-muted">
@@ -183,7 +183,7 @@ export default async function HomePage({
               </div>
               <Link
                 href={`/${locale}/gallery`}
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-dark underline-offset-4 transition hover:underline md:mt-0"
+                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand hover:text-brand-dark underline-offset-4 transition hover:underline md:mt-0"
               >
                 Виж всички
                 <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
@@ -196,7 +196,7 @@ export default async function HomePage({
           <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3">
             {galleryPhotos.map((src, i) => (
               <Reveal key={src} delayMs={(i % 3) * 60}>
-                <div className="group relative aspect-[4/3] overflow-hidden rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
+                <div className="group relative aspect-[4/3] overflow-hidden rounded-[32px] shadow-lg hover:shadow-xl transition-all duration-300">
                   <Image
                     src={src}
                     alt=""
@@ -204,7 +204,7 @@ export default async function HomePage({
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                     sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 50vw"
                   />
-                  <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/20" />
+                  <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/15" />
                 </div>
               </Reveal>
             ))}
@@ -217,7 +217,7 @@ export default async function HomePage({
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal>
             <div className="text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+              <h2 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
                 Отзиви на клиентите
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-lg text-muted">
@@ -229,10 +229,10 @@ export default async function HomePage({
           <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {reviews.map((review, i) => (
               <Reveal key={review.name} delayMs={i * 55}>
-                <article className={`flex h-full flex-col rounded-2xl bg-gradient-to-br ${review.gradient} p-6 shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.09)]`}>
+                <article className={`flex h-full flex-col rounded-[32px] bg-gradient-to-br ${review.gradient} p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border border-black/5 backdrop-blur-sm`}>
                   <div className="flex gap-1">
                     {Array.from({ length: review.rating }).map((_, j) => (
-                      <svg key={j} viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5 text-amber-400">
+                      <svg key={j} viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5 text-brand">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 0 0 .95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 0 0-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 0 0-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 0 0-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 0 0 .951-.69l1.07-3.292Z" />
                       </svg>
                     ))}
@@ -268,7 +268,7 @@ export default async function HomePage({
         />
         <div className="relative mx-auto max-w-3xl px-4 text-center md:px-6">
           <Reveal>
-            <h2 className="text-3xl font-bold text-white md:text-4xl lg:text-5xl">
+            <h2 className="text-4xl font-bold text-white md:text-5xl lg:text-6xl">
               {t.home.brandsTitle}
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-lg text-white/80">
