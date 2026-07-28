@@ -26,7 +26,7 @@ export function VideoHero({
         playsInline
         className="absolute inset-0 h-full w-full object-cover"
       >
-        <source src="/main.mp4" type="video/mp4" />
+        <source src="/video_2026-07-28_19-58-11.mp4" type="video/mp4" />
       </video>
 
       {/* Dark Overlay */}
