@@ -24,7 +24,7 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
   const enHref = `/en${pathSuffix}`;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-white/95 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-brand/20 bg-brand/95 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 md:gap-4 md:px-6 md:py-4">
         <Link
           href={`/${locale}`}
@@ -40,7 +40,7 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
             priority
             sizes="(max-width: 768px) 140px, 160px"
           />
-          <span className="hidden text-base font-bold tracking-tight text-foreground sm:block">
+          <span className="hidden text-base font-bold tracking-tight text-white sm:block">
             BG Green Yard
           </span>
         </Link>
@@ -58,8 +58,8 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
                 href={path}
                 className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
                   active
-                    ? "bg-brand-soft text-brand-dark"
-                    : "text-muted hover:bg-surface hover:text-foreground"
+                    ? "bg-white/20 text-white"
+                    : "text-white/80 hover:bg-white/10 hover:text-white"
                 }`}
               >
                 {nav[key]}
@@ -70,13 +70,13 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
 
         <div className="flex shrink-0 items-center gap-2">
           <div
-            className="relative flex h-10 w-[6.75rem] shrink-0 items-stretch rounded-full border border-border bg-surface p-1 shadow-[inset_0_1px_2px_rgb(0_0_0_/0.04)]"
+            className="relative flex h-10 w-[6.75rem] shrink-0 items-stretch rounded-full border border-white/20 bg-white/10 p-1 shadow-[inset_0_1px_2px_rgb(0_0_0_/0.04)]"
             role="group"
             aria-label="BG / EN"
           >
             <span
               aria-hidden
-              className={`pointer-events-none absolute bottom-1 left-1 top-1 w-[calc(50%-4px)] rounded-full bg-white shadow-sm ring-1 ring-black/[0.06] transition-transform duration-300 ease-out will-change-transform ${
+              className={`pointer-events-none absolute bottom-1 left-1 top-1 w-[calc(50%-4px)] rounded-full bg-white/20 shadow-sm ring-1 ring-white/20 transition-transform duration-300 ease-out ${
                 locale === "en" ? "translate-x-[calc(100%+8px)]" : "translate-x-0"
               }`}
             />
@@ -85,8 +85,8 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
               hrefLang="bg"
               className={`relative z-10 flex flex-1 items-center justify-center rounded-full text-xs font-semibold uppercase tracking-wide transition-colors ${
                 locale === "bg"
-                  ? "text-foreground"
-                  : "text-muted hover:text-foreground"
+                  ? "text-white"
+                  : "text-white/60 hover:text-white"
               }`}
             >
               BG
@@ -96,8 +96,8 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
               hrefLang="en"
               className={`relative z-10 flex flex-1 items-center justify-center rounded-full text-xs font-semibold uppercase tracking-wide transition-colors ${
                 locale === "en"
-                  ? "text-foreground"
-                  : "text-muted hover:text-foreground"
+                  ? "text-white"
+                  : "text-white/60 hover:text-white"
               }`}
             >
               EN
@@ -105,7 +105,7 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
           </div>
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border md:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 md:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((o) => !o)}
@@ -115,13 +115,13 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
             </span>
             <span className="flex flex-col gap-1.5" aria-hidden>
               <span
-                className={`block h-0.5 w-5 origin-center bg-foreground transition-all duration-300 ease-out motion-reduce:transition-none ${open ? "translate-y-2 rotate-45" : ""}`}
+                className={`block h-0.5 w-5 origin-center bg-white transition-all duration-300 ease-out motion-reduce:transition-none ${open ? "translate-y-2 rotate-45" : ""}`}
               />
               <span
-                className={`block h-0.5 w-5 bg-foreground transition-opacity duration-300 ease-out motion-reduce:transition-none ${open ? "opacity-0" : "opacity-100"}`}
+                className={`block h-0.5 w-5 bg-white transition-opacity duration-300 ease-out motion-reduce:transition-none ${open ? "opacity-0" : "opacity-100"}`}
               />
               <span
-                className={`block h-0.5 w-5 origin-center bg-foreground transition-all duration-300 ease-out motion-reduce:transition-none ${open ? "-translate-y-2 -rotate-45" : ""}`}
+                className={`block h-0.5 w-5 origin-center bg-white transition-all duration-300 ease-out motion-reduce:transition-none ${open ? "-translate-y-2 -rotate-45" : ""}`}
               />
             </span>
           </button>
@@ -138,7 +138,7 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
           <nav
             id="mobile-nav"
             inert={!open ? true : undefined}
-            className={`border-t border-border bg-white px-4 pb-4 pt-2 transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${
+            className={`border-t border-brand/20 bg-brand px-4 pb-4 pt-2 transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${
               open
                 ? "translate-y-0 opacity-100"
                 : "pointer-events-none -translate-y-2 opacity-0"
@@ -149,7 +149,7 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
                 <Link
                   key={key}
                   href={`/${locale}${href}`}
-                  className="rounded-lg px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-surface"
+                  className="rounded-lg px-3 py-3 text-base font-medium text-white transition-colors hover:bg-white/10"
                   onClick={() => setOpen(false)}
                 >
                   {nav[key]}
@@ -162,4 +162,3 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
     </header>
   );
 }
-//bbb
