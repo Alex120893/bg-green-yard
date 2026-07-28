@@ -221,7 +221,7 @@ export default async function HomePage({
                 Отзиви на клиентите
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-lg text-muted">
-                Доволни клиенти по цяла София и региона
+                Доволни клиенти по цяла България
               </p>
             </div>
           </Reveal>
