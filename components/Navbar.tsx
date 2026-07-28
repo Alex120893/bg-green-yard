@@ -28,17 +28,21 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 md:gap-4 md:px-6 md:py-4">
         <Link
           href={`/${locale}`}
-          className="flex shrink-0 items-center gap-2 rounded-lg bg-white/10 px-3 py-2 hover:bg-white/20 transition-all duration-300 hover:shadow-lg border border-white/20"
+          className="flex shrink-0 items-center gap-3 hover:opacity-90 transition-opacity duration-300"
           onClick={() => setOpen(false)}
         >
-          <Image
-            src="/logo-removebg-preview.png"
-            alt="BG Green Yard"
-            width={48}
-            height={48}
-            className="h-12 w-12 object-contain"
-            priority
-          />
+          {/* White circle with logo */}
+          <div className="relative h-14 w-14 flex items-center justify-center rounded-full bg-white shadow-md">
+            <Image
+              src="/logo-removebg-preview.png"
+              alt="BG Green Yard"
+              width={40}
+              height={40}
+              className="h-10 w-10 object-contain"
+              priority
+            />
+          </div>
+          
           <span className="hidden sm:block text-base font-bold tracking-tight text-white whitespace-nowrap">
             BG Green Yard
           </span>
