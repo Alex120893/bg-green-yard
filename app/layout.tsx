@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PRODUCTION_SITE_ORIGIN, ogImageAbsoluteUrl } from "@/lib/site";
 import "./globals.css";
 import Script from "next/script";
+import { ChatBot } from "@/components/ChatBot";
 
 export const metadata: Metadata = {
   metadataBase: new URL(PRODUCTION_SITE_ORIGIN),
@@ -111,6 +112,7 @@ gtag('config', 'G-LQMY7RMSV1');`}
         className="min-h-full bg-background text-foreground antialiased"
       >
         {children}
+        <ChatBot />
       </body>
     </html>
   );
