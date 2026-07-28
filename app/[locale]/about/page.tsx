@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { PlantFrame } from "@/components/PlantDecoration";
 import { Reveal } from "@/components/Reveal";
 import type { Locale } from "@/lib/i18n";
 import { getMessages, isLocale } from "@/lib/i18n";
@@ -32,133 +31,147 @@ export default async function AboutPage({
   const stats = [
     { value: "15 000+", label: t.about.statsSqm },
     { value: "120+", label: t.about.statsClients },
-    { full: t.about.statsWorkHoursLine },
-  ] as const;
+  ];
 
   const why = [
-    { title: t.about.why1Title, body: t.about.why1Body },
-    { title: t.about.why2Title, body: t.about.why2Body },
-    { title: t.about.why3Title, body: t.about.why3Body },
+    {
+      title: t.about.why1Title,
+      body: t.about.why1Body,
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+          <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+      ),
+      gradient: "from-emerald-50 to-teal-50",
+      iconBg: "bg-emerald-100 text-emerald-700",
+    },
+    {
+      title: t.about.why2Title,
+      body: t.about.why2Body,
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <path d="M3 9h18"/>
+          <path d="M9 21V9"/>
+        </svg>
+      ),
+      gradient: "from-sky-50 to-blue-50",
+      iconBg: "bg-sky-100 text-sky-700",
+    },
+    {
+      title: t.about.why3Title,
+      body: t.about.why3Body,
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <path d="m9 11 3 3L22 4"/>
+        </svg>
+      ),
+      gradient: "from-violet-50 to-purple-50",
+      iconBg: "bg-violet-100 text-violet-700",
+    },
   ];
 
   return (
-    <PlantFrame clipDecorations={false}>
-      <div className="relative">
-        <div className="relative z-[2]">
-      <section className="border-b border-border bg-white">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-2 md:items-center md:gap-16 md:px-6 md:py-20">
+    <>
+      {/* ── Hero ── */}
+      <section className="relative overflow-hidden bg-white py-20 md:py-28">
+        <div className="pointer-events-none absolute -top-32 -right-32 h-80 w-80 rounded-full bg-brand/5 blur-3xl" aria-hidden />
+        <div className="mx-auto grid max-w-6xl gap-12 px-4 md:grid-cols-2 md:items-center md:gap-16 md:px-6">
           <Reveal>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark">
+              <span className="inline-flex items-center gap-2 rounded-full border border-brand/20 bg-brand-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-dark">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand" aria-hidden />
                 BG Green Yard
-              </p>
-              <h1 className="mt-3 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+              </span>
+              <h1 className="mt-5 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
                 {t.about.title}
               </h1>
-              <p className="mt-4 text-lg text-muted">{t.about.subtitle}</p>
+              <p className="mt-4 text-lg leading-relaxed text-muted">{t.about.subtitle}</p>
             </div>
           </Reveal>
           <Reveal delayMs={100}>
-            <div className="relative">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-surface shadow-sm">
-                <Image
-                  src="/1000017936.jpg"
-                  alt=""
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  priority
-                />
-              </div>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.12)]">
+              <Image
+                src="/1000017936.jpg"
+                alt=""
+                fill
+                className="object-cover"
+                sizes="(min-width: 768px) 50vw, 100vw"
+                priority
+              />
             </div>
           </Reveal>
         </div>
       </section>
 
-      <section className="bg-surface">
-        <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+      {/* ── Stats + Mission ── */}
+      <section className="bg-surface py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6">
           <div className="grid gap-12 md:grid-cols-2">
             <Reveal>
               <div>
-                <h2 className="text-xl font-semibold text-foreground md:text-2xl">
+                <h2 className="text-2xl font-bold text-foreground md:text-3xl">
                   {t.about.missionTitle}
                 </h2>
-                <p className="mt-4 leading-relaxed text-muted">
+                <p className="mt-5 leading-relaxed text-muted">
                   {t.about.missionBody}
                 </p>
                 <p className="mt-4 leading-relaxed text-muted">
                   {t.about.visionBody}
                 </p>
+                <p className="mt-4 text-sm font-medium text-brand-dark">
+                  {t.about.statsWorkHoursLine}
+                </p>
               </div>
             </Reveal>
             <Reveal delayMs={80}>
-              <div className="grid gap-4 rounded-2xl border border-border bg-white p-8 shadow-sm">
+              <div className="grid grid-cols-2 gap-4">
                 {stats.map((s) => (
                   <div
-                    key={"full" in s ? s.full : s.label}
-                    className="border-b border-border pb-4 last:border-0 last:pb-0"
+                    key={s.label}
+                    className="flex flex-col justify-center rounded-2xl bg-white p-8 shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
                   >
-                    {"full" in s ? (
-                      <p className="text-lg font-semibold leading-snug text-brand-dark sm:text-xl">
-                        {s.full}
-                      </p>
-                    ) : (
-                      <>
-                        <p className="text-3xl font-semibold text-brand-dark">
-                          {s.value}
-                        </p>
-                        <p className="mt-1 text-sm text-muted">{s.label}</p>
-                      </>
-                    )}
+                    <p className="text-4xl font-bold text-brand">{s.value}</p>
+                    <p className="mt-2 text-sm leading-snug text-muted">{s.label}</p>
                   </div>
                 ))}
+                <div className="col-span-2 flex items-center gap-4 rounded-2xl bg-brand/5 p-6">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand text-white">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+                      <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground">София и регион</p>
+                    <p className="text-sm text-muted">Бърза реакция, познаване на терена</p>
+                  </div>
+                </div>
               </div>
             </Reveal>
           </div>
-
-          <Reveal delayMs={40}>
-            <div
-              className="mt-12 flex flex-nowrap items-end justify-center gap-2 px-1 md:mt-14 md:flex-wrap md:gap-14 md:px-2"
-              aria-hidden
-            >
-              <Image
-                src="/plant.png"
-                alt=""
-                width={180}
-                height={180}
-                className="h-auto w-11 max-w-[28%] shrink-0 object-contain opacity-90 drop-shadow-md -rotate-[10deg] min-[480px]:w-14 md:max-w-none md:w-40"
-              />
-              <Image
-                src="/plant.png"
-                alt=""
-                width={200}
-                height={200}
-                className="h-auto w-12 max-w-[30%] shrink-0 object-contain opacity-95 drop-shadow-md -scale-x-100 rotate-[8deg] min-[480px]:w-16 md:max-w-none md:w-44"
-              />
-              <Image
-                src="/plant.png"
-                alt=""
-                width={180}
-                height={180}
-                className="h-auto w-11 max-w-[28%] shrink-0 object-contain opacity-90 drop-shadow-md rotate-[12deg] min-[480px]:w-14 md:max-w-none md:w-40"
-              />
-            </div>
-          </Reveal>
         </div>
       </section>
 
-      <section className="border-t border-border bg-white">
-        <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+      {/* ── Why Us ── */}
+      <section className="bg-white py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal>
-            <h2 className="text-center text-2xl font-semibold text-foreground md:text-3xl">
-              {t.about.whyTitle}
-            </h2>
+            <div className="text-center">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+                {t.about.whyTitle}
+              </h2>
+            </div>
           </Reveal>
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
             {why.map((w, i) => (
-              <Reveal key={w.title} delayMs={i * 60}>
-                <article className="rounded-2xl border border-border bg-surface/80 p-8">
-                  <h3 className="text-lg font-semibold text-foreground">
+              <Reveal key={w.title} delayMs={i * 70}>
+                <article className={`group h-full rounded-2xl bg-gradient-to-br ${w.gradient} p-8 shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(0,0,0,0.1)]`}>
+                  <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl ${w.iconBg} transition-transform duration-300 group-hover:scale-110`}>
+                    {w.icon}
+                  </div>
+                  <h3 className="mt-5 text-lg font-semibold text-foreground">
                     {w.title}
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-muted">
@@ -168,27 +181,27 @@ export default async function AboutPage({
               </Reveal>
             ))}
           </div>
-          <div className="mt-14 flex flex-col items-center gap-4 border-t border-border pt-12">
-            <Image
-              src="/logo-removebg-preview.png"
-              alt="BG Green Yard"
-              width={72}
-              height={72}
-            />
-            <p className="text-center text-lg font-medium text-foreground">
-              {t.about.ctaTitle}
-            </p>
-            <Link
-              href={`/${locale}/contact`}
-              className="inline-flex h-12 items-center justify-center rounded-full bg-brand px-8 text-sm font-semibold text-white transition hover:bg-brand-dark"
-            >
-              {t.about.ctaButton}
-            </Link>
-          </div>
         </div>
       </section>
+
+      {/* ── CTA ── */}
+      <section className="relative overflow-hidden bg-brand py-20 md:py-24">
+        <div className="pointer-events-none absolute -top-20 -right-20 h-56 w-56 rounded-full bg-white/10 blur-3xl" aria-hidden />
+        <div className="mx-auto max-w-2xl px-4 text-center md:px-6">
+          <Reveal>
+            <h2 className="text-3xl font-bold text-white md:text-4xl">{t.about.ctaTitle}</h2>
+            <div className="mt-8">
+              <Link
+                href={`/${locale}/contact`}
+                className="inline-flex h-13 items-center justify-center rounded-full bg-white px-9 text-base font-semibold text-brand shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+              >
+                {t.about.ctaButton}
+              </Link>
+            </div>
+          </Reveal>
         </div>
-      </div>
-    </PlantFrame>
+      </section>
+    </>
   );
 }
+
