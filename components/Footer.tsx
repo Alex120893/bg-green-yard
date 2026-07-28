@@ -23,13 +23,13 @@ export function Footer({
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-white">
+    <footer className="border-t border-border bg-gradient-to-b from-white to-slate-50/70">
       <div
-        className="h-1 w-full bg-brand"
+        className="h-1 w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500"
         aria-hidden
       />
 
-      <div className="border-b border-border bg-surface/70">
+      <div className="border-b border-border bg-white/75 backdrop-blur-sm">
         <div className="mx-auto max-w-6xl px-4 py-6 md:px-6 md:py-7">
           <div className="grid gap-8 md:grid-cols-12 md:items-start md:gap-6 lg:gap-8">
             {/* Brand — tight lockup */}
@@ -108,7 +108,7 @@ export function Footer({
       </div>
 
       {/* Bottom bar — single compact strip */}
-      <div className="bg-white">
+      <div className="bg-transparent">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-3 text-[11px] text-muted sm:flex-row sm:items-center sm:justify-between sm:gap-4 md:px-6">
           <p className="order-2 sm:order-1">
             © {year}{" "}

@@ -74,7 +74,7 @@ export function ContactForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="grid gap-5 rounded-2xl border border-border bg-white p-6 shadow-sm md:p-8"
+    className="grid gap-5 rounded-2xl border border-border bg-gradient-to-b from-white to-slate-50/70 p-6 shadow-[0_12px_30px_rgb(15_23_42_/0.06)] md:p-8"
       noValidate
     >
       {error && (
@@ -164,7 +164,7 @@ export function ContactForm({
       <button
         type="submit"
         disabled={sending}
-        className="mt-2 inline-flex h-12 items-center justify-center rounded-full bg-brand px-8 text-sm font-semibold text-white transition hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-60"
+        className="lovable-button-primary mt-2 inline-flex h-12 items-center justify-center rounded-full px-8 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60"
       >
         {sending ? contact.formSending : contact.formSubmit}
       </button>

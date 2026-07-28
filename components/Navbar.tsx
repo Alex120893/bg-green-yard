@@ -24,8 +24,8 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
   const enHref = `/en${pathSuffix}`;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-white/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 md:gap-4 md:px-6 md:py-4">
+    <header className="sticky top-0 z-50 border-b border-white/60 bg-white/72 shadow-[0_10px_28px_rgb(15_23_42_/0.06)] backdrop-blur-xl">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-4 md:gap-5 md:px-6 md:py-5">
         <Link
           href={`/${locale}`}
           className="flex shrink-0 items-center gap-2"
@@ -43,7 +43,7 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
           <span className="sr-only">BG Green Yard</span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
+        <nav className="hidden items-center gap-1.5 md:flex" aria-label="Main">
           {navKeys.map(({ href, key }) => {
             const path = `/${locale}${href}`;
             const active =
@@ -54,10 +54,10 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
               <Link
                 key={key}
                 href={path}
-                className={`rounded-full px-3 py-2 text-sm font-medium transition-colors ${
+                className={`rounded-full border px-3.5 py-2 text-sm font-medium transition-all ${
                   active
-                    ? "bg-brand-soft text-brand-dark"
-                    : "text-muted hover:bg-surface hover:text-foreground"
+                    ? "border-brand/25 bg-brand-soft text-brand-dark"
+                    : "border-transparent text-muted hover:border-border hover:bg-white/90 hover:text-foreground"
                 }`}
               >
                 {nav[key]}
@@ -68,13 +68,13 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
 
         <div className="flex shrink-0 items-center gap-2">
           <div
-            className="relative flex h-10 w-[6.75rem] shrink-0 items-stretch rounded-full border border-border bg-surface p-1 shadow-[inset_0_1px_2px_rgb(0_0_0_/0.04)]"
+            className="relative flex h-10 w-[6.75rem] shrink-0 items-stretch rounded-full border border-white/70 bg-white/80 p-1 shadow-[inset_0_1px_2px_rgb(15_23_42_/0.05),0_8px_16px_rgb(15_23_42_/0.04)]"
             role="group"
             aria-label="BG / EN"
           >
             <span
               aria-hidden
-              className={`pointer-events-none absolute bottom-1 left-1 top-1 w-[calc(50%-4px)] rounded-full bg-white shadow-sm ring-1 ring-black/[0.06] transition-transform duration-300 ease-out will-change-transform ${
+              className={`pointer-events-none absolute bottom-1 left-1 top-1 w-[calc(50%-4px)] rounded-full bg-gradient-to-r from-emerald-50 to-cyan-50 shadow-sm ring-1 ring-black/[0.05] transition-transform duration-300 ease-out will-change-transform ${
                 locale === "en" ? "translate-x-[calc(100%+8px)]" : "translate-x-0"
               }`}
             />
@@ -103,7 +103,7 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
           </div>
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border md:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white/85 md:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((o) => !o)}
@@ -136,7 +136,7 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
           <nav
             id="mobile-nav"
             inert={!open ? true : undefined}
-            className={`border-t border-border bg-white px-4 pb-4 pt-2 transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${
+            className={`border-t border-white/70 bg-gradient-to-b from-white/90 to-slate-50/90 px-4 pb-4 pt-2 transition-[opacity,transform] duration-300 ease-out motion-reduce:transition-none ${
               open
                 ? "translate-y-0 opacity-100"
                 : "pointer-events-none -translate-y-2 opacity-0"
@@ -147,7 +147,7 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
                 <Link
                   key={key}
                   href={`/${locale}${href}`}
-                  className="rounded-lg px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-surface"
+                  className="rounded-xl px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-white"
                   onClick={() => setOpen(false)}
                 >
                   {nav[key]}

@@ -49,8 +49,8 @@ export default async function ServicesPage({
       <PlantDecoration corner="tl" kind="png" className="opacity-28" size={135} />
       <PlantDecoration corner="bl" kind="png" className="opacity-26" size={125} />
 
-      <section className="border-b border-border bg-white">
-        <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+      <section className="border-b border-border bg-gradient-to-b from-white to-slate-50/75">
+        <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
           <Reveal>
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <div className="max-w-2xl">
@@ -82,11 +82,11 @@ export default async function ServicesPage({
         </div>
       </section>
 
-      <section className="bg-surface">
-        <div className="mx-auto max-w-6xl space-y-16 px-4 py-14 md:px-6 md:py-20">
+      <section className="bg-gradient-to-b from-slate-50/85 via-white to-slate-50/75">
+        <div className="mx-auto max-w-6xl space-y-16 px-4 py-16 md:px-6 md:py-24">
           {blocks.map((b, i) => (
             <Reveal key={b.title} delayMs={i * 70}>
-              <article className="grid gap-8 overflow-hidden rounded-2xl border border-border bg-white shadow-sm md:grid-cols-2 md:gap-0">
+              <article className="lovable-card grid gap-8 overflow-hidden md:grid-cols-2 md:gap-0">
                 <div
                   className={`relative aspect-[16/10] md:aspect-auto md:min-h-[280px] ${i % 2 === 1 ? "md:order-2" : ""}`}
                 >
