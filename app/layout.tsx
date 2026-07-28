@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { PRODUCTION_SITE_ORIGIN, ogImageAbsoluteUrl } from "@/lib/site";
 import "./globals.css";
 import Script from "next/script";
-import { ChatBot } from "@/components/ChatBot";
+import dynamic from "next/dynamic";
+
+const ChatBot = dynamic(() => import("@/components/ChatBot").then(mod => ({ default: mod.ChatBot })), {
+  ssr: false,
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(PRODUCTION_SITE_ORIGIN),
