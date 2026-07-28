@@ -26,10 +26,7 @@ export function VideoHero({
         playsInline
         className="absolute inset-0 h-full w-full object-cover"
       >
-        <source
-          src="https://videos.pexels.com/video-files/856889/856889-sd_640_360_24fps.mp4"
-          type="video/mp4"
-        />
+        <source src="/main.mp4" type="video/mp4" />
       </video>
 
       {/* Dark Overlay */}
@@ -56,7 +53,7 @@ export function VideoHero({
           <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
             <Link
               href={`/${locale}/services`}
-              className="inline-flex h-14 items-center justify-center rounded-full bg-emerald-600 px-10 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:bg-emerald-700 hover:shadow-xl hover:-translate-y-0.5"
+              className="inline-flex h-14 items-center justify-center rounded-full bg-brand px-10 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:bg-brand-dark hover:shadow-xl hover:-translate-y-0.5"
             >
               {ctaPrimary}
             </Link>
