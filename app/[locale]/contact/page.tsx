@@ -38,8 +38,8 @@ export default async function ContactPage({
       <PlantDecoration corner="bl" kind="avif" className="opacity-35" size={190} />
       <PlantDecoration corner="tr" kind="png" className="opacity-27" size={128} />
 
-      <section className="border-b border-border bg-white">
-        <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+      <section className="border-b border-border bg-gradient-to-b from-white to-slate-50/75">
+        <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
           <Reveal>
             <div>
                 <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
@@ -104,8 +104,8 @@ export default async function ContactPage({
         </div>
       </section>
 
-      <section className="bg-surface">
-        <div className="mx-auto grid max-w-6xl gap-12 px-4 py-14 md:grid-cols-2 md:px-6 md:py-20">
+      <section className="bg-gradient-to-b from-slate-50/85 via-white to-slate-50/75">
+        <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 md:grid-cols-2 md:px-6 md:py-24">
           <Reveal>
             <ContactForm
               locale={locale}
@@ -118,7 +118,7 @@ export default async function ContactPage({
               <h2 className="text-lg font-semibold text-foreground">
                 {t.contact.mapTitle}
               </h2>
-              <div className="min-h-[280px] flex-1 overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
+              <div className="lovable-card min-h-[280px] flex-1 overflow-hidden bg-white">
                 <iframe
                   title="Sofia map"
                   src={MAP_EMBED}

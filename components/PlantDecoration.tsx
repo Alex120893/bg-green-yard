@@ -12,18 +12,18 @@ const cornerPos: Record<Corner, string> = {
 
 /** Завъртане на контейнера по ъгъл */
 const cornerRot: Record<Corner, string> = {
-  tl: "rotate-[-8deg]",
-  tr: "rotate-[10deg]",
-  bl: "rotate-[6deg]",
-  br: "rotate-[-12deg]",
+  tl: "rotate-[-4deg]",
+  tr: "rotate-[5deg]",
+  bl: "rotate-[3deg]",
+  br: "rotate-[-6deg]",
 };
 
 /** Същите ъгли с обратен знак (ляво ↔ дясно наклон) */
 const cornerRotFlipped: Record<Corner, string> = {
-  tl: "rotate-[8deg]",
-  tr: "rotate-[-10deg]",
-  bl: "rotate-[-6deg]",
-  br: "rotate-[12deg]",
+  tl: "rotate-[4deg]",
+  tr: "rotate-[-5deg]",
+  bl: "rotate-[-3deg]",
+  br: "rotate-[6deg]",
 };
 
 /** Допълнително завъртане и огледалност за plant.png */
@@ -45,7 +45,7 @@ export function PlantDecoration({
   corner,
   className = "",
   size = 160,
-  opacity = 0.55,
+  opacity = 0.35,
   kind = "avif",
   /** Обръща посоката на наклона при същия абсолютен ъгъл */
   flipTilt = false,
@@ -71,7 +71,7 @@ export function PlantDecoration({
           alt=""
           width={size}
           height={size}
-          className="h-auto w-[min(50vw,300px)] max-w-none drop-shadow-sm md:w-[min(38vw,260px)]"
+          className="h-auto w-[min(44vw,260px)] max-w-none drop-shadow-sm md:w-[min(34vw,220px)]"
           sizes="260px"
         />
       </div>
@@ -81,7 +81,7 @@ export function PlantDecoration({
         alt=""
         width={size}
         height={size}
-        className="h-auto w-[min(52vw,320px)] max-w-none drop-shadow-sm md:w-[min(40vw,280px)]"
+        className="h-auto w-[min(46vw,280px)] max-w-none drop-shadow-sm md:w-[min(36vw,240px)]"
         sizes="280px"
       />
     );

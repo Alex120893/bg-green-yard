@@ -36,42 +36,42 @@ export default async function HomePage({
       text: "Много добре! Екипът на BG Green Yard направи чудесна работа с градината ми. Всичко е чисто, красиво и професионално.",
       rating: 5,
       initials: "МП",
-      color: "bg-blue-500",
+      color: "bg-gradient-to-br from-sky-400 to-cyan-500",
     },
     {
       name: "Иван Славов",
       text: "Отличен сервис! Препоръчвам на всички приятели. Поливната система работи перфектно, никакви проблеми.",
       rating: 5,
       initials: "ИС",
-      color: "bg-green-500",
+      color: "bg-gradient-to-br from-emerald-400 to-teal-500",
     },
     {
       name: "Деян Костадинов",
       text: "Професионализъм на първо място! Екипът дойде на време, свърши работата добре и чистата площ след себе си.",
       rating: 5,
       initials: "ДК",
-      color: "bg-purple-500",
+      color: "bg-gradient-to-br from-violet-400 to-purple-500",
     },
     {
       name: "Александра Георгиева",
       text: "Препоръчвам BG Green Yard! Градината ми изглежда като от списание. Цена-качество е топ!",
       rating: 5,
       initials: "АГ",
-      color: "bg-pink-500",
+      color: "bg-gradient-to-br from-pink-400 to-rose-500",
     },
     {
       name: "Георги Василев",
       text: "Много добре направихте! Персоналът е учтив, внимателен и уважава времето ти. Ще ви наемам пак.",
       rating: 5,
       initials: "ГВ",
-      color: "bg-orange-500",
+      color: "bg-gradient-to-br from-amber-400 to-orange-500",
     },
     {
       name: "Нина Димитрова",
       text: "Отличен избор! Озеленяването е според моите желания. Благодаря на BG Green Yard за вниманието!",
       rating: 5,
       initials: "НД",
-      color: "bg-red-500",
+      color: "bg-gradient-to-br from-fuchsia-400 to-purple-500",
     },
   ];
 
@@ -86,7 +86,7 @@ export default async function HomePage({
         ctaSecondary={t.home.ctaSecondary}
       />
 
-      <section className="relative border-b border-border bg-white">
+      <section className="relative border-b border-border bg-gradient-to-b from-white via-white to-slate-50/70">
         <PlantDecoration
           corner="tl"
           kind="avif"
@@ -95,7 +95,7 @@ export default async function HomePage({
           size={200}
         />
         <PlantDecoration corner="tr" kind="png" className="opacity-30" size={155} />
-        <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+        <div className="relative z-10 mx-auto max-w-6xl px-4 py-20 md:px-6 md:py-28">
           <Reveal>
             <div className="flex flex-col items-center text-center">
               <Image
@@ -116,19 +116,19 @@ export default async function HomePage({
         </div>
       </section>
 
-      <section className="relative bg-surface">
+      <section className="relative bg-gradient-to-b from-slate-50/85 via-white to-slate-50/80">
         <PlantDecoration corner="br" kind="avif" className="opacity-35" size={220} />
         <PlantDecoration corner="bl" kind="png" className="opacity-30" size={148} />
-        <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+        <div className="relative z-10 mx-auto max-w-6xl px-4 py-20 md:px-6 md:py-28">
           <Reveal>
-            <h2 className="text-center text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
+            <h2 className="text-center text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
               {t.home.trustTitle}
             </h2>
           </Reveal>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
             {trust.map((item, i) => (
               <Reveal key={item.title} delayMs={i * 80}>
-                <article className="h-full rounded-2xl border border-border bg-white p-8 shadow-sm">
+                <article className="lovable-card h-full p-8">
                   <h3 className="text-lg font-semibold text-foreground">
                     {item.title}
                   </h3>
@@ -142,7 +142,7 @@ export default async function HomePage({
           <div className="mt-14 flex justify-center">
             <Link
               href={`/${locale}/contact`}
-              className="inline-flex h-12 items-center justify-center rounded-full bg-brand px-8 text-sm font-semibold text-white transition hover:bg-brand-dark"
+              className="lovable-button-primary inline-flex h-12 items-center justify-center rounded-full px-8 text-sm font-semibold"
             >
               {t.home.ctaSecondary}
             </Link>
@@ -151,13 +151,13 @@ export default async function HomePage({
       </section>
 
       {/* Reviews Section */}
-      <section className="relative bg-white">
-        <PlantDecoration corner="tl" kind="png" className="opacity-25" size={160} />
-        <PlantDecoration corner="br" kind="avif" className="opacity-30" size={200} />
-        <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
+      <section className="relative bg-gradient-to-b from-white via-slate-50/70 to-white">
+        <PlantDecoration corner="tl" kind="png" className="opacity-15" size={140} />
+        <PlantDecoration corner="br" kind="avif" className="opacity-20" size={170} />
+        <div className="relative z-10 mx-auto max-w-6xl px-4 py-20 md:px-6 md:py-28">
           <Reveal>
             <div className="flex flex-col items-center text-center">
-              <h2 className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
+              <h2 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
                 Отзиви на клиентите
               </h2>
             </div>
@@ -166,7 +166,7 @@ export default async function HomePage({
           <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {reviews.map((review, i) => (
               <Reveal key={review.name} delayMs={i * 60}>
-                <article className="flex h-full flex-col rounded-2xl border border-border bg-gradient-to-br from-white to-surface p-6 shadow-sm transition hover:shadow-md">
+                <article className="lovable-card flex h-full flex-col p-7">
                   {/* Stars */}
                   <div className="flex gap-1">
                     {Array.from({ length: review.rating }).map((_, i) => (
@@ -178,12 +178,12 @@ export default async function HomePage({
 
                   {/* Review Text */}
                   <p className="mt-4 flex-grow text-sm leading-relaxed text-muted">
-                    "{review.text}"
+                    &ldquo;{review.text}&rdquo;
                   </p>
 
                   {/* Author */}
                   <div className="mt-6 flex items-center gap-3 border-t border-border pt-4">
-                    <div className={`flex h-10 w-10 items-center justify-center rounded-full ${review.color} text-white font-semibold text-sm`}>
+                    <div className={`flex h-10 w-10 items-center justify-center rounded-full ${review.color} text-sm font-semibold text-white`}>
                       {review.initials}
                     </div>
                     <div>

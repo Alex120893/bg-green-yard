@@ -45,8 +45,8 @@ export default async function AboutPage({
     <PlantFrame clipDecorations={false}>
       <div className="relative">
         <div className="relative z-[2]">
-      <section className="border-b border-border bg-white">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-2 md:items-center md:gap-16 md:px-6 md:py-20">
+      <section className="border-b border-border bg-gradient-to-b from-white to-slate-50/75">
+        <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 md:grid-cols-2 md:items-center md:gap-16 md:px-6 md:py-24">
           <Reveal>
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-dark">
@@ -60,7 +60,7 @@ export default async function AboutPage({
           </Reveal>
           <Reveal delayMs={100}>
             <div className="relative">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-surface shadow-sm">
+              <div className="lovable-card relative aspect-[4/3] overflow-hidden">
                 <Image
                   src="/1000017936.jpg"
                   alt=""
@@ -75,8 +75,8 @@ export default async function AboutPage({
         </div>
       </section>
 
-      <section className="bg-surface">
-        <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+      <section className="bg-gradient-to-b from-slate-50/80 via-white to-slate-50/75">
+        <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
           <div className="grid gap-12 md:grid-cols-2">
             <Reveal>
               <div>
@@ -92,7 +92,7 @@ export default async function AboutPage({
               </div>
             </Reveal>
             <Reveal delayMs={80}>
-              <div className="grid gap-4 rounded-2xl border border-border bg-white p-8 shadow-sm">
+              <div className="lovable-card grid gap-4 p-8">
                 {stats.map((s) => (
                   <div
                     key={"full" in s ? s.full : s.label}
@@ -147,8 +147,8 @@ export default async function AboutPage({
         </div>
       </section>
 
-      <section className="border-t border-border bg-white">
-        <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+      <section className="border-t border-border bg-gradient-to-b from-white to-slate-50/70">
+        <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
           <Reveal>
             <h2 className="text-center text-2xl font-semibold text-foreground md:text-3xl">
               {t.about.whyTitle}
@@ -157,7 +157,7 @@ export default async function AboutPage({
           <div className="mt-12 grid gap-8 md:grid-cols-3">
             {why.map((w, i) => (
               <Reveal key={w.title} delayMs={i * 60}>
-                <article className="rounded-2xl border border-border bg-surface/80 p-8">
+                <article className="lovable-card p-8">
                   <h3 className="text-lg font-semibold text-foreground">
                     {w.title}
                   </h3>
@@ -180,7 +180,7 @@ export default async function AboutPage({
             </p>
             <Link
               href={`/${locale}/contact`}
-              className="inline-flex h-12 items-center justify-center rounded-full bg-brand px-8 text-sm font-semibold text-white transition hover:bg-brand-dark"
+              className="lovable-button-primary inline-flex h-12 items-center justify-center rounded-full px-8 text-sm font-semibold"
             >
               {t.about.ctaButton}
             </Link>

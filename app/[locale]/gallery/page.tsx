@@ -44,8 +44,8 @@ export default async function GalleryPage({
       <PlantDecoration corner="bl" kind="avif" size={150} opacity={0.42} />
       <PlantDecoration corner="br" kind="png" size={150} opacity={0.36} />
       <div className="relative z-10">
-        <section className="border-b border-border bg-white">
-          <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+        <section className="border-b border-border bg-gradient-to-b from-white to-slate-50/75">
+          <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
             <Reveal>
               <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
                 <div>
@@ -68,18 +68,18 @@ export default async function GalleryPage({
           </div>
         </section>
 
-        <section className="bg-surface">
-          <div className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+        <section className="bg-gradient-to-b from-slate-50/85 via-white to-slate-50/75">
+          <div className="mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
             <Reveal>
               <div>
                 <p className="mb-4 text-sm font-medium text-muted">
                   {t.gallery.videoNote}
                 </p>
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 lg:gap-8">
-                  <div className="overflow-hidden rounded-2xl border border-border bg-black shadow-sm">
+                  <div className="lovable-card overflow-hidden bg-black">
                     <GalleryVideo src="/1000011543.mp4" />
                   </div>
-                  <div className="overflow-hidden rounded-2xl border border-border bg-black shadow-sm">
+                  <div className="lovable-card overflow-hidden bg-black">
                     <GalleryVideo src="/main.mp4" />
                   </div>
                 </div>
@@ -89,7 +89,7 @@ export default async function GalleryPage({
             <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {photos.map((src, i) => (
                 <Reveal key={src} delayMs={(i % 3) * 50}>
-                  <figure className="group overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
+                  <figure className="lovable-card group overflow-hidden bg-white">
                     <div className="relative aspect-[4/3]">
                       <Image
                         src={src}
