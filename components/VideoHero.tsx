@@ -17,26 +17,24 @@ export function VideoHero({
   ctaSecondary: string;
 }) {
   return (
-    <section className="relative overflow-hidden bg-black">
-      {/* Background Image with Overlay */}
+    <section className="relative overflow-hidden">
+      {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1552502963-a4b47fcd2f7b?w=1400&h=800&fit=crop')",
+            "linear-gradient(135deg, #1a4d2e 0%, #2d5a3d 50%, #1a4d2e 100%)",
         }}
       />
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/45" />
 
       <div className="relative mx-auto flex min-h-[min(100svh,900px)] max-w-7xl flex-col justify-center px-4 py-24 md:px-8 md:py-32">
-        <div className="max-w-2xl">
+        <div className="max-w-3xl">
           {/* Eyebrow */}
           <span className="inline-block text-xs font-semibold uppercase tracking-widest text-emerald-300">
             {eyebrow}
           </span>
 
-          {/* Main Title - Large and Bold */}
+          {/* Main Title */}
           <h1 className="mt-6 text-5xl font-bold leading-[1.1] tracking-tight text-white md:text-6xl lg:text-7xl">
             {title}
           </h1>
@@ -50,7 +48,7 @@ export function VideoHero({
           <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
             <Link
               href={`/${locale}/services`}
-              className="inline-flex h-14 items-center justify-center rounded-full bg-emerald-500 px-10 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:bg-emerald-600 hover:shadow-xl hover:-translate-y-0.5"
+              className="inline-flex h-14 items-center justify-center rounded-full bg-emerald-600 px-10 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:bg-emerald-700 hover:shadow-xl hover:-translate-y-0.5"
             >
               {ctaPrimary}
             </Link>
