@@ -33,7 +33,8 @@ export function VideoHero({
       <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/50 to-black/40" />
 
       <div className="relative mx-auto flex min-h-[min(100svh,900px)] max-w-7xl flex-col justify-center px-4 py-24 md:px-8 md:py-32">
-        <div className="max-w-3xl">
+        {/* Content Box */}
+        <div className="max-w-3xl rounded-[40px] bg-black/40 backdrop-blur-md border border-white/10 p-10 md:p-12 lg:p-16">
           {/* Eyebrow */}
           <span className="inline-block text-xs font-semibold uppercase tracking-widest text-emerald-300">
             {eyebrow}
