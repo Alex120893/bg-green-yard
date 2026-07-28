@@ -85,21 +85,18 @@ export function FloatingCTA({ locale }: { locale: Locale }) {
             {/* Content - Centered over flower */}
             <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
               <div className="text-center px-8">
-                <h3 className="text-2xl font-bold text-white mb-2 animate-in fade-in duration-1000" style={{ animationDelay: "200ms" }}>
-                  Закажи сейчас
-                </h3>
-                <p className="text-base text-white/95 font-semibold mb-6 animate-in fade-in duration-1000" style={{ animationDelay: "400ms" }}>
-                  Безплатен преглед
+                <p className="text-lg text-white/95 font-semibold mb-6 animate-in fade-in duration-1000 leading-relaxed" style={{ animationDelay: "200ms" }}>
+                  Заявете своя безплатен оглед още днес!
                 </p>
 
                 {/* CTA Button */}
                 <Link
                   href={`/${locale}/contact`}
                   className="inline-flex h-11 items-center justify-center rounded-full bg-white px-8 text-sm font-bold text-brand shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 whitespace-nowrap animate-in fade-in duration-1000"
-                  style={{ animationDelay: "600ms" }}
+                  style={{ animationDelay: "400ms" }}
                   onClick={() => setIsOpen(false)}
                 >
-                  Контактирай нас
+                  Свържи се с нас
                 </Link>
               </div>
 
@@ -107,7 +104,7 @@ export function FloatingCTA({ locale }: { locale: Locale }) {
               <button
                 onClick={() => setIsOpen(false)}
                 className="absolute top-8 right-8 z-20 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-all duration-300 backdrop-blur-sm animate-in fade-in duration-1000"
-                style={{ animationDelay: "800ms" }}
+                style={{ animationDelay: "600ms" }}
                 aria-label="Close"
               >
                 <svg
@@ -124,7 +121,7 @@ export function FloatingCTA({ locale }: { locale: Locale }) {
           </div>
 
           {/* Dismiss option */}
-          <div className="text-center mt-8 animate-in fade-in duration-1000" style={{ animationDelay: "900ms" }}>
+          <div className="text-center mt-8 animate-in fade-in duration-1000" style={{ animationDelay: "700ms" }}>
             <button
               onClick={() => setIsOpen(false)}
               className="text-sm text-white/60 hover:text-white transition-colors font-medium"
