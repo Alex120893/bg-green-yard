@@ -17,15 +17,23 @@ export function VideoHero({
   ctaSecondary: string;
 }) {
   return (
-    <section className="relative overflow-hidden">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "linear-gradient(135deg, #1a4d2e 0%, #2d5a3d 50%, #1a4d2e 100%)",
-        }}
-      />
+    <section className="relative overflow-hidden bg-black">
+      {/* Video Background */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 h-full w-full object-cover"
+      >
+        <source
+          src="https://videos.pexels.com/video-files/856889/856889-sd_640_360_24fps.mp4"
+          type="video/mp4"
+        />
+      </video>
+
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/50 to-black/40" />
 
       <div className="relative mx-auto flex min-h-[min(100svh,900px)] max-w-7xl flex-col justify-center px-4 py-24 md:px-8 md:py-32">
         <div className="max-w-3xl">
