@@ -28,7 +28,7 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 md:gap-4 md:px-6 md:py-4">
         <Link
           href={`/${locale}`}
-          className="flex shrink-0 items-center gap-2.5 rounded-full bg-white/20 px-4 py-2 hover:bg-white/30 transition-colors"
+          className="flex shrink-0 items-center gap-2.5 rounded-full bg-white px-3 py-2 hover:bg-white/90 transition-colors"
           onClick={() => setOpen(false)}
         >
           <Image
@@ -40,7 +40,7 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
             priority
             sizes="(max-width: 768px) 120px, 160px"
           />
-          <span className="hidden text-sm font-bold tracking-tight text-white sm:block">
+          <span className="hidden text-sm font-bold tracking-tight text-brand sm:block">
             BG Green Yard
           </span>
         </Link>
