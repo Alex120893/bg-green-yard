@@ -31,15 +31,17 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
           className="flex shrink-0 items-center gap-2.5 rounded-full bg-white px-3 py-2 hover:bg-white/90 transition-colors"
           onClick={() => setOpen(false)}
         >
-          <Image
-            src="/logo-removebg-preview.png"
-            alt="BG Green Yard"
-            width={160}
-            height={160}
+          <svg
+            viewBox="0 0 200 200"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
             className="h-10 w-auto sm:h-12 md:h-14"
-            priority
-            sizes="(max-width: 768px) 120px, 160px"
-          />
+          >
+            <path d="M 100 30 Q 130 50 130 80 Q 130 120 100 140 Q 70 120 70 80 Q 70 50 100 30" fill="#10b981" opacity="0.9"/>
+            <path d="M 100 40 Q 120 55 120 80 Q 120 110 100 130 Q 80 110 80 80 Q 80 55 100 40" fill="#059669" opacity="0.7"/>
+            <circle cx="100" cy="85" r="8" fill="#ffffff" opacity="0.6"/>
+            <line x1="60" y1="155" x2="140" y2="155" stroke="#10b981" strokeWidth="2" opacity="0.5"/>
+          </svg>
           <span className="hidden text-sm font-bold tracking-tight text-brand sm:block">
             BG Green Yard
           </span>
