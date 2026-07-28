@@ -11,7 +11,6 @@ const navKeys = [
   { href: "/about", key: "about" as const },
   { href: "/services", key: "services" as const },
   { href: "/plant-care", key: "plantCare" as const },
-  { href: "/lawn-care", key: "lawnCare" as const },
   { href: "/gallery", key: "gallery" as const },
   { href: "/contact", key: "contact" as const },
 ];
@@ -67,7 +66,7 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
                     : "text-white/80 hover:bg-white/10 hover:text-white"
                 }`}
               >
-                {nav[key] || (key === "plantCare" ? "Растения" : key === "lawnCare" ? "Газон" : key)}
+                {nav[key]}
               </Link>
             );
           })}
@@ -157,7 +156,7 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
                   className="rounded-lg px-3 py-3 text-base font-medium text-white transition-colors hover:bg-white/10"
                   onClick={() => setOpen(false)}
                 >
-                  {nav[key] || (key === "plantCare" ? "Растения" : key === "lawnCare" ? "Газон" : key)}
+                  {nav[key]}
                 </Link>
               ))}
             </div>
