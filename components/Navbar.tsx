@@ -28,23 +28,27 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 md:gap-4 md:px-6 md:py-4">
         <Link
           href={`/${locale}`}
-          className="flex shrink-0 items-center gap-2.5 rounded-full bg-white px-3 py-2 hover:bg-white/90 transition-colors"
+          className="flex shrink-0 items-center gap-2.5 rounded-full bg-white/15 px-3 py-2 hover:bg-white/25 transition-all duration-300 hover:shadow-lg"
           onClick={() => setOpen(false)}
         >
-          <svg
-            viewBox="0 0 200 200"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            className="h-10 w-auto sm:h-12 md:h-14"
-          >
-            <path d="M 100 30 Q 130 50 130 80 Q 130 120 100 140 Q 70 120 70 80 Q 70 50 100 30" fill="#10b981" opacity="0.9"/>
-            <path d="M 100 40 Q 120 55 120 80 Q 120 110 100 130 Q 80 110 80 80 Q 80 55 100 40" fill="#059669" opacity="0.7"/>
-            <circle cx="100" cy="85" r="8" fill="#ffffff" opacity="0.6"/>
-            <line x1="60" y1="155" x2="140" y2="155" stroke="#10b981" strokeWidth="2" opacity="0.5"/>
-          </svg>
-          <span className="hidden text-sm font-bold tracking-tight text-brand sm:block">
-            BG Green Yard
-          </span>
+          <div className="relative h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 flex items-center justify-center">
+            <Image
+              src="/logo-removebg-preview.png"
+              alt="BG Green Yard"
+              fill
+              className="object-contain"
+              priority
+              sizes="(max-width: 640px) 40px, (max-width: 768px) 48px, 56px"
+            />
+          </div>
+          <div className="hidden sm:flex flex-col gap-0">
+            <span className="text-sm font-bold tracking-tight text-white leading-tight">
+              BG Green
+            </span>
+            <span className="text-sm font-bold tracking-tight text-white leading-tight">
+              Yard
+            </span>
+          </div>
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
