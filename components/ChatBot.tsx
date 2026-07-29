@@ -9,11 +9,13 @@ interface Message {
   content: string;
   timestamp: Date;
   needsContact?: boolean;
+  showServicePrompt?: boolean;
 }
 
 type ChatResponse = {
   response: string;
   needsContact: boolean;
+  showServicePrompt: boolean;
 };
 
 export function ChatBot() {
@@ -90,6 +92,7 @@ export function ChatBot() {
         content: data.response,
         timestamp: new Date(),
         needsContact: data.needsContact,
+        showServicePrompt: data.showServicePrompt,
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
@@ -184,7 +187,12 @@ export function ChatBot() {
                   <p className="text-xs leading-relaxed whitespace-pre-wrap">
                     {message.content}
                   </p>
-                  {message.needsContact && (
+                  {message.showServicePrompt && (
+                    <p className="mt-2 border-t border-green-100 pt-2 text-xs font-medium text-green-800">
+                      Искате професионална помощ? Екипът на BG Green Yard може да поеме огледа и изпълнението.
+                    </p>
+                  )}
+                  {(message.needsContact || message.showServicePrompt) && (
                     <div className="mt-2 flex flex-col gap-1.5">
                       <a
                         href={contactHref}
