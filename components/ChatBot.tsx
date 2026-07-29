@@ -88,7 +88,7 @@ export function ChatBot() {
       {/* Бутон за чат - малка иконка */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-40 w-12 h-12 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center"
+        className="fixed bottom-6 right-6 z-[60] w-12 h-12 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center"
         aria-label="Отворете чата"
         title="Помощник за растенията"
       >
@@ -103,7 +103,7 @@ export function ChatBot() {
 
       {/* Прозорец на чата */}
       {isOpen && (
-        <div className="fixed bottom-20 right-6 z-40 w-80 h-96 bg-white rounded-lg shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-2">
+        <div className="fixed bottom-20 right-6 z-[60] w-80 h-96 bg-white rounded-lg shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-2">
           {/* Заглавие */}
           <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-3">
             <div className="flex items-center justify-between">
