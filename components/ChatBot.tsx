@@ -89,7 +89,7 @@ export function ChatBot() {
       <div className="fixed bottom-5 right-5 z-[60] flex items-center gap-3">
         {!isOpen && (
           <div className="max-w-48 rounded-2xl rounded-br-sm bg-white px-3 py-2 text-xs font-semibold leading-snug text-green-900 shadow-lg ring-1 ring-green-100 sm:text-sm">
-            Здравейте! Аз съм вашият помощник за растенията.
+            Професионален консултант за грижа за растения и тревни площи.
           </div>
         )}
         <button
@@ -103,7 +103,11 @@ export function ChatBot() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           ) : (
-            <span className="text-2xl">🌿</span>
+            <img
+              src="/logo-removebg-preview.png"
+              alt="BG Green Yard"
+              className="h-10 w-10 rounded-full bg-white object-contain p-0.5"
+            />
           )}
         </button>
       </div>
@@ -115,8 +119,17 @@ export function ChatBot() {
           <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-3">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-bold text-sm">🌿 BG Green Yard</h3>
-                <p className="text-xs text-green-100">Помощник</p>
+                <div className="flex items-center gap-2">
+                  <img
+                    src="/logo-removebg-preview.png"
+                    alt="BG Green Yard"
+                    className="h-7 w-7 rounded-full bg-white object-contain p-0.5"
+                  />
+                  <div>
+                    <h3 className="font-bold text-sm">BG Green Yard</h3>
+                    <p className="text-xs text-green-100">Консултант по озеленяване</p>
+                  </div>
+                </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
