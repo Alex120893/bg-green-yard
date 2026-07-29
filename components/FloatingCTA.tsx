@@ -69,7 +69,7 @@ export function FloatingCTA({ locale }: { locale: Locale }) {
         )}
       </div>
 
-      {/* Desktop Version - Bottom Right */}
+      {/* Desktop CTA stays out of the chat and lower-page controls. */}
       <div className="hidden md:block">
         {isOpen && (
           <>
@@ -81,7 +81,7 @@ export function FloatingCTA({ locale }: { locale: Locale }) {
             />
 
             {/* Message Bubble */}
-            <div className="fixed bottom-8 right-8 z-50 animate-in slide-in-from-bottom-8 fade-in duration-700">
+            <div className="fixed left-8 top-24 z-50 animate-in slide-in-from-top-8 fade-in duration-700">
               <div className="relative bg-white rounded-2xl rounded-br-none shadow-2xl max-w-sm animate-in fade-in slide-in-from-bottom duration-700">
                 {/* Arrow pointer */}
                 <div className="absolute bottom-0 right-0 w-0 h-0 border-l-12 border-t-12 border-l-transparent border-t-white"></div>
