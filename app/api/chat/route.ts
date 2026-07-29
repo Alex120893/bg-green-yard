@@ -1,3 +1,4 @@
+import { searchPlantCatalog } from "@/lib/plantCatalog";
 import { searchPlantDatabase } from "@/lib/plantDatabase";
 
 export async function POST(request: Request) {
@@ -8,7 +9,11 @@ export async function POST(request: Request) {
       return Response.json({ error: "Невалидно съобщение" }, { status: 400 });
     }
 
-    return Response.json(searchPlantDatabase(message));
+    const localResult = searchPlantDatabase(message);
+    if (!localResult.needsContact) return Response.json(localResult);
+
+    const catalogResult = await searchPlantCatalog(message);
+    return Response.json(catalogResult ?? localResult);
   } catch (error) {
     console.error("Chat API error:", error);
     return Response.json(
