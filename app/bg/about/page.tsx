@@ -83,6 +83,10 @@ export default function AboutPage() {
     },
   ];
 
+  const handleTabChange = (tabId: string) => {
+    setActiveTab(tabId as "about" | "team" | "values");
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
@@ -96,7 +100,7 @@ export default function AboutPage() {
       </div>
 
       {/* Tab Navigation */}
-      <TabNav tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
+      <TabNav tabs={tabs} activeTab={activeTab} onTabChange={handleTabChange} />
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 py-12">
@@ -110,13 +114,13 @@ export default function AboutPage() {
                 <div className="bg-gradient-to-br from-green-50 to-white rounded-lg p-8 border border-green-200">
                   <h3 className="text-xl font-bold text-green-600 mb-4">Нашата мисия</h3>
                   <p className="text-gray-700 leading-relaxed">
-                    Мисията ни е да съдържаме поддържани, здрави и красиви зелени пространства за живот и работа в София и около град. Съобщения дългосрочни партньорства, основани на надеждност и висока изпълнителска култура.
+                    Мисията ни е да съдържаме поддържани, здрави и красиви зелени пространства за живот и работа в С[...]
                   </p>
                 </div>
                 <div className="bg-gradient-to-br from-green-50 to-white rounded-lg p-8 border border-green-200">
                   <h3 className="text-xl font-bold text-green-600 mb-4">Нашето видение</h3>
                   <p className="text-gray-700 leading-relaxed">
-                    Вярваме, че всеки добре поддържан двор носи повече спокойствие и стойност на имота. Поддържаме индивидуално на всеки проект, последвайки качеството по всяко време на годината.
+                    Вярваме, че всеки добре поддържан двор носи повече спокойствие и стойност на имота. Поддържаме �[...]
                   </p>
                 </div>
               </div>
