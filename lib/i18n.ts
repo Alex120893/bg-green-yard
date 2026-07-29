@@ -19,6 +19,8 @@ const dictionaryBg = {
     home: "Начало",
     about: "За нас",
     services: "Услуги",
+    plantCare: "Грижа за растенията",
+    lawnCare: "Грижа за тревата",
     gallery: "Галерия",
     contact: "Контакти",
     openMenu: "Отвори менюто",
