@@ -37,11 +37,8 @@ async function redisCommand<T>(command: string, init: RequestInit = {}): Promise
 }
 
 export async function saveChatInquiry(inquiry: ChatInquiry) {
-  return redisCommand("lpush", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify([INQUIRIES_KEY, JSON.stringify(inquiry)]),
-  });
+  const value = encodeURIComponent(JSON.stringify(inquiry));
+  return redisCommand(`lpush/${INQUIRIES_KEY}/${value}`);
 }
 
 export async function getChatInquiries(): Promise<ChatInquiry[]> {
