@@ -132,6 +132,10 @@ export default function ServicesPage() {
     },
   ];
 
+  const handleTabChange = (tabId: string) => {
+    setActiveTab(tabId as "services" | "portfolio");
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
@@ -145,7 +149,7 @@ export default function ServicesPage() {
       </div>
 
       {/* Tab Navigation */}
-      <TabNav tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
+      <TabNav tabs={tabs} activeTab={activeTab} onTabChange={handleTabChange} />
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 py-12">
