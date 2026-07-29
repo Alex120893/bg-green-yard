@@ -238,7 +238,15 @@ export default function PlantAndLawnCare() {
       </div>
 
       {/* Tab Navigation */}
-      <TabNav tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
+      <TabNav
+        tabs={tabs}
+        activeTab={activeTab}
+        onTabChange={(tabId) => {
+          if (tabId === "plants" || tabId === "lawn") {
+            setActiveTab(tabId);
+          }
+        }}
+      />
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 py-12">

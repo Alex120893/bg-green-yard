@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PRODUCTION_SITE_ORIGIN, ogImageAbsoluteUrl } from "@/lib/site";
 import "./globals.css";
 import Script from "next/script";
-import ChatBotWrapper from "@/components/ChatBotWrapper";
+import { ChatBotWrapper } from "@/components/ChatBotWrapper";
 
 export const metadata: Metadata = {
   metadataBase: new URL(PRODUCTION_SITE_ORIGIN),
