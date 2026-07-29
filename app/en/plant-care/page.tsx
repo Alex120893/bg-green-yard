@@ -3,10 +3,35 @@
 import Link from "next/link";
 import { useState } from "react";
 
+interface Plant {
+  id: number;
+  name: string;
+  description: string;
+  care: string[];
+}
+
+interface CareSection {
+  title: string;
+  tips: string[];
+}
+
+interface LawnCareGuide {
+  title: string;
+  icon: string;
+  tips: string[];
+}
+
+interface PlantsData {
+  trees: Plant[];
+  shrubs: Plant[];
+  flowers: Plant[];
+  vegetables: Plant[];
+}
+
 export default function PlantAndLawnCareEn() {
   const [activeTab, setActiveTab] = useState<"plants" | "lawn">("plants");
 
-  const plants = {
+  const plants: PlantsData = {
     trees: [
       {
         id: 1,
@@ -305,7 +330,7 @@ export default function PlantAndLawnCareEn() {
     ],
   };
 
-  const generalCare = [
+  const generalCare: CareSection[] = [
     {
       title: "Watering",
       tips: [
@@ -351,7 +376,7 @@ export default function PlantAndLawnCareEn() {
     },
   ];
 
-  const lawnCareGuides = [
+  const lawnCareGuides: LawnCareGuide[] = [
     {
       title: "Lawn Watering",
       icon: "💧",
@@ -610,7 +635,7 @@ export default function PlantAndLawnCareEn() {
   );
 }
 
-function PlantCard({ plant }: { plant: any }) {
+function PlantCard({ plant }: { plant: Plant }) {
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow h-full flex flex-col">
       <div className="bg-gradient-to-r from-green-500 to-green-600 p-4">
@@ -620,7 +645,7 @@ function PlantCard({ plant }: { plant: any }) {
       <div className="p-4 flex-grow">
         <h4 className="font-bold text-gray-800 mb-3 text-sm">Care instructions:</h4>
         <ul className="space-y-2">
-          {plant.care.map((care: string, careIndex: number) => (
+          {plant.care.map((care, careIndex) => (
             <li key={careIndex} className="flex items-start text-xs text-gray-700">
               <span className="text-green-600 mr-2">●</span>
               <span>{care}</span>
