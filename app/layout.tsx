@@ -2,11 +2,7 @@ import type { Metadata } from "next";
 import { PRODUCTION_SITE_ORIGIN, ogImageAbsoluteUrl } from "@/lib/site";
 import "./globals.css";
 import Script from "next/script";
-import dynamic from "next/dynamic";
-
-const ChatBot = dynamic(() => import("@/components/ChatBot").then(mod => ({ default: mod.ChatBot })), {
-  ssr: false,
-});
+import ChatBotWrapper from "@/components/ChatBotWrapper";
 
 export const metadata: Metadata = {
   metadataBase: new URL(PRODUCTION_SITE_ORIGIN),
@@ -116,7 +112,7 @@ gtag('config', 'G-LQMY7RMSV1');`}
         className="min-h-full bg-background text-foreground antialiased"
       >
         {children}
-        <ChatBot />
+        <ChatBotWrapper />
       </body>
     </html>
   );
