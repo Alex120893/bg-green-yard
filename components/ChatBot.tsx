@@ -85,21 +85,28 @@ export function ChatBot() {
 
   return (
     <>
-      {/* Бутон за чат - малка иконка */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-[60] w-12 h-12 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center"
-        aria-label="Отворете чата"
-        title="Помощник за растенията"
-      >
-        {isOpen ? (
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        ) : (
-          <span className="text-lg">🌿</span>
+      {/* Prominent mobile-friendly chat entry point. */}
+      <div className="fixed bottom-5 right-5 z-[60] flex items-center gap-3">
+        {!isOpen && (
+          <div className="max-w-48 rounded-2xl rounded-br-sm bg-white px-3 py-2 text-xs font-semibold leading-snug text-green-900 shadow-lg ring-1 ring-green-100 sm:text-sm">
+            Здравейте! Аз съм вашият помощник за растенията.
+          </div>
         )}
-      </button>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-green-600 to-green-700 text-white shadow-xl ring-4 ring-white transition-all hover:scale-110 focus:outline-none focus:ring-4 focus:ring-green-300"
+          aria-label="Отворете чата с помощника за растенията"
+          title="Помощник за растенията"
+        >
+          {isOpen ? (
+            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <span className="text-2xl">🌿</span>
+          )}
+        </button>
+      </div>
 
       {/* Прозорец на чата */}
       {isOpen && (
