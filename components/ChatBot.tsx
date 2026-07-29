@@ -1,16 +1,25 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { CONTACT } from "@/lib/contact";
 
 interface Message {
   id: string;
   role: "user" | "assistant";
   content: string;
   timestamp: Date;
+  needsContact?: boolean;
 }
+
+type ChatResponse = {
+  response: string;
+  needsContact: boolean;
+};
 
 export function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
+  const locale = typeof window !== "undefined" && window.location.pathname.startsWith("/en") ? "en" : "bg";
+  const contactHref = `/${locale}/contact`;
   const [showPrompt, setShowPrompt] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -74,12 +83,13 @@ export function ChatBot() {
 
       if (!response.ok) throw new Error("Неуспешен отговор");
 
-      const data = await response.json();
+      const data: ChatResponse = await response.json();
       const assistantMessage: Message = {
         id: Date.now().toString(),
         role: "assistant",
         content: data.response,
         timestamp: new Date(),
+        needsContact: data.needsContact,
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
@@ -174,6 +184,22 @@ export function ChatBot() {
                   <p className="text-xs leading-relaxed whitespace-pre-wrap">
                     {message.content}
                   </p>
+                  {message.needsContact && (
+                    <div className="mt-2 flex flex-col gap-1.5">
+                      <a
+                        href={contactHref}
+                        className="rounded bg-green-600 px-2 py-1 text-center text-xs font-semibold text-white hover:bg-green-700"
+                      >
+                        Свържете се с нас
+                      </a>
+                      <a
+                        href={`tel:${CONTACT.phoneTel}`}
+                        className="rounded border border-green-600 px-2 py-1 text-center text-xs font-semibold text-green-700 hover:bg-green-50"
+                      >
+                        Позвонете ни: {CONTACT.phoneDisplay}
+                      </a>
+                    </div>
+                  )}
                   <span className={`text-xs mt-1 block ${
                     message.role === "user" ? "text-green-100" : "text-gray-400"
                   }`}>
