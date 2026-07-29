@@ -8,56 +8,431 @@ export default function PlantAndLawnCareEn() {
 
   const plants = {
     trees: [
-      { id: 1, name: "Plane (Platanus orientalis)", description: "Common tree in parks and streets", care: ["Watering: Prefers moist soil, water regularly", "Light: Full sun or partial shade", "Fertilizing: Mineral fertilizers in spring", "Pruning: February-March before growth starts", "Soil: Moist, well-drained"] },
-      { id: 2, name: "Oak (Quercus spp.)", description: "Powerful tree characteristic of Bulgarian forests", care: ["Watering: Moderate, drought tolerant", "Light: Full sun", "Fertilizing: Organic fertilizers once yearly", "Pruning: Minimal, only remove sick branches", "Soil: Adaptive tree, grows on different soil types"] },
-      { id: 3, name: "Maple (Acer spp.)", description: "Beautiful flowering tree with attractive leaves", care: ["Watering: Regular in first year, then during drought", "Light: Sun or partial shade", "Fertilizing: Organic fertilizers in spring", "Pruning: February or August", "Soil: Well-drained, prefers neutral soil"] },
-      { id: 4, name: "Linden (Tilia spp.)", description: "Fragrant tree with sweet flowers", care: ["Watering: Regular during growing season", "Light: Full sun to partial shade", "Fertilizing: Complex fertilizer in spring", "Pruning: February before growth starts", "Soil: Adaptive, prefers fertile soil"] },
-      { id: 5, name: "Black Pine (Pinus nigra)", description: "Hardy conifer with slender form", care: ["Watering: Moderate, drought tolerant", "Light: Full sun", "Fertilizing: Specialized conifer fertilizer", "Pruning: Minimal, shaping only", "Soil: Well-drained, not too acidic"] },
-      { id: 6, name: "Cypress (Cupressus sempervirens)", description: "Elegant conifer with columnar form", care: ["Watering: Moderate, avoid overwatering", "Light: Full sun", "Fertilizing: Conifer fertilizer in spring", "Pruning: Spring and early summer", "Soil: Well-drained, dry"] },
+      {
+        id: 1,
+        name: "Plane Tree (Platanus orientalis)",
+        description: "A common tree in parks and along streets",
+        care: [
+          "Watering: Prefers moist soil; water regularly.",
+          "Light: Full sun or partial shade.",
+          "Fertilizing: Feed in spring with organic fertilizer.",
+          "Pruning: Prune in late winter to maintain shape.",
+          "Soil: Well-drained, fertile soil.",
+        ],
+      },
+      {
+        id: 2,
+        name: "Oak (Quercus spp.)",
+        description: "A strong tree typical of Bulgarian forests",
+        care: [
+          "Watering: Moderate; drought-tolerant once established.",
+          "Light: Full sun.",
+          "Fertilizing: Apply organic compost in spring.",
+          "Pruning: Minimal pruning; remove dead branches.",
+          "Soil: Deep, well-drained soil.",
+        ],
+      },
+      {
+        id: 3,
+        name: "Maple (Acer spp.)",
+        description: "A beautiful ornamental tree with attractive foliage",
+        care: [
+          "Watering: Water regularly during the first year, then during dry periods.",
+          "Light: Sun or partial shade.",
+          "Fertilizing: Use balanced fertilizer in spring.",
+          "Pruning: Prune in winter when dormant.",
+          "Soil: Moist, well-drained soil.",
+        ],
+      },
+      {
+        id: 4,
+        name: "Linden (Tilia spp.)",
+        description: "A fragrant tree with sweet-smelling flowers",
+        care: [
+          "Watering: Water regularly during the growing season.",
+          "Light: Full sun to partial shade.",
+          "Fertilizing: Add compost in early spring.",
+          "Pruning: Prune after flowering if needed.",
+          "Soil: Rich, well-drained soil.",
+        ],
+      },
+      {
+        id: 5,
+        name: "Black Pine (Pinus nigra)",
+        description: "A hardy conifer with a slender form",
+        care: [
+          "Watering: Moderate; drought-tolerant once established.",
+          "Light: Full sun.",
+          "Fertilizing: Use a conifer-specific fertilizer in spring.",
+          "Pruning: Light pruning only to remove damaged branches.",
+          "Soil: Well-drained sandy or loamy soil.",
+        ],
+      },
+      {
+        id: 6,
+        name: "Cypress (Cupressus sempervirens)",
+        description: "An elegant conifer with a columnar shape",
+        care: [
+          "Watering: Moderate; avoid overwatering.",
+          "Light: Full sun.",
+          "Fertilizing: Feed with conifer fertilizer in spring.",
+          "Pruning: Trim lightly to maintain shape.",
+          "Soil: Well-drained soil.",
+        ],
+      },
     ],
     shrubs: [
-      { id: 7, name: "Thuja (Thuja occidentalis)", description: "Popular for hedges and decorative purposes", care: ["Watering: Regular first year, then during drought", "Light: Sun or partial shade", "Fertilizing: Complex conifer fertilizer in spring", "Pruning: February to August, maintain desired shape", "Soil: Well-drained, moist, not waterlogged"] },
-      { id: 8, name: "Leyland Cypress (Cupressocyparis leylandii)", description: "Fast-growing conifer for hedges", care: ["Watering: Regular, especially first year and hot periods", "Light: Sun or partial shade", "Fertilizing: Conifer fertilizer spring and summer", "Pruning: Spring and summer, avoid cold seasons", "Protection: Watch for rot with excessive moisture"] },
-      { id: 9, name: "Boxwood (Buxus sempervirens)", description: "Compact evergreen for hedges and topiaries", care: ["Watering: Moderate, avoid drying out", "Light: Partial shade ideal, tolerates shade", "Fertilizing: Light feeding during growing season", "Pruning: Spring and summer, can be shaped", "Soil: Well-drained"] },
-      { id: 10, name: "Lavender (Lavandula angustifolia)", description: "Fragrant shrub with beautiful purple flowers", care: ["Watering: Moderate, drought adapted", "Light: Full sun", "Fertilizing: Minimal - poor soil preferred", "Pruning: August after flowering", "Soil: Well-drained, prefers dry soil"] },
-      { id: 11, name: "Honeysuckle (Lonicera spp.)", description: "Fast-growing plant with beautiful flowers and berries", care: ["Watering: Regular, especially first year", "Light: Sun or partial shade", "Fertilizing: Complex fertilizer spring and summer", "Pruning: After flowering or early spring", "Soil: Adapts to different soil types"] },
-      { id: 12, name: "Spirea (Spiraea spp.)", description: "Decorative shrub with many small flowers", care: ["Watering: Moderate, water regularly during drought", "Light: Full sun", "Fertilizing: Organic fertilizers in spring", "Pruning: Spring before growth starts", "Soil: Well-drained, light and fertile"] },
+      {
+        id: 7,
+        name: "Thuja (Thuja occidentalis)",
+        description: "Popular for hedges and decorative landscaping",
+        care: [
+          "Watering: Water regularly in the first year, then during dry spells.",
+          "Light: Sun or partial shade.",
+          "Fertilizing: Apply evergreen fertilizer in spring.",
+          "Pruning: Trim in late spring or summer.",
+          "Soil: Moist, well-drained soil.",
+        ],
+      },
+      {
+        id: 8,
+        name: "Leyland Cypress (Cupressocyparis leylandii)",
+        description: "A fast-growing conifer ideal for hedges",
+        care: [
+          "Watering: Water regularly, especially in the first year and during hot weather.",
+          "Light: Sun or partial shade.",
+          "Fertilizing: Feed in spring with balanced fertilizer.",
+          "Pruning: Prune 2-3 times per year to control growth.",
+          "Soil: Fertile, well-drained soil.",
+        ],
+      },
+      {
+        id: 9,
+        name: "Boxwood (Buxus sempervirens)",
+        description: "A compact evergreen for hedges and topiary",
+        care: [
+          "Watering: Moderate; do not let the soil dry out completely.",
+          "Light: Partial shade is ideal, but it tolerates sun.",
+          "Fertilizing: Use slow-release fertilizer in spring.",
+          "Pruning: Prune regularly to maintain shape.",
+          "Soil: Well-drained, slightly alkaline soil.",
+        ],
+      },
+      {
+        id: 10,
+        name: "Lavender (Lavandula angustifolia)",
+        description: "A fragrant shrub with beautiful purple flowers",
+        care: [
+          "Watering: Moderate; drought-tolerant once established.",
+          "Light: Full sun.",
+          "Fertilizing: Minimal feeding; avoid rich fertilizers.",
+          "Pruning: Prune after flowering to keep plants compact.",
+          "Soil: Light, well-drained, slightly alkaline soil.",
+        ],
+      },
+      {
+        id: 11,
+        name: "Honeysuckle (Lonicera spp.)",
+        description: "A fast-growing plant with fragrant flowers and berries",
+        care: [
+          "Watering: Water regularly, especially in the first year.",
+          "Light: Sun or partial shade.",
+          "Fertilizing: Feed with balanced fertilizer in spring.",
+          "Pruning: Prune after flowering to control growth.",
+          "Soil: Moist, fertile, well-drained soil.",
+        ],
+      },
+      {
+        id: 12,
+        name: "Spirea (Spiraea spp.)",
+        description: "An ornamental shrub with many small flowers",
+        care: [
+          "Watering: Moderate; water regularly during dry periods.",
+          "Light: Full sun.",
+          "Fertilizing: Apply compost or balanced fertilizer in spring.",
+          "Pruning: Prune after flowering to encourage new growth.",
+          "Soil: Well-drained soil.",
+        ],
+      },
     ],
     flowers: [
-      { id: 13, name: "Rose (Rosa spp.)", description: "Queen of flowers, symbol of beauty", care: ["Watering: Regular and abundant, especially in summer", "Light: 6-8 hours full sun daily", "Fertilizing: Specialized rose fertilizer during growing season", "Pruning: February-March to half height", "Soil: Well-drained, fertile, acidic"] },
-      { id: 14, name: "Tulip (Tulipa spp.)", description: "Early spring flower with rich color choice", care: ["Watering: Moderate during growing season", "Light: Full sun", "Fertilizing: Feed when sprouting", "Pruning: Remove flowers after blooming, keep leaves", "Soil: Well-drained, light"] },
-      { id: 15, name: "Narcissus (Narcissus spp.)", description: "Bright spring flower with distinctive fragrance", care: ["Watering: Moderate during growing season", "Light: Sun or partial shade", "Fertilizing: Minimal, hardy plant", "Pruning: Remove dead flowers, keep leaves", "Soil: Well-drained"] },
-      { id: 16, name: "Lily (Lilium spp.)", description: "Elegant flower with strong fragrance", care: ["Watering: Regular, avoid overwatering", "Light: Sun or partial shade", "Fertilizing: Complex fertilizer during growing season", "Pruning: Remove dead flowers and stems", "Soil: Well-drained, fertile"] },
-      { id: 17, name: "Geranium (Pelargonium spp.)", description: "Popular balcony flower with beautiful leaves", care: ["Watering: Regular but allow soil to dry between waterings", "Light: Full sun (minimum 4 hours)", "Fertilizing: Regular feeding during growing season", "Pruning: Regulate shape and remove dead flowers", "Soil: Well-drained, light"] },
-      { id: 18, name: "Hydrangea (Hydrangea spp.)", description: "Stunning blooms with large flower clusters", care: ["Watering: Abundant regular watering, especially in summer", "Light: Partial shade, avoid all-day sun", "Fertilizing: Specialized hydrangea fertilizer", "Pruning: February-March, remove dead branches", "Soil: Acidic to neutral, well-drained"] },
+      {
+        id: 13,
+        name: "Rose (Rosa spp.)",
+        description: "The queen of flowers and a symbol of beauty",
+        care: [
+          "Watering: Water regularly and deeply, especially in summer.",
+          "Light: 6-8 hours of full sun daily.",
+          "Fertilizing: Feed with rose fertilizer every 4-6 weeks.",
+          "Pruning: Prune in late winter or early spring.",
+          "Soil: Fertile, well-drained soil.",
+        ],
+      },
+      {
+        id: 14,
+        name: "Tulip (Tulipa spp.)",
+        description: "An early spring flower available in many colors",
+        care: [
+          "Watering: Moderate during the growing season.",
+          "Light: Full sun.",
+          "Fertilizing: Feed when shoots appear and after flowering.",
+          "Pruning: Remove spent flowers; let foliage die back naturally.",
+          "Soil: Well-drained soil.",
+        ],
+      },
+      {
+        id: 15,
+        name: "Daffodil (Narcissus spp.)",
+        description: "A bright spring flower with a distinctive fragrance",
+        care: [
+          "Watering: Moderate during the growing season.",
+          "Light: Sun or partial shade.",
+          "Fertilizing: Apply bulb fertilizer in early spring.",
+          "Pruning: Remove faded blooms only.",
+          "Soil: Well-drained soil.",
+        ],
+      },
+      {
+        id: 16,
+        name: "Lily (Lilium spp.)",
+        description: "An elegant flower with a strong fragrance",
+        care: [
+          "Watering: Water regularly; avoid waterlogging.",
+          "Light: Sun or partial shade.",
+          "Fertilizing: Use complete fertilizer during active growth.",
+          "Pruning: Remove spent flowers and dead stems.",
+          "Soil: Rich, well-drained soil.",
+        ],
+      },
+      {
+        id: 17,
+        name: "Geranium (Pelargonium spp.)",
+        description: "A popular balcony flower with attractive foliage",
+        care: [
+          "Watering: Water regularly, allowing the soil to dry slightly between waterings.",
+          "Light: Full sun to partial shade.",
+          "Fertilizing: Feed every 2-3 weeks during the growing season.",
+          "Pruning: Pinch back to encourage bushy growth.",
+          "Soil: Light, well-drained potting mix.",
+        ],
+      },
+      {
+        id: 18,
+        name: "Hydrangea (Hydrangea spp.)",
+        description: "A stunning plant with large flower clusters",
+        care: [
+          "Watering: Water deeply and regularly, especially in summer.",
+          "Light: Partial shade.",
+          "Fertilizing: Use hydrangea fertilizer in spring and early summer.",
+          "Pruning: Prune according to variety type.",
+          "Soil: Moist, rich, well-drained soil.",
+        ],
+      },
     ],
     vegetables: [
-      { id: 19, name: "Tomato (Solanum lycopersicum)", description: "Popular vegetable for summer gardening", care: ["Watering: Regular and abundant, especially during fruiting", "Light: Minimum 6-8 hours full sun", "Fertilizing: Complex fertilizer every 2-3 weeks, high potassium", "Pruning: Suckering - remove side shoots", "Soil: Fertile, well-drained, pH 6-7"] },
-      { id: 20, name: "Cucumber (Cucumis sativus)", description: "Vegetable needing warmth and moisture", care: ["Watering: Abundant and regular, especially during flowering", "Light: Full sun (minimum 8 hours)", "Fertilizing: Regular feeding with complex fertilizers", "Support: Cucumbers need netting or trellis", "Soil: Fertile, moist, well-drained"] },
-      { id: 21, name: "Pepper (Capsicum annuum)", description: "Thermophilic vegetable with rich flavor", care: ["Watering: Regular and moderate, avoid overwatering", "Light: Full sun", "Fertilizing: Feed every 2 weeks with phosphorus-rich fertilizer", "Pruning: Remove first flowers for better growth", "Soil: Fertile, warm, well-drained"] },
-      { id: 22, name: "Onion (Allium cepa)", description: "Essential in kitchen and easy to grow", care: ["Watering: Moderate, avoid overwatering", "Light: Full sun", "Fertilizing: Organic fertilizers at planting", "Pruning: Minimal", "Soil: Well-drained, fertile"] },
-      { id: 23, name: "Garlic (Allium sativum)", description: "Tasty vegetable with health benefits", care: ["Watering: Moderate, at base of plant", "Light: Full sun", "Fertilizing: Organic fertilizers at planting", "Pruning: Remove flower stems for better bulbs", "Soil: Well-drained, fertile"] },
-      { id: 24, name: "Carrot (Daucus carota)", description: "Sweet orange root vegetable", care: ["Watering: Regular and moderate", "Light: Sun or partial shade", "Fertilizing: Organic fertilizers at planting", "Pruning: Thinning overcrowded seedlings", "Soil: Loose, well-drained, stone-free"] },
-    ]
+      {
+        id: 19,
+        name: "Tomato (Solanum lycopersicum)",
+        description: "A popular vegetable for summer gardens",
+        care: [
+          "Watering: Water regularly and deeply, especially during fruiting.",
+          "Light: At least 6-8 hours of direct sun.",
+          "Fertilizing: Feed every 2-3 weeks with tomato fertilizer.",
+          "Pruning: Remove suckers on indeterminate varieties.",
+          "Soil: Fertile, well-drained soil.",
+        ],
+      },
+      {
+        id: 20,
+        name: "Cucumber (Cucumis sativus)",
+        description: "A vegetable that needs warmth and moisture",
+        care: [
+          "Watering: Water abundantly and consistently, especially during flowering and fruiting.",
+          "Light: Full sun (at least 6 hours daily).",
+          "Fertilizing: Feed with balanced fertilizer every 2 weeks.",
+          "Pruning: Remove damaged leaves and train vines as needed.",
+          "Soil: Loose, fertile, well-drained soil.",
+        ],
+      },
+      {
+        id: 21,
+        name: "Pepper (Capsicum annuum)",
+        description: "A heat-loving vegetable with rich flavor",
+        care: [
+          "Watering: Water regularly and moderately; avoid overwatering.",
+          "Light: Full sun.",
+          "Fertilizing: Feed every 2-3 weeks with phosphorus-rich fertilizer.",
+          "Pruning: Remove early flowers for stronger growth if needed.",
+          "Soil: Warm, fertile, well-drained soil.",
+        ],
+      },
+      {
+        id: 22,
+        name: "Onion (Allium cepa)",
+        description: "A kitchen staple that is easy to grow",
+        care: [
+          "Watering: Moderate; avoid overwatering.",
+          "Light: Full sun.",
+          "Fertilizing: Use organic fertilizer before planting.",
+          "Pruning: No pruning needed; remove dry leaves.",
+          "Soil: Loose, fertile, well-drained soil.",
+        ],
+      },
+      {
+        id: 23,
+        name: "Garlic (Allium sativum)",
+        description: "A flavorful vegetable with many health benefits",
+        care: [
+          "Watering: Moderate; water at the base of the plant.",
+          "Light: Full sun.",
+          "Fertilizing: Add compost before planting.",
+          "Pruning: Remove flower stalks to improve bulb size.",
+          "Soil: Well-drained, fertile soil.",
+        ],
+      },
+      {
+        id: 24,
+        name: "Carrot (Daucus carota)",
+        description: "A sweet orange root vegetable",
+        care: [
+          "Watering: Water regularly and moderately.",
+          "Light: Sun or partial shade.",
+          "Fertilizing: Use low-nitrogen fertilizer.",
+          "Pruning: Thin seedlings to provide adequate spacing.",
+          "Soil: Loose, deep, stone-free soil.",
+        ],
+      },
+    ],
   };
 
   const generalCare = [
-    { title: "Watering", tips: ["Water early morning or late evening to avoid evaporation", "Water more frequently in summer due to higher temperatures", "Use drip irrigation for efficiency and savings", "Avoid overwatering and waterlogging"] },
-    { title: "Fertilizing and Feeding", tips: ["Feed plants during growing season (March-September)", "Use complex fertilizers suited to plant type", "Organic fertilizers (compost, manure) are excellent", "Increase doses for vegetables during fruiting"] },
-    { title: "Pruning and Shaping", tips: ["Regular pruning encourages dense growth", "Prune during growing season (March-August)", "Remove dead or diseased branches immediately", "Shape living hedges to desired form"] },
-    { title: "Soil and Mulching", tips: ["Well-drained soil is critical for most plants", "Mulch with organic materials around the base", "Mulch helps retain moisture and increase fertility", "Keep 5-10 cm distance between mulch and stem"] },
-    { title: "Disease and Pest Protection", tips: ["Regularly inspect plants for disease signs", "Remove affected branches immediately", "Use organic or chemical treatments when needed", "Maintain good hygiene and cleanliness in garden"] }
+    {
+      title: "Watering",
+      tips: [
+        "Water early in the morning or late in the evening to reduce evaporation.",
+        "Water more frequently in summer due to higher temperatures.",
+        "Use drip irrigation for efficient watering and water savings.",
+      ],
+    },
+    {
+      title: "Fertilizing and Feeding",
+      tips: [
+        "Feed plants during the growing season (March-September).",
+        "Use complete fertilizers suited to each plant type.",
+        "Organic fertilizers (compost, manure) improve long-term soil quality.",
+      ],
+    },
+    {
+      title: "Pruning and Shaping",
+      tips: [
+        "Regular pruning encourages dense, healthy growth.",
+        "Prune during the active season (March-August).",
+        "Remove dead or diseased branches immediately.",
+        "Shape hedges and ornamental plants regularly.",
+      ],
+    },
+    {
+      title: "Soil and Mulching",
+      tips: [
+        "Well-drained soil is essential for most plants.",
+        "Apply organic mulch around the base of plants.",
+        "Mulch helps retain moisture and improve soil fertility.",
+        "Keep mulch away from stems and trunks to prevent rot.",
+      ],
+    },
+    {
+      title: "Disease and Pest Protection",
+      tips: [
+        "Inspect plants regularly for signs of disease.",
+        "Remove affected leaves or branches promptly.",
+        "Use organic or chemical treatments when necessary.",
+        "Maintain good airflow between plants to prevent fungal issues.",
+      ],
+    },
   ];
 
   const lawnCareGuides = [
-    { title: "Lawn Watering", icon: "💧", tips: ["Water early morning or late evening to avoid evaporation", "Water 2-3 times weekly in summer", "Aim for 10-15 liters per square meter", "Use drip irrigation for more efficient watering", "Reduce watering significantly in winter"] },
-    { title: "Mowing", icon: "✂️", tips: ["Mow every 7-10 days during growing season", "Maintain grass height of 4-5 cm", "Never remove more than 1/3 of height", "Use sharp blades for clean cuts", "During summer heat, mow longer (5-6 cm)"] },
-    { title: "Fertilizing and Feeding", icon: "🌱", tips: ["Spring: nitrogen fertilizers for fast growth", "Summer: potassium-phosphorus fertilizers for health", "Fall: special autumn fertilizers", "Winter: reduce feeding", "Fertilize every 4-6 weeks during growing season"] },
-    { title: "Weed Control", icon: "🚫", tips: ["Regular mowing displaces weeds", "Healthy lawn protects itself from weeds", "Hand pulling for small areas", "Selective herbicides for lawns if needed", "Maintain dense lawn for natural protection"] },
-    { title: "Aeration and Drainage", icon: "🌬️", tips: ["Aerate lawn 1-2 times yearly", "Spring and fall are ideal periods", "Use specialized aerator or fork", "Top dressing after aeration improves soil", "Allows oxygen to reach roots"] },
-    { title: "Verticutting", icon: "⚙️", tips: ["Verticut in spring or fall", "Removes dead grass and thatch", "Improves root ventilation", "Promotes denser growth", "Do this before fertilizing or aerating"] },
-    { title: "Disease Protection", icon: "🛡️", tips: ["Healthy lawn is protected from diseases", "Avoid excessive watering", "Ensure good air circulation", "Use fungicides for fungal diseases", "Regularly check for disease signs"] },
-    { title: "Seasonal Care", icon: "🌍", tips: ["Spring: aerate, fertilize, start regular mowing", "Summer: intensive watering, less frequent mowing", "Fall: final feeding, winter preparation", "Winter: minimal care, avoid walking on frozen grass", "Focus on growth period"] },
+    {
+      title: "Lawn Watering",
+      icon: "💧",
+      tips: [
+        "Water early in the morning or late in the evening to reduce evaporation.",
+        "Water 2-3 times per week in summer.",
+        "Apply 10-15 liters of water per square meter.",
+        "Use a sprinkler or drip irrigation system for even coverage.",
+      ],
+    },
+    {
+      title: "Mowing",
+      icon: "✂️",
+      tips: [
+        "Mow every 7-10 days during the growing season.",
+        "Maintain grass height at 4-5 cm.",
+        "Never remove more than one-third of the grass height at once.",
+        "Use sharp mower blades for clean cuts.",
+      ],
+    },
+    {
+      title: "Fertilizing and Feeding",
+      icon: "🌱",
+      tips: [
+        "Spring: Use nitrogen-rich fertilizer for active growth.",
+        "Summer: Use potassium- and phosphorus-rich fertilizer for stress tolerance.",
+        "Fall: Apply an autumn lawn fertilizer for winter preparation.",
+        "Do not fertilize during very hot weather.",
+      ],
+    },
+    {
+      title: "Weed Control",
+      icon: "🚫",
+      tips: [
+        "Regular mowing helps suppress weeds.",
+        "A healthy, dense lawn naturally resists weed growth.",
+        "Hand-pull weeds in small areas.",
+        "Use selective lawn herbicides when needed.",
+      ],
+    },
+    {
+      title: "Aeration and Drainage",
+      icon: "🌬️",
+      tips: [
+        "Aerate the lawn 1-2 times per year.",
+        "Spring and fall are ideal for aeration.",
+        "Use a lawn aerator or garden fork.",
+        "Top-dress after aeration to improve soil structure.",
+      ],
+    },
+    {
+      title: "Verticutting",
+      icon: "⚙️",
+      tips: [
+        "Verticut in spring or fall.",
+        "This removes dead grass and thatch buildup.",
+        "It improves root aeration.",
+        "It promotes denser turf growth.",
+        "Do this before fertilizing for better nutrient absorption.",
+      ],
+    },
+    {
+      title: "Disease Protection",
+      icon: "🛡️",
+      tips: [
+        "A healthy lawn is less vulnerable to disease.",
+        "Avoid excessive watering.",
+        "Ensure good air circulation.",
+        "Use fungicides for fungal diseases when required.",
+      ],
+    },
+    {
+      title: "Seasonal Care",
+      icon: "🌍",
+      tips: [
+        "Spring: Aerate, fertilize, and begin regular mowing.",
+        "Summer: Water deeply and mow less frequently during heat.",
+        "Fall: Apply final fertilizer and prepare for winter.",
+        "Winter: Keep off frozen grass and avoid heavy traffic.",
+      ],
+    },
   ];
 
   return (
@@ -66,7 +441,7 @@ export default function PlantAndLawnCareEn() {
       <div className="bg-gradient-to-r from-green-600 to-green-700 text-white">
         <div className="max-w-6xl mx-auto px-4 py-12">
           <h1 className="text-4xl font-bold mb-8">Garden and Lawn Care</h1>
-          
+
           {/* Tab Switcher */}
           <div className="flex gap-4 mb-6">
             <button
@@ -90,18 +465,17 @@ export default function PlantAndLawnCareEn() {
               🌾 Lawn Care
             </button>
           </div>
-          
+
           <p className="text-xl text-green-50">
-            {activeTab === "plants" 
-              ? "Complete guide for growing and maintaining all types of plants in Bulgaria"
-              : "Everything you need to know about maintaining a beautiful and healthy lawn in Bulgaria"}
+            {activeTab === "plants"
+              ? "A complete guide to growing and maintaining all types of plants in Bulgaria."
+              : "Everything you need to know to maintain a beautiful, healthy lawn in Bulgaria."}
           </p>
         </div>
       </div>
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 py-12">
-        
         {/* PLANTS TAB */}
         {activeTab === "plants" && (
           <div>
@@ -209,12 +583,14 @@ export default function PlantAndLawnCareEn() {
         {/* CTA Section */}
         <section className="bg-gradient-to-r from-green-600 to-green-700 rounded-lg shadow-lg p-8 text-white text-center">
           <h2 className="text-2xl font-bold mb-4">Have questions or need professional help?</h2>
-          <p className="text-green-50 mb-6">Contact us for personalized advice and consultation for your garden or lawn</p>
+          <p className="text-green-50 mb-6">
+            Contact us for personalized advice and consultation for your garden or lawn.
+          </p>
           <Link
             href="/en/contact"
             className="inline-block bg-white text-green-600 hover:bg-gray-100 px-8 py-3 rounded-full font-bold transition-colors"
           >
-            Schedule Consultation
+            Schedule a Consultation
           </Link>
         </section>
       </div>
