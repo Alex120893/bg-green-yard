@@ -10,7 +10,6 @@ const navKeys = [
   { href: "", key: "home" as const },
   { href: "/about", key: "about" as const },
   { href: "/services", key: "services" as const },
-  { href: "/plant-care", key: "plantCare" as const },
   { href: "/gallery", key: "gallery" as const },
   { href: "/contact", key: "contact" as const },
 ];
