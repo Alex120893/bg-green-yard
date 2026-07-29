@@ -1,111 +1,43 @@
+import { gateway, generateText, isStepCount } from "ai";
 import { searchPlantDatabase } from "@/lib/plantDatabase";
+
+const systemPrompt = `You are the BG Green Yard assistant. Reply in Bulgarian unless the user writes in another language. Give practical, careful gardening and lawn-care advice for Sofia and Bulgaria. Use the supplied local plant database first. Search the web when the answer depends on current information, local regulations, product availability, weather, or when the local database is insufficient. Do not invent sources, diagnoses, or safety claims. Recommend a local professional for hazardous chemicals, large trees, or urgent plant disease issues.`;
 
 export async function POST(request: Request) {
   try {
     const { message } = await request.json();
 
-    if (!message || typeof message !== "string") {
+    if (typeof message !== "string" || !message.trim()) {
+      return Response.json({ error: "Невалидно съобщение" }, { status: 400 });
+    }
+
+    if (!process.env.AI_GATEWAY_API_KEY) {
       return Response.json(
-        { error: "Невалидно съобщение" },
-        { status: 400 }
+        { error: "AI помощникът все още не е конфигуриран." },
+        { status: 503 }
       );
     }
 
-    // Търси в базата данни
     const databaseInfo = searchPlantDatabase(message);
+    const result = await generateText({
+      model: gateway("openai/gpt-5.6-sol"),
+      system: systemPrompt,
+      prompt: `Question: ${message}
 
-    // Генерира отговор базиран на информацията
-    const response = generateResponse(message, databaseInfo);
+Local plant database context:
+${databaseInfo}`,
+      tools: {
+        perplexity_search: gateway.tools.perplexitySearch(),
+      },
+      stopWhen: isStepCount(3),
+    });
 
-    return Response.json({ response });
+    return Response.json({ response: result.text });
   } catch (error) {
-    console.error("Грешка в API:", error);
+    console.error("Chat API error:", error);
     return Response.json(
-      { error: "Възникна грешка при обработката на вашия вопрос" },
+      { error: "Възникна грешка при обработката на въпроса." },
       { status: 500 }
     );
   }
-}
-
-function generateResponse(userMessage: string, databaseInfo: string): string {
-  const lowerMessage = userMessage.toLowerCase();
-
-  // Приветствие
-  if (
-    lowerMessage.includes("привет") ||
-    lowerMessage.includes("здравей") ||
-    lowerMessage.includes("добър")
-  ) {
-    return "👋 Добър ден! Аз съм вашият помощник за грижа на растенията и тревата. Как мога да ви помогна днес?";
-  }
-
-  // Благодарност
-  if (
-    lowerMessage.includes("благодаря") ||
-    lowerMessage.includes("спасибо") ||
-    lowerMessage.includes("merci")
-  ) {
-    return "😊 С удоволствие! Ако имате още вопроси, свободно питайте.";
-  }
-
-  // Вопрос за помощ
-  if (
-    lowerMessage.includes("помощ") ||
-    lowerMessage.includes("как") ||
-    lowerMessage.includes("кога")
-  ) {
-    if (databaseInfo.includes("Не намерих информация")) {
-      return (
-        "Съжалявам, но нямам конкретна информация за това. " +
-        "Мога да ви помогна с въпроси за:\n" +
-        "• Грижа на различни растения (дърветата, цветята, кустарници)\n" +
-        "• Поливане, торене и подхранване\n" +
-        "• Косене и ухаживане на газон\n" +
-        "• Борба със сорняци и болести\n\n" +
-        "Попробуйте да попитате за конкретно растение или проблем!"
-      );
-    }
-    return (
-      "Ето информацията, която намерих:\n\n" + databaseInfo + "\n\n" +
-      "Имате ли още вопроси?"
-    );
-  }
-
-  // Ако има информация в базата
-  if (!databaseInfo.includes("Не намерих информация")) {
-    return (
-      "Ево какво знам за вашия вопрос:\n\n" + databaseInfo + "\n\n" +
-      "Надявам се, че това помогна! Питайте ако имате още въпроси."
-    );
-  }
-
-  // Общ отговор с предложение за помощ
-  if (lowerMessage.includes("растение")) {
-    return (
-      "🌿 Вижте, че интересува растенията! " +
-      "Можете ли да ми дадете повече детайли - име на растение, " +
-      "какъв проблем имате или какъв съвет търсите?"
-    );
-  }
-
-  if (lowerMessage.includes("трева") || lowerMessage.includes("газон")) {
-    return (
-      "🌾 Говорите за грижа на газон! " +
-      "Мога да ви помогна с:\n" +
-      "• Поливане\n" +
-      "• Косене\n" +
-      "• Торене\n" +
-      "• Борба със сорняци\n" +
-      "• Аерация и дренаж\n\n" +
-      "Какво точно ви интересува?"
-    );
-  }
-
-  // Отговор по подразбиране
-  return (
-    "Интересен вопрос! 🤔 " +
-    "За да ми помогнете да дам по-точен отговор, " +
-    "можете ли да бъдете по-конкретни? " +
-    "Какъв растение или проблем имате предвид?"
-  );
 }
