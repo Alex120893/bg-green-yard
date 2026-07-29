@@ -8,9 +8,7 @@ export async function POST(request: Request) {
       return Response.json({ error: "Невалидно съобщение" }, { status: 400 });
     }
 
-    return Response.json({
-      response: searchPlantDatabase(message),
-    });
+    return Response.json(searchPlantDatabase(message));
   } catch (error) {
     console.error("Chat API error:", error);
     return Response.json(

@@ -12,6 +12,11 @@ type LawnTopic = {
   tips: string[];
 };
 
+export type PlantSearchResult = {
+  response: string;
+  needsContact: boolean;
+};
+
 export const plantDatabase: { plants: Plant[]; lawnCare: LawnTopic[] } = {
   plants: [
     { name: "Роза (Rosa spp.)", category: "цвете", aliases: ["роза", "рози"], description: "Слънцелюбив храст с дълъг цъфтеж.", care: ["Светлина: поне 6 часа слънце дневно.", "Поливане: дълбоко в основата, когато горният слой почва изсъхне.", "Подрязване: в края на зимата или ранната пролет; премахвайте прецъфтелите цветове.", "Профилактика: осигурете проветрение и не мокрете листата вечер."] },
@@ -54,15 +59,15 @@ function matches(queryTokens: string[], terms: string[]) {
   return queryTokens.some((token) => terms.some((term) => term.toLowerCase().includes(token) || token.includes(term.toLowerCase())));
 }
 
-export function searchPlantDatabase(query: string): string {
+export function searchPlantDatabase(query: string): PlantSearchResult {
   const normalizedQuery = query.trim().toLowerCase();
 
   if (/^(здравей|здрасти|добър ден|добро утро|добър вечер|hello|hi)\W*$/.test(normalizedQuery)) {
-    return "Здравейте! Аз съм помощникът на BG Green Yard. Мога да помогна с грижа за популярни градински и стайни растения, както и с поливане, косене, торене, аерация и проблеми с тревата. За кое растение или проблем искате съвет?";
+    return { response: "Здравейте! Аз съм помощникът на BG Green Yard. Мога да помогна с грижа за популярни градински и стайни растения, както и с поливане, косене, торене, аерация и проблеми с тревата. За кое растение или проблем искате съвет?", needsContact: false };
   }
 
   if (/^(благодаря|мерси|thanks|thank you)\W*$/.test(normalizedQuery)) {
-    return "С удоволствие! Пишете името на растението или опишете проблема и ще дам насоки от локалния справочник.";
+    return { response: "С удоволствие! Пишете името на растението или опишете проблема и ще дам насоки от локалния справочник.", needsContact: false };
   }
 
   const queryTokens = tokens(query);
@@ -80,7 +85,10 @@ export function searchPlantDatabase(query: string): string {
     }
   }
 
-  if (sections.length) return sections.slice(0, 2).join("\n\n");
+  if (sections.length) return { response: sections.slice(0, 2).join("\n\n"), needsContact: false };
 
-  return "Все още нямам конкретна информация за това растение или проблем. Опитайте да посочите името на растението или тема като поливане, косене, торене, аерация, плевели или пожълтяване.";
+  return {
+    response: "Все още нямам конкретна информация за това растение или проблем. Можете да се свържете с нашия екип за професионална консултация.",
+    needsContact: true,
+  };
 }
