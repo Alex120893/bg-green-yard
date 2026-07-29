@@ -10,10 +10,12 @@ export async function POST(request: Request) {
     }
 
     const localResult = searchPlantDatabase(message);
-    if (!localResult.needsContact) return Response.json(localResult);
+    if (!localResult.needsContact) {
+      return Response.json({ ...localResult, showServicePrompt: true });
+    }
 
     const catalogResult = await searchPlantCatalog(message);
-    return Response.json(catalogResult ?? localResult);
+    return Response.json({ ...(catalogResult ?? localResult), showServicePrompt: false });
   } catch (error) {
     console.error("Chat API error:", error);
     return Response.json(
