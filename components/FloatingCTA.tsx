@@ -22,8 +22,8 @@ export function FloatingCTA({ locale }: { locale: Locale }) {
 
   return (
     <>
-      {/* Mobile CTA is disabled so it cannot cover the chat assistant. */}
-      <div className="hidden md:hidden fixed bottom-0 right-0 z-50 p-4">
+      {/* Mobile CTA is positioned above the chat assistant. */}
+      <div className="fixed bottom-24 right-5 z-50 p-4 md:hidden">
         {isOpen && (
           <div className="animate-in slide-in-from-bottom duration-700">
             {/* Message Bubble */}
@@ -33,7 +33,7 @@ export function FloatingCTA({ locale }: { locale: Locale }) {
 
               <div className="p-4">
                 <p className="text-sm text-gray-800 font-semibold mb-3 leading-relaxed animate-in fade-in duration-1000" style={{ animationDelay: "200ms" }}>
-                  Заявете своя безплатен оглед още днес!
+                  Заявете безплатна консултация още днес!
                 </p>
 
                 {/* CTA Button */}
