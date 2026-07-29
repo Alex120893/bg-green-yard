@@ -11,6 +11,7 @@ interface Message {
 
 export function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showPrompt, setShowPrompt] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -31,6 +32,11 @@ export function ChatBot() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setShowPrompt(true), 10_000);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,7 +93,7 @@ export function ChatBot() {
     <>
       {/* Prominent mobile-friendly chat entry point. */}
       <div className="fixed bottom-5 right-5 z-[60] flex items-center gap-3">
-        {!isOpen && (
+        {!isOpen && showPrompt && (
           <div className="max-w-48 rounded-2xl rounded-br-sm bg-white px-3 py-2 text-xs font-semibold leading-snug text-green-900 shadow-lg ring-1 ring-green-100 sm:text-sm">
             Професионален консултант за грижа за растения и тревни площи.
           </div>
