@@ -34,8 +34,17 @@ export function ChatBot() {
   }, [messages]);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setShowPrompt(true), 10_000);
-    return () => window.clearTimeout(timer);
+    const showTimer = window.setTimeout(() => {
+      setShowPrompt(true);
+    }, 10_000);
+    const hideTimer = window.setTimeout(() => {
+      setShowPrompt(false);
+    }, 20_000);
+
+    return () => {
+      window.clearTimeout(showTimer);
+      window.clearTimeout(hideTimer);
+    };
   }, []);
 
   const handleSendMessage = async (e: React.FormEvent) => {
