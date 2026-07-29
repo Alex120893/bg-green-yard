@@ -11,6 +11,7 @@ interface Message {
 
 export function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showPrompt, setShowPrompt] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -31,6 +32,20 @@ export function ChatBot() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    const showTimer = window.setTimeout(() => {
+      setShowPrompt(true);
+    }, 10_000);
+    const hideTimer = window.setTimeout(() => {
+      setShowPrompt(false);
+    }, 20_000);
+
+    return () => {
+      window.clearTimeout(showTimer);
+      window.clearTimeout(hideTimer);
+    };
+  }, []);
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -85,21 +100,32 @@ export function ChatBot() {
 
   return (
     <>
-      {/* Бутон за чат - малка иконка */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-[60] w-12 h-12 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center"
-        aria-label="Отворете чата"
-        title="Помощник за растенията"
-      >
-        {isOpen ? (
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        ) : (
-          <span className="text-lg">🌿</span>
+      {/* Prominent mobile-friendly chat entry point. */}
+      <div className="fixed bottom-5 right-5 z-[60] flex items-center gap-3">
+        {!isOpen && showPrompt && (
+          <div className="max-w-48 rounded-2xl rounded-br-sm bg-white px-3 py-2 text-xs font-semibold leading-snug text-green-900 shadow-lg ring-1 ring-green-100 sm:text-sm">
+            Професионален консултант за грижа за растения и тревни площи.
+          </div>
         )}
-      </button>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-r from-green-600 to-green-700 text-white shadow-xl ring-4 ring-white transition-all hover:scale-110 focus:outline-none focus:ring-4 focus:ring-green-300"
+          aria-label="Отворете чата с помощника за растенията"
+          title="Помощник за растенията"
+        >
+          {isOpen ? (
+            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <img
+              src="/logo-removebg-preview.png"
+              alt="BG Green Yard"
+              className="h-10 w-10 rounded-full bg-white object-contain p-0.5"
+            />
+          )}
+        </button>
+      </div>
 
       {/* Прозорец на чата */}
       {isOpen && (
@@ -108,8 +134,17 @@ export function ChatBot() {
           <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-3">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-bold text-sm">🌿 BG Green Yard</h3>
-                <p className="text-xs text-green-100">Помощник</p>
+                <div className="flex items-center gap-2">
+                  <img
+                    src="/logo-removebg-preview.png"
+                    alt="BG Green Yard"
+                    className="h-7 w-7 rounded-full bg-white object-contain p-0.5"
+                  />
+                  <div>
+                    <h3 className="font-bold text-sm">BG Green Yard</h3>
+                    <p className="text-xs text-green-100">Консултант по озеленяване</p>
+                  </div>
+                </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
