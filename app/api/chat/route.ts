@@ -1,4 +1,4 @@
-import { gateway, generateText, isStepCount } from "ai";
+import { gateway, generateText, stepCountIs } from "ai";
 import { searchPlantDatabase } from "@/lib/plantDatabase";
 
 const systemPrompt = `You are the BG Green Yard assistant. Reply in Bulgarian unless the user writes in another language. Give practical, careful gardening and lawn-care advice for Sofia and Bulgaria. Use the supplied local plant database first. Search the web when the answer depends on current information, local regulations, product availability, weather, or when the local database is insufficient. Do not invent sources, diagnoses, or safety claims. Recommend a local professional for hazardous chemicals, large trees, or urgent plant disease issues.`;
@@ -29,7 +29,7 @@ ${databaseInfo}`,
       tools: {
         perplexity_search: gateway.tools.perplexitySearch(),
       },
-      stopWhen: isStepCount(3),
+      stopWhen: stepCountIs(3),
     });
 
     return Response.json({ response: result.text });
