@@ -22,8 +22,8 @@ export function FloatingCTA({ locale }: { locale: Locale }) {
 
   return (
     <>
-      {/* Mobile Version - Bottom Right */}
-      <div className="md:hidden fixed bottom-0 right-0 z-50 p-4">
+      {/* Mobile CTA is disabled so it cannot cover the chat assistant. */}
+      <div className="hidden md:hidden fixed bottom-0 right-0 z-50 p-4">
         {isOpen && (
           <div className="animate-in slide-in-from-bottom duration-700">
             {/* Message Bubble */}
