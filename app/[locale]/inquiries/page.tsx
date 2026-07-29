@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { InquiriesList } from "@/components/InquiriesList";
 import { getChatInquiries } from "@/lib/chatInquiries";
 import { isLocale } from "@/lib/i18n";
 
@@ -37,6 +38,9 @@ export default async function InquiriesPage({
         question: "Въпрос",
         answer: "Отговор",
         empty: "Все още няма публикувани запитвания.",
+        searchLabel: "Търсене в запитванията",
+        searchPlaceholder: "Търсете по въпрос или отговор...",
+        noResults: "Няма намерени запитвания.",
       }
     : {
         eyebrow: "BG Green Yard assistant",
@@ -45,6 +49,9 @@ export default async function InquiriesPage({
         question: "Question",
         answer: "Answer",
         empty: "There are no published inquiries yet.",
+        searchLabel: "Search inquiries",
+        searchPlaceholder: "Search questions or answers...",
+        noResults: "No inquiries found.",
       };
 
   return (
@@ -60,16 +67,7 @@ export default async function InquiriesPage({
       <section className="bg-surface py-12 md:py-16">
         <div className="mx-auto max-w-4xl px-4 md:px-6">
           {inquiries.length ? (
-            <div className="space-y-4">
-              {inquiries.map((inquiry, index) => (
-                <article key={`${inquiry.createdAt}-${index}`} className="rounded-2xl bg-white p-5 shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
-                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand">{copy.question}</p>
-                  <p className="mt-2 whitespace-pre-wrap text-base font-semibold text-foreground">{inquiry.question}</p>
-                  <p className="mt-5 border-t border-black/5 pt-4 text-xs font-semibold uppercase tracking-[0.14em] text-brand">{copy.answer}</p>
-                  <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-muted">{inquiry.answer}</p>
-                </article>
-              ))}
-            </div>
+            <InquiriesList inquiries={inquiries} copy={copy} />
           ) : (
             <div className="rounded-2xl bg-white p-8 text-center text-muted shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
               {copy.empty}
