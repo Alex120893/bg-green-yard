@@ -1,0 +1,2 @@
+// Trigger rebuild on Vercel - force redeploy
+// This empty commit will signal Vercel to rebuild the entire project
