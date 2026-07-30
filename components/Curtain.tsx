@@ -66,7 +66,7 @@ export function Curtain({ locale }: { locale: Locale }) {
                     </Link>
                     <button
                       onClick={() => setIsOpen(false)}
-                      className="inline-flex h-12 items-center justify-center rounded-full border-2 border-gray-300 hover:border-gray-400 px-8 text-base font-semibold text-gray-700 transition-all"
+                      className="inline-flex h-12 items-center justify-center rounded-full border-2 border-gray-300 hover:border-gray-400 px-8 text-base font-semibold text-gray-700 transition-all duration-300"
                     >
                       Затвори
                     </button>
