@@ -201,19 +201,19 @@ export function searchPlantDatabase(query: string): PlantSearchResult {
   const queryTokens = tokens(query);
   const sections: { text: string; score: number }[] = [];
 
-  for (const faq of plantDatabase.faqs) {
-    const score = matchScore(queryTokens, faq.keywords);
-    if (score) sections.push({ text: faq.answer, score });
-  }
-
   for (const plant of plantDatabase.plants) {
-    const score = matchScore(queryTokens, [plant.name, plant.category, ...plant.aliases]);
+    const score = matchScore(queryTokens, [plant.name, ...plant.aliases]);
     if (score) {
       sections.push({
         text: `**${plant.name}**\n${plant.description}\n${plant.care.map((tip) => `• ${tip}`).join("\n")}`,
-        score,
+        score: score + 2,
       });
     }
+  }
+
+  for (const faq of plantDatabase.faqs) {
+    const score = matchScore(queryTokens, faq.keywords);
+    if (score) sections.push({ text: faq.answer, score });
   }
 
   for (const topic of plantDatabase.lawnCare) {
