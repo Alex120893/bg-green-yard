@@ -37,10 +37,10 @@ export default async function InquiriesPage({
         subtitle: "Вижте въпросите на посетителите и отговорите на нашия помощник.",
         question: "Въпрос",
         answer: "Отговор",
-        searchLabel: "Търси в запитванията",
-        searchPlaceholder: "Търсете въпроси или отговори...",
-        noResults: "Няма намерени запитвания.",
         empty: "Все още няма публикувани запитвания.",
+        searchLabel: "Търсене в запитванията",
+        searchPlaceholder: "Търсете по въпрос или отговор...",
+        noResults: "Няма намерени запитвания.",
       }
     : {
         eyebrow: "BG Green Yard assistant",
@@ -48,10 +48,10 @@ export default async function InquiriesPage({
         subtitle: "Browse visitor questions and answers from our assistant.",
         question: "Question",
         answer: "Answer",
+        empty: "There are no published inquiries yet.",
         searchLabel: "Search inquiries",
         searchPlaceholder: "Search questions or answers...",
         noResults: "No inquiries found.",
-        empty: "There are no published inquiries yet.",
       };
 
   return (
@@ -66,7 +66,9 @@ export default async function InquiriesPage({
 
       <section className="bg-surface py-12 md:py-16">
         <div className="mx-auto max-w-4xl px-4 md:px-6">
-          {inquiries.length ? <InquiriesList inquiries={inquiries} copy={copy} /> : (
+          {inquiries.length ? (
+            <InquiriesList inquiries={inquiries} copy={copy} />
+          ) : (
             <div className="rounded-2xl bg-white p-8 text-center text-muted shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
               {copy.empty}
             </div>

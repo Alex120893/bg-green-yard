@@ -17,7 +17,9 @@ export function InquiriesList({ inquiries, copy }: { inquiries: ChatInquiry[]; c
     const term = query.trim().toLocaleLowerCase();
     if (!term) return inquiries;
 
-    return inquiries.filter(({ question, answer }) => `${question} ${answer}`.toLocaleLowerCase().includes(term));
+    return inquiries.filter(({ question, answer }) =>
+      `${question} ${answer}`.toLocaleLowerCase().includes(term)
+    );
   }, [inquiries, query]);
 
   return (
