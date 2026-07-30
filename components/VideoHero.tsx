@@ -8,6 +8,7 @@ export function VideoHero({
   lead,
   ctaPrimary,
   ctaSecondary,
+  stats,
 }: {
   locale: Locale;
   eyebrow: string;
@@ -15,6 +16,7 @@ export function VideoHero({
   lead: string;
   ctaPrimary: string;
   ctaSecondary: string;
+  stats: { value: string; label: string }[];
 }) {
   return (
     <section className="relative overflow-hidden bg-black">
@@ -70,10 +72,7 @@ export function VideoHero({
 
         {/* Floating Stats */}
         <div className="mt-24 flex flex-wrap gap-6 md:mt-32">
-          {[
-            { value: "15 000+", label: "м² поддържани площи" },
-            { value: "120+", label: "доволни клиенти" },
-          ].map((stat) => (
+          {stats.map((stat) => (
             <div
               key={stat.label}
               className="flex items-center gap-3 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 px-6 py-4"

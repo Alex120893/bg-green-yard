@@ -7,6 +7,9 @@ import type { Locale } from "@/lib/i18n";
 export function FloatingCTA({ locale }: { locale: Locale }) {
   const [isOpen, setIsOpen] = useState(false);
   const [hasShown, setHasShown] = useState(false);
+  const copy = locale === "en"
+    ? { mobileMessage: "Request your free consultation today!", desktopMessage: "Request your free site visit today!", contact: "Contact us" }
+    : { mobileMessage: "Заявете безплатна консултация още днес!", desktopMessage: "Заявете своя безплатен оглед още днес!", contact: "Свържи се с нас" };
 
   useEffect(() => {
     // Show popup after 5 seconds if not already shown
@@ -33,7 +36,7 @@ export function FloatingCTA({ locale }: { locale: Locale }) {
 
               <div className="p-4">
                 <p className="text-sm text-gray-800 font-semibold mb-3 leading-relaxed animate-in fade-in duration-1000" style={{ animationDelay: "200ms" }}>
-                  Заявете безплатна консултация още днес!
+                  {copy.mobileMessage}
                 </p>
 
                 {/* CTA Button */}
@@ -43,7 +46,7 @@ export function FloatingCTA({ locale }: { locale: Locale }) {
                   style={{ animationDelay: "400ms" }}
                   onClick={() => setIsOpen(false)}
                 >
-                  Свържи се с нас
+                  {copy.contact}
                 </Link>
               </div>
 
@@ -88,7 +91,7 @@ export function FloatingCTA({ locale }: { locale: Locale }) {
 
                 <div className="p-6">
                   <p className="text-base text-gray-800 font-semibold mb-4 leading-relaxed animate-in fade-in duration-1000" style={{ animationDelay: "200ms" }}>
-                    Заявете своя безплатен оглед още днес!
+                    {copy.desktopMessage}
                   </p>
 
                   {/* CTA Button */}
@@ -98,7 +101,7 @@ export function FloatingCTA({ locale }: { locale: Locale }) {
                     style={{ animationDelay: "400ms" }}
                     onClick={() => setIsOpen(false)}
                   >
-                    Свържи се с нас
+                    {copy.contact}
                   </Link>
                 </div>
 
