@@ -63,7 +63,14 @@ export default async function HomePage({
     "/grass.jpg",
   ];
 
-  const reviews = [
+  const reviews = locale === "en" ? [
+    { name: "Maria Petrova", text: "Excellent work by the BG Green Yard team. My garden is clean, beautiful, and professionally maintained.", rating: 5, initials: "MP", role: "Verified client", gradient: "from-green-50 to-emerald-50", iconColor: "bg-brand" },
+    { name: "Ivan Slavov", text: "Excellent service. The irrigation system works perfectly and without any issues.", rating: 5, initials: "IS", role: "Verified client", gradient: "from-amber-50 to-orange-50", iconColor: "bg-brand" },
+    { name: "Deyan Kostadinov", text: "Professionalism comes first. The team arrived on time, did the work well, and left the area clean.", rating: 5, initials: "DK", role: "Verified client", gradient: "from-stone-50 to-slate-50", iconColor: "bg-brand" },
+    { name: "Alexandra Georgieva", text: "I recommend BG Green Yard. My garden looks like it came from a magazine.", rating: 5, initials: "AG", role: "Verified client", gradient: "from-green-50 to-emerald-50", iconColor: "bg-brand" },
+    { name: "Georgi Vasilev", text: "The staff are polite, attentive, and respectful of your time. I will hire them again.", rating: 5, initials: "GV", role: "Verified client", gradient: "from-amber-50 to-orange-50", iconColor: "bg-brand" },
+    { name: "Nina Dimitrova", text: "A great choice. The landscaping matches my wishes perfectly. Thank you for the attention to detail.", rating: 5, initials: "ND", role: "Verified client", gradient: "from-stone-50 to-slate-50", iconColor: "bg-brand" },
+  ] : [
     {
       name: "Мария Петрова",
       text: "Много добре! Екипът на BG Green Yard направи чудесна работа с градината ми. Всичко е чисто, красиво и професионално.",
@@ -130,6 +137,10 @@ export default async function HomePage({
         lead={t.home.heroLead}
         ctaPrimary={t.home.ctaPrimary}
         ctaSecondary={t.home.ctaSecondary}
+        stats={[
+          { value: "15 000+", label: locale === "en" ? "m² of maintained areas" : "м² поддържани площи" },
+          { value: "120+", label: locale === "en" ? "satisfied clients" : "доволни клиенти" },
+        ]}
       />
 
       {/* ── Features / Why Us ── */}
@@ -175,17 +186,17 @@ export default async function HomePage({
             <div className="flex flex-col items-center text-center md:flex-row md:items-end md:justify-between md:text-left">
               <div>
                 <h2 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-                  Нашите проекти
+                  {locale === "en" ? "Our projects" : "Нашите проекти"}
                 </h2>
                 <p className="mt-3 max-w-xl text-lg text-muted">
-                  Реални обекти и атмосферата, която създаваме
+                  {locale === "en" ? "Real projects and the atmosphere we create" : "Реални обекти и атмосферата, която създаваме"}
                 </p>
               </div>
               <Link
                 href={`/${locale}/gallery`}
                 className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand hover:text-brand-dark underline-offset-4 transition hover:underline md:mt-0"
               >
-                Виж всички
+                {locale === "en" ? "View all" : "Виж всички"}
                 <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
                   <path fillRule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10z" clipRule="evenodd" />
                 </svg>
@@ -218,10 +229,10 @@ export default async function HomePage({
           <Reveal>
             <div className="text-center">
               <h2 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-                Отзиви на клиентите
+                {locale === "en" ? "Client reviews" : "Отзиви на клиентите"}
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-lg text-muted">
-                Доволни клиенти в София
+                {locale === "en" ? "Satisfied clients in Sofia" : "Доволни клиенти в София"}
               </p>
             </div>
           </Reveal>
@@ -272,7 +283,7 @@ export default async function HomePage({
               {t.home.brandsTitle}
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-lg text-white/80">
-              Свържете се с нас и получете безплатна консултация за вашия проект.
+              {locale === "en" ? "Contact us for a free consultation about your project." : "Свържете се с нас и получете безплатна консултация за вашия проект."}
             </p>
             <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <Link
