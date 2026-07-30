@@ -96,7 +96,7 @@ export default async function ServicesPage({
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-brand/20 bg-brand-soft px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-dark">
               <span className="h-1.5 w-1.5 rounded-full bg-brand" aria-hidden />
-              Sofia
+              {locale === "bg" ? "София" : "Sofia"}
             </span>
             <h1 className="mt-5 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
               {t.services.title}
@@ -105,12 +105,16 @@ export default async function ServicesPage({
             <p className="mt-5 max-w-3xl leading-relaxed text-muted">
               {t.services.intro}
             </p>
-            <div className="mt-5 inline-flex items-center gap-2 rounded-xl bg-brand-soft px-4 py-3 text-sm text-brand-dark">
+            <div className="mt-5 inline-flex items-center gap-2 rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-900 border border-amber-200">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 shrink-0">
                 <circle cx="12" cy="12" r="10"/>
                 <path d="M12 16v-4M12 8h.01"/>
               </svg>
-              {t.services.sofiaNote}
+              <span className="font-medium">
+                {locale === "bg" 
+                  ? "Работим само в София и близките квартали" 
+                  : "We serve Sofia and nearby districts only"}
+              </span>
             </div>
           </Reveal>
         </div>
@@ -122,7 +126,7 @@ export default async function ServicesPage({
           <div className="grid gap-8 md:grid-cols-3">
             {services.map((s, i) => (
               <Reveal key={s.title} delayMs={i * 80}>
-                <article className={`group flex h-full flex-col rounded-3xl bg-gradient-to-br ${s.gradient} p-8 shadow-[0_8px_30px_rgba(0,0,0,0.07)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,0,0,0.12)]`}>
+                <article className={`group flex h-full flex-col rounded-3xl bg-gradient-to-br ${s.gradient} p-8 shadow-[0_8px_30px_rgba(0,0,0,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.1)]`}>
                   <div className={`inline-flex h-16 w-16 items-center justify-center rounded-2xl ${s.iconBg} transition-transform duration-300 group-hover:scale-110`}>
                     {s.icon}
                   </div>
@@ -149,7 +153,7 @@ export default async function ServicesPage({
             <div className="mt-16 flex justify-center">
               <Link
                 href={`/${locale}/contact`}
-                className="inline-flex h-13 items-center justify-center rounded-full bg-brand px-9 text-base font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-dark hover:shadow-md"
+                className="inline-flex h-13 items-center justify-center rounded-full bg-brand px-9 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
               >
                 {locale === "bg" ? "Запитване за услуга" : "Request a quote"}
               </Link>
