@@ -59,14 +59,14 @@ export function Curtain({ locale }: { locale: Locale }) {
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     <Link
                       href={`/${locale}/contact`}
-                      className="inline-flex h-12 items-center justify-center rounded-full bg-brand hover:bg-brand-dark px-8 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5"
+                      className="inline-flex h-12 items-center justify-center rounded-full bg-brand hover:bg-brand-dark px-8 text-base font-semibold text-white shadow-lg transition-all duration-300"
                       onClick={() => setIsOpen(false)}
                     >
                       Заяви оглед
                     </Link>
                     <button
                       onClick={() => setIsOpen(false)}
-                      className="inline-flex h-12 items-center justify-center rounded-full border-2 border-gray-300 hover:border-gray-400 px-8 text-base font-semibold text-gray-700 transition-all duration-300"
+                      className="inline-flex h-12 items-center justify-center rounded-full border-2 border-gray-300 hover:border-gray-400 px-8 text-base font-semibold text-gray-700 transition-all"
                     >
                       Затвори
                     </button>
