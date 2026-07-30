@@ -31,7 +31,7 @@ export type PlantSearchResult = {
 
 export const plantDatabase: { plants: Plant[]; lawnCare: LawnTopic[]; irrigation: IrrigationTopic[]; faqs: FAQ[] } = {
   plants: [
-    { name: "Роза (Rosa spp.)", category: "цвете", aliases: ["роза", "рози"], description: "Слънцелюбив храст с дълъг цъфтеж.", care: ["Светлина: Минимум 6 часа пълно слънце", "Поливане: Редовно, без преливане", "Почва: Добре дренирана", "Подрязване: През пролетта"] },
+    { name: "Роза (Rosa spp.)", category: "цвете", aliases: ["роза", "рози"], description: "Слънцелюбив храст с дълъг цъфтеж.", care: ["Светлина: Минимум 6 часа пълно слънце", "Поливане: Дълбоко при суха почва, без преовлажняване", "Почва: Добре дренирана", "Подрязване: През ранна пролет", "Жълти листа: Проверете поливането, дренажа и вредители; премахнете силно засегнатите листа"] },
     { name: "Лаванда (Lavandula angustifolia)", category: "многогодишно растение", aliases: ["лаванда", "лавандула"], description: "Ароматно, сухоустойчиво растение за слънце.", care: ["Светлина: Пълно слънце", "Поливане: Умерено, толерантна към суша", "Почва: Добре дренирана, наклонена към киселина", "Подрязване: След цъфтежа"] },
     { name: "Хортензия (Hydrangea spp.)", category: "храст", aliases: ["хортензия", "хортензии"], description: "Цъфтящ храст, който предпочита частичната сянка.", care: ["Светлина: Частична сянка", "Поливане: Редовно, особено през лятото", "Почва: Киселинна, богата на органика", "Подрязване: След цъфтежа"] },
     { name: "Туя (Thuja occidentalis)", category: "иглолистно", aliases: ["туя", "туи", "туите"], description: "Вечнозелено растение, често използвано за жив плет.", care: ["Светлина: Пълно слънце до частична сянка", "Поливане: Редовно първата година, след това умерено", "Причини за изсъхване: Недостатъчна влага, лоша дренировка, студен вятър", "Избягвайте: Преовлажнена почва и продължителна суша"] },
@@ -147,7 +147,7 @@ export const plantDatabase: { plants: Plant[]; lawnCare: LawnTopic[]; irrigation
     },
   ],
   lawnCare: [
-    { title: "Поливане на тревата", keywords: ["трева", "тревата", "газон", "поливане", "полея", "суха"], tips: ["Поливайте рано сутринта (6-8 часа) за намаляване на болести", "Дълбоко и по-редко (2-3 см вода всеки 2-3 дни) е по-добре от повърхностно поливане", "През жегата поливайте всеки ден или всеки втори ден", "Избягвайте вечерното поливане, което насърчава гъбични болести", "Използвайте разпръсквач за равномерно разпределение"] },
+    { title: "Поливане на тревата", keywords: ["поливане", "полея", "поливам", "суха"], tips: ["Поливайте рано сутринта (6-8 часа) за намаляване на болести", "Дълбоко и по-редко (2-3 см вода всеки 2-3 дни) е по-добре от повърхностно поливане", "През жегата поливайте всеки ден или всеки втори ден", "Избягвайте вечерното поливане, което насърчава гъбични болести", "Използвайте разпръсквач за равномерно разпределение"] },
     { title: "Косене", keywords: ["косене", "кося", "косачка", "височина"], tips: ["Косете с остър нож и никога не премахвайте повече от 1/3 на височината", "Идеална височина: 5–7 см през лятото, 7-10 см през есента", "Косете редовно - всеки 7-10 дни през растежния сезон", "Не косете с мокра трева - рискуваш да разпространиш болести", "Оставете клипингите на тревата (мълчинг) - това помага с хранене"] },
     { title: "Торене", keywords: ["тор", "торене", "подхранване", "азот"], tips: ["Направете почвен анализ при повтарящи се проблеми с растежа", "Пролет: Азотен тор (N-P-K 30-10-10 или подобно)", "Лято: Намалено торене или специален летен тор", "Есен: фосфорно-калиев тор според етикета", "Зима: Без торене. Есенният тор е за подпомагане на корените"] },
     { title: "Аерация и презасяване", keywords: ["аерация", "аериране", "презасяване", "рядка", "плешиви", "дупки"], tips: ["Аериране през пролетта (март-май) или есента (август-октомври)", "Ако почвата е плътна или тревата е тънка, правите аериране", "След аериране, разпръснете тревен посев в рядките площи", "Аериране подобрява пътя на вода и хранилища до корените", "След аериране поливайте редовно за установяване на нов посев"] },
@@ -178,65 +178,66 @@ function tokens(text: string) {
 function matchScore(queryTokens: string[], terms: string[]) {
   return queryTokens.reduce((score, token) => {
     const best = terms.reduce((termScore, term) => {
-      const normalizedTerm = term.toLowerCase();
-      if (normalizedTerm === token) return Math.max(termScore, 4);
-      if (normalizedTerm.includes(token) || token.includes(normalizedTerm)) return Math.max(termScore, 1);
+      const normalizedTerms = tokens(term);
+      if (normalizedTerms.includes(token)) return Math.max(termScore, 4);
+      if (normalizedTerms.some((candidate) => candidate.length >= 4 && (candidate.startsWith(token) || token.startsWith(candidate)))) {
+        return Math.max(termScore, 2);
+      }
       return termScore;
     }, 0);
     return score + best;
   }, 0);
 }
 
+function plantResponse(plant: Plant) {
+  return `**${plant.name}**\n${plant.description}\n${plant.care.map((tip) => `• ${tip}`).join("\n")}`;
+}
+
 export function searchPlantDatabase(query: string): PlantSearchResult {
   const normalizedQuery = query.trim().toLowerCase();
 
   if (/^(здравей|здрасти|добър ден|добро утро|добър вечер|hello|hi)\W*$/.test(normalizedQuery)) {
-    return { response: "Здравейте! Аз съм помощникът на BG Green Yard. Мога да помогна с грижа за растения и тревни площи, както и с системи за напояване. Попитайте ме за всяко растение или проблем!", needsContact: false };
+    return { response: "Здравейте! Аз съм помощникът на BG Green Yard. Мога да помогна с грижа за растения и тревни площи, както и с поливни системи. Попитайте ме за конкретно растение или проблем.", needsContact: false };
   }
 
   if (/^(благодаря|мерси|thanks|thank you)\W*$/.test(normalizedQuery)) {
-    return { response: "С удоволствие! Пишете името на растението или опишете проблема и ще дам насоки от локалния справочник или ще насоча към професионалите.", needsContact: false };
+    return { response: "С удоволствие! Напишете името на растението и какво искате да знаете — поливане, подрязване, торене или проблем.", needsContact: false };
   }
 
   const queryTokens = tokens(query);
-  const sections: { text: string; score: number }[] = [];
+  const matchedPlants = plantDatabase.plants
+    .map((plant) => ({ plant, score: matchScore(queryTokens, [plant.name, ...plant.aliases]) }))
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score);
 
-  for (const plant of plantDatabase.plants) {
-    const score = matchScore(queryTokens, [plant.name, ...plant.aliases]);
-    if (score) {
-      sections.push({
-        text: `**${plant.name}**\n${plant.description}\n${plant.care.map((tip) => `• ${tip}`).join("\n")}`,
-        score: score + 2,
-      });
-    }
+  // A named plant always takes priority over generic symptoms from other plants.
+  if (matchedPlants.length) {
+    return { response: plantResponse(matchedPlants[0].plant), needsContact: false };
   }
 
+  const sections: { text: string; score: number }[] = [];
   for (const faq of plantDatabase.faqs) {
     const score = matchScore(queryTokens, faq.keywords);
     if (score) sections.push({ text: faq.answer, score });
   }
-
   for (const topic of plantDatabase.lawnCare) {
-    const score = matchScore(queryTokens, [topic.title, ...topic.keywords]);
+    const score = matchScore(queryTokens, topic.keywords);
     if (score) sections.push({ text: `**${topic.title}**\n${topic.tips.map((tip) => `• ${tip}`).join("\n")}`, score });
   }
-
   for (const topic of plantDatabase.irrigation) {
-    const score = matchScore(queryTokens, [topic.title, ...topic.keywords]);
+    const score = matchScore(queryTokens, topic.keywords);
     if (score) sections.push({ text: `**${topic.title}**\n${topic.tips.map((tip) => `• ${tip}`).join("\n")}`, score });
   }
 
   if (sections.length) {
-    const response = sections
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 2)
-      .map((section) => section.text)
-      .join("\n\n");
-    return { response, needsContact: false };
+    return {
+      response: sections.sort((a, b) => b.score - a.score).slice(0, 2).map((section) => section.text).join("\n\n"),
+      needsContact: false,
+    };
   }
 
   return {
-    response: "Все още нямам конкретна информация за това растение или проблем. Можете да се свържете с нашия екип за професионална консултация.",
+    response: "Нямам надеждна информация за този конкретен случай. Напишете името на растението, условията (слънце/сянка, поливане) и при възможност добавете снимка, за да насочим правилно.",
     needsContact: true,
   };
 }
