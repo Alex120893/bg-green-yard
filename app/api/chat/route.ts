@@ -1,3 +1,4 @@
+import { answerGardenQuestionWithAi } from "@/lib/gardenAi";
 import { saveChatInquiry } from "@/lib/chatInquiries";
 import { searchPlantCatalog } from "@/lib/plantCatalog";
 import { searchPlantDatabase } from "@/lib/plantDatabase";
@@ -14,7 +15,14 @@ export async function POST(request: Request) {
     const localResult = searchPlantDatabase(question);
     const result = !localResult.needsContact
       ? { ...localResult, showServicePrompt: true }
-      : { ...(await searchPlantCatalog(question) ?? localResult), showServicePrompt: false };
+      : {
+          ...(
+            await answerGardenQuestionWithAi(question)
+            ?? await searchPlantCatalog(question)
+            ?? localResult
+          ),
+          showServicePrompt: false,
+        };
 
     await saveChatInquiry({
       question,
