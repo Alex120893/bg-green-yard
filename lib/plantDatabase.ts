@@ -191,7 +191,7 @@ export const plantDatabase: { plants: Plant[]; lawnCare: LawnTopic[]; irrigation
   ],
 };
 
-const stopWords = new Set(["как", "да", "се", "за", "на", "с", "и", "в", "по", "ли", "ми", "е", "са", "от", "или", "при", "кога", "колко", "една", "един"]);
+const stopWords = new Set(["как", "да", "се", "за", "на", "с", "и", "в", "по", "ли", "ми", "е", "са", "от", "или", "при", "кога", "колко", "една", "един", "грижа", "проблем", "почва", "градина", "растение", "растения"]);
 
 function tokens(text: string) {
   return text.toLowerCase().match(/[\p{L}\p{N}]+/gu)?.filter((word) => word.length > 2 && !stopWords.has(word)) ?? [];
@@ -238,6 +238,7 @@ export function searchPlantDatabase(query: string): PlantSearchResult {
   }
 
   const sections: { text: string; score: number }[] = [];
+  const minimumTopicScore = 4;
   for (const faq of plantDatabase.faqs) {
     const score = matchScore(queryTokens, faq.keywords);
     if (score) sections.push({ text: faq.answer, score });
@@ -251,9 +252,13 @@ export function searchPlantDatabase(query: string): PlantSearchResult {
     if (score) sections.push({ text: `**${topic.title}**\n${topic.tips.map((tip) => `• ${tip}`).join("\n")}`, score });
   }
 
-  if (sections.length) {
+  const relevantSections = sections
+    .filter((section) => section.score >= minimumTopicScore)
+    .sort((a, b) => b.score - a.score);
+
+  if (relevantSections.length) {
     return {
-      response: sections.sort((a, b) => b.score - a.score).slice(0, 2).map((section) => section.text).join("\n\n"),
+      response: relevantSections.slice(0, 2).map((section) => section.text).join("\n\n"),
       needsContact: false,
     };
   }
