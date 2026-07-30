@@ -15,7 +15,7 @@ export function Curtain({ locale }: { locale: Locale }) {
   if (!mounted) return null;
 
   return (
-    <>
+    <div className="hidden md:block">
       {isOpen && (
         <>
           {/* Backdrop */}
@@ -77,6 +77,6 @@ export function Curtain({ locale }: { locale: Locale }) {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }
