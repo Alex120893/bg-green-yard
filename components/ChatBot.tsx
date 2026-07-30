@@ -123,9 +123,22 @@ export function ChatBot() {
       setSpeakingMessageId(null);
       return;
     }
+
+    const language = locale === "en" ? "en-GB" : "bg-BG";
+    const text = message.content
+      .replace(/[*_#>`]/g, "")
+      .replace(/•/g, ". ")
+      .replace(/\s+/g, " ")
+      .trim();
+    const voices = window.speechSynthesis.getVoices();
+    const voice = voices.find((candidate) => candidate.lang.toLowerCase().startsWith(language.toLowerCase().slice(0, 2)));
+
     window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(message.content.replace(/[*_]/g, ""));
-    utterance.lang = locale === "en" ? "en-GB" : "bg-BG";
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = language;
+    utterance.voice = voice ?? null;
+    utterance.rate = locale === "en" ? 0.9 : 0.8;
+    utterance.pitch = 1;
     utterance.onend = () => setSpeakingMessageId((current) => current === message.id ? null : current);
     utterance.onerror = () => setSpeakingMessageId((current) => current === message.id ? null : current);
     setSpeakingMessageId(message.id);
