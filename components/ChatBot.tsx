@@ -19,6 +19,21 @@ type ChatResponse = {
   showServicePrompt: boolean;
 };
 
+type SpeechRecognitionInstance = {
+  start: () => void;
+  stop: () => void;
+  lang: string;
+  interimResults: boolean;
+  onresult: ((event: { results: { 0: { 0: { transcript: string } } }[] }) => void) | null;
+  onend: (() => void) | null;
+  onerror: (() => void) | null;
+};
+
+type SpeechRecognitionWindow = Window & {
+  SpeechRecognition?: new () => SpeechRecognitionInstance;
+  webkitSpeechRecognition?: new () => SpeechRecognitionInstance;
+};
+
 export function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
@@ -36,6 +51,9 @@ export function ChatBot() {
         contact: "Contact us",
         call: "Call us",
         placeholder: "Your question...",
+        startListening: "Start voice input",
+        stopListening: "Stop voice input",
+        voiceInputUnavailable: "Voice input is not supported by this browser.",
       }
     : {
         greeting: "👋 Привет! Аз съм вашата помощница за грижа за растенията и тревата. Задайте ми всеки въпрос относно вашата градина! 🌿",
@@ -48,6 +66,9 @@ export function ChatBot() {
         contact: "Свържете се с нас",
         call: "Обадете ни се",
         placeholder: "Въпрос...",
+        startListening: "Гласово търсене на български",
+        stopListening: "Спри гласовото търсене",
+        voiceInputUnavailable: "Този браузър не поддържа гласово търсене.",
       };
   const voiceCopy = locale === "en"
     ? { read: "Read answer aloud", stop: "Stop reading", unavailable: "Voice playback is not supported by this browser." }
@@ -65,6 +86,9 @@ export function ChatBot() {
   const [isLoading, setIsLoading] = useState(false);
   const [speakingMessageId, setSpeakingMessageId] = useState<string | null>(null);
   const [speechSupported, setSpeechSupported] = useState(false);
+  const [recognitionSupported, setRecognitionSupported] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -75,7 +99,21 @@ export function ChatBot() {
 
   useEffect(() => {
     setSpeechSupported("speechSynthesis" in window && "SpeechSynthesisUtterance" in window);
-    return () => window.speechSynthesis?.cancel();
+    const SpeechRecognition = (window as SpeechRecognitionWindow).SpeechRecognition
+      ?? (window as SpeechRecognitionWindow).webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.lang = "bg-BG";
+      recognitionRef.current.interimResults = false;
+      recognitionRef.current.onresult = (event) => setInput(event.results[0][0].transcript);
+      recognitionRef.current.onend = () => setIsListening(false);
+      recognitionRef.current.onerror = () => setIsListening(false);
+      setRecognitionSupported(true);
+    }
+    return () => {
+      window.speechSynthesis?.cancel();
+      recognitionRef.current?.stop();
+    };
   }, []);
 
   const toggleSpeech = (message: Message) => {
@@ -92,6 +130,21 @@ export function ChatBot() {
     utterance.onerror = () => setSpeakingMessageId((current) => current === message.id ? null : current);
     setSpeakingMessageId(message.id);
     window.speechSynthesis.speak(utterance);
+  };
+
+  const toggleVoiceInput = () => {
+    const recognition = recognitionRef.current;
+    if (!recognition) return;
+    if (isListening) {
+      recognition.stop();
+      return;
+    }
+    try {
+      recognition.start();
+      setIsListening(true);
+    } catch {
+      setIsListening(false);
+    }
   };
 
   const scrollToBottom = () => {
@@ -322,6 +375,19 @@ export function ChatBot() {
                 disabled={isLoading}
                 className="flex-1 px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:border-green-600 disabled:bg-gray-100"
               />
+              <button
+                type="button"
+                onClick={toggleVoiceInput}
+                disabled={!recognitionSupported}
+                aria-label={isListening ? copy.stopListening : copy.startListening}
+                title={!recognitionSupported ? copy.voiceInputUnavailable : isListening ? copy.stopListening : copy.startListening}
+                className={`rounded px-2 py-1 transition-colors ${isListening ? "bg-red-600 text-white" : "border border-green-600 text-green-700 hover:bg-green-50"} disabled:cursor-not-allowed disabled:opacity-40`}
+              >
+                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden>
+                  <rect x="9" y="2" width="6" height="12" rx="3" />
+                  <path d="M5 10a7 7 0 0 0 14 0M12 17v4M8 21h8" />
+                </svg>
+              </button>
               <button
                 type="submit"
                 disabled={isLoading || !input.trim()}
