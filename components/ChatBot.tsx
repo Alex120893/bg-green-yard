@@ -24,7 +24,7 @@ type SpeechRecognitionInstance = {
   stop: () => void;
   lang: string;
   interimResults: boolean;
-  onresult: ((event: { results: { 0: { 0: { transcript: string } } }[] }) => void) | null;
+  onresult: ((event: { results: { 0: { transcript: string } }[] }) => void) | null;
   onend: (() => void) | null;
   onerror: (() => void) | null;
 };
