@@ -13,7 +13,7 @@ const dictionaryBg = {
     siteName: "BG Green Yard",
     defaultTitle: "BG Green Yard — озеленяване и поддръжка на градини в София",
     defaultDesc:
-      "Професионално озеленяване, поливни системи и снегопочистване за София и регион.",
+      "Професионално озеленяване, поливни системи и снегопочистване само в София.",
   },
   nav: {
     home: "Начало",
@@ -55,7 +55,7 @@ const dictionaryBg = {
     subtitle: "Мисия, подход и хората зад BG Green Yard",
     missionTitle: "Мисия и цел",
     missionBody:
-      "Мисията ни е да създаваме подредени, здрави и красиви зелени пространства за живот и работа в София и околог. Съобщения дългосрочни партньорства, основани на надеждност и висока изпълнителска култура.",
+      "Мисията ни е да създаваме подредени, здрави и красиви зелени пространства за живот и работа в София. Създаваме дългосрочни партньорства, основани на надеждност и висока изпълнителска култура.",
     visionBody:
       "Вярваме, че всеки добре поддържан двор носи повече спокойствие и стойност на имота. Подхождаме индивидуално на всеки проект, проследявайки качеството по всяко време на годината.",
     statsSqm: "поддържани зелени площи (ориентир)",
@@ -64,7 +64,7 @@ const dictionaryBg = {
     whyTitle: "Защо да ни изберете",
     why1Title: "Локален фокус — София",
     why1Body:
-      "Работим в столицата и региона — бърза реакция, познаване на терена и сезонните нужди на градини и общи зони.",
+      "Работим само в София — с бърза реакция, познаване на терена и сезонните нужди на градини и общи зони.",
     why2Title: "Цялостни решения",
     why2Body:
       "От озеленяване и тревни площи до автоматизирани поливни системи и зимно поддържане на достъпност.",
@@ -77,17 +77,17 @@ const dictionaryBg = {
   services: {
     title: "Услуги",
     subtitle:
-      "Структурирани решения за частни дворове, жилищни комплекси и бизнес обекти в София.",
+      "Услуги за частни дворове, жилищни комплекси и бизнес обекти само в София.",
     intro:
       "Комбинираме услугите според обекта — от еднократни проекти до абонаментна грижа. Всички дейности са ориентирани към трайност, безопасност и удобство.",
-    sofiaNote: "Работим предимно в София и близките квартали; за по-големи договори — уточнение на зона на изпълнение.",
+    sofiaNote: "Работим само в София.",
     snow: {
       title: "Снегопочистване",
       body: "Механизирано и ръчно почистване на алеи, паркоместа и достъпи при зимни условия. Поддържаме сигурност и проходимост на жилищни и бизнес обекти.",
     },
     green: {
       title: "Професионално озеленяване и поддръжка",
-      body: "Проектиране и изпълнение на озеленяване, поддръжка на градини, нивелиране и поддръжка на тревни площи — кошене, аерация, торене и сезонни работи.",
+      body: "Проектиране и изпълнение на озеленяване, поддръжка на градини, нивелиране и поддръжка на тревни площи — косене, аерация, торене и сезонни работи.",
     },
     irrigation: {
       title: "Поливни системи",
@@ -159,7 +159,7 @@ const dictionaryEn: Messages = {
     siteName: "BG Green Yard",
     defaultTitle: "BG Green Yard — landscaping & garden care in Sofia",
     defaultDesc:
-      "Professional landscaping, irrigation systems, and snow removal for Sofia and the region.",
+      "Professional landscaping, irrigation systems, and snow removal in Sofia only.",
   },
   nav: {
     home: "Home",
@@ -210,7 +210,7 @@ const dictionaryEn: Messages = {
     whyTitle: "Why choose us",
     why1Title: "Local focus — Sofia",
     why1Body:
-      "We operate in the capital and surroundings — fast response, terrain knowledge, and seasonal needs for gardens and common areas.",
+      "We operate in Sofia only — with fast response, terrain knowledge, and an understanding of seasonal needs for gardens and common areas.",
     why2Title: "End-to-end solutions",
     why2Body:
       "From landscaping and lawns to automated irrigation and winter accessibility.",
@@ -223,11 +223,11 @@ const dictionaryEn: Messages = {
   services: {
     title: "Services",
     subtitle:
-      "Structured solutions for private gardens, residential complexes, and commercial sites in Sofia.",
+      "Services for private gardens, residential complexes, and commercial sites in Sofia only.",
     intro:
       "We tailor combinations of services to each property — from one-off projects to subscription care. Everything is oriented toward durability, safety, and convenience.",
     sofiaNote:
-      "We mainly serve Sofia and nearby districts; for larger contracts, the service area is agreed individually.",
+      "We serve Sofia only.",
     snow: {
       title: "Snow removal",
       body: "Mechanized and manual clearing of paths, parking, and access routes in winter — keeping residential and business sites safe and passable.",
