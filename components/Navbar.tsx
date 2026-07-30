@@ -15,6 +15,14 @@ const navKeys = [
   { href: "/contact", key: "contact" as const },
 ];
 
+const mobileNavKeys = [
+  { href: "", key: "home" as const },
+  { href: "/about", key: "about" as const },
+  { href: "/services", key: "services" as const },
+  { href: "/gallery", key: "gallery" as const },
+  { href: "/contact", key: "contact" as const },
+];
+
 export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -149,7 +157,7 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
             }`}
           >
             <div className="mx-auto flex max-w-6xl flex-col gap-1">
-              {navKeys.map(({ href, key }) => (
+              {mobileNavKeys.map(({ href, key }) => (
                 <Link
                   key={key}
                   href={`/${locale}${href}`}
