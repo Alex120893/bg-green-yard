@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { InquiriesList } from "@/components/InquiriesList";
 import { getChatInquiries } from "@/lib/chatInquiries";
+import { searchPlantDatabase } from "@/lib/plantDatabase";
 import { isLocale } from "@/lib/i18n";
 
 export const dynamic = "force-dynamic";
@@ -27,7 +28,11 @@ export default async function InquiriesPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const inquiries = await getChatInquiries();
+  const savedInquiries = await getChatInquiries();
+  const inquiries = savedInquiries.map((inquiry) => ({
+    ...inquiry,
+    answer: searchPlantDatabase(inquiry.question).response,
+  }));
   const isBulgarian = locale !== "en";
 
   const copy = isBulgarian
