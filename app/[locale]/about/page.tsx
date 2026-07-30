@@ -31,6 +31,7 @@ export default async function AboutPage({
   const stats = [
     { value: "15 000+", label: t.about.statsSqm },
     { value: "120+", label: t.about.statsClients },
+    { value: "20+", label: t.about.statsWorkHoursLine },
   ];
 
   const why = [
@@ -95,7 +96,7 @@ export default async function AboutPage({
             <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.12)]">
               <Image
                 src="/1000017936.jpg"
-                alt=""
+                alt="BG Green Yard"
                 fill
                 className="object-cover"
                 sizes="(min-width: 768px) 50vw, 100vw"
@@ -121,33 +122,19 @@ export default async function AboutPage({
                 <p className="mt-4 leading-relaxed text-muted">
                   {t.about.visionBody}
                 </p>
-                <p className="mt-4 text-sm font-medium text-brand-dark">
-                  {t.about.statsWorkHoursLine}
-                </p>
               </div>
             </Reveal>
             <Reveal delayMs={80}>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-3 gap-4">
                 {stats.map((s) => (
                   <div
                     key={s.label}
-                    className="flex flex-col justify-center rounded-2xl bg-white p-8 shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
+                    className="flex flex-col justify-center rounded-2xl bg-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.06)] text-center"
                   >
-                    <p className="text-4xl font-bold text-brand">{s.value}</p>
-                    <p className="mt-2 text-sm leading-snug text-muted">{s.label}</p>
+                    <p className="text-3xl md:text-4xl font-bold text-brand">{s.value}</p>
+                    <p className="mt-2 text-xs md:text-sm leading-snug text-muted">{s.label}</p>
                   </div>
                 ))}
-                <div className="col-span-2 flex items-center gap-4 rounded-2xl bg-brand/5 p-6">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand text-white">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-                      <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-foreground">София и регион</p>
-                    <p className="text-sm text-muted">Бърза реакция, познаване на терена</p>
-                  </div>
-                </div>
               </div>
             </Reveal>
           </div>
@@ -167,7 +154,7 @@ export default async function AboutPage({
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {why.map((w, i) => (
               <Reveal key={w.title} delayMs={i * 70}>
-                <article className={`group h-full rounded-2xl bg-gradient-to-br ${w.gradient} p-8 shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(0,0,0,0.1)]`}>
+                <article className={`group h-full rounded-2xl bg-gradient-to-br ${w.gradient} p-8 shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.1)]`}>
                   <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl ${w.iconBg} transition-transform duration-300 group-hover:scale-110`}>
                     {w.icon}
                   </div>
@@ -204,4 +191,3 @@ export default async function AboutPage({
     </>
   );
 }
-
