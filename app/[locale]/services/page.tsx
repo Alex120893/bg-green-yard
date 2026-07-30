@@ -110,11 +110,7 @@ export default async function ServicesPage({
                 <circle cx="12" cy="12" r="10"/>
                 <path d="M12 16v-4M12 8h.01"/>
               </svg>
-              <span className="font-medium">
-                {locale === "bg" 
-                  ? "Работим само в София и близките квартали" 
-                  : "We serve Sofia and nearby districts only"}
-              </span>
+              <span className="font-medium">{t.services.sofiaNote}</span>
             </div>
           </Reveal>
         </div>
