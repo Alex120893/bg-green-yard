@@ -7,12 +7,12 @@ import { getMessages, isLocale } from "@/lib/i18n";
 import { PRODUCTION_SITE_ORIGIN } from "@/lib/site";
 
 const photos = [
-  "/1000017924.jpg",
-  "/1000017925.jpg",
-  "/1000017927.jpg",
-  "/1000017936.jpg",
-  "/1000018008.jpg",
-  "/grass.jpg",
+  { src: "/images/gallery/ozelenyavane-gradina-sofia-01.jpg", alt: "Озеленена градина в София", width: 960, height: 1280 },
+  { src: "/images/gallery/ozelenyavane-gradina-sofia-02.jpg", alt: "Зелена площ към градина в София", width: 960, height: 1280 },
+  { src: "/images/gallery/ozelenyavane-gradina-sofia-03.jpg", alt: "Озеленяване на външно пространство в София", width: 960, height: 1280 },
+  { src: "/images/gallery/ozelenyavane-gradina-sofia-04.jpg", alt: "Поддържана градина в София", width: 960, height: 1280 },
+  { src: "/images/gallery/ozelenyavane-gradina-sofia-05.jpg", alt: "Озеленен двор в София", width: 1319, height: 1979 },
+  { src: "/images/gallery/trevna-plosht-sofia.jpg", alt: "Поддържана тревна площ в София", width: 1140, height: 500 },
 ] as const;
 
 export async function generateMetadata({
@@ -96,14 +96,15 @@ export default async function GalleryPage({
       <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-            {photos.map((src, i) => (
-              <Reveal key={src} delayMs={(i % 3) * 55}>
+            {photos.map((photo, i) => (
+              <Reveal key={photo.src} delayMs={(i % 3) * 55}>
                 <div className="group relative aspect-[4/3] overflow-hidden rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
                   <Image
-                    src={src}
-                    alt=""
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    src={photo.src}
+                    alt={photo.alt}
+                    width={photo.width}
+                    height={photo.height}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                     sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 50vw"
                   />
                   <div className="absolute inset-0 bg-black/0 transition-colors duration-400 group-hover:bg-black/25" />
