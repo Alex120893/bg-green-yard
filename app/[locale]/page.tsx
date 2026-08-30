@@ -63,6 +63,15 @@ export default async function HomePage({
     "/grass.jpg",
   ];
 
+  const clients = [
+    { name: "AURA 1" },
+    { name: "PRIMA" },
+    { name: "Synergy Tower" },
+    { name: "Renault Center" },
+    { name: "Dacia Center" },
+    { name: "Nissan Center" },
+  ];
+
   const reviews = locale === "en" ? [
     { name: "Maria Petrova", text: "Excellent work by the BG Green Yard team. My garden is clean, beautiful, and professionally maintained.", rating: 5, initials: "MP", role: "Verified client", gradient: "from-green-50 to-emerald-50", iconColor: "bg-brand" },
     { name: "Ivan Slavov", text: "Excellent service. The irrigation system works perfectly and without any issues.", rating: 5, initials: "IS", role: "Verified client", gradient: "from-amber-50 to-orange-50", iconColor: "bg-brand" },
@@ -73,7 +82,7 @@ export default async function HomePage({
   ] : [
     {
       name: "Мария Петрова",
-      text: "Много добре! Екипът на BG Green Yard направи чудесна работа с градината ми. Всичко е чисто, красиво и професионално.",
+      text: "Много добре! Екипът на BG Green Yard направи чудесна работа с градината ми. Всичко е чисто, красиво и профе.",
       rating: 5,
       initials: "МП",
       role: "Проверен клиент",
@@ -82,7 +91,7 @@ export default async function HomePage({
     },
     {
       name: "Иван Славов",
-      text: "Отличен сервис! Препоръчвам на всички приятели. Поливната система работи перфектно, никакви проблеми.",
+      text: "Отличен сервис! Препоръчвам на всички приятели. Поливната система работи перфектно, никакви пробле.",
       rating: 5,
       initials: "ИС",
       role: "Проверен клиент",
@@ -91,7 +100,7 @@ export default async function HomePage({
     },
     {
       name: "Деян Костадинов",
-      text: "Професионализъм на първо място! Екипът дойде навреме, свърши работата добре и остави площта чиста след себе си.",
+      text: "Професионализъм на първо място! Екипът дойде навреме, свърши работата добре и остави площта чиста.",
       rating: 5,
       initials: "ДК",
       role: "Проверен клиент",
@@ -161,7 +170,7 @@ export default async function HomePage({
             {features.map((f, i) => (
               <Reveal key={f.title} delayMs={i * 80}>
                 <article
-                  className={`group h-full rounded-[40px] bg-gradient-to-br ${f.gradient} p-8 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border border-black/5 backdrop-blur-sm`}
+                  className={`group h-full rounded-[40px] bg-gradient-to-br ${f.gradient} p-8 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border border-black/5`}
                 >
                   <div className={`inline-flex h-14 w-14 items-center justify-center rounded-[24px] ${f.iconBg} transition-transform duration-300 group-hover:scale-110`}>
                     {f.icon}
@@ -179,8 +188,44 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* ── Gallery Preview ── */}
+      {/* ── Our Clients and Projects ── */}
       <section className="bg-background py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6">
+          <Reveal>
+            <div className="text-center">
+              <h2 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+                {locale === "en" ? "Our clients and projects" : "Нашите клиенти и обекти в София"}
+              </h2>
+              <p className="mx-auto mt-4 max-w-2xl text-lg text-muted font-semibold">
+                {locale === "en" ? "Trust built with real results." : "Доверие, изградено с реални резултати."}
+              </p>
+              <p className="mx-auto mt-4 max-w-3xl text-base text-muted">
+                {locale === "en"
+                  ? "We provide landscaping and professional maintenance of green areas for residential complexes, office buildings and automotive centers in Sofia."
+                  : "Извършваме озеленяване и професионална поддръжка на зелени площи за жилищни комплекси, бизнес сгради и автомобилни центрове в София."}
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {clients.map((client, i) => (
+              <Reveal key={client.name} delayMs={i * 60}>
+                <div className="group relative rounded-[24px] bg-gradient-to-br from-green-50 to-emerald-50 p-8 shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-green-100/50">
+                  <h3 className="text-lg font-bold text-foreground text-center">
+                    {client.name}
+                  </h3>
+                  <p className="mt-3 text-sm text-muted text-center">
+                    {locale === "en" ? "Professional landscaping & maintenance" : "Професионално озеленяване и поддръжка"}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Gallery Preview ── */}
+      <section className="bg-white py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal>
             <div className="flex flex-col items-center text-center md:flex-row md:items-end md:justify-between md:text-left">
@@ -240,7 +285,7 @@ export default async function HomePage({
           <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {reviews.map((review, i) => (
               <Reveal key={review.name} delayMs={i * 55}>
-                <article className={`flex h-full flex-col rounded-[32px] bg-gradient-to-br ${review.gradient} p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border border-black/5 backdrop-blur-sm`}>
+                <article className={`flex h-full flex-col rounded-[32px] bg-gradient-to-br ${review.gradient} p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl border border-black/5`}>
                   <div className="flex gap-1">
                     {Array.from({ length: review.rating }).map((_, j) => (
                       <svg key={j} viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5 text-yellow-400">
@@ -288,13 +333,13 @@ export default async function HomePage({
             <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <Link
                 href={`/${locale}/contact`}
-                className="inline-flex h-13 items-center justify-center rounded-full bg-white px-9 text-base font-semibold text-brand shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+                className="inline-flex h-13 items-center justify-center rounded-full bg-white px-9 text-base font-semibold text-brand shadow-lg transition-all duration-300 hover:-translate-y-0.5"
               >
                 {t.home.ctaSecondary}
               </Link>
               <Link
                 href={`/${locale}/services`}
-                className="inline-flex h-13 items-center justify-center rounded-full border-2 border-white/40 px-9 text-base font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/10 hover:shadow-lg"
+                className="inline-flex h-13 items-center justify-center rounded-full border-2 border-white/40 px-9 text-base font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-white"
               >
                 {t.home.ctaPrimary}
               </Link>
