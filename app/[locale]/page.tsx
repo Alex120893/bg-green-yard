@@ -188,42 +188,6 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* ── Our Clients and Projects ── */}
-      <section className="bg-background py-16 md:py-24">
-        <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <Reveal>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
-                {locale === "en" ? "Our clients and projects" : "Нашите клиенти и обекти в София"}
-              </h2>
-              <p className="mx-auto mt-3 max-w-2xl text-base md:text-lg text-muted font-semibold">
-                {locale === "en" ? "Trust built with real results." : "Доверие, изградено с реални резултати."}
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="flex justify-center">
-            <div className="grid gap-4 sm:gap-6 grid-cols-2 sm:grid-cols-3 w-full max-w-4xl">
-              {clients.map((client, i) => (
-                <Reveal key={client.name} delayMs={i * 50}>
-                  <div className="group relative aspect-square overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white">
-                    <Image
-                      src={client.image}
-                      alt={client.alt}
-                      fill
-                      className="object-contain p-4 transition-transform duration-300 group-hover:scale-110"
-                      sizes="(min-width: 1024px) 200px, (min-width: 640px) 180px, 150px"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/5" />
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ── Gallery Preview ── */}
       <section className="bg-white py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
@@ -264,6 +228,42 @@ export default async function HomePage({
                 </div>
               </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Our Clients and Projects ── */}
+      <section className="bg-background py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 md:px-6">
+          <Reveal>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+                {locale === "en" ? "Our clients and projects" : "Нашите клиенти и обекти в София"}
+              </h2>
+              <p className="mx-auto mt-3 max-w-2xl text-base md:text-lg text-muted font-semibold">
+                {locale === "en" ? "Trust built with real results." : "Доверие, изградено с реални резултати."}
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="flex justify-center">
+            <div className="grid gap-4 sm:gap-6 grid-cols-2 sm:grid-cols-3 w-full max-w-4xl">
+              {clients.map((client, i) => (
+                <Reveal key={client.name} delayMs={i * 50}>
+                  <div className="group relative aspect-square overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white">
+                    <Image
+                      src={client.image}
+                      alt={client.alt}
+                      fill
+                      className="object-contain p-4 transition-transform duration-300 group-hover:scale-110"
+                      sizes="(min-width: 1024px) 200px, (min-width: 640px) 180px, 150px"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/5" />
+                  </div>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </section>
