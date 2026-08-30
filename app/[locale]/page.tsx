@@ -152,6 +152,16 @@ export default async function HomePage({
         ]}
       />
 
+      {locale === "bg" && (
+        <section className="bg-white py-7">
+          <div className="mx-auto max-w-6xl px-4 text-center md:px-6">
+            <Link href="/bg/ozelenyavane-sofia" className="text-sm font-semibold text-brand underline-offset-4 transition hover:text-brand-dark hover:underline">
+              Озеленяване в София — изграждане и поддръжка на градини
+            </Link>
+          </div>
+        </section>
+      )}
+
       {/* ── Features / Why Us ── */}
       <section className="bg-surface py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-4 md:px-6">

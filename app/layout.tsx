@@ -106,8 +106,6 @@ gtag('config', 'AW-18368920167');`}
           }}
         />
 
-        {/* Canonical URL */}
-        <link rel="canonical" href={PRODUCTION_SITE_ORIGIN} />
       </head>
       <body
         className="min-h-full bg-background text-foreground antialiased"
