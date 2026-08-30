@@ -55,21 +55,21 @@ export default async function HomePage({
   ];
 
   const galleryPhotos = [
-    "/1000017924.jpg",
-    "/1000017925.jpg",
-    "/1000017927.jpg",
-    "/1000017936.jpg",
-    "/1000018008.jpg",
-    "/grass.jpg",
+    { src: "/images/gallery/ozelenyavane-gradina-sofia-01.jpg", alt: "Озеленена градина в София", width: 960, height: 1280 },
+    { src: "/images/gallery/ozelenyavane-gradina-sofia-02.jpg", alt: "Зелена площ към градина в София", width: 960, height: 1280 },
+    { src: "/images/gallery/ozelenyavane-gradina-sofia-03.jpg", alt: "Озеленяване на външно пространство в София", width: 960, height: 1280 },
+    { src: "/images/gallery/ozelenyavane-gradina-sofia-04.jpg", alt: "Поддържана градина в София", width: 960, height: 1280 },
+    { src: "/images/gallery/ozelenyavane-gradina-sofia-05.jpg", alt: "Озеленен двор в София", width: 1319, height: 1979 },
+    { src: "/images/gallery/trevna-plosht-sofia.jpg", alt: "Поддържана тревна площ в София", width: 1140, height: 500 },
   ];
 
   const clients = [
-    { name: "Nissan Center", image: "/images/clients/nissan.png", alt: "Nissan Center - озеленяване и поддръжка в София" },
-    { name: "Renault Center", image: "/images/clients/renault.png", alt: "Renault Center - поддръжка на зелени площи в София" },
-    { name: "Dacia Center", image: "/images/clients/dacia.png", alt: "Dacia Center - озеленяване и поддръжка в София" },
-    { name: "AURA 1 Residence", image: "/images/clients/aura-1.jpg", alt: "AURA 1 Residence - озеленяване и поддръжка на зелени площи в София" },
-    { name: "PRIMA Residence", image: "/images/clients/prima.jpg", alt: "PRIMA Residence - озеленяване и поддръжка в София" },
-    { name: "Synergy Tower", image: "/images/clients/synergy-tower.jpg", alt: "Synergy Tower - озеленяване и поддръжка на зелени площи в София" },
+    { name: "Nissan Center", image: "/images/clients/nissan-center-ozelenyavane.png", alt: "Nissan Center — озеленяване и поддръжка в София", width: 1079, height: 1080 },
+    { name: "Renault Center", image: "/images/clients/renault-center-ozelenyavane.png", alt: "Renault Center — поддръжка на зелени площи в София", width: 1080, height: 1080 },
+    { name: "Dacia Center", image: "/images/clients/dacia-center-ozelenyavane.png", alt: "Dacia Center — озеленяване и поддръжка в София", width: 1080, height: 933 },
+    { name: "AURA 1 Residence", image: "/images/clients/aura-1-residence-ozelenyavane.jpg", alt: "AURA 1 Residence — озеленяване и поддръжка на зелени площи в София", width: 971, height: 548 },
+    { name: "PRIMA Residence", image: "/images/clients/prima-residence-ozelenyavane.jpg", alt: "PRIMA Residence — озеленяване и поддръжка в София", width: 1080, height: 632 },
+    { name: "Synergy Tower", image: "/images/clients/synergy-tower-ozelenyavane.jpg", alt: "Synergy Tower — озеленяване и поддръжка на зелени площи в София", width: 853, height: 1280 },
   ];
 
   const reviews = locale === "en" ? [
@@ -224,14 +224,15 @@ export default async function HomePage({
           </Reveal>
 
           <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3">
-            {galleryPhotos.map((src, i) => (
-              <Reveal key={src} delayMs={(i % 3) * 60}>
+            {galleryPhotos.map((photo, i) => (
+              <Reveal key={photo.src} delayMs={(i % 3) * 60}>
                 <div className="group relative aspect-[4/3] overflow-hidden rounded-[32px] shadow-lg hover:shadow-xl transition-all duration-300">
                   <Image
-                    src={src}
-                    alt=""
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    src={photo.src}
+                    alt={photo.alt}
+                    width={photo.width}
+                    height={photo.height}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                     sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 50vw"
                   />
                   <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/15" />
@@ -265,8 +266,9 @@ export default async function HomePage({
                       <Image
                         src={client.image}
                         alt={client.alt}
-                        fill
-                        className="object-contain p-3 transition-transform duration-300 group-hover:scale-105"
+                        width={client.width}
+                        height={client.height}
+                        className="h-full w-full object-contain p-3 transition-transform duration-300 group-hover:scale-105"
                         sizes="(min-width: 640px) 144px, 128px"
                         loading="lazy"
                       />

@@ -52,12 +52,12 @@ const services = [
 ] as const;
 
 const projects = [
-  { name: "AURA 1 Residence", image: "/images/clients/aura-1.jpg" },
-  { name: "PRIMA Residence", image: "/images/clients/prima.jpg" },
-  { name: "Synergy Tower", image: "/images/clients/synergy-tower.jpg" },
-  { name: "Renault Center", image: "/images/clients/renault.png" },
-  { name: "Dacia Center", image: "/images/clients/dacia.png" },
-  { name: "Nissan Center", image: "/images/clients/nissan.png" },
+  { name: "AURA 1 Residence", image: "/images/clients/aura-1-residence-ozelenyavane.jpg", width: 971, height: 548 },
+  { name: "PRIMA Residence", image: "/images/clients/prima-residence-ozelenyavane.jpg", width: 1080, height: 632 },
+  { name: "Synergy Tower", image: "/images/clients/synergy-tower-ozelenyavane.jpg", width: 853, height: 1280 },
+  { name: "Renault Center", image: "/images/clients/renault-center-ozelenyavane.png", width: 1080, height: 1080 },
+  { name: "Dacia Center", image: "/images/clients/dacia-center-ozelenyavane.png", width: 1080, height: 933 },
+  { name: "Nissan Center", image: "/images/clients/nissan-center-ozelenyavane.png", width: 1079, height: 1080 },
 ] as const;
 
 export default async function LandscapingSofiaPage({
@@ -125,7 +125,7 @@ export default async function LandscapingSofiaPage({
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal><div className="text-center"><h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">Реални обекти</h2><p className="mx-auto mt-3 max-w-2xl text-lg text-muted">Част от обектите, за които полагаме грижа в София.</p></div></Reveal>
           <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3">
-            {projects.map((project, index) => <Reveal key={project.name} delayMs={index * 50}><figure className="overflow-hidden rounded-2xl bg-white shadow-md"><div className="relative aspect-[4/3]"><Image src={project.image} alt={`${project.name} — озеленяване и поддръжка в София`} fill className="object-contain p-4" sizes="(min-width: 640px) 33vw, 50vw" /></div><figcaption className="border-t border-black/5 px-4 py-3 text-center text-sm font-semibold text-foreground">{project.name}</figcaption></figure></Reveal>)}
+            {projects.map((project, index) => <Reveal key={project.name} delayMs={index * 50}><figure className="overflow-hidden rounded-2xl bg-white shadow-md"><div className="relative aspect-[4/3]"><Image src={project.image} alt={`${project.name} — озеленяване и поддръжка в София`} width={project.width} height={project.height} className="h-full w-full object-contain p-4" sizes="(min-width: 640px) 33vw, 50vw" /></div><figcaption className="border-t border-black/5 px-4 py-3 text-center text-sm font-semibold text-foreground">{project.name}</figcaption></figure></Reveal>)}
           </div>
         </div>
       </section>

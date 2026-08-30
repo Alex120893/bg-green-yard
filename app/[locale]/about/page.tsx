@@ -97,10 +97,11 @@ export default async function AboutPage({
           <Reveal delayMs={100}>
             <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.12)]">
               <Image
-                src="/1000017936.jpg"
-                alt="BG Green Yard"
-                fill
-                className="object-cover"
+                src="/images/gallery/ozelenyavane-gradina-sofia-04.jpg"
+                alt="Озеленена градина от BG Green Yard в София"
+                width={960}
+                height={1280}
+                className="h-full w-full object-cover"
                 sizes="(min-width: 768px) 50vw, 100vw"
                 priority
               />

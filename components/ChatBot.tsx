@@ -257,7 +257,9 @@ export function ChatBot() {
           ) : (
             <img
               src="/logo-removebg-preview.png"
-              alt="BG Green Yard"
+              alt="Лого на BG Green Yard"
+              width={40}
+              height={40}
               className="h-10 w-10 rounded-full bg-white object-contain p-0.5"
             />
           )}
@@ -274,7 +276,9 @@ export function ChatBot() {
                 <div className="flex items-center gap-2">
                   <img
                     src="/logo-removebg-preview.png"
-                    alt="BG Green Yard"
+                    alt="Лого на BG Green Yard"
+                    width={28}
+                    height={28}
                     className="h-7 w-7 rounded-full bg-white object-contain p-0.5"
                   />
                   <div>
@@ -294,7 +298,7 @@ export function ChatBot() {
             </div>
           </div>
 
-          {/* Сообщения */}
+          {/* Сообщени�� */}
           <div className="flex-1 overflow-y-auto p-3 space-y-3 bg-gray-50">
             {messages.map((message) => (
               <div
