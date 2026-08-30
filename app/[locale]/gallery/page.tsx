@@ -67,6 +67,24 @@ export default async function GalleryPage({
               <div className="overflow-hidden rounded-2xl bg-black shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
                 <GalleryVideo src="/main.mp4" />
               </div>
+              <div className="overflow-hidden rounded-2xl bg-black shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                <GalleryVideo src="/video_2026-08-30_16-37-08.mp4" />
+              </div>
+              <div className="overflow-hidden rounded-2xl bg-black shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                <GalleryVideo src="/video_2026-08-30_16-38-53.mp4" />
+              </div>
+              <div className="overflow-hidden rounded-2xl bg-black shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                <GalleryVideo src="/video_2026-08-30_16-39-03.mp4" />
+              </div>
+              <div className="overflow-hidden rounded-2xl bg-black shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                <GalleryVideo src="/video_2026-08-30_16-39-15.mp4" />
+              </div>
+              <div className="overflow-hidden rounded-2xl bg-black shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                <GalleryVideo src="/video_2026-08-30_16-39-18.mp4" />
+              </div>
+              <div className="overflow-hidden rounded-2xl bg-black shadow-[0_8px_30px_rgba(0,0,0,0.12)]">
+                <GalleryVideo src="/video_2026-08-30_16-39-22.mp4" />
+              </div>
             </div>
           </Reveal>
         </div>
