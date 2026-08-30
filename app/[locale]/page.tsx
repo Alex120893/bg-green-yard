@@ -64,12 +64,36 @@ export default async function HomePage({
   ];
 
   const clients = [
-    { name: "AURA 1" },
-    { name: "PRIMA" },
-    { name: "Synergy Tower" },
-    { name: "Renault Center" },
-    { name: "Dacia Center" },
-    { name: "Nissan Center" },
+    {
+      name: "Nissan",
+      src: "/images/clients/nissan.png",
+      alt: "Nissan Center — озеленяване и поддръжка на зелени площи в София",
+    },
+    {
+      name: "Dacia",
+      src: "/images/clients/dacia.png",
+      alt: "Dacia Center — озеленяване и поддръжка в София",
+    },
+    {
+      name: "Renault",
+      src: "/images/clients/renault.png",
+      alt: "Renault Center — поддръжка на зелени площи в София",
+    },
+    {
+      name: "Synergy Tower",
+      src: "/images/clients/synergy-tower.jpg",
+      alt: "Synergy Tower — озеленяване и поддръжка на зелени площи в София",
+    },
+    {
+      name: "AURA 1",
+      src: "/images/clients/aura-1.jpg",
+      alt: "AURA 1 Residence — озеленяване и поддръжка в София",
+    },
+    {
+      name: "PRIMA",
+      src: "/images/clients/prima.jpg",
+      alt: "PRIMA Residence — озеленяване и поддръжка в София",
+    },
   ];
 
   const reviews = locale === "en" ? [
@@ -196,28 +220,34 @@ export default async function HomePage({
               <h2 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
                 {locale === "en" ? "Our clients and projects" : "Нашите клиенти и обекти в София"}
               </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-lg text-muted font-semibold">
+              <p className="mx-auto mt-4 max-w-2xl text-lg font-semibold text-muted">
                 {locale === "en" ? "Trust built with real results." : "Доверие, изградено с реални резултати."}
-              </p>
-              <p className="mx-auto mt-4 max-w-3xl text-base text-muted">
-                {locale === "en"
-                  ? "We provide landscaping and professional maintenance of green areas for residential complexes, office buildings and automotive centers in Sofia."
-                  : "Извършваме озеленяване и професионална поддръжка на зелени площи за жилищни комплекси, бизнес сгради и автомобилни центрове в София."}
               </p>
             </div>
           </Reveal>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
             {clients.map((client, i) => (
               <Reveal key={client.name} delayMs={i * 60}>
-                <div className="group relative rounded-[24px] bg-gradient-to-br from-green-50 to-emerald-50 p-8 shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-green-100/50">
-                  <h3 className="text-lg font-bold text-foreground text-center">
-                    {client.name}
-                  </h3>
-                  <p className="mt-3 text-sm text-muted text-center">
-                    {locale === "en" ? "Professional landscaping & maintenance" : "Професионално озеленяване и поддръжка"}
-                  </p>
-                </div>
+                <article className="group overflow-hidden rounded-[20px] border-2 border-gray-100 bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                  <div className="relative aspect-square">
+                    <Image
+                      src={client.src}
+                      alt={client.alt}
+                      width={900}
+                      height={900}
+                      loading="lazy"
+                      sizes="(min-width: 1280px) 360px, (min-width: 1024px) 30vw, (min-width: 640px) 46vw, 94vw"
+                      className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10" />
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent p-4">
+                      <h3 className="text-center text-base font-semibold text-white md:text-lg">
+                        {client.name}
+                      </h3>
+                    </div>
+                  </div>
+                </article>
               </Reveal>
             ))}
           </div>
