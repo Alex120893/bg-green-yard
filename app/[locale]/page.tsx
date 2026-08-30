@@ -64,12 +64,12 @@ export default async function HomePage({
   ];
 
   const clients = [
-    { name: "AURA 1" },
-    { name: "PRIMA" },
-    { name: "Synergy Tower" },
-    { name: "Renault Center" },
-    { name: "Dacia Center" },
-    { name: "Nissan Center" },
+    { name: "AURA 1", image: "/images/clients/aura-1.jpg", alt: "AURA 1 Residence - озеленяване и поддръжка на зелени площи в София" },
+    { name: "PRIMA", image: "/images/clients/prima.jpg", alt: "PRIMA Residence - озеленяване и поддръжка в София" },
+    { name: "Synergy Tower", image: "/images/clients/synergy-tower.jpg", alt: "Synergy Tower - озеленяване и поддръжка на зелени площи в София" },
+    { name: "Renault", image: "/images/clients/renault.png", alt: "Renault Center - поддръжка на зелени площи в София" },
+    { name: "Dacia", image: "/images/clients/dacia.png", alt: "Dacia Center - озеленяване и поддръжка в София" },
+    { name: "Nissan", image: "/images/clients/nissan.png", alt: "Nissan Center - озеленяване и поддръжка в София" },
   ];
 
   const reviews = locale === "en" ? [
@@ -189,37 +189,37 @@ export default async function HomePage({
       </section>
 
       {/* ── Our Clients and Projects ── */}
-      <section className="bg-background py-20 md:py-28">
+      <section className="bg-background py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal>
-            <div className="text-center">
-              <h2 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
                 {locale === "en" ? "Our clients and projects" : "Нашите клиенти и обекти в София"}
               </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-lg text-muted font-semibold">
+              <p className="mx-auto mt-3 max-w-2xl text-base md:text-lg text-muted font-semibold">
                 {locale === "en" ? "Trust built with real results." : "Доверие, изградено с реални резултати."}
-              </p>
-              <p className="mx-auto mt-4 max-w-3xl text-base text-muted">
-                {locale === "en"
-                  ? "We provide landscaping and professional maintenance of green areas for residential complexes, office buildings and automotive centers in Sofia."
-                  : "Извършваме озеленяване и професионална поддръжка на зелени площи за жилищни комплекси, бизнес сгради и автомобилни центрове в София."}
               </p>
             </div>
           </Reveal>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {clients.map((client, i) => (
-              <Reveal key={client.name} delayMs={i * 60}>
-                <div className="group relative rounded-[24px] bg-gradient-to-br from-green-50 to-emerald-50 p-8 shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-green-100/50">
-                  <h3 className="text-lg font-bold text-foreground text-center">
-                    {client.name}
-                  </h3>
-                  <p className="mt-3 text-sm text-muted text-center">
-                    {locale === "en" ? "Professional landscaping & maintenance" : "Професионално озеленяване и поддръжка"}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
+          <div className="flex justify-center">
+            <div className="grid gap-4 sm:gap-6 grid-cols-2 sm:grid-cols-3 w-full max-w-4xl">
+              {clients.map((client, i) => (
+                <Reveal key={client.name} delayMs={i * 50}>
+                  <div className="group relative aspect-square overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white">
+                    <Image
+                      src={client.image}
+                      alt={client.alt}
+                      fill
+                      className="object-contain p-4 transition-transform duration-300 group-hover:scale-110"
+                      sizes="(min-width: 1024px) 200px, (min-width: 640px) 180px, 150px"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/5" />
+                  </div>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </section>
