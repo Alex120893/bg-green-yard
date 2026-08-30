@@ -28,7 +28,6 @@ export function VideoHero({
         playsInline
         className="absolute inset-0 h-full w-full object-cover"
       >
-        <source src="/main.webm" type="video/webm" />
         <source src="/main.mp4" type="video/mp4" />
       </video>
 

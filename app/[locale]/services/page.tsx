@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Reveal } from "@/components/Reveal";
 import type { Locale } from "@/lib/i18n";
 import { getMessages, isLocale } from "@/lib/i18n";
+import { PRODUCTION_SITE_ORIGIN } from "@/lib/site";
 
 export async function generateMetadata({
   params,
@@ -13,6 +14,7 @@ export async function generateMetadata({
   const locale = isLocale(loc) ? loc : "bg";
   const t = getMessages(locale);
   return {
+    alternates: { canonical: `${PRODUCTION_SITE_ORIGIN}/${locale}/services` },
     title: t.services.title,
     description: t.services.subtitle,
   };
