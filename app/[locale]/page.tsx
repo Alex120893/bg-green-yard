@@ -281,6 +281,32 @@ export default async function HomePage({
         </div>
       </section>
 
+      {locale === "bg" && (
+        <section className="bg-white py-20 md:py-28">
+          <div className="mx-auto max-w-6xl px-4 md:px-6">
+            <Reveal>
+              <div className="max-w-3xl">
+                <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+                  Райони, които обслужваме
+                </h2>
+                <p className="mt-4 text-lg leading-relaxed text-muted">
+                  Предлагаме озеленяване и професионална поддръжка на градини и зелени площи в София и околните райони. Работим както с частни имоти, така и с жилищни комплекси, бизнес сгради и търговски обекти.
+                </p>
+              </div>
+            </Reveal>
+            <div className="mt-10 flex flex-wrap gap-3">
+              {["Бистрица", "Симеоново", "Драгалевци", "Бояна", "Панчарево", "Лозен", "Малинова долина", "Студентски град"].map((area, index) => (
+                <Reveal key={area} delayMs={index * 45}>
+                  <span className="inline-flex rounded-full border border-brand/20 bg-white px-4 py-2 text-sm font-semibold text-foreground shadow-sm">
+                    {area}
+                  </span>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ── Testimonials ── */}
       <section className="bg-surface py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
