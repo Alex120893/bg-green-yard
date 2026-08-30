@@ -179,6 +179,49 @@ export default async function HomePage({
         </div>
       </section>
 
+      {/* ── Наши клиенти и обекти ── */}
+      <section className="bg-white py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6">
+          <Reveal>
+            <div className="text-center">
+              <h2 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+                {locale === "en" ? "Our clients and projects" : "Нашите клиенти и обекти в София"}
+              </h2>
+              <p className="mx-auto mt-3 max-w-2xl text-lg text-muted">
+                {locale === "en" ? "Trust built with real results." : "Доверие, изградено с реални резултати."}
+              </p>
+              <p className="mx-auto mt-4 max-w-3xl text-base text-muted">
+                {locale === "en"
+                  ? "We provide landscaping and professional maintenance of green areas for residential complexes, office buildings and automotive centers in Sofia."
+                  : "Извършваме озеленяване и професионална поддръжка на зелени площи за жилищни комплекси, бизнес сгради и автомобилни центрове в София."}
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { name: "AURA 1" },
+              { name: "PRIMA" },
+              { name: "Synergy Tower" },
+              { name: "Renault Center" },
+              { name: "Dacia Center" },
+              { name: "Nissan Center" },
+            ].map((client, i) => (
+              <Reveal key={client.name} delayMs={i * 60}>
+                <div className="group relative rounded-[24px] bg-gradient-to-br from-green-50 to-emerald-50 p-8 shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-green-100/50">
+                  <h3 className="text-lg font-bold text-foreground text-center">
+                    {client.name}
+                  </h3>
+                  <p className="mt-3 text-sm text-muted text-center">
+                    {locale === "en" ? "Professional landscaping & maintenance" : "Професионално озеленяване и поддръжка"}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Gallery Preview ── */}
       <section className="bg-background py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
