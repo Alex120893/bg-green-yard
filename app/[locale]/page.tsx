@@ -64,12 +64,12 @@ export default async function HomePage({
   ];
 
   const clients = [
-    { name: "AURA 1", image: "/images/clients/aura-1.jpg", alt: "AURA 1 Residence - озеленяване и поддръжка на зелени площи в София" },
-    { name: "PRIMA", image: "/images/clients/prima.jpg", alt: "PRIMA Residence - озеленяване и поддръжка в София" },
+    { name: "Nissan Center", image: "/images/clients/nissan.png", alt: "Nissan Center - озеленяване и поддръжка в София" },
+    { name: "Renault Center", image: "/images/clients/renault.png", alt: "Renault Center - поддръжка на зелени площи в София" },
+    { name: "Dacia Center", image: "/images/clients/dacia.png", alt: "Dacia Center - озеленяване и поддръжка в София" },
+    { name: "AURA 1 Residence", image: "/images/clients/aura-1.jpg", alt: "AURA 1 Residence - озеленяване и поддръжка на зелени площи в София" },
+    { name: "PRIMA Residence", image: "/images/clients/prima.jpg", alt: "PRIMA Residence - озеленяване и поддръжка в София" },
     { name: "Synergy Tower", image: "/images/clients/synergy-tower.jpg", alt: "Synergy Tower - озеленяване и поддръжка на зелени площи в София" },
-    { name: "Renault", image: "/images/clients/renault.png", alt: "Renault Center - поддръжка на зелени площи в София" },
-    { name: "Dacia", image: "/images/clients/dacia.png", alt: "Dacia Center - озеленяване и поддръжка в София" },
-    { name: "Nissan", image: "/images/clients/nissan.png", alt: "Nissan Center - озеленяване и поддръжка в София" },
   ];
 
   const reviews = locale === "en" ? [
@@ -246,20 +246,23 @@ export default async function HomePage({
             </div>
           </Reveal>
 
-          <div className="flex justify-center">
-            <div className="grid gap-4 sm:gap-6 grid-cols-2 sm:grid-cols-3 w-full max-w-4xl">
+          <div className="overflow-x-auto pb-2">
+            <div className="mx-auto flex min-w-max justify-center gap-3 sm:gap-4">
               {clients.map((client, i) => (
                 <Reveal key={client.name} delayMs={i * 50}>
-                  <div className="group relative aspect-square overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white">
-                    <Image
-                      src={client.image}
-                      alt={client.alt}
-                      fill
-                      className="object-contain p-4 transition-transform duration-300 group-hover:scale-110"
-                      sizes="(min-width: 1024px) 200px, (min-width: 640px) 180px, 150px"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/5" />
+                  <div className="w-32 text-center sm:w-36">
+                    <div className="group relative h-24 overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:h-28">
+                      <Image
+                        src={client.image}
+                        alt={client.alt}
+                        fill
+                        className="object-contain p-3 transition-transform duration-300 group-hover:scale-105"
+                        sizes="(min-width: 640px) 144px, 128px"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/5" />
+                    </div>
+                    <p className="mt-2 text-sm font-semibold text-foreground">{client.name}</p>
                   </div>
                 </Reveal>
               ))}
