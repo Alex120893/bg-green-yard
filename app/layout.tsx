@@ -3,6 +3,7 @@ import { PRODUCTION_SITE_ORIGIN, ogImageAbsoluteUrl } from "@/lib/site";
 import "./globals.css";
 import Script from "next/script";
 import { ChatBotWrapper } from "@/components/ChatBotWrapper";
+import { RadioEnergyPlayer } from "@/components/RadioEnergyPlayer";
 
 export const metadata: Metadata = {
   metadataBase: new URL(PRODUCTION_SITE_ORIGIN),
@@ -111,6 +112,7 @@ gtag('config', 'AW-18368920167');`}
         className="min-h-full bg-background text-foreground antialiased"
       >
         {children}
+        <RadioEnergyPlayer />
         <ChatBotWrapper />
       </body>
     </html>
