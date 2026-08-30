@@ -3,6 +3,7 @@ import { InquiriesList } from "@/components/InquiriesList";
 import { getChatInquiries } from "@/lib/chatInquiries";
 import { searchPlantDatabase } from "@/lib/plantDatabase";
 import { isLocale } from "@/lib/i18n";
+import { PRODUCTION_SITE_ORIGIN } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +20,8 @@ export async function generateMetadata({
     description: isBulgarian
       ? "Въпроси и отговори от помощника на BG Green Yard."
       : "Questions and answers from the BG Green Yard assistant.",
+    alternates: { canonical: `${PRODUCTION_SITE_ORIGIN}/${locale}/inquiries` },
+    robots: { index: false, follow: false },
   };
 }
 
