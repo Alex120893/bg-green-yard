@@ -72,6 +72,17 @@ export default async function HomePage({
     { name: "Synergy Tower", image: "/images/clients/synergy-tower-ozelenyavane.jpg", alt: "Synergy Tower — озеленяване и поддръжка на зелени площи в София", width: 853, height: 1280 },
   ];
 
+  const clientBenefits = [
+    "Професионално озеленяване и поддръжка",
+    "Работа с частни и бизнес имоти",
+    "Реални завършени обекти в София",
+    "Цялостна грижа за зелени площи",
+    "Поддръжка на тревни площи и растения",
+    "Изграждане и поддръжка на поливни системи",
+    "Индивидуален подход към всеки обект",
+    "Възможност за регулярна абонаментна поддръжка",
+  ];
+
   const reviews = locale === "en" ? [
     { name: "Maria Petrova", text: "Excellent work by the BG Green Yard team. My garden is clean, beautiful, and professionally maintained.", rating: 5, initials: "MP", role: "Verified client", gradient: "from-green-50 to-emerald-50", iconColor: "bg-brand" },
     { name: "Ivan Slavov", text: "Excellent service. The irrigation system works perfectly and without any issues.", rating: 5, initials: "IS", role: "Verified client", gradient: "from-amber-50 to-orange-50", iconColor: "bg-brand" },
@@ -197,6 +208,37 @@ export default async function HomePage({
           </div>
         </div>
       </section>
+
+      {locale === "bg" && (
+        <section className="bg-white py-20 md:py-28">
+          <div className="mx-auto max-w-6xl px-4 md:px-6">
+            <Reveal>
+              <div className="max-w-3xl">
+                <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+                  Защо да изберете BG.GREEN_YARD?
+                </h2>
+                <p className="mt-4 text-lg leading-relaxed text-muted">
+                  Грижим се за зелените пространства от подготовката и изграждането до редовната поддръжка. Работим с внимание към детайлите и съобразяваме услугите с особеностите на всеки обект.
+                </p>
+              </div>
+            </Reveal>
+            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {clientBenefits.map((benefit, index) => (
+                <Reveal key={benefit} delayMs={index * 45}>
+                  <div className="flex h-full items-start gap-3 rounded-2xl bg-surface p-5 shadow-sm">
+                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-soft text-brand-dark" aria-hidden>
+                      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={2} className="h-3.5 w-3.5">
+                        <path d="m4 10 3.5 3.5L16 5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                    <p className="text-sm font-semibold leading-relaxed text-foreground">{benefit}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── Gallery Preview ── */}
       <section className="bg-background py-20 md:py-28">
