@@ -246,17 +246,17 @@ export default async function HomePage({
             </div>
           </Reveal>
 
-          <div className="flex justify-center">
-            <div className="grid gap-4 sm:gap-6 grid-cols-2 sm:grid-cols-3 w-full max-w-4xl">
+          <div className="overflow-x-auto pb-2">
+            <div className="mx-auto flex min-w-max justify-center gap-3 sm:gap-4">
               {clients.map((client, i) => (
                 <Reveal key={client.name} delayMs={i * 50}>
-                  <div className="group relative aspect-square overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white">
+                  <div className="group relative h-24 w-32 overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:h-28 sm:w-36">
                     <Image
                       src={client.image}
                       alt={client.alt}
                       fill
-                      className="object-contain p-4 transition-transform duration-300 group-hover:scale-110"
-                      sizes="(min-width: 1024px) 200px, (min-width: 640px) 180px, 150px"
+                      className="object-contain p-3 transition-transform duration-300 group-hover:scale-105"
+                      sizes="(min-width: 640px) 144px, 128px"
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/5" />
