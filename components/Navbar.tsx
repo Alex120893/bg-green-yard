@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { RadioEnergyPlayer } from "@/components/RadioEnergyPlayer";
 import type { Locale, Messages } from "@/lib/i18n";
 
 const navKeys = [
@@ -150,6 +151,12 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
               />
             </span>
           </button>
+        </div>
+      </div>
+
+      <div className="border-t border-white/10 bg-brand-dark/20 px-4 py-1.5">
+        <div className="mx-auto flex max-w-6xl justify-center md:justify-end">
+          <RadioEnergyPlayer />
         </div>
       </div>
 

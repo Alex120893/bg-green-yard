@@ -15,15 +15,13 @@ export function RadioEnergyPlayer() {
 
   const play = async (isAutoplay = false) => {
     const audio = audioRef.current;
-    if (!audio) return;
+    if (!audio || pausedByUser.current) return;
 
     try {
       await audio.play();
-      setIsPlaying(true);
       setAutoplayBlocked(false);
     } catch {
       if (isAutoplay) setAutoplayBlocked(true);
-      setIsPlaying(false);
     }
   };
 
@@ -37,7 +35,6 @@ export function RadioEnergyPlayer() {
     } else {
       pausedByUser.current = true;
       audio.pause();
-      setIsPlaying(false);
     }
   };
 
@@ -59,31 +56,50 @@ export function RadioEnergyPlayer() {
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (!audio || pausedByUser.current) return;
+    if (!audio) return;
     audio.volume = volume;
     void play(true);
   }, []);
 
   return (
-    <aside className="fixed bottom-4 left-4 z-50 w-[calc(100vw-2rem)] max-w-sm rounded-2xl border border-brand/20 bg-white/95 p-3 shadow-xl backdrop-blur-md md:bottom-6 md:left-6 md:w-auto md:min-w-[22rem]" aria-label="Radio Energy player">
-      <audio ref={audioRef} src={streamUrl} preload="none" onPlay={() => setIsPlaying(true)} onPause={() => setIsPlaying(false)} />
-      <div className="flex items-center gap-3">
-        <span className="flex h-2.5 w-2.5 shrink-0 rounded-full bg-red-600" aria-hidden />
-        <div className="min-w-0 flex-1">
-          <p className="text-xs font-bold tracking-[0.16em] text-red-700">LIVE</p>
-          <p className="truncate text-sm font-semibold text-foreground">Radio Energy</p>
-        </div>
-        <button type="button" onClick={togglePlayback} className="inline-flex h-10 shrink-0 items-center justify-center rounded-full bg-brand px-4 text-sm font-semibold text-white transition-colors hover:bg-brand-dark" aria-label={isPlaying ? "Пауза на Radio Energy" : "Включи Radio Energy"}>
-          {isPlaying ? "Пауза" : "▶ Включи"}
-        </button>
-      </div>
-      <div className="mt-3 flex items-center gap-3 border-t border-black/5 pt-3">
-        <button type="button" onClick={toggleMute} className="text-xs font-semibold text-brand-dark" aria-label={muted ? "Включи звука" : "Спри звука"}>
-          {muted ? "Без звук" : "Звук"}
-        </button>
-        <input type="range" min="0" max="1" step="0.05" value={muted ? 0 : volume} onChange={(event) => updateVolume(Number(event.target.value))} className="h-1.5 flex-1 accent-brand" aria-label="Сила на звука" />
-      </div>
-      {autoplayBlocked && !isPlaying && <p className="mt-2 text-xs text-muted">Браузърът изисква действие, за да включи радиото.</p>}
-    </aside>
+    <div className="flex items-center gap-2 text-white" aria-label="Radio Energy player">
+      <audio
+        ref={audioRef}
+        src={streamUrl}
+        preload="none"
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+      />
+      <span className="h-2 w-2 shrink-0 rounded-full bg-red-500" aria-hidden />
+      <span className="text-[10px] font-bold tracking-[0.12em] text-white/90">LIVE</span>
+      <span className="hidden text-xs font-semibold sm:inline">Radio Energy</span>
+      <button
+        type="button"
+        onClick={togglePlayback}
+        className="inline-flex h-7 items-center justify-center rounded-full bg-white px-2.5 text-xs font-bold text-brand-dark transition-colors hover:bg-brand-soft"
+        aria-label={isPlaying ? "Пауза на Radio Energy" : "Включи Radio Energy"}
+      >
+        {isPlaying ? "Пауза" : "▶ Включи"}
+      </button>
+      <button
+        type="button"
+        onClick={toggleMute}
+        className="hidden text-[11px] font-semibold text-white/85 hover:text-white sm:inline"
+        aria-label={muted ? "Включи звука" : "Спри звука"}
+      >
+        {muted ? "Без звук" : "Звук"}
+      </button>
+      <input
+        type="range"
+        min="0"
+        max="1"
+        step="0.05"
+        value={muted ? 0 : volume}
+        onChange={(event) => updateVolume(Number(event.target.value))}
+        className="hidden h-1 w-16 accent-white sm:block"
+        aria-label="Сила на звука"
+      />
+      {autoplayBlocked && !isPlaying && <span className="hidden text-[10px] text-white/70 lg:inline">Натиснете Включи</span>}
+    </div>
   );
 }
