@@ -59,6 +59,18 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
+          {locale === "bg" && (
+            <Link
+              href="/bg/ozelenyavane-sofia"
+              className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
+                pathname === "/bg/ozelenyavane-sofia"
+                  ? "bg-white/20 text-white"
+                  : "text-white/80 hover:bg-white/10 hover:text-white"
+              }`}
+            >
+              Озеленяване София
+            </Link>
+          )}
           {navKeys.map(({ href, key }) => {
             const path = `/${locale}${href}`;
             const active =
@@ -158,6 +170,15 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
             }`}
           >
             <div className="mx-auto flex max-w-6xl flex-col gap-1">
+              {locale === "bg" && (
+                <Link
+                  href="/bg/ozelenyavane-sofia"
+                  className="rounded-lg px-3 py-3 text-base font-medium text-white transition-colors hover:bg-white/10"
+                  onClick={() => setOpen(false)}
+                >
+                  Озеленяване София
+                </Link>
+              )}
               {mobileNavKeys.map(({ href, key }) => (
                 <Link
                   key={key}
