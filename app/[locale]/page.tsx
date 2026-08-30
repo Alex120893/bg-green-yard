@@ -179,8 +179,48 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* ── Gallery Preview ── */}
+      {/* ── Clients & Objects ── */}
       <section className="bg-background py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-4 md:px-6">
+          <Reveal>
+            <div className="text-center">
+              <h2 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+                {locale === "en" ? "Our clients and objects in Sofia" : "Нашите клиенти и обекти в София"}
+              </h2>
+              <p className="mx-auto mt-4 max-w-2xl text-lg font-medium text-brand">
+                {locale === "en" ? "Trust built with real results." : "Доверие, изградено с реални резултати."}
+              </p>
+              <p className="mx-auto mt-3 max-w-2xl text-base text-muted">
+                {locale === "en"
+                  ? "We provide landscaping and professional maintenance of green areas for residential complexes, business buildings, and automotive centers in Sofia."
+                  : "Извършваме озеленяване и професионална поддръжка на зелени площи за жилищни комплекси, бизнес сгради и автомобилни центрове в София."}
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="mt-14 grid gap-5 grid-cols-2 sm:grid-cols-3 md:grid-cols-6">
+            {[
+              "AURA 1",
+              "PRIMA",
+              "Synergy Tower",
+              "Renault Center",
+              "Dacia Center",
+              "Nissan Center",
+            ].map((client, i) => (
+              <Reveal key={client} delayMs={i * 60}>
+                <div className="flex h-28 w-full items-center justify-center rounded-2xl border border-black/8 bg-surface px-4 py-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                  <span className="text-sm font-semibold leading-snug text-foreground">
+                    {client}
+                  </span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Gallery Preview ── */}
+      <section className="bg-surface py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal>
             <div className="flex flex-col items-center text-center md:flex-row md:items-end md:justify-between md:text-left">
