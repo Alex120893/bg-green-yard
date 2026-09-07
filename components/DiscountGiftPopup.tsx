@@ -16,7 +16,13 @@ export function DiscountGiftPopup() {
 
   return (
     <>
-      <div className="fixed right-4 top-24 z-[90] animate-[bounce_2.4s_ease-in-out_infinite] sm:right-6 sm:top-28">
+      <div className="fixed right-4 top-24 z-[90] sm:right-6 sm:top-28">
+        <div className="pointer-events-none absolute -inset-10" aria-hidden>
+          {["-left-1 top-2 bg-rose-500", "left-10 -top-3 bg-sky-400", "right-3 -top-2 bg-violet-500", "-right-2 top-8 bg-amber-200", "left-3 -bottom-2 bg-emerald-400", "right-10 -bottom-3 bg-rose-400"].map((color, index) => (
+            <span key={color} className={`absolute h-2 w-2 rounded-sm ${color} animate-[ping_900ms_ease-out_${index * 80}ms_1_both]`} />
+          ))}
+        </div>
+        <div className="animate-[bounce_2.4s_ease-in-out_infinite]">
         <button
           type="button"
           onClick={() => setOpened(true)}
@@ -38,6 +44,7 @@ export function DiscountGiftPopup() {
         >
           ×
         </button>
+        </div>
       </div>
 
       {opened && (
