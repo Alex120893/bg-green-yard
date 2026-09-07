@@ -16,7 +16,7 @@ export function DiscountGiftPopup() {
 
   return (
     <>
-      <div className="fixed bottom-5 right-5 z-[90] animate-[bounce_700ms_ease-out_1] sm:bottom-6 sm:right-6">
+      <div className="fixed left-1/2 top-24 z-[90] -translate-x-1/2 animate-[bounce_700ms_ease-out_1] sm:top-28">
         <div className="animate-[bounce_2.8s_ease-in-out_infinite]">
           <button type="button" onClick={() => setOpened(true)} className="flex items-center gap-2 rounded-2xl bg-gradient-to-br from-amber-300 via-yellow-400 to-orange-500 px-3 py-2.5 text-amber-950 shadow-[0_12px_28px_rgba(146,64,14,.35)] ring-2 ring-white/90 transition hover:scale-105 focus:outline-none focus:ring-4 focus:ring-amber-300/70" aria-label="Отвори подарък с отстъпка">
             <span className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-rose-600 shadow-sm"><span className="absolute inset-y-0 left-1/2 w-1.5 -translate-x-1/2 bg-amber-300" /><span className="absolute -top-1.5 left-1 h-3 w-3 rounded-tl-full border-2 border-amber-300" /><span className="absolute -top-1.5 right-1 h-3 w-3 rounded-tr-full border-2 border-amber-300" /></span>
