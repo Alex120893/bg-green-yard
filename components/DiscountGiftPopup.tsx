@@ -19,28 +19,30 @@ export function DiscountGiftPopup() {
       <button
         type="button"
         onClick={() => setOpened(true)}
-        className="fixed right-4 top-24 z-[90] flex h-auto min-h-16 w-auto max-w-[calc(100vw-2rem)] gap-3 px-4 py-3 sm:right-6 sm:top-28 items-center justify-center rounded-2xl bg-brand text-white shadow-[0_12px_32px_rgba(15,70,39,.35)] transition hover:-translate-y-1 hover:bg-brand-dark focus:outline-none focus:ring-4 focus:ring-brand/30"
+        className="fixed right-4 top-24 z-[90] flex max-w-[calc(100vw-2rem)] items-center gap-3 rounded-2xl bg-gradient-to-br from-amber-300 via-yellow-400 to-orange-500 px-4 py-3 text-amber-950 shadow-[0_14px_36px_rgba(146,64,14,.38)] ring-2 ring-white/90 transition duration-300 hover:-translate-y-1 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-amber-300/70 sm:right-6 sm:top-28"
         aria-label="Отвори подарък с отстъпка"
       >
-        <span className="relative block h-9 w-10 shrink-0 rounded-md bg-white/95 shadow-sm">
-          <span className="absolute inset-y-0 left-1/2 w-2 -translate-x-1/2 bg-brand" />
-          <span className="absolute -top-2 left-1 h-3 w-4 rounded-tl-full border-4 border-brand bg-white/95" />
-          <span className="absolute -top-2 right-1 h-3 w-4 rounded-tr-full border-4 border-brand bg-white/95" />
+        <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-rose-600 shadow-md">
+          <span className="absolute inset-y-0 left-1/2 w-2 -translate-x-1/2 bg-amber-300" />
+          <span className="absolute -top-2 left-1 h-4 w-4 rounded-tl-full border-4 border-amber-300" />
+          <span className="absolute -top-2 right-1 h-4 w-4 rounded-tr-full border-4 border-amber-300" />
         </span>
-        <span className="text-left text-sm font-extrabold leading-tight">30% отстъпка<br /><span className="font-medium text-white/80">за поддръжка</span></span>
+        <span className="text-left text-sm font-extrabold leading-tight">Подарък за вас<br /><span className="font-bold text-rose-800">30% отстъпка</span></span>
       </button>
 
       {opened && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/55 p-4" role="dialog" aria-modal="true" aria-labelledby="discount-gift-title">
-          <div className="relative w-full max-w-sm overflow-hidden rounded-3xl bg-white text-center shadow-2xl">
-            <div className="bg-brand px-7 pb-8 pt-10 text-white">
-              <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-2xl bg-white/15 text-3xl font-extrabold ring-1 ring-white/30">30%</div>
-              <p className="mt-5 text-sm font-bold uppercase tracking-[.16em] text-white/75">Подарък за поддръжка</p>
-              <h2 id="discount-gift-title" className="mt-2 text-3xl font-bold">30% отстъпка за поддръжка</h2>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/60 p-4" role="dialog" aria-modal="true" aria-labelledby="discount-gift-title">
+          <div className="relative w-full max-w-sm overflow-hidden rounded-[28px] bg-white text-center shadow-2xl ring-4 ring-amber-300">
+            <div className="relative overflow-hidden bg-gradient-to-br from-amber-300 via-yellow-400 to-orange-500 px-7 pb-9 pt-10 text-amber-950">
+              <span className="absolute -left-8 -top-8 h-28 w-28 rounded-full bg-white/20" aria-hidden />
+              <span className="absolute -bottom-12 -right-8 h-32 w-32 rounded-full bg-rose-500/20" aria-hidden />
+              <div className="relative mx-auto flex h-24 w-24 items-center justify-center rounded-2xl bg-rose-600 text-3xl font-extrabold text-white shadow-xl ring-4 ring-amber-200">30%</div>
+              <p className="relative mt-5 text-sm font-bold uppercase tracking-[.16em] text-rose-800">Подарък за поддръжка</p>
+              <h2 id="discount-gift-title" className="relative mt-2 text-3xl font-extrabold">Вашата отстъпка е готова</h2>
             </div>
             <div className="p-7">
               <p className="text-base leading-relaxed text-muted">Получете 30% отстъпка за първата заявка за поддръжка на градина или зелени площи в София.</p>
-              <Link href="/bg/contact" onClick={() => setOpened(false)} className="mt-6 inline-flex rounded-full bg-brand px-7 py-3 font-bold text-white transition hover:bg-brand-dark">Използвай отстъпката</Link>
+              <Link href="/bg/contact" onClick={() => setOpened(false)} className="mt-6 inline-flex rounded-full bg-rose-600 px-7 py-3 font-bold text-white shadow-md transition hover:bg-rose-700">Използвай отстъпката</Link>
               <button type="button" onClick={() => setOpened(false)} className="mt-4 block w-full text-sm font-medium text-muted hover:text-foreground">Затвори</button>
             </div>
           </div>
