@@ -130,6 +130,25 @@ export default async function LandscapingSofiaPage({
         </div>
       </section>
 
+      <section className="bg-white py-20 md:py-28">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 md:grid-cols-2 md:px-6">
+          <Reveal>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-surface shadow-lg">
+              <Image src="/images/gallery/ozelenyavane-gradina-sofia-02.jpg" alt="Озеленяване на градина в София от BG Green Yard" fill className="object-cover" sizes="(min-width: 768px) 50vw, 100vw" />
+            </div>
+          </Reveal>
+          <Reveal delayMs={80}>
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-brand">BG.GREEN_YARD</p>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground md:text-4xl">Как работим</h2>
+              <ol className="mt-6 space-y-3 text-muted">
+                {['Оглед и разговор за нуждите на обекта', 'План за озеленяване и подходящи материали', 'Изграждане на зелени площи и поливане', 'Финален преглед и план за поддръжка'].map((step, index) => <li key={step} className="flex items-center gap-3"><span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand text-sm font-bold text-white">{index + 1}</span>{step}</li>)}
+              </ol>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       <section className="bg-surface py-20 md:py-28">
         <div className="mx-auto grid max-w-6xl gap-12 px-4 md:grid-cols-2 md:px-6">
           <Reveal><div><h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">Райони, които обслужваме</h2><p className="mt-5 leading-relaxed text-muted">Обслужваме частни, жилищни и бизнес обекти в рамките на София. За оглед и конкретна оферта се свържете с нас.</p></div></Reveal>

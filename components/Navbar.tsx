@@ -14,7 +14,7 @@ const landscapingLinks = [
   ["/polivni-sistemi-sofia", "Поливни системи"],
   ["/ozelenyavane-na-dvorove-sofia", "Озеленяване на дворове"],
   ["/izgrazhdane-na-gradini-sofia", "Изграждане на градини"],
-  ["/services", "Снегопочистване"],
+  ["/snegopochistvane-sofia", "Снегопочистване"],
   ["/proekti", "Проекти"],
 ] as const;
 
