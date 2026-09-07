@@ -4,6 +4,16 @@ import { useState } from "react";
 import type { Locale } from "@/lib/i18n";
 import type { Messages } from "@/lib/i18n";
 
+declare global {
+  interface Window {
+    oaiq?: (
+      command: "measure",
+      event: string,
+      properties: Record<string, string>,
+    ) => void;
+  }
+}
+
 const serviceValues = ["snow", "green", "irrigation", "other"] as const;
 
 export function ContactForm({
@@ -51,6 +61,9 @@ export function ContactForm({
         throw new Error("send_failed");
       }
 
+      window.oaiq?.("measure", "appointment_scheduled", {
+        type: "customer_action",
+      });
       setSent(true);
       form.reset();
     } catch {
