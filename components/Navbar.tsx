@@ -7,21 +7,16 @@ import { useState } from "react";
 import { RadioEnergyPlayer } from "@/components/RadioEnergyPlayer";
 import type { Locale, Messages } from "@/lib/i18n";
 
+const bgNavLinks = [
+  ["", "Начало"], ["/services", "Услуги"], ["/ozelenyavane-sofia", "Озеленяване"],
+  ["/poddruzhka-na-gradini-sofia", "Поддръжка на градини"], ["/trevni-ploshti-sofia", "Тревни площи"],
+  ["/polivni-sistemi-sofia", "Поливни системи"], ["/ozelenyavane-na-dvorove-sofia", "Озеленяване на дворове"],
+  ["/izgrazhdane-na-gradini-sofia", "Изграждане на градини"], ["/services", "Снегопочистване"],
+  ["/proekti", "Проекти"], ["/about", "За нас"], ["/blog", "Блог"], ["/contact", "Контакти"],
+] as const;
 const navKeys = [
-  { href: "", key: "home" as const },
-  { href: "/about", key: "about" as const },
-  { href: "/services", key: "services" as const },
-  { href: "/gallery", key: "gallery" as const },
-  { href: "/inquiries", key: "inquiries" as const },
-  { href: "/contact", key: "contact" as const },
-];
-
-const mobileNavKeys = [
-  { href: "", key: "home" as const },
-  { href: "/about", key: "about" as const },
-  { href: "/services", key: "services" as const },
-  { href: "/gallery", key: "gallery" as const },
-  { href: "/inquiries", key: "inquiries" as const },
+  { href: "", key: "home" as const }, { href: "/about", key: "about" as const },
+  { href: "/services", key: "services" as const }, { href: "/gallery", key: "gallery" as const },
   { href: "/contact", key: "contact" as const },
 ];
 
@@ -60,19 +55,11 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
-          {locale === "bg" && (
-            <Link
-              href="/bg/ozelenyavane-sofia"
-              className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                pathname === "/bg/ozelenyavane-sofia"
-                  ? "bg-white/20 text-white"
-                  : "text-white/80 hover:bg-white/10 hover:text-white"
-              }`}
-            >
-              Озеленяване София
-            </Link>
-          )}
-          {navKeys.map(({ href, key }) => {
+          {locale === "bg" ? bgNavLinks.map(([href, label]) => {
+            const path = `/bg${href}`;
+            const active = href === "" ? pathname === "/bg" : pathname === path || pathname.startsWith(`${path}/`);
+            return <Link key={`${href}-${label}`} href={path} className={`rounded-full px-2 py-2 text-xs font-medium transition-all duration-200 ${active ? "bg-white/20 text-white" : "text-white/80 hover:bg-white/10 hover:text-white"}`}>{label}</Link>;
+          }) : navKeys.map(({ href, key }) => {
             const path = `/${locale}${href}`;
             const active =
               href === ""
@@ -93,6 +80,14 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
             );
           })}
         </nav>
+        {locale === "bg" && (
+          <Link
+            href="/bg/contact"
+            className="hidden shrink-0 rounded-full bg-white px-4 py-2 text-xs font-bold text-brand-dark transition-colors hover:bg-brand-soft xl:inline-flex"
+          >
+            ПОЛУЧИ ОФЕРТА
+          </Link>
+        )}
 
         <div className="flex shrink-0 items-center gap-2">
           <div
@@ -177,16 +172,9 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
             }`}
           >
             <div className="mx-auto flex max-w-6xl flex-col gap-1">
-              {locale === "bg" && (
-                <Link
-                  href="/bg/ozelenyavane-sofia"
-                  className="rounded-lg px-3 py-3 text-base font-medium text-white transition-colors hover:bg-white/10"
-                  onClick={() => setOpen(false)}
-                >
-                  Озеленяване София
-                </Link>
-              )}
-              {mobileNavKeys.map(({ href, key }) => (
+              {locale === "bg" ? bgNavLinks.map(([href, label]) => (
+                <Link key={`${href}-${label}`} href={`/bg${href}`} className="rounded-lg px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10" onClick={() => setOpen(false)}>{label}</Link>
+              )) : navKeys.map(({ href, key }) => (
                 <Link
                   key={key}
                   href={`/${locale}${href}`}
