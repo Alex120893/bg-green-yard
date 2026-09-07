@@ -4,26 +4,47 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export function DiscountGiftPopup() {
-  const [open, setOpen] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [opened, setOpened] = useState(false);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setOpen(true), 1400);
+    const timer = window.setTimeout(() => setVisible(true), 1400);
     return () => window.clearTimeout(timer);
   }, []);
 
-  if (!open) return null;
+  if (!visible) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4" role="dialog" aria-modal="true" aria-labelledby="discount-gift-title">
-      <div className="relative w-full max-w-md overflow-hidden rounded-3xl bg-white p-7 text-center shadow-2xl md:p-9">
-        <button type="button" onClick={() => setOpen(false)} className="absolute right-4 top-4 rounded-full p-2 text-muted hover:bg-surface hover:text-foreground" aria-label="Затвори предложението">×</button>
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-brand-soft text-xl font-bold text-brand" aria-hidden>30%</div>
-        <p className="mt-5 text-sm font-bold uppercase tracking-[.16em] text-brand">Подарък за нови клиенти</p>
-        <h2 id="discount-gift-title" className="mt-3 text-3xl font-bold tracking-tight text-foreground">30% отстъпка</h2>
-        <p className="mt-3 text-base leading-relaxed text-muted">Получете 30% отстъпка за първата заявка за озеленяване или поддръжка в София.</p>
-        <Link href="/bg/contact" onClick={() => setOpen(false)} className="mt-7 inline-flex rounded-full bg-brand px-7 py-3 font-bold text-white transition hover:bg-brand-dark">Използвай отстъпката</Link>
-        <button type="button" onClick={() => setOpen(false)} className="mt-4 block w-full text-sm font-medium text-muted underline-offset-4 hover:text-foreground hover:underline">Не, благодаря</button>
-      </div>
-    </div>
+    <>
+      <button
+        type="button"
+        onClick={() => setOpened(true)}
+        className="fixed bottom-5 right-5 z-[90] flex h-16 w-16 items-center justify-center rounded-2xl bg-brand text-white shadow-[0_12px_32px_rgba(15,70,39,.35)] transition hover:-translate-y-1 hover:bg-brand-dark focus:outline-none focus:ring-4 focus:ring-brand/30"
+        aria-label="Отвори подарък с отстъпка"
+      >
+        <span className="relative block h-9 w-10 rounded-md bg-white/95 shadow-sm">
+          <span className="absolute inset-y-0 left-1/2 w-2 -translate-x-1/2 bg-brand" />
+          <span className="absolute -top-2 left-1 h-3 w-4 rounded-tl-full border-4 border-brand bg-white/95" />
+          <span className="absolute -top-2 right-1 h-3 w-4 rounded-tr-full border-4 border-brand bg-white/95" />
+        </span>
+      </button>
+
+      {opened && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/55 p-4" role="dialog" aria-modal="true" aria-labelledby="discount-gift-title">
+          <div className="relative w-full max-w-sm overflow-hidden rounded-3xl bg-white text-center shadow-2xl">
+            <div className="bg-brand px-7 pb-8 pt-10 text-white">
+              <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-2xl bg-white/15 text-3xl font-extrabold ring-1 ring-white/30">30%</div>
+              <p className="mt-5 text-sm font-bold uppercase tracking-[.16em] text-white/75">Подарък за нови клиенти</p>
+              <h2 id="discount-gift-title" className="mt-2 text-3xl font-bold">Вашата отстъпка е готова</h2>
+            </div>
+            <div className="p-7">
+              <p className="text-base leading-relaxed text-muted">Получете 30% отстъпка за първата заявка за озеленяване или поддръжка в София.</p>
+              <Link href="/bg/contact" onClick={() => setOpened(false)} className="mt-6 inline-flex rounded-full bg-brand px-7 py-3 font-bold text-white transition hover:bg-brand-dark">Използвай отстъпката</Link>
+              <button type="button" onClick={() => setOpened(false)} className="mt-4 block w-full text-sm font-medium text-muted hover:text-foreground">Затвори</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
