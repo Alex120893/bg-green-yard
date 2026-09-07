@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { RadioEnergyPlayer } from "@/components/RadioEnergyPlayer";
+import { DiscountGiftPopup } from "@/components/DiscountGiftPopup";
 import type { Locale, Messages } from "@/lib/i18n";
 
 const landscapingLinks = [
@@ -47,7 +48,9 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
   const enHref = `/en${pathSuffix}`;
   const servicesActive = landscapingLinks.some(([href]) => pathname === `/bg${href}` || pathname.startsWith(`/bg${href}/`));
 
-  return <header className="sticky top-0 z-50 border-b border-brand/20 bg-brand/95 backdrop-blur-md">
+  return <>
+  {locale === "bg" && <DiscountGiftPopup />}
+  <header className="sticky top-0 z-50 border-b border-brand/20 bg-brand/95 backdrop-blur-md">
     <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 md:gap-4 md:px-6 md:py-4">
       <Link href={`/${locale}`} className="flex shrink-0 items-center gap-3 transition-opacity hover:opacity-90" onClick={() => setOpen(false)}>
         <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-md"><Image src="/logo-removebg-preview.png" alt="BG Green Yard" width={40} height={40} className="h-10 w-10 object-contain" priority /></div>
@@ -68,8 +71,6 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
           {bgPrimaryLinks.slice(1).map(([href, label]) => <DesktopLink key={href} href={`/bg${href}`} label={label} active={pathname === `/bg${href}` || pathname.startsWith(`/bg${href}/`)} />)}
         </> : navKeys.map(({ href, key }) => <DesktopLink key={key} href={`/${locale}${href}`} label={nav[key]} active={href === "" ? pathname === `/${locale}` : pathname === `/${locale}${href}` || pathname.startsWith(`/${locale}${href}/`)} />)}
       </nav>
-      {locale === "bg" && <Link href="/bg/contact" className="hidden shrink-0 rounded-full bg-white px-4 py-2 text-xs font-bold text-brand-dark transition-colors hover:bg-brand-soft xl:inline-flex">ПОЛУЧИ ОФЕРТА</Link>}
-
       <div className="flex shrink-0 items-center gap-2">
         <div className="relative flex h-10 w-[6.75rem] shrink-0 items-stretch rounded-full border border-white/20 bg-white/10 p-1" role="group" aria-label="BG / EN">
           <span aria-hidden className={`pointer-events-none absolute bottom-1 left-1 top-1 w-[calc(50%-4px)] rounded-full bg-white/20 transition-transform ${locale === "en" ? "translate-x-[calc(100%+8px)]" : "translate-x-0"}`} />
@@ -81,9 +82,10 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
     </div>
     <div className="border-t border-white/10 bg-brand-dark/20 px-4 py-1.5"><div className="mx-auto flex max-w-6xl justify-center md:justify-end"><RadioEnergyPlayer /></div></div>
     <div className={`grid md:hidden ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"} transition-[grid-template-rows] duration-300`} aria-hidden={!open}><div className="min-h-0 overflow-hidden"><nav id="mobile-nav" inert={!open ? true : undefined} className="border-t border-brand/20 bg-brand px-4 pb-4 pt-2"><div className="mx-auto flex max-w-6xl flex-col gap-1">
-      {locale === "bg" ? <><MobileLink href="/bg" label="Начало" close={() => setOpen(false)} /><p className="px-3 pb-1 pt-3 text-xs font-bold uppercase tracking-widest text-white/60">Озеленяване</p>{landscapingLinks.map(([href, label]) => <MobileLink key={href} href={`/bg${href}`} label={label} close={() => setOpen(false)} />)}{bgPrimaryLinks.slice(1).map(([href, label]) => <MobileLink key={href} href={`/bg${href}`} label={label} close={() => setOpen(false)} />)}<MobileLink href="/bg/contact" label="ПОЛУЧИ ОФЕРТА" close={() => setOpen(false)} /></> : navKeys.map(({ href, key }) => <MobileLink key={key} href={`/${locale}${href}`} label={nav[key]} close={() => setOpen(false)} />)}
+      {locale === "bg" ? <><MobileLink href="/bg" label="Начало" close={() => setOpen(false)} /><p className="px-3 pb-1 pt-3 text-xs font-bold uppercase tracking-widest text-white/60">Озеленяване</p>{landscapingLinks.map(([href, label]) => <MobileLink key={href} href={`/bg${href}`} label={label} close={() => setOpen(false)} />)}{bgPrimaryLinks.slice(1).map(([href, label]) => <MobileLink key={href} href={`/bg${href}`} label={label} close={() => setOpen(false)} />)}</> : navKeys.map(({ href, key }) => <MobileLink key={key} href={`/${locale}${href}`} label={nav[key]} close={() => setOpen(false)} />)}
     </div></nav></div></div>
-  </header>;
+  </header>
+  </>;
 }
 
 function DesktopLink({ href, label, active }: { href: string; label: string; active: boolean }) { return <Link href={href} className={`rounded-full px-3 py-2 text-sm font-medium transition-all ${active ? "bg-white/20 text-white" : "text-white/80 hover:bg-white/10 hover:text-white"}`}>{label}</Link>; }
