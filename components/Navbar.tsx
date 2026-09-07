@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RadioEnergyPlayer } from "@/components/RadioEnergyPlayer";
 import type { Locale, Messages } from "@/lib/i18n";
 
@@ -25,6 +25,22 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const servicesMenuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function closeOnOutsideClick(event: MouseEvent) {
+      if (!servicesMenuRef.current?.contains(event.target as Node)) setServicesOpen(false);
+    }
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") setServicesOpen(false);
+    }
+    document.addEventListener("mousedown", closeOnOutsideClick);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("mousedown", closeOnOutsideClick);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, []);
   const rest = pathname.replace(new RegExp(`^/${locale}`), "") || "/";
   const pathSuffix = rest === "/" ? "" : rest;
   const bgHref = `/bg${pathSuffix}`;
@@ -41,7 +57,7 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
       <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
         {locale === "bg" ? <>
           {bgPrimaryLinks.slice(0, 1).map(([href, label]) => <DesktopLink key={href} href={`/bg${href}`} label={label} active={pathname === "/bg"} />)}
-          <div className="relative" onMouseEnter={() => setServicesOpen(true)} onMouseLeave={() => setServicesOpen(false)}>
+          <div ref={servicesMenuRef} className="relative">
             <button type="button" aria-expanded={servicesOpen} aria-haspopup="menu" onClick={() => setServicesOpen((value) => !value)} className={`inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium transition-all ${servicesActive ? "bg-white/20 text-white" : "text-white/80 hover:bg-white/10 hover:text-white"}`}>
               Озеленяване <Chevron open={servicesOpen} />
             </button>
