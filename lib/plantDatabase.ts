@@ -1,3 +1,5 @@
+import { gardenFaqs } from "./gardenFaqs";
+
 type Plant = {
   name: string;
   category: string;
@@ -75,6 +77,7 @@ export const plantDatabase: { plants: Plant[]; lawnCare: LawnTopic[]; irrigation
     { name: "Тиквичка (Cucurbita pepo)", category: "зеленчук", aliases: ["тиквичка", "тиквички"], description: "Бързорастящ зеленчук с големи листа и висока нужда от вода.", care: ["Светлина: Пълно слънце", "Поливане: Дълбоко в основата; избягвайте мокрене на листата", "Почва: Богата на компост", "Поддръжка: Берете редовно; следете за брашнеста мана"] },
   ],
   faqs: [
+    ...gardenFaqs,
     {
       question: "Как да се грижа за орхидея?",
       keywords: ["орхидея", "грижа", "отглеждане"],
@@ -229,6 +232,11 @@ export function searchPlantDatabase(query: string): PlantSearchResult {
 
   if (/^(благодаря|мерси|thanks|thank you)\W*$/.test(normalizedQuery)) {
     return { response: "С удоволствие! Напишете името на растението и какво искате да знаете — поливане, подрязване, торене или проблем.", needsContact: false };
+  }
+
+  const exactFaq = gardenFaqs.find((faq) => faq.question.toLocaleLowerCase("bg-BG") === normalizedQuery);
+  if (exactFaq) {
+    return { response: exactFaq.answer, needsContact: false };
   }
 
   const queryTokens = tokens(query);
