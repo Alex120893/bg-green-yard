@@ -19,7 +19,7 @@ const landscapingLinks = [
   ["/proekti", "Проекти"],
 ] as const;
 
-const bgPrimaryLinks = [["", "Начало"], ["/about", "За нас"], ["/blog", "Блог"], ["/contact", "Контакти"]] as const;
+const bgPrimaryLinks = [["", "Начало"], ["/about", "За нас"], ["/blog", "Блог"], ["/inquiries", "Въпроси"], ["/contact", "Контакти"]] as const;
 const navKeys = [{ href: "", key: "home" as const }, { href: "/about", key: "about" as const }, { href: "/services", key: "services" as const }, { href: "/gallery", key: "gallery" as const }, { href: "/contact", key: "contact" as const }];
 
 export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }) {

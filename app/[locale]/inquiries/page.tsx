@@ -16,12 +16,13 @@ export async function generateMetadata({
   const isBulgarian = !isLocale(locale) || locale === "bg";
 
   return {
-    title: isBulgarian ? "Запитвания от чата" : "Chat inquiries",
+    title: isBulgarian
+      ? "Въпроси за градини и растения | BG Green Yard"
+      : "Garden and plant questions | BG Green Yard",
     description: isBulgarian
-      ? "Въпроси и отговори от помощника на BG Green Yard."
-      : "Questions and answers from the BG Green Yard assistant.",
+      ? "Практични въпроси и отговори за градини, растения, тревни площи и поливни системи от BG Green Yard."
+      : "Practical questions and answers about gardens, plants, lawns, and irrigation systems from BG Green Yard.",
     alternates: { canonical: `${PRODUCTION_SITE_ORIGIN}/${locale}/inquiries` },
-    robots: { index: false, follow: false },
   };
 }
 
@@ -40,9 +41,9 @@ export default async function InquiriesPage({
 
   const copy = isBulgarian
     ? {
-        eyebrow: "Помощник на BG Green Yard",
-        title: "Запитвания от чата",
-        subtitle: "Вижте въпросите на посетителите и отговорите на нашия помощник.",
+        eyebrow: "Съвети от BG Green Yard",
+        title: "Въпроси за градини и растения",
+        subtitle: "Практични въпроси и отговори за растения, тревни площи и поливни системи."
         question: "Въпрос",
         answer: "Отговор",
         empty: "Все още няма публикувани запитвания.",
