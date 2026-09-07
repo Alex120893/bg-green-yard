@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/bg/ozelenyavane-na-dvorove-sofia",
     "/bg/trevni-ploshti-sofia",
     "/bg/izgrazhdane-na-gradini-sofia",
+    "/bg/snegopochistvane-sofia",
     "/bg/proekti",
     "/bg/proekti/aura-1",
     "/bg/proekti/prima",
