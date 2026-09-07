@@ -1,0 +1,10 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { projects } from "@/lib/seo-pages";
+export function generateStaticParams() { return projects.map(({ slug }) => ({ locale: "bg", slug })); }
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> { const { locale, slug } = await params;
+  if (locale !== "bg") notFound(); const project = projects.find((item) => item.slug === slug); if (!project) return {}; return { title: `Озеленяване и поддръжка на ${project.name} – София`, description: project.description, alternates: { canonical: `https://bg-greenyard.com/bg/proekti/${slug}` } }; }
+export default async function ProjectPage({ params }: { params: Promise<{ locale: string; slug: string }> }) { const { locale, slug } = await params;
+  if (locale !== "bg") notFound(); const project = projects.find((item) => item.slug === slug); if (!project) notFound(); return <main><section className="bg-white py-16 md:py-24"><div className="mx-auto max-w-4xl px-4 md:px-6"><Link href="/bg/proekti" className="text-sm font-semibold text-brand">← Всички проекти</Link><h1 className="mt-5 text-4xl font-bold tracking-tight md:text-5xl">Озеленяване и поддръжка на обект {project.name} – София</h1><p className="mt-5 text-lg text-muted">{project.description} Работата включва последователна грижа за зелените площи според сезона и нуждите на обекта.</p><div className="relative mt-10 aspect-video overflow-hidden rounded-3xl bg-surface"><Image src={project.image} alt={`${project.name} — озеленяване и поддръжка`} fill className="object-contain p-8" sizes="(min-width: 768px) 768px, 100vw" /></div><h2 className="mt-10 text-2xl font-bold">Извършени дейности</h2><ul className="mt-5 grid gap-3 sm:grid-cols-2">{project.work.map((item) => <li key={item} className="rounded-xl bg-surface px-4 py-3 text-muted">{item}</li>)}</ul></div></section></main>; }

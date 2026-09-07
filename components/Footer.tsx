@@ -58,15 +58,17 @@ export function Footer({
               {footer.menuHeading}
             </p>
             <ul className="mt-4 space-y-3">
+              {locale === "bg" && [
+                ["/ozelenyavane-sofia", "Озеленяване"],
+                ["/poddruzhka-na-gradini-sofia", "Поддръжка на градини"],
+                ["/polivni-sistemi-sofia", "Поливни системи"],
+                ["/proekti", "Проекти"],
+                ["/blog", "Блог"],
+              ].map(([href, label]) => (
+                <li key={href}><Link href={`/bg${href}`} className="text-sm font-medium text-foreground/80 underline-offset-4 transition-colors hover:text-brand-dark hover:underline">{label}</Link></li>
+              ))}
               {links.map(({ href, key }) => (
-                <li key={key}>
-                  <Link
-                    href={`/${locale}${href}`}
-                    className="text-sm font-medium text-foreground/80 underline-offset-4 transition-colors hover:text-brand-dark hover:underline"
-                  >
-                    {nav[key]}
-                  </Link>
-                </li>
+                <li key={key}><Link href={`/${locale}${href}`} className="text-sm font-medium text-foreground/80 underline-offset-4 transition-colors hover:text-brand-dark hover:underline">{nav[key]}</Link></li>
               ))}
             </ul>
           </nav>

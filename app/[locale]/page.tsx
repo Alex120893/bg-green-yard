@@ -225,7 +225,7 @@ export default async function HomePage({
                 </p>
               </div>
               <Link
-                href={`/${locale}/gallery`}
+                href={locale === "bg" ? "/bg/proekti" : "/en/gallery"}
                 className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand hover:text-brand-dark underline-offset-4 transition hover:underline md:mt-0"
               >
                 {locale === "en" ? "View all" : "Виж всички"}
