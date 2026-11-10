@@ -168,3 +168,68 @@ a, button, input, textarea, select { -webkit-tap-highlight-color: transparent; }
   .reveal.is-visible { animation: none; }
   *, *::before, *::after { transition-duration: 0s !important; }
 }
+
+/* Botanical decoration belongs to existing sections, not additional content blocks. */
+.home-page .garden-block {
+  position: relative;
+  isolation: isolate;
+  border-block-start: 1px solid rgb(61 91 42 / 8%);
+}
+.home-page .garden-block-cream {
+  background: radial-gradient(ellipse at 90% 0%, #e6ecd74d, transparent 58%), #faf6ec;
+}
+.home-page .garden-block-sage {
+  background: linear-gradient(125deg, #eaf0df, #f1f2e5 55%, #e5edda);
+}
+.home-page .garden-block-mist {
+  background: linear-gradient(120deg, #f2f4e9, #e8eee2);
+}
+.home-page .garden-block-forest {
+  background: radial-gradient(ellipse at 15% 100%, #42652d80, transparent 60%), linear-gradient(115deg, #163e25, #244e30);
+}
+.home-page .garden-block::before,
+.home-page .garden-block::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  user-select: none;
+  width: clamp(105px, 15vw, 220px);
+  height: clamp(125px, 18vw, 260px);
+  background: url('/garden-leaves.svg') center / contain no-repeat;
+  opacity: .14;
+}
+.home-page .garden-block::before { top: 0; left: 0; transform: rotate(15deg); transform-origin: center; }
+.home-page .garden-block::after { bottom: 0; right: 0; transform: rotate(195deg); opacity: .1; }
+.home-page .garden-block-forest::before { opacity: .33; }
+.home-page .garden-block-forest::after { opacity: .22; }
+.home-page .garden-block article {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid #688b3c26;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #fffdf4, #edf1e1);
+  box-shadow: 0 8px 25px #193d2010;
+}
+.home-page .garden-block article::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  bottom: 0;
+  right: 0;
+  width: 92px;
+  height: 106px;
+  background: url('/garden-leaves.svg') center / contain no-repeat;
+  transform: rotate(180deg);
+  opacity: .1;
+}
+.home-page .garden-block h2 { text-wrap: balance; }
+.home-page .garden-block-forest h2 { color: #faf8e9; }
+@media (max-width: 767px) {
+  .home-page .garden-block::before,
+  .home-page .garden-block::after { width: 94px; height: 112px; opacity: .11; }
+  .home-page .garden-block-forest::before,
+  .home-page .garden-block-forest::after { opacity: .23; }
+  .home-page .garden-block article::after { width: 70px; height: 82px; opacity: .08; }
+}
