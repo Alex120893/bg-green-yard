@@ -163,18 +163,8 @@ export default async function HomePage({
         ]}
       />
 
-      {locale === "bg" && (
-        <section className="bg-white py-7">
-          <div className="mx-auto max-w-6xl px-4 text-center md:px-6">
-            <Link href="/bg/ozelenyavane-sofia" className="text-sm font-semibold text-brand underline-offset-4 transition hover:text-brand-dark hover:underline">
-              Озеленяване в София — изграждане и поддръжка на градини
-            </Link>
-          </div>
-        </section>
-      )}
-
       {/* ── Features / Why Us ── */}
-      <section className="bg-surface py-20 md:py-28">
+      <section className="garden-block garden-block-sage bg-surface py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal>
             <div className="text-center">
@@ -212,7 +202,7 @@ export default async function HomePage({
 
 
       {/* ── Gallery Preview ── */}
-      <section className="bg-background py-20 md:py-28">
+      <section className="garden-block garden-block-cream bg-background py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal>
             <div className="flex flex-col items-center text-center md:flex-row md:items-end md:justify-between md:text-left">
@@ -257,7 +247,7 @@ export default async function HomePage({
       </section>
 
       {/* ── Our Clients and Projects ── */}
-      <section className="bg-white py-16 md:py-24">
+      <section className="garden-block garden-block-mist bg-white py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal>
             <div className="text-center mb-12">
@@ -297,7 +287,7 @@ export default async function HomePage({
       </section>
 
       {locale === "bg" && (
-        <section className="bg-white py-20 md:py-28">
+        <section className="garden-block garden-block-cream bg-white py-20 md:py-28">
           <div className="mx-auto max-w-6xl px-4 md:px-6">
             <Reveal>
               <div className="max-w-3xl">
@@ -323,7 +313,7 @@ export default async function HomePage({
       )}
 
       {/* ── Testimonials ── */}
-      <section className="bg-surface py-20 md:py-28">
+      <section className="garden-block garden-block-sage bg-surface py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal>
             <div className="text-center">
@@ -369,7 +359,7 @@ export default async function HomePage({
 
 
       {/* ── CTA ── */}
-      <section className="relative overflow-hidden bg-brand py-20 md:py-28">
+      <section className="garden-block garden-block-forest relative overflow-hidden bg-brand py-20 md:py-28">
         <div
           className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-white/10 blur-3xl"
           aria-hidden
@@ -405,7 +395,7 @@ export default async function HomePage({
       </section>
 
       {locale === "bg" && (
-        <section className="bg-white py-20 md:py-28">
+        <section className="garden-block garden-block-cream bg-white py-20 md:py-28">
           <div className="mx-auto max-w-6xl px-4 md:px-6">
             <Reveal>
               <div className="max-w-3xl">

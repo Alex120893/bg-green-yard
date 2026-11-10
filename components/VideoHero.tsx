@@ -12,7 +12,7 @@ export function VideoHero({ locale, eyebrow, title, lead, ctaPrimary, ctaSeconda
   stats: { value: string; label: string }[];
 }) {
   return (
-    <section className="garden-story" aria-labelledby="home-title">
+    <section className="garden-block garden-block-cream garden-story" aria-labelledby="home-title">
       <div className="garden-story-inner">
         <div className="garden-story-copy">
           <p className="garden-eyebrow">{eyebrow}</p>
