@@ -79,7 +79,7 @@ export default async function AboutPage({
   return (
     <>
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden bg-white py-20 md:py-28">
+      <section className="garden-block garden-block-cream relative overflow-hidden bg-white py-20 md:py-28">
         <div className="pointer-events-none absolute -top-32 -right-32 h-80 w-80 rounded-full bg-brand/5 blur-3xl" aria-hidden />
         <div className="mx-auto grid max-w-6xl gap-12 px-4 md:grid-cols-2 md:items-center md:gap-16 md:px-6">
           <Reveal>
@@ -111,7 +111,7 @@ export default async function AboutPage({
       </section>
 
       {/* ── Stats + Mission ── */}
-      <section className="bg-surface py-20 md:py-28">
+      <section className="garden-block garden-block-sage bg-surface py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <div className="grid gap-12 md:grid-cols-2">
             <Reveal>
@@ -145,7 +145,7 @@ export default async function AboutPage({
       </section>
 
       {/* ── Why Us ── */}
-      <section className="bg-white py-20 md:py-28">
+      <section className="garden-block garden-block-cream bg-white py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal>
             <div className="text-center">
@@ -175,7 +175,7 @@ export default async function AboutPage({
       </section>
 
       {/* ── CTA ── */}
-      <section className="relative overflow-hidden bg-brand py-20 md:py-24">
+      <section className="garden-block garden-block-forest relative overflow-hidden bg-brand py-20 md:py-24">
         <div className="pointer-events-none absolute -top-20 -right-20 h-56 w-56 rounded-full bg-white/10 blur-3xl" aria-hidden />
         <div className="mx-auto max-w-2xl px-4 text-center md:px-6">
           <Reveal>

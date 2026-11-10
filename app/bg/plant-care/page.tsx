@@ -201,9 +201,9 @@ export default function PlantAndLawnCare() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="garden-care-page min-h-screen bg-white">
       {/* Top Navigation Bar */}
-      <nav className="sticky top-0 z-50 bg-gradient-to-r from-green-600 to-green-700 shadow-lg">
+      <nav className="sticky top-0 z-50 bg-gradient-to-r from-brand to-brand-dark shadow-lg">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link href="/bg" className="flex items-center gap-2 text-white hover:opacity-90 transition-opacity">
             <span className="text-2xl">🌿</span>
@@ -228,7 +228,7 @@ export default function PlantAndLawnCare() {
       </nav>
 
       {/* Header */}
-      <div className="bg-gradient-to-r from-green-600 to-green-700 text-white">
+      <div className="bg-gradient-to-r from-brand to-brand-dark text-white">
         <div className="max-w-6xl mx-auto px-4 py-16">
           <h1 className="text-4xl font-bold mb-4">Грижа за градина и тревата</h1>
           <p className="text-xl text-green-50">
@@ -255,7 +255,7 @@ export default function PlantAndLawnCare() {
         {activeTab === "plants" && (
           <div>
             {/* General Care Section */}
-            <section className="mb-16">
+            <section className="garden-block garden-block-cream mb-16">
               <h2 className="text-3xl font-bold text-gray-800 mb-8">Основни правила за грижа</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {generalCare.map((section, index) => (
@@ -280,7 +280,7 @@ export default function PlantAndLawnCare() {
             </section>
 
             {/* Trees Section */}
-            <section className="mb-16">
+            <section className="garden-block garden-block-sage mb-16">
               <h2 className="text-3xl font-bold text-gray-800 mb-8 flex items-center">
                 <span className="text-4xl mr-3">🌳</span> Дървета
               </h2>
@@ -292,7 +292,7 @@ export default function PlantAndLawnCare() {
             </section>
 
             {/* Shrubs Section */}
-            <section className="mb-16">
+            <section className="garden-block garden-block-cream mb-16">
               <h2 className="text-3xl font-bold text-gray-800 mb-8 flex items-center">
                 <span className="text-4xl mr-3">🌿</span> Кустарници
               </h2>
@@ -304,7 +304,7 @@ export default function PlantAndLawnCare() {
             </section>
 
             {/* Flowers Section */}
-            <section className="mb-16">
+            <section className="garden-block garden-block-sage mb-16">
               <h2 className="text-3xl font-bold text-gray-800 mb-8 flex items-center">
                 <span className="text-4xl mr-3">🌸</span> Цветя
               </h2>
@@ -316,7 +316,7 @@ export default function PlantAndLawnCare() {
             </section>
 
             {/* Vegetables Section */}
-            <section className="mb-16">
+            <section className="garden-block garden-block-cream mb-16">
               <h2 className="text-3xl font-bold text-gray-800 mb-8 flex items-center">
                 <span className="text-4xl mr-3">🥬</span> Зеленчуци
               </h2>
@@ -333,7 +333,7 @@ export default function PlantAndLawnCare() {
         {activeTab === "lawn" && (
           <div>
             {/* Main Care Guide */}
-            <section className="mb-16">
+            <section className="garden-block garden-block-sage mb-16">
               <h2 className="text-3xl font-bold text-gray-800 mb-8">Основни правила за грижа на тревата</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {lawnCareGuides.map((guide, index) => (
@@ -356,7 +356,7 @@ export default function PlantAndLawnCare() {
         )}
 
         {/* CTA Section */}
-        <section className="bg-gradient-to-r from-green-600 to-green-700 rounded-lg shadow-lg p-8 text-white text-center">
+        <section className="garden-block garden-block-forest bg-gradient-to-r from-brand to-brand-dark rounded-lg shadow-lg p-8 text-white text-center">
           <h2 className="text-2xl font-bold mb-4">Имате въпроси или нуждаете се от професионална помощ?</h2>
           <p className="text-green-50 mb-6">Свържете се с нас за персонални съветы и консултации за вашия град или тревата</p>
           <Link

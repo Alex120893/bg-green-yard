@@ -184,9 +184,9 @@ export default function LawnCare() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-white">
+    <div className="garden-care-page min-h-screen bg-gradient-to-b from-green-50 to-white">
       {/* Header */}
-      <div className="bg-gradient-to-r from-green-600 to-green-700 text-white py-12">
+      <div className="bg-gradient-to-r from-brand to-brand-dark text-white py-12">
         <div className="max-w-6xl mx-auto px-4">
           <h1 className="text-4xl font-bold mb-4">Грижа за тревната площ</h1>
           <p className="text-xl text-green-50">Всичко което трябва да знаете за поддържане на красив и здрав газон в България</p>
@@ -196,7 +196,7 @@ export default function LawnCare() {
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 py-12">
         {/* Main Care Guide */}
-        <section className="mb-16">
+        <section className="garden-block garden-block-cream mb-16">
           <h2 className="text-3xl font-bold text-gray-800 mb-8">Основни правила за грижа на газона</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {lawnCareGuides.map((guide, index) => (
@@ -217,7 +217,7 @@ export default function LawnCare() {
         </section>
 
         {/* Seasonal Schedule */}
-        <section className="mb-16">
+        <section className="garden-block garden-block-sage mb-16">
           <h2 className="text-3xl font-bold text-gray-800 mb-8">Сезонна схема за грижа</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {seasonalSchedule.map((schedule, index) => (
@@ -237,7 +237,7 @@ export default function LawnCare() {
         </section>
 
         {/* Common Problems */}
-        <section className="mb-16">
+        <section className="garden-block garden-block-cream mb-16">
           <h2 className="text-3xl font-bold text-gray-800 mb-8">Често срещани проблеми и решения</h2>
           <div className="space-y-6">
             {commonProblems.map((item, index) => (
@@ -260,7 +260,7 @@ export default function LawnCare() {
         </section>
 
         {/* Tips Section */}
-        <section className="mb-16 bg-gradient-to-r from-green-600 to-green-700 rounded-lg shadow-lg p-8 text-white">
+        <section className="garden-block garden-block-forest mb-16 bg-gradient-to-r from-brand to-brand-dark rounded-lg shadow-lg p-8 text-white">
           <h2 className="text-2xl font-bold mb-6">💡 Полезни съвети</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
@@ -309,7 +309,7 @@ export default function LawnCare() {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg shadow-lg p-8 text-white text-center">
+        <section className="garden-block garden-block-forest bg-gradient-to-r from-brand to-brand-dark rounded-lg shadow-lg p-8 text-white text-center">
           <h2 className="text-2xl font-bold mb-4">Нуждаете се от професионална помощ?</h2>
           <p className="text-blue-50 mb-6">Нашият екип е готов да помогне за красивия и здравия газон на вашия двор</p>
           <Link

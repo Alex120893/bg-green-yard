@@ -461,9 +461,9 @@ export default function PlantAndLawnCareEn() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-white">
+    <div className="garden-care-page min-h-screen bg-gradient-to-b from-green-50 to-white">
       {/* Header with Tabs */}
-      <div className="bg-gradient-to-r from-green-600 to-green-700 text-white">
+      <div className="bg-gradient-to-r from-brand to-brand-dark text-white">
         <div className="max-w-6xl mx-auto px-4 py-12">
           <h1 className="text-4xl font-bold mb-8">Garden and Lawn Care</h1>
 
@@ -505,7 +505,7 @@ export default function PlantAndLawnCareEn() {
         {activeTab === "plants" && (
           <div>
             {/* General Care Section */}
-            <section className="mb-16">
+            <section className="garden-block garden-block-cream mb-16">
               <h2 className="text-3xl font-bold text-gray-800 mb-8">Basic Care Rules</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {generalCare.map((section, index) => (
@@ -530,7 +530,7 @@ export default function PlantAndLawnCareEn() {
             </section>
 
             {/* Trees Section */}
-            <section className="mb-16">
+            <section className="garden-block garden-block-sage mb-16">
               <h2 className="text-3xl font-bold text-gray-800 mb-8 flex items-center">
                 <span className="text-4xl mr-3">🌳</span> Trees
               </h2>
@@ -542,7 +542,7 @@ export default function PlantAndLawnCareEn() {
             </section>
 
             {/* Shrubs Section */}
-            <section className="mb-16">
+            <section className="garden-block garden-block-cream mb-16">
               <h2 className="text-3xl font-bold text-gray-800 mb-8 flex items-center">
                 <span className="text-4xl mr-3">🌿</span> Shrubs
               </h2>
@@ -554,7 +554,7 @@ export default function PlantAndLawnCareEn() {
             </section>
 
             {/* Flowers Section */}
-            <section className="mb-16">
+            <section className="garden-block garden-block-sage mb-16">
               <h2 className="text-3xl font-bold text-gray-800 mb-8 flex items-center">
                 <span className="text-4xl mr-3">🌸</span> Flowers
               </h2>
@@ -566,7 +566,7 @@ export default function PlantAndLawnCareEn() {
             </section>
 
             {/* Vegetables Section */}
-            <section className="mb-16">
+            <section className="garden-block garden-block-cream mb-16">
               <h2 className="text-3xl font-bold text-gray-800 mb-8 flex items-center">
                 <span className="text-4xl mr-3">🥬</span> Vegetables
               </h2>
@@ -583,7 +583,7 @@ export default function PlantAndLawnCareEn() {
         {activeTab === "lawn" && (
           <div>
             {/* Main Care Guide */}
-            <section className="mb-16">
+            <section className="garden-block garden-block-sage mb-16">
               <h2 className="text-3xl font-bold text-gray-800 mb-8">Basic Lawn Care Rules</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {lawnCareGuides.map((guide, index) => (
@@ -606,7 +606,7 @@ export default function PlantAndLawnCareEn() {
         )}
 
         {/* CTA Section */}
-        <section className="bg-gradient-to-r from-green-600 to-green-700 rounded-lg shadow-lg p-8 text-white text-center">
+        <section className="garden-block garden-block-forest bg-gradient-to-r from-brand to-brand-dark rounded-lg shadow-lg p-8 text-white text-center">
           <h2 className="text-2xl font-bold mb-4">Have questions or need professional help?</h2>
           <p className="text-green-50 mb-6">
             Contact us for personalized advice and consultation for your garden or lawn.
