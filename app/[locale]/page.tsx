@@ -148,8 +148,8 @@ export default async function HomePage({
   ];
 
   return (
-    <>
-      {/* ── Hero ── */}
+    <div className="home-page">
+      {/* Original hero: existing copy, video, actions and statistics. */}
       <VideoHero
         locale={locale}
         eyebrow={t.home.heroEyebrow}
@@ -434,6 +434,6 @@ export default async function HomePage({
           </div>
         </section>
       )}
-    </>
+    </div>
   );
 }
