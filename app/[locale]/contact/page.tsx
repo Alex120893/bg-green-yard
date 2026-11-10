@@ -37,7 +37,7 @@ export default async function ContactPage({
   return (
     <>
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden bg-white py-20 md:py-28">
+      <section className="garden-block garden-block-cream relative overflow-hidden bg-white py-20 md:py-28">
         <div className="pointer-events-none absolute -top-32 -right-32 h-80 w-80 rounded-full bg-brand/5 blur-3xl" aria-hidden />
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal>
@@ -76,7 +76,7 @@ export default async function ContactPage({
       </section>
 
       {/* ── Map ── */}
-      <section className="bg-surface py-16 md:py-20">
+      <section className="garden-block garden-block-sage bg-surface py-16 md:py-20">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal>
             <h2 className="mb-6 text-2xl font-bold text-foreground">{t.contact.mapTitle}</h2>

@@ -92,7 +92,7 @@ export default async function LandscapingSofiaPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      <section className="relative overflow-hidden bg-white py-20 md:py-28">
+      <section className="garden-block garden-block-cream relative overflow-hidden bg-white py-20 md:py-28">
         <div className="pointer-events-none absolute -right-32 -top-32 h-80 w-80 rounded-full bg-brand/5 blur-3xl" aria-hidden />
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal>
@@ -112,7 +112,7 @@ export default async function LandscapingSofiaPage({
         </div>
       </section>
 
-      <section className="bg-surface py-20 md:py-28">
+      <section className="garden-block garden-block-sage bg-surface py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal><div className="max-w-2xl"><h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">Услуги по озеленяване</h2><p className="mt-4 text-lg text-muted">Изпълняваме цялостни решения за създаване и поддържане на зелени площи.</p></div></Reveal>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -121,7 +121,7 @@ export default async function LandscapingSofiaPage({
         </div>
       </section>
 
-      <section className="bg-white py-20 md:py-28">
+      <section className="garden-block garden-block-cream bg-white py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal><div className="text-center"><h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">Реални обекти</h2><p className="mx-auto mt-3 max-w-2xl text-lg text-muted">Част от обектите, за които полагаме грижа в София.</p></div></Reveal>
           <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3">
@@ -130,7 +130,7 @@ export default async function LandscapingSofiaPage({
         </div>
       </section>
 
-      <section className="bg-white py-20 md:py-28">
+      <section className="garden-block garden-block-cream bg-white py-20 md:py-28">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 md:grid-cols-2 md:px-6">
           <Reveal>
             <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-surface shadow-lg">
@@ -149,14 +149,14 @@ export default async function LandscapingSofiaPage({
         </div>
       </section>
 
-      <section className="bg-surface py-20 md:py-28">
+      <section className="garden-block garden-block-sage bg-surface py-20 md:py-28">
         <div className="mx-auto grid max-w-6xl gap-12 px-4 md:grid-cols-2 md:px-6">
           <Reveal><div><h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">Райони, които обслужваме</h2><p className="mt-5 leading-relaxed text-muted">Обслужваме частни, жилищни и бизнес обекти в рамките на София. За оглед и конкретна оферта се свържете с нас.</p></div></Reveal>
           <Reveal delayMs={80}><div><h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">Защо да изберете нас</h2><ul className="mt-5 space-y-3 text-muted"><li>Локален фокус и работа само в София.</li><li>Комплексна грижа — от озеленяване до поливни системи и поддръжка.</li><li>Опит с жилищни комплекси и бизнес обекти.</li></ul></div></Reveal>
         </div>
       </section>
 
-      <section className="bg-brand py-16 text-center text-white md:py-20">
+      <section className="garden-block garden-block-forest bg-brand py-16 text-center text-white md:py-20">
         <div className="mx-auto max-w-3xl px-4 md:px-6"><Reveal><h2 className="text-3xl font-bold md:text-4xl">Нуждаете се от озеленяване в София?</h2><p className="mt-4 text-white/85">Свържете се с BG Green Yard за оглед и оферта.</p><div className="mt-7 flex flex-wrap justify-center gap-3"><Link href="/bg/contact" className="inline-flex h-13 items-center justify-center rounded-full bg-white px-8 text-base font-semibold text-brand-dark transition-colors hover:bg-brand-soft">Поискай оферта</Link><a href={`tel:${phoneTel}`} className="inline-flex h-13 items-center justify-center rounded-full border border-white/30 px-8 text-base font-semibold text-white transition-colors hover:bg-white/10">{phoneDisplay}</a></div></Reveal></div>
       </section>
     </>

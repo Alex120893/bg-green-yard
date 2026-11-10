@@ -41,7 +41,7 @@ export default async function GalleryPage({
   return (
     <>
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden bg-white py-20 md:py-28">
+      <section className="garden-block garden-block-cream relative overflow-hidden bg-white py-20 md:py-28">
         <div className="pointer-events-none absolute -top-32 -right-32 h-80 w-80 rounded-full bg-brand/5 blur-3xl" aria-hidden />
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal>
@@ -56,7 +56,7 @@ export default async function GalleryPage({
       </section>
 
       {/* ── Videos ── */}
-      <section className="bg-surface py-16 md:py-20">
+      <section className="garden-block garden-block-sage bg-surface py-16 md:py-20">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal>
             <p className="mb-6 text-sm font-semibold uppercase tracking-[0.16em] text-muted">
@@ -93,7 +93,7 @@ export default async function GalleryPage({
       </section>
 
       {/* ── Photo Grid ── */}
-      <section className="bg-white py-16 md:py-20">
+      <section className="garden-block garden-block-cream bg-white py-16 md:py-20">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
             {photos.map((photo, i) => (

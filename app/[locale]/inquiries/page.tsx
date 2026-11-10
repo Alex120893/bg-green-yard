@@ -65,7 +65,7 @@ export default async function InquiriesPage({
 
   return (
     <main>
-      <section className="bg-white py-16 md:py-24">
+      <section className="garden-block garden-block-cream bg-white py-16 md:py-24">
         <div className="mx-auto max-w-4xl px-4 md:px-6">
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-brand">{copy.eyebrow}</p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight text-foreground md:text-5xl">{copy.title}</h1>
@@ -73,7 +73,7 @@ export default async function InquiriesPage({
         </div>
       </section>
 
-      <section className="bg-surface py-12 md:py-16">
+      <section className="garden-block garden-block-sage bg-surface py-12 md:py-16">
         <div className="mx-auto max-w-4xl px-4 md:px-6">
           {inquiries.length ? (
             <InquiriesList inquiries={inquiries} copy={copy} />

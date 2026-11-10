@@ -92,7 +92,7 @@ export default async function ServicesPage({
   return (
     <>
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden bg-white py-20 md:py-28">
+      <section className="garden-block garden-block-cream relative overflow-hidden bg-white py-20 md:py-28">
         <div className="pointer-events-none absolute -top-32 -right-32 h-80 w-80 rounded-full bg-brand/5 blur-3xl" aria-hidden />
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <Reveal>
@@ -119,7 +119,7 @@ export default async function ServicesPage({
       </section>
 
       {/* ── Service Cards ── */}
-      <section className="bg-surface py-20 md:py-28">
+      <section className="garden-block garden-block-sage bg-surface py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <div className="grid gap-8 md:grid-cols-3">
             {services.map((s, i) => (

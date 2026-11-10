@@ -170,25 +170,25 @@ a, button, input, textarea, select { -webkit-tap-highlight-color: transparent; }
 }
 
 /* Decorate every other rendered section; undecorated sections and their cards stay leaf-free. */
-.home-page .garden-block {
+.garden-block {
   position: relative;
   isolation: isolate;
   border-block-start: 1px solid rgb(61 91 42 / 8%);
 }
-.home-page .garden-block-cream {
+.garden-block-cream {
   background: radial-gradient(ellipse at 90% 0%, #e6ecd74d, transparent 58%), #faf6ec;
 }
-.home-page .garden-block-sage {
+.garden-block-sage {
   background: linear-gradient(125deg, #eaf0df, #f1f2e5 55%, #e5edda);
 }
-.home-page .garden-block-mist {
+.garden-block-mist {
   background: linear-gradient(120deg, #f2f4e9, #e8eee2);
 }
-.home-page .garden-block-forest {
+.garden-block-forest {
   background: radial-gradient(ellipse at 15% 100%, #42652d80, transparent 60%), linear-gradient(115deg, #163e25, #244e30);
 }
-.home-page > .garden-block:nth-child(odd)::before,
-.home-page > .garden-block:nth-child(odd)::after {
+.garden-block:nth-of-type(odd)::before,
+.garden-block:nth-of-type(odd)::after {
   content: '';
   position: absolute;
   z-index: -1;
@@ -199,11 +199,11 @@ a, button, input, textarea, select { -webkit-tap-highlight-color: transparent; }
   background: url('/garden-leaves.svg') center / contain no-repeat;
   opacity: .36;
 }
-.home-page > .garden-block:nth-child(odd)::before { top: 0; left: 0; transform: rotate(15deg); transform-origin: center; }
-.home-page > .garden-block:nth-child(odd)::after { bottom: 0; right: 0; transform: rotate(195deg); opacity: .28; }
-.home-page > .garden-block-forest:nth-child(odd)::before { opacity: .58; }
-.home-page > .garden-block-forest:nth-child(odd)::after { opacity: .45; }
-.home-page .garden-block article {
+.garden-block:nth-of-type(odd)::before { top: 0; left: 0; transform: rotate(15deg); transform-origin: center; }
+.garden-block:nth-of-type(odd)::after { bottom: 0; right: 0; transform: rotate(195deg); opacity: .28; }
+.garden-block-forest:nth-of-type(odd)::before { opacity: .58; }
+.garden-block-forest:nth-of-type(odd)::after { opacity: .45; }
+.garden-block article[class*="rounded"] {
   position: relative;
   isolation: isolate;
   border: 1px solid #688b3c26;
@@ -211,7 +211,7 @@ a, button, input, textarea, select { -webkit-tap-highlight-color: transparent; }
   background: linear-gradient(135deg, #fffdf4, #edf1e1);
   box-shadow: 0 8px 25px #193d2010;
 }
-.home-page > .garden-block:nth-child(odd) article::after {
+.garden-block:nth-of-type(odd) article[class*="rounded"]::after {
   content: '';
   position: absolute;
   z-index: -1;
@@ -224,12 +224,19 @@ a, button, input, textarea, select { -webkit-tap-highlight-color: transparent; }
   transform: rotate(180deg);
   opacity: .28;
 }
-.home-page .garden-block h2 { text-wrap: balance; }
-.home-page .garden-block-forest h2 { color: #faf8e9; }
+.garden-block h2 { text-wrap: balance; }
+.garden-block-forest h2 { color: #faf8e9; }
 @media (max-width: 767px) {
-  .home-page > .garden-block:nth-child(odd)::before,
-  .home-page > .garden-block:nth-child(odd)::after { width: 94px; height: 112px; opacity: .28; }
-  .home-page > .garden-block-forest:nth-child(odd)::before,
-  .home-page > .garden-block-forest:nth-child(odd)::after { opacity: .48; }
-  .home-page > .garden-block:nth-child(odd) article::after { width: 70px; height: 82px; opacity: .2; }
+  .garden-block:nth-of-type(odd)::before,
+  .garden-block:nth-of-type(odd)::after { width: 94px; height: 112px; opacity: .28; }
+  .garden-block-forest:nth-of-type(odd)::before,
+  .garden-block-forest:nth-of-type(odd)::after { opacity: .48; }
+  .garden-block:nth-of-type(odd) article[class*="rounded"]::after { width: 70px; height: 82px; opacity: .2; }
 }
+
+/* Care guides keep their dedicated navigation, tabs and content. */
+.garden-care-page { background: #faf6ec; }
+.garden-care-page .garden-block { padding: 28px 22px; border-radius: 22px; }
+.garden-care-page .garden-block h2 { color: #163e25; }
+.garden-care-page .garden-block-forest h2 { color: #faf8e9; }
+.garden-care-page .garden-block .bg-white { background: linear-gradient(135deg, #fffdf4, #edf1e1); border: 1px solid #688b3c26; border-radius: 18px; }
