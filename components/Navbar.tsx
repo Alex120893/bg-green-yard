@@ -72,7 +72,7 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
         </> : navKeys.map(({ href, key }) => <DesktopLink key={key} href={`/${locale}${href}`} label={nav[key]} active={href === "" ? pathname === `/${locale}` : pathname === `/${locale}${href}` || pathname.startsWith(`/${locale}${href}/`)} />)}
       </nav>
       <div className="flex shrink-0 items-center gap-2">
-        <a href={`tel:${CONTACT.phoneTel}`} className="garden-button header-call"><span aria-hidden="true">☎</span>{locale === "en" ? "Call now" : "Обади се сега"}</a>
+        <a href={`tel:${CONTACT.phoneTel}`} className="garden-button header-call"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m6.6 2 3.1 5.3-2.2 2.4c1.5 3 3.8 5.3 6.8 6.8l2.4-2.2 5.3 3.1c-1 5.7-5.1 5-9.9 2.3A25.6 25.6 0 0 1 4.3 12C1.6 7.2.9 3.1 6.6 2Z" /></svg>{locale === "en" ? "Call now" : "Обади се сега"}</a>
         <div className="relative flex h-10 w-[4.5rem] shrink-0 items-stretch rounded-full border border-white/20 bg-white/10 p-1" role="group" aria-label="BG / EN">
           <span aria-hidden className={`pointer-events-none absolute bottom-1 left-1 top-1 w-[calc(50%-4px)] rounded-full bg-white/20 transition-transform ${locale === "en" ? "translate-x-[calc(100%+8px)]" : "translate-x-0"}`} />
           <Link href={bgHref} hrefLang="bg" className={`relative z-10 flex flex-1 items-center justify-center rounded-full text-xs font-semibold uppercase tracking-wide ${locale === "bg" ? "text-white" : "text-white/60 hover:text-white"}`}>BG</Link>

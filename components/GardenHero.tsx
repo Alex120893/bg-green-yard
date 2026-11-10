@@ -36,7 +36,7 @@ export function GardenHero({ locale }: { locale: Locale }) {
           <span className="copper-rule" aria-hidden="true" />
           <p>{en ? "Design, landscaping and care for green spaces in Sofia" : "Проектиране, изграждане и поддръжка на зелени пространства в София"}</p>
           <Link className="garden-button" href={`/${locale}/contact`}>
-            {en ? "Request a quote" : "Поискай оферта"}<span aria-hidden="true">⟶</span>
+            {en ? "Request a quote" : "Поискай оферта"}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M3 12h17m-6-6 6 6-6 6" /></svg>
           </Link>
         </div>
         <div className="garden-hero-image">

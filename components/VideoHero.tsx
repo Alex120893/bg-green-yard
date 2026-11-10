@@ -21,7 +21,7 @@ export function VideoHero({ locale, eyebrow, title, lead, ctaPrimary, ctaSeconda
           <p className="garden-story-lead">{lead}</p>
           <div className="garden-story-actions">
             <Link href={`/${locale}/services`} className="garden-button">{ctaPrimary}</Link>
-            <Link href={`/${locale}/contact`} className="garden-text-link">{ctaSecondary} <span aria-hidden="true">⟶</span></Link>
+            <Link href={`/${locale}/contact`} className="garden-text-link">{ctaSecondary}</Link>
           </div>
           <div className="garden-stats">
             {stats.map(stat => <div key={stat.label}><strong>{stat.value}</strong><span>{stat.label}</span></div>)}
