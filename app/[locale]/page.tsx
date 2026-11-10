@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
+import { GardenHero } from "@/components/GardenHero";
 import { VideoHero } from "@/components/VideoHero";
 import type { Locale } from "@/lib/i18n";
 import { getMessages } from "@/lib/i18n";
@@ -148,8 +149,9 @@ export default async function HomePage({
   ];
 
   return (
-    <>
-      {/* ── Hero ── */}
+    <div className="home-page">
+      <GardenHero locale={locale} />
+      {/* Existing video, copy and statistics retained below the new introduction. */}
       <VideoHero
         locale={locale}
         eyebrow={t.home.heroEyebrow}
@@ -434,6 +436,6 @@ export default async function HomePage({
           </div>
         </section>
       )}
-    </>
+    </div>
   );
 }

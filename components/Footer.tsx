@@ -1,4 +1,5 @@
-import Image from "next/image";
+import { BrandLogo } from "@/components/BrandLogo";
+import { RadioEnergyPlayer } from "@/components/RadioEnergyPlayer";
 import Link from "next/link";
 import { SocialContactLinks } from "@/components/SocialContactLinks";
 import type { Locale, Messages } from "@/lib/i18n";
@@ -23,7 +24,7 @@ export function Footer({
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-white">
+    <footer className="garden-footer border-t border-border bg-white">
       <div className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
         <div className="grid gap-10 md:grid-cols-12 md:gap-8">
           {/* Brand */}
@@ -33,20 +34,9 @@ export function Footer({
               className="group flex items-center gap-3"
               aria-label="BG Green Yard — home"
             >
-              <Image
-                src="/logo-removebg-preview.png"
-                alt=""
-                width={52}
-                height={52}
-                className="h-12 w-auto transition-opacity group-hover:opacity-80"
-              />
-              <div>
-                <p className="text-lg font-bold tracking-tight text-foreground">
-                  BG Green Yard
-                </p>
-                <p className="text-xs text-muted">{footer.tagline}</p>
-              </div>
+              <BrandLogo english={locale === "en"} />
             </Link>
+            <p className="mt-4 text-xs text-muted">{footer.tagline}</p>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">
               {footer.locationLine}
             </p>
@@ -89,6 +79,8 @@ export function Footer({
             />
           </div>
         </div>
+
+        <div className="mt-8 rounded-xl bg-brand px-4 py-3"><RadioEnergyPlayer /></div>
 
         {/* Bottom bar */}
         <div className="mt-12 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">

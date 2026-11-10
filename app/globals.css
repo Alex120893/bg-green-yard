@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f3f0;
-  --foreground: #1f2937;
-  --muted: #6b7280;
+  --background: #faf5eb;
+  --foreground: #102f1c;
+  --muted: #585d50;
   --brand: #1a4d2e;
   --brand-dark: #0f3220;
   --brand-soft: rgb(26 77 46 / 0.1);
-  --surface: #efe8e3;
+  --surface: #f0efe1;
   --border: rgb(26 77 46 / 0.08);
   --accent-cream: #fef7f0;
   --accent-sage: #c4d6c8;
@@ -84,4 +84,109 @@ body {
   background: radial-gradient(circle at 20% 80%, rgba(26, 77, 46, 0.03) 0%, transparent 50%),
               radial-gradient(circle at 80% 20%, rgba(26, 77, 46, 0.02) 0%, transparent 50%);
   pointer-events: none;
+}
+
+/* Reference design: forest green, warm ivory, copper and botanical linework. */
+html { background: var(--background); }
+a, button, input, textarea, select { -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 3px solid #93bf43; outline-offset: 4px; }
+.garden-header { background: linear-gradient(110deg, #1b462a, #10351f); color: #fff; }
+.garden-header > div:first-child { min-height: 94px; }
+.brand-logo { display: inline-flex; align-items: center; gap: 12px; text-align: left; }
+.brand-logo > svg { width: 62px; height: 62px; flex: none; }
+.brand-logo-name { display: block; white-space: nowrap; color: #faf8eb; font-size: 23px; font-weight: 800; letter-spacing: -.8px; }
+.brand-logo-name > span { color: #9ac637; }
+.brand-logo-tagline { display: block; margin-top: 5px; font-size: 6.6px; font-weight: 500; letter-spacing: 1px; color: #e8eddf; }
+.garden-header nav[aria-label="Main"] { gap: 0; }
+.garden-header nav[aria-label="Main"] > a,
+.garden-header nav[aria-label="Main"] > div > button { border-radius: 0; padding: 12px 9px; font-size: 12px; background: transparent; position: relative; }
+.garden-header nav[aria-label="Main"] a.text-white::after { content: ''; position: absolute; height: 2px; background: #9ac637; bottom: 3px; left: 9px; right: 9px; }
+.garden-button { display: inline-flex; align-items: center; justify-content: center; gap: 20px; padding: 14px 26px; border: 1px solid #5c8c17; border-radius: 10px; background: linear-gradient(#579514, #2d6907); box-shadow: inset 0 1px 0 #ffffff21, 0 3px 10px #203d0f0b; color: white; font-size: 19px; line-height: 1.2; font-weight: 700; text-decoration: none; transition: transform .2s, filter .2s; }
+.garden-button:hover { filter: brightness(1.1); transform: translateY(-2px); }
+.garden-button > span { font-size: 27px; line-height: .8; font-weight: 400; }
+.header-call { display: none; font-size: 12px; gap: 8px; padding: 11px 14px; border-radius: 7px; white-space: nowrap; }
+.header-call > span { font-size: 16px; }
+.garden-intro { max-width: 1440px; margin: 0 auto; background: #faf6ec; }
+.garden-hero { position: relative; display: grid; grid-template-columns: 44% 56%; min-height: 530px; overflow: hidden; isolation: isolate; }
+.garden-hero-copy { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 52px 0 60px clamp(28px, 4.5vw, 70px); }
+.garden-hero-copy::before { content: ''; position: absolute; z-index: -1; top: -42%; bottom: -10%; left: -45%; right: -10%; border-radius: 0 0 47% 0 / 0 0 75% 0; background: #faf6ec; }
+.garden-hero-copy::after { content: ''; position: absolute; top: 0; left: -15px; width: 135px; height: 100px; background: url('/leaf-mark.svg') no-repeat center / contain; opacity: .13; transform: rotate(100deg); pointer-events: none; }
+.garden-hero h1 { max-width: 480px; margin: 0; font-size: clamp(38px, 4.4vw, 63px); font-weight: 850; line-height: 1.04; letter-spacing: -2px; color: #0c2d17; }
+.copper-rule { display: block; width: 78px; height: 4px; flex: none; border-radius: 2px; background: #b78058; margin: 25px 0 20px; }
+.garden-hero-copy > p { max-width: 410px; font-size: 21px; line-height: 1.45; color: #494d40; margin: 0 0 30px; }
+.garden-hero-image { position: relative; min-width: 0; z-index: -2; }
+.garden-hero-image img { object-fit: cover; object-position: 51% center; }
+.garden-services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; padding: 34px clamp(28px, 4.5vw, 70px) 26px; }
+.garden-service { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; min-width: 0; padding: 13px 12px 20px; border: 1px solid #eeebdc; border-radius: 19px; background: linear-gradient(110deg, #f4f0e4, #efefdf); color: #142b16; transition: background .2s, transform .2s; }
+.garden-service:hover { background: #e8edda; transform: translateY(-3px); }
+.garden-service > svg { width: 91px; height: 73px; color: #4e792f; }
+.garden-service > span { font-size: clamp(19px, 2.1vw, 28px); line-height: 1.3; font-weight: 750; text-align: center; }
+.garden-service .service-arrow { display: none; }
+.garden-season { position: relative; overflow: hidden; padding: 28px 24px 22px; color: #f5f5e7; background: radial-gradient(ellipse at 20% 80%, #355b2f, transparent 65%), linear-gradient(110deg,#173f25,#20492d); text-align: center; }
+.garden-season::before { content: ''; position: absolute; width: 200px; height: 180px; left: -60px; top: -50px; background: url('/leaf-mark.svg') center / contain no-repeat; opacity: .18; transform: rotate(80deg); }
+.garden-season h2 { position: relative; font-size: clamp(22px, 2.65vw, 36px); font-weight: 650; line-height: 1.25; }
+.garden-season .copper-rule { margin: 17px auto 0; width: 90px; }
+.garden-story { background: #faf6ec; padding: 80px 24px; }
+.garden-story-inner { max-width: 1152px; margin: auto; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 64px; }
+.garden-eyebrow { text-transform: uppercase; color: #4d722e; font-size: 11px; font-weight: 700; letter-spacing: 2px; }
+.garden-story h2 { font-size: clamp(28px, 3vw, 42px); line-height: 1.15; letter-spacing: -1px; font-weight: 750; margin-top: 14px; }
+.garden-story-lead { font-size: 17px; line-height: 1.7; color: var(--muted); }
+.garden-story-video { width: 100%; aspect-ratio: 4/5; max-height: 550px; object-fit: cover; border-radius: 20px; background: #163923; }
+.garden-story-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 25px; }
+.garden-story-actions .garden-button { font-size: 15px; padding: 13px 20px; }
+.garden-text-link { color: var(--brand); font-weight: 650; font-size: 14px; }
+.garden-text-link:hover { text-decoration: underline; }
+.garden-stats { display: flex; flex-wrap: wrap; gap: 35px; margin-top: 35px; padding-top: 24px; border-top: 1px solid #dce0cf; }
+.garden-stats strong { display: block; color: var(--brand); font-size: 30px; }
+.garden-stats span { display: block; color: var(--muted); font-size: 12px; margin-top: 3px; }
+.home-page > section.bg-white { background: #faf6ec; }
+.home-page article { border-radius: 18px; box-shadow: 0 3px 14px #16392307; background: #f5f3e8; }
+.home-page .rounded-\[32px\] { border-radius: 18px; }
+.garden-footer { background: #f0efe1; }
+.garden-footer .brand-logo-name { color: var(--brand); }
+.garden-footer .brand-logo-tagline { color: var(--muted); }
+@media (min-width: 1280px) { .header-call { display: inline-flex; } }
+@media (min-width: 1440px) { .garden-hero { min-height: 590px; } }
+@media (max-width: 767px) {
+  .garden-header > div:first-child { min-height: 76px; padding-top: 9px; padding-bottom: 9px; gap: 8px; }
+  .brand-logo { gap: 8px; }
+  .brand-logo > svg { width: 43px; height: 46px; }
+  .brand-logo-name { font-size: 19px; letter-spacing: -.6px; }
+  .brand-logo-tagline { font-size: 5px; letter-spacing: .55px; margin-top: 3px; }
+  .garden-header [aria-label="BG / EN"] { width: 57px; height: 32px; }
+  .garden-header [aria-label="BG / EN"] a { font-size: 9px; }
+  .garden-header button[aria-controls="mobile-nav"] { border: none; width: 30px; }
+  .garden-hero { grid-template-columns: 1fr; min-height: 0; }
+  .garden-hero-copy { padding: 24px 24px 21px; }
+  .garden-hero-copy::before, .garden-hero-copy::after { display: none; }
+  .garden-hero h1 { max-width: 430px; font-size: clamp(34px, 8.5vw, 51px); line-height: 1.04; letter-spacing: -1.3px; }
+  .garden-hero-copy > p { font-size: 17px; line-height: 1.35; margin-bottom: 18px; max-width: 370px; }
+  .copper-rule { width: 63px; height: 3px; margin: 15px 0 13px; }
+  .garden-button { padding: 11px 22px; font-size: 17px; gap: 18px; border-radius: 7px; }
+  .garden-hero-image { height: clamp(195px, 56vw, 360px); }
+  .garden-hero-image img { object-position: center 55%; }
+  .garden-services { grid-template-columns: 1fr; gap: 8px; padding: 18px 18px 20px; }
+  .garden-service { flex-direction: row; justify-content: flex-start; gap: 18px; padding: 6px 18px; min-height: 51px; border-radius: 12px; }
+  .garden-service > svg { width: 48px; height: 38px; flex: none; }
+  .garden-service > span { font-size: 17px; text-align: left; }
+  .garden-service .service-arrow { display: block; margin-left: auto; font-size: 29px; font-weight: 300; color: #557643; }
+  .garden-season { padding: 19px 28px 18px; }
+  .garden-season h2 { max-width: 350px; margin: auto; font-size: 23px; }
+  .garden-season .copper-rule { margin-top: 15px; width: 70px; }
+  .garden-story { padding: 48px 22px; }
+  .garden-story-inner { grid-template-columns: 1fr; gap: 30px; }
+  .garden-story-video { aspect-ratio: 4/3; }
+  .garden-footer .brand-logo-tagline { font-size: 5.5px; }
+}
+@media (max-width: 359px) {
+  .brand-logo-name { font-size: 16px; }
+  .brand-logo-tagline { font-size: 4.2px; }
+  .brand-logo > svg { width: 34px; }
+  .garden-hero-copy { padding-left: 19px; padding-right: 19px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; }
+  .reveal.is-visible { animation: none; }
+  *, *::before, *::after { transition-duration: 0s !important; }
 }
