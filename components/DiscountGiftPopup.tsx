@@ -3,11 +3,36 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+const SEEN_KEY = "bg-green-yard:discount-gift-seen";
+let shownThisSession = false;
+
+function hasSeenOffer() {
+  if (shownThisSession) return true;
+  try {
+    return window.localStorage.getItem(SEEN_KEY) === "true";
+  } catch {
+    // Storage can be unavailable when browser privacy settings block it.
+    return false;
+  }
+}
+
 export function DiscountGiftPopup() {
   const [opened, setOpened] = useState(false);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setOpened(true), 8000);
+    if (hasSeenOffer()) return;
+
+    const timer = window.setTimeout(() => {
+      // Another tab may have shown the offer during the delay.
+      if (hasSeenOffer()) return;
+      shownThisSession = true;
+      try {
+        window.localStorage.setItem(SEEN_KEY, "true");
+      } catch {
+        // Still avoid repeat displays during client-side navigation.
+      }
+      setOpened(true);
+    }, 8000);
     return () => window.clearTimeout(timer);
   }, []);
 
