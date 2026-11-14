@@ -31,6 +31,27 @@ function FacebookIcon({ className }: { className?: string }) {
   );
 }
 
+function TikTokIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 1 1-2-2.75V9.4a6.33 6.33 0 1 0 5.45 6.27V8.68a8.24 8.24 0 0 0 4.82 1.55V6.8a4.85 4.85 0 0 1-1.05-.11Z" />
+    </svg>
+  );
+}
+
+function YouTubeIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+      <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.8 12l-6.2 3.6Z" />
+    </svg>
+  );
+}
+
+const additionalSocialLinks = [
+  { href: CONTACT.tiktok, label: "TikTok — BG Green Yard", Icon: TikTokIcon },
+  { href: CONTACT.youtube, label: "YouTube — BG Green Yard", Icon: YouTubeIcon },
+];
+
 function MailIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -86,12 +107,12 @@ export function SocialContactLinks({
 }) {
   if (layout === "header") {
     const contactLink = "inline-flex min-h-9 items-center gap-2 whitespace-nowrap text-xs font-semibold text-foreground transition-colors hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:text-sm";
-    const socialLink = "inline-flex h-9 w-9 shrink-0 items-center justify-center text-brand transition-colors hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand";
+    const socialLink = "inline-flex h-9 w-7 sm:w-9 shrink-0 items-center justify-center text-brand transition-colors hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand";
 
     return (
-      <div className={`flex items-center justify-between gap-2 py-1 ${className}`}>
+      <div className={`flex items-center justify-between gap-1 py-1 ${className}`}>
         {(showPhone || showEmail) && (
-          <div className="flex min-w-0 flex-wrap items-center gap-x-6">
+          <div className="flex min-w-0 flex-wrap items-center gap-x-2 sm:gap-x-6">
             {showPhone && (
               <a href={`tel:${CONTACT.phoneTel}`} className={contactLink}>
                 <PhoneIcon className="h-4 w-4 shrink-0 text-brand" />
@@ -100,22 +121,30 @@ export function SocialContactLinks({
               </a>
             )}
             {showEmail && (
-              <a href={`mailto:${CONTACT.email}`} className={contactLink}>
+              <a
+                href={`mailto:${CONTACT.email}`}
+                aria-label={`${labels.email}: ${CONTACT.email}`}
+                className={`${contactLink} w-7 justify-center sm:w-auto`}
+              >
                 <MailIcon className="h-4 w-4 shrink-0 text-brand" />
-                <span className="sr-only">{labels.email}: </span>
-                {CONTACT.email}
+                <span className="hidden sm:inline">{CONTACT.email}</span>
               </a>
             )}
           </div>
         )}
         {showSocial && (
-          <div className="flex shrink-0 items-center gap-1">
+          <div className="flex shrink-0 items-center sm:gap-1">
             <a href={CONTACT.facebook} target="_blank" rel="noopener noreferrer" className={socialLink} aria-label={labels.facebook}>
               <FacebookIcon className="h-5 w-5" />
             </a>
             <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" className={socialLink} aria-label={labels.instagram}>
               <InstagramIcon className="h-5 w-5" />
             </a>
+            {additionalSocialLinks.map(({ href, label, Icon }) => (
+              <a key={href} href={href} target="_blank" rel="noopener noreferrer" className={socialLink} aria-label={label}>
+                <Icon className="h-5 w-5" />
+              </a>
+            ))}
           </div>
         )}
       </div>
@@ -192,6 +221,11 @@ export function SocialContactLinks({
           >
             <FacebookIcon className="h-5 w-5" />
           </a>
+          {additionalSocialLinks.map(({ href, label, Icon }) => (
+            <a key={href} href={href} target="_blank" rel="noopener noreferrer" className={iconBtn} aria-label={label}>
+              <Icon className="h-5 w-5" />
+            </a>
+          ))}
         </div>
       )}
     </div>
