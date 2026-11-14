@@ -81,9 +81,47 @@ export function SocialContactLinks({
   showEmail?: boolean;
   showPhone?: boolean;
   showSocial?: boolean;
-  layout?: "stacked" | "inline";
+  layout?: "stacked" | "inline" | "header";
   className?: string;
 }) {
+  if (layout === "header") {
+    const contactLink = "inline-flex min-h-9 items-center gap-2 whitespace-nowrap text-xs font-semibold text-foreground transition-colors hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:text-sm";
+    const socialLink = "inline-flex h-9 w-9 shrink-0 items-center justify-center text-brand transition-colors hover:text-brand-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand";
+
+    return (
+      <div className={`flex items-center justify-between gap-2 py-1 ${className}`}>
+        {(showPhone || showEmail) && (
+          <div className="flex min-w-0 flex-wrap items-center gap-x-6">
+            {showPhone && (
+              <a href={`tel:${CONTACT.phoneTel}`} className={contactLink}>
+                <PhoneIcon className="h-4 w-4 shrink-0 text-brand" />
+                <span className="sr-only">{labels.phone}: </span>
+                {CONTACT.phoneDisplay}
+              </a>
+            )}
+            {showEmail && (
+              <a href={`mailto:${CONTACT.email}`} className={contactLink}>
+                <MailIcon className="h-4 w-4 shrink-0 text-brand" />
+                <span className="sr-only">{labels.email}: </span>
+                {CONTACT.email}
+              </a>
+            )}
+          </div>
+        )}
+        {showSocial && (
+          <div className="flex shrink-0 items-center gap-1">
+            <a href={CONTACT.facebook} target="_blank" rel="noopener noreferrer" className={socialLink} aria-label={labels.facebook}>
+              <FacebookIcon className="h-5 w-5" />
+            </a>
+            <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" className={socialLink} aria-label={labels.instagram}>
+              <InstagramIcon className="h-5 w-5" />
+            </a>
+          </div>
+        )}
+      </div>
+    );
+  }
+
   const rowClass =
     layout === "inline"
       ? "flex flex-wrap items-center gap-3"

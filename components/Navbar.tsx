@@ -1,7 +1,7 @@
 "use client";
 
 import { BrandLogo } from "@/components/BrandLogo";
-import { RadioEnergyPlayer } from "@/components/RadioEnergyPlayer";
+import { SocialContactLinks } from "@/components/SocialContactLinks";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -79,7 +79,18 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
         <button type="button" className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 xl:hidden" aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen((value) => !value)}><span className="sr-only">{open ? nav.closeMenu : nav.openMenu}</span><span className="flex flex-col gap-1.5" aria-hidden><span className={`block h-0.5 w-5 bg-white transition-transform ${open ? "translate-y-2 rotate-45" : ""}`} /><span className={`block h-0.5 w-5 bg-white transition-opacity ${open ? "opacity-0" : ""}`} /><span className={`block h-0.5 w-5 bg-white transition-transform ${open ? "-translate-y-2 -rotate-45" : ""}`} /></span></button>
       </div>
     </div>
-    <div className="border-t border-white/10 px-4 py-1.5"><div className="mx-auto flex max-w-7xl justify-center md:justify-end"><RadioEnergyPlayer /></div></div>
+    <div className="border-t border-border bg-surface px-4 md:px-6">
+      <SocialContactLinks
+        layout="header"
+        className="mx-auto max-w-7xl"
+        labels={{
+          phone: locale === "bg" ? "Телефон" : "Phone",
+          email: locale === "bg" ? "Имейл" : "Email",
+          instagram: "Instagram — BG Green Yard",
+          facebook: "Facebook — BG Green Yard",
+        }}
+      />
+    </div>
     <div className={`grid xl:hidden ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"} transition-[grid-template-rows] duration-300`} aria-hidden={!open}><div className="min-h-0 overflow-hidden"><nav id="mobile-nav" inert={!open ? true : undefined} className="border-t border-brand/20 bg-brand px-4 pb-4 pt-2"><div className="mx-auto flex max-w-7xl flex-col gap-1">
       {locale === "bg" ? <><MobileLink href="/bg" label="Начало" close={() => setOpen(false)} /><p className="px-3 pb-1 pt-3 text-xs font-bold uppercase tracking-widest text-white/60">Озеленяване</p>{landscapingLinks.map(([href, label]) => <MobileLink key={href} href={`/bg${href}`} label={label} close={() => setOpen(false)} />)}{bgPrimaryLinks.slice(1).map(([href, label]) => <MobileLink key={href} href={`/bg${href}`} label={label} close={() => setOpen(false)} />)}</> : navKeys.map(({ href, key }) => <MobileLink key={key} href={`/${locale}${href}`} label={nav[key]} close={() => setOpen(false)} />)}
     </div></nav></div></div>
