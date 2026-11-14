@@ -208,14 +208,14 @@ export default async function HomePage({
             <div className="flex flex-col items-center text-center md:flex-row md:items-end md:justify-between md:text-left">
               <div>
                 <h2 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-                  {locale === "en" ? "Our projects" : "Нашите проекти"}
+                  {locale === "en" ? "Photos from our sites" : "Снимки от нашите обекти"}
                 </h2>
                 <p className="mt-3 max-w-xl text-lg text-muted">
-                  {locale === "en" ? "Real projects and the atmosphere we create" : "Реални обекти и атмосферата, която създаваме"}
+                  {locale === "en" ? "Our own photos of the landscaping and maintenance work we do" : "Наши снимки от озеленяването и поддръжката на обектите, за които се грижим"}
                 </p>
               </div>
               <Link
-                href={locale === "bg" ? "/bg/proekti" : "/en/gallery"}
+                href={`/${locale}/gallery`}
                 className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand hover:text-brand-dark underline-offset-4 transition hover:underline md:mt-0"
               >
                 {locale === "en" ? "View all" : "Виж всички"}
