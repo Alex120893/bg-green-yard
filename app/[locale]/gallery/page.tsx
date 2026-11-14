@@ -6,14 +6,6 @@ import type { Locale } from "@/lib/i18n";
 import { getMessages, isLocale } from "@/lib/i18n";
 import { PRODUCTION_SITE_ORIGIN } from "@/lib/site";
 
-const tiktokVideoIds = [
-  "7706936989500591382",
-  "7701465985991068950",
-  "7700277913119116566",
-  "7699887975638928642",
-  "7699579585599524118",
-] as const;
-
 const photos = [
   { src: "/images/gallery/ozelenyavane-gradina-sofia-01.jpg", alt: "Озеленена градина в София", width: 960, height: 1280 },
   { src: "/images/gallery/ozelenyavane-gradina-sofia-02.jpg", alt: "Зелена площ към градина в София", width: 960, height: 1280 },
@@ -60,45 +52,6 @@ export default async function GalleryPage({
               {t.gallery.subtitle}
             </p>
           </Reveal>
-        </div>
-      </section>
-
-      {/* ── TikTok Videos ── */}
-      <section id="tiktok" aria-labelledby="tiktok-heading" className="garden-block garden-block-sage bg-surface py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <h2 id="tiktok-heading" className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-            {loc === "en" ? "Our TikTok videos" : "Нашите видеа в TikTok"}
-          </h2>
-          <p className="mt-3 max-w-2xl text-lg text-muted">
-            {loc === "en" ? "More moments from our work at BG Green Yard." : "Още моменти от работата на BG Green Yard."}
-          </p>
-          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {tiktokVideoIds.map((id, index) => (
-              <div key={id} className="mx-auto w-full max-w-sm overflow-hidden rounded-2xl border border-border bg-white shadow-lg">
-                <iframe
-                  src={`https://www.tiktok.com/player/v1/${id}?autoplay=0`}
-                  title={`BG Green Yard — TikTok ${index + 1}`}
-                  loading="lazy"
-                  allow="fullscreen; picture-in-picture"
-                  allowFullScreen
-                  className="aspect-[9/16] w-full border-0 bg-black"
-                />
-                <a
-                  href={`https://www.tiktok.com/@bg.green_yard/video/${id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex min-h-12 items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-brand transition-colors hover:bg-brand-soft focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-brand"
-                  aria-label={`${loc === "en" ? "Watch on TikTok" : "Гледай в TikTok"} — ${index + 1}`}
-                >
-                  {loc === "en" ? "Watch on TikTok" : "Гледай в TikTok"}
-                  <span aria-hidden>↗</span>
-                </a>
-              </div>
-            ))}
-          </div>
-          <p className="mt-6 text-sm text-muted">
-            {loc === "en" ? "If a video does not load, use its link to watch it on TikTok." : "Ако някое видео не се зарежда, отворете го чрез връзката към TikTok."}
-          </p>
         </div>
       </section>
 
