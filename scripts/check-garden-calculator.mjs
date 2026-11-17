@@ -29,16 +29,30 @@ try {
  const cleaning=test('cleaning',{yardArea:'500',condition:'overgrown'},610);eq(cleaning.period,'изпълнение');
  test('cleaning',{yardArea:'10'},50);test('cleaning',{yardArea:'500',promo:true},610);
  test('weeding',{yardArea:'100'},185);
- test('lawn',{yardArea:'100'},370);
- test('planting',{variant:'plantingFlowers',yardArea:'10'},74);
- test('planting',{variant:'plantingHedge',volume:'exact',quantity:'10'},28);
- test('planting',{variant:'plantingPlants',volume:'exact',quantity:'10'},11);
- test('planting',{variant:'plantingPlants',volume:'medium'},6.6,16.5);
+ eq(calc({...change(base,'lawn'),yardArea:'100'}).kind,'invalid');
+ test('planting',{variant:'plantingFlowers',volume:'small'},50,50);
+ test('planting',{variant:'plantingFlowers',volume:'medium'},50,111);
+ test('planting',{variant:'plantingHedge',volume:'medium'},50,98);
+ test('planting',{variant:'plantingShrubs',volume:'large'},50,88);
+ test('planting',{variant:'plantingTrees',treeSize:'standard',volume:'medium'},50,50);
+ const big=test('planting',{variant:'plantingTrees',treeSize:'large',volume:'large'},100.8,168);
+ assert.ok(estimateText(big).includes('не максимална цена'));checks++;
+ const combined=test('planting',{variant:'plantingPlants',volume:'medium'},69.2,149);
+ const supplies=test('planting',{variant:'plantingPlants',volume:'medium',supplies:true},69.2,149);
+ eq(combined.total,supplies.total);assert.ok(estimateText(supplies).includes('Поискана отделно'));checks++;
+ eq(calc({...change(base,'planting'),volume:'exact',quantity:'100'}).kind,'invalid');
+ eq(calc({...change(base,'planting'),variant:'plantingTrees',treeSize:'invalid',volume:'medium'}).kind,'invalid');
+ for(const variant of ['plantingFlowers','plantingShrubs','plantingHedge','plantingTrees','plantingPlants']) {
+  for(const volume of ['small','medium','large']) {
+   const r=calc({...change(base,'planting'),variant,volume,treeSize:'standard'});eq(r.kind,'price');assert.ok(r.total>=50&&r.maxTotal>=r.total);checks++;
+  }
+  eq(calc({...change(base,'planting'),variant,volume:'unknown',treeSize:'standard'}).total,null);
+ }
  for(const [variant,total] of [['irrigationDrip',560],['irrigationAuto',840],['irrigationSprinklers',1070]])test('irrigation',{variant,yardArea:'100'},total);
  for(const service of services){assert.ok(serviceTariffText(service.id).includes('€/'));checks++;}
  for(const raw of ['', 'NaN','Infinity','0','-1','1e2','0x10','1000001'])eq(calc({...base,yardArea:raw}).kind,'invalid');
  eq(calc({...base,yardArea:'12,5'}).total,8.75);
- for(const service of ['subscription','mowing','cleaning','lawn','weeding','irrigation']){
+ for(const service of ['subscription','mowing','cleaning','weeding','irrigation']){
   const r=calc({...change(base,service),gardenType:'lawn',condition:'standard',areaUnknown:true});eq(r.kind,'quote');eq(r.total,null);
  }
  for(const service of ['hedge','shrubs','planting']){const i=change(base,service);if(service==='planting')i.variant='plantingPlants';eq(calc(i).kind,'quote');}
@@ -47,7 +61,7 @@ try {
  eq(calc({...base,gardenType:'toString'}).kind,'invalid');
  eq(calc({...base,frequency:'once'}).kind,'invalid');
  const shifted=change({...base,quantity:'55',volume:'exact',variant:'hedgeHigh'},'irrigation');eq(shifted.quantity,'');eq(shifted.frequency,'');eq(shifted.volume,'unknown');
- for(const service of ['planting','irrigation','lawn','cleaning']){
+ for(const service of ['planting','irrigation','cleaning']){
   eq(frequencyOptions(service),[]);
   const i={...change(base,service),yardArea:'500',frequency:'weekly',gardenType:'dense',condition:'overgrown'};
   eq(validate(i).input.frequency,'');eq(validate(i).input.gardenType,'');
@@ -61,6 +75,9 @@ try {
  const response=await handle(request(submission),async p=>{sent=p;});eq(response.status,200);eq(await response.json(),{ok:true});
  for(const text of ['610,00','500 м²','1,22','Почистване на запустял терен']){assert.ok(sent.message.includes(text));checks++;}
  assert.ok(!('recipient' in sent));checks++;
+ const plantingRequest={...submission,garden:{...change(base,'planting'),variant:'plantingPlants',volume:'medium',supplies:true}};
+ const plantingResponse=await handle(request(plantingRequest),async p=>{sent=p;});eq(plantingResponse.status,200);
+ for(const text of ['69,20','149,00','Поискана отделно','почвени материали','Комбинирано засаждане']){assert.ok(sent.message.includes(text));checks++;}
  const failure=await handle(request(submission),async()=>{throw new Error('failed');});eq(failure.status,500);
  for(const data of [null,[],{...submission,email:'bad'},{...submission,garden:{...base,yardArea:'NaN'}}])eq((await handle(request(data),async()=>{})).status,400);
  console.log(`Service-specific calculator: ${checks} assertions passed. 500 м² запустял терен = 610 €; 200 м² абонамент = 140 €/месец.`);
