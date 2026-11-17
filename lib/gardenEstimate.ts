@@ -1,65 +1,95 @@
-import { pricing, services, type RateKey } from "./gardenPricing";
-
-export type EstimateInput = {
-  service: string; quantity: string; condition: string; access: string;
-  frequency: string; waste: string; lawn: string[];
-};
+// Server calculation: public components import gardenFields only.
+import { pricing, type RateKey } from "./gardenPricing";
+import { validateGardenInput, numberValue, services, conditionLabels, frequencyLabels, type EstimateInput } from "./gardenFields";
 export type Estimate = { kind: "invalid"; errors: string[] } | {
-  kind: "price" | "quote"; lines: string[]; notes: string[]; min?: number; max?: number;
+  kind: "price"; lines: string[]; breakdown: string[]; base: number; maintenance: number;
+  waste: number; total: number; firstOrderTotal?: number; period: string; notes: string[];
 };
+const money = (n: number) => new Intl.NumberFormat("bg-BG", { style: "currency", currency: "EUR" }).format(n);
+const round = (n: number) => Math.round((n + Number.EPSILON) * 100) / 100;
 export function vatLabel(status: string = pricing.vat.status) {
-  return ({ included: "ДДС е включен в сумата.", excluded: "Сумата е без ДДС. Крайната сума с приложимия ДДС се потвърждава в офертата.", "not-applicable": "ДДС не се начислява.", unconfirmed: "ДДС: статусът не е потвърден от BG GREEN YARD. Не приемайте сумата за крайна цена с ДДС; данъчното третиране ще бъде уточнено в офертата." } as Record<string, string>)[status] ?? "ДДС се уточнява в офертата.";
-}
-export function estimateGarden(input: EstimateInput): Estimate {
-  const service = services.find(s => s.id === input.service);
-  const errors: string[] = [];
-  const q = Number(input.quantity.trim().replace(",", "."));
-  if (!service) errors.push("Изберете услуга.");
-  if (!/^(?:\d+(?:[.,]\d+)?|[.,]\d+)$/.test(input.quantity.trim()) || !Number.isFinite(q) || q <= 0 || (service?.id === "planting" && !Number.isInteger(q))) errors.push(service?.id === "planting" ? "Въведете положителен цял брой растения." : "Въведете положителна площ или дължина.");
-  if (!["standard", "high", "overgrown"].includes(input.condition)) errors.push("Изберете състояние на терена.");
-  if (!["easy", "difficult"].includes(input.access)) errors.push("Изберете достъп до терена.");
-  const hasWaste = !["irrigation", "planting"].includes(input.service);
-  if (hasWaste && !["yes", "no"].includes(input.waste)) errors.push("Уточнете дали желаете извозване.");
-  if (input.service === "subscription" && !["weekly", "fortnightly", "monthly"].includes(input.frequency)) errors.push("Изберете честота на посещенията.");
-  if (input.service === "lawn" && (!input.lawn.length || input.lawn.some(k => !["aeration", "overseeding", "fertilizing"].includes(k)))) errors.push("Изберете поне една грижа за тревния килим.");
-  if (errors.length || !service) return { kind: "invalid", errors };
-  const lines = [`${service.label} — ${q.toLocaleString("bg-BG")} ${service.unit}`, `Състояние: ${{standard:"Поддържан",high:"Висока трева / нужда от грижа",overgrown:"Запустял"}[input.condition]}`, `Достъп: ${input.access === "easy" ? "Лесен, равен терен" : "Затруднен / наклон / стъпала"}`];
-  if (hasWaste) lines.push(`Извозване: ${input.waste === "yes" ? "Желано, цена след уточняване на обема" : "Не е включено"}`);
-  if (input.service === "subscription") lines.push(`Честота: ${{weekly:"Всяка седмица",fortnightly:"На две седмици",monthly:"Веднъж месечно"}[input.frequency]}`);
-  else if (["planting", "irrigation"].includes(input.service)) lines.push("Срокът и обхватът на проекта се уточняват с офертата.");
-  else lines.push("Обхват: едно посещение, не месечен абонамент");
-  const notes: string[] = [];
-  if (input.access === "difficult") notes.push("Затруднен достъп: точната цена се определя след оглед, без автоматична надбавка.");
-  if (input.condition === "overgrown" || (input.condition === "high" && input.service !== "mowing")) notes.push("Състоянието изисква оценка на място, без произволен коефициент.");
-  if (hasWaste && input.waste === "yes") notes.push("Извозването се оферира според обема, товаренето и транспорта, а не според площта.");
-  const rateKeys: RateKey[] = [];
-  if (input.service === "mowing") rateKeys.push(input.condition === "high" ? "highMowing" : "mowing");
-  else if (input.service === "weeding") rateKeys.push("weeding");
-  else if (input.service === "lawn") {
-    for (const key of [...new Set(input.lawn)]) {
-      if (key === "overseeding") { lines.push("Подсяване с тревна смеска"); notes.push(pricing.quoteOnly.overseeding); }
-      else rateKeys.push(key as RateKey);
-    }
-  } else notes.push(pricing.quoteOnly[input.service as keyof typeof pricing.quoteOnly]);
-  for (const key of rateKeys) lines.push(pricing.rates[key].label);
-  // Не показваме непълна междинна сума като обща цена при работа по оферта.
-  if (notes.length) return { kind: "quote", lines, notes };
-  let min = 0, max = 0;
-  for (const key of rateKeys) {
-    const rate = pricing.rates[key];
-    const large = "aboveArea" in rate && q > rate.aboveArea;
-    min += q * (large && "largeMin" in rate ? rate.largeMin : rate.min);
-    max += q * (large && "largeMax" in rate ? rate.largeMax : rate.max);
-    notes.push(rate.note);
+  switch (status) {
+    case "included": return "ДДС е включен във вътрешните ставки.";
+    case "excluded": return "Вътрешните ставки са без ДДС; данъкът не е начисляван автоматично.";
+    case "not-applicable": return "ДДС не се начислява.";
+    default: return "ДДС: неуточнен статус; не е начисляван данък. Данъчното третиране се уточнява в окончателната оферта.";
   }
-  const factor = pricing.coefficients.standardAccess * pricing.coefficients.standardCondition;
-  min = Math.round(min * factor * 100) / 100; max = Math.round(max * factor * 100) / 100;
-  if (!Number.isFinite(min) || !Number.isFinite(max) || min <= 0 || max < min) return { kind: "quote", lines, notes: ["Нужна е индивидуална оферта за този размер или настройка на тарифите."] };
-  return { kind: "price", lines, notes, min, max };
 }
-export function formatEuro(value: number) { return new Intl.NumberFormat("bg-BG", { style: "currency", currency: "EUR" }).format(value); }
-export function estimateText(result: Exclude<Estimate, {kind: "invalid"}>) {
-  return ["Запитване от калкулатора BG GREEN YARD", ...result.lines,
-    result.kind === "price" ? `Ориентир: ${formatEuro(result.min!)}${result.max !== result.min ? ` – ${formatEuro(result.max!)}` : ""}` : "Цена: индивидуална оферта след оглед",
-    vatLabel(), ...result.notes, "Сумата е предварителна и може да се промени след оглед на място."].join("\n");
+export function marketRate(key: RateKey, area = 0) {
+  const rate = pricing.rates[key];
+  const range = "largeMarket" in rate && area > rate.threshold ? rate.largeMarket : rate.market;
+  return (range[0] + range[1]) / 2 * pricing.marketFactor;
+}
+export function estimateGarden(value: unknown): Estimate {
+  const parsed = validateGardenInput(value);
+  if (!parsed.input) return { kind: "invalid", errors: parsed.errors };
+  const i: EstimateInput = parsed.input;
+  const area = numberValue(i.yardArea), work = numberValue(i.workArea), plants = numberValue(i.plantCount), hedge = numberValue(i.hedgeLength), beds = numberValue(i.bedArea);
+  const service = services.find(s => s.id === i.service)!;
+  const lines = [`Услуга: ${service.label}`, `Обща площ на двора: ${area} м² (НЕ площ на газона)`, `Състояние: ${conditionLabels[i.condition]}`, `Достъп: ${i.access === "easy" ? "Лесен / равен терен" : "Затруднен / наклон / стъпала"}`, `Извозване: ${i.waste === "yes" ? `Да, ${i.wasteVolume} м³` : "Не"}`, `Промоция: ${i.promo ? pricing.discount.code + " — заявена, непотвърдено право" : "Не е заявена"}`];
+  const breakdown: string[] = [];
+  const notes = ["Вътрешна ориентировъчна оценка, не обвързваща оферта. Цените/обхватът се потвърждават след оглед.", vatLabel()];
+  let base = 0;
+  const addRate = (key: RateKey, quantity: number) => {
+    const rate = marketRate(key, work);
+    const sum = rate * quantity;
+    base += sum;
+    breakdown.push(`${pricing.rates[key].scope}: ${quantity} × ${rate.toFixed(4)} = ${money(sum)} (${pricing.rates[key].unit})`);
+  };
+  if (i.service === "subscription") {
+    const s = pricing.subscription;
+    base = area * s.basePerYardSqmMonth;
+    breakdown.push(`База за целия двор: ${area} м² × ${s.basePerYardSqmMonth} €/м²/месец = ${money(base)}`);
+    lines.push(`Посещения: ${frequencyLabels[i.frequency]}`, `Налични растения/храсти извън плета и цветните лехи: ${plants} бр.`, `Жив плет: ${hedge} л.м`, `Цветни лехи: ${beds} м²`, `Включено: ${s.included}`);
+    const extras = [
+      { label: "растения", qty: Math.max(0, plants - area / 100 * s.includedPlantsPer100Sqm), rule: s.extraPlant },
+      { label: "жив плет", qty: Math.max(0, hedge - area / 100 * s.includedHedgePer100Sqm), rule: s.extraHedge },
+      { label: "цветни лехи", qty: Math.max(0, beds - area * s.includedBedsShare), rule: s.extraBeds },
+    ];
+    for (const extra of extras) {
+      const rate = (extra.rule.referenceMarket[0] + extra.rule.referenceMarket[1]) / 2 * pricing.marketFactor * extra.rule.monthlyWorkloadShare;
+      const sum = extra.qty * rate; base += sum;
+      breakdown.push(`Допълнителен обем — ${extra.label}: ${extra.qty.toFixed(2)} × ${rate.toFixed(4)} = ${money(sum)} / месец`);
+    }
+    const frequency = s.frequency[i.frequency as keyof typeof s.frequency];
+    breakdown.push(`Честота: коефициент ${frequency} към месечната поддръжка (не цена на посещение)`);
+    base *= frequency;
+  } else {
+    lines.push("Еднократно изпълнение, не месечен абонамент");
+    if (["mowing", "shrubs", "cleaning", "weeding", "lawn", "irrigation"].includes(i.service)) lines.push(`Площ само за избраната работа: ${work} м²`);
+    if (i.service === "mowing") addRate(i.condition === "high" ? "highMowing" : "mowing", work);
+    else if (i.service === "hedge") { lines.push(`Жив плет: ${hedge} л.м`); addRate("hedge", hedge); }
+    else if (i.service === "planting") { lines.push(`Засаждане: ${plants} бр. ${i.plantingType === "shrubs" ? "единични храсти" : "дребноразмерни дървета"}`); addRate(i.plantingType === "shrubs" ? "plantingShrubs" : "plantingTrees", plants); notes.push("Растенията, доставката и извънредната подготовка не са включени в трудовата оценка."); }
+    else if (i.service === "lawn") {
+      const keys = [...new Set(i.lawn)] as ("aeration" | "overseeding" | "fertilizing")[];
+      for (const key of keys) {
+        if (key === "fertilizing" && keys.includes("overseeding")) { breakdown.push("Торенето е включено в пакета за подсяване — не се начислява повторно."); continue; }
+        addRate(key, work);
+      }
+      lines.push(`Избрани грижи: ${keys.map(k => ({aeration: "Аериране", overseeding: "Подсяване с подготовка и торене", fertilizing: "Торене"})[k]).join(", ")}`);
+    } else addRate(i.service as RateKey, work);
+  }
+  const condition = i.service === "mowing" && i.condition === "high" ? pricing.coefficients.condition.standard : pricing.coefficients.condition[i.condition as keyof typeof pricing.coefficients.condition];
+  const access = pricing.coefficients.access[i.access as keyof typeof pricing.coefficients.access];
+  const maintenance = round(base * condition * access);
+  breakdown.push(`Състояние ×${condition}; достъп ×${access}; работа общо ${money(maintenance)}`);
+  let waste = 0;
+  if (i.waste === "yes") {
+    const containers = Math.ceil(numberValue(i.wasteVolume) / pricing.rates.waste.containerVolume);
+    waste = round(containers * marketRate("waste"));
+    breakdown.push(`Извозване: ${containers} контейнер(а) до ${pricing.rates.waste.containerVolume} м³ × ${marketRate("waste").toFixed(4)} = ${money(waste)}`);
+    notes.push(i.service === "subscription" ? "Извозване: заявеният общ месечен обем, не този обем при всяко посещение. Товарене/логистика се потвърждават." : "Товарене/логистика на извозването се потвърждават след оглед.");
+  }
+  const total = round(maintenance + waste);
+  if (!Number.isFinite(total) || total <= 0 || maintenance <= 0) return { kind: "invalid", errors: ["Проверете количествата — не може да се изчисли положителна крайна оценка."] };
+  const eligible = i.promo && pricing.discount.appliesTo.includes(i.service);
+  const firstOrderTotal = eligible ? round(maintenance * (1 - pricing.discount.percent / 100) + waste) : undefined;
+  if (i.promo) notes.push(pricing.discount.note, eligible ? "Показана е отделна промоционална оценка; стандартната база не се променя." : "Промоцията не се прилага към избраната услуга.");
+  return { kind: "price", lines, breakdown, base: round(base), maintenance, waste, total, firstOrderTotal, period: i.service === "subscription" ? "месец" : "еднократно изпълнение", notes };
+}
+export function estimateText(r: Exclude<Estimate, { kind: "invalid" }>) {
+  return [`ВЪТРЕШНА ОЦЕНКА BG GREEN YARD — ${pricing.version}`, ...r.lines, "--- Разбивка ---", ...r.breakdown,
+    `СТАНДАРТНА ВЪТРЕШНА ОЦЕНКА: ${money(r.total)} / ${r.period}`,
+    ...(r.firstOrderTotal !== undefined ? [`ПЪРВА ЗАЯВКА / ПЪРВИ МЕСЕЦ С ПРОМОЦИЯ: ${money(r.firstOrderTotal)} (след проверка на правото)`] : []),
+    ...r.notes].join("\n");
 }
