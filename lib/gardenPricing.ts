@@ -1,14 +1,13 @@
-/** Редактируйте тарифы и ДДС здесь. Рыночные ориентиры, НЕ утверждённый прайс BG GREEN YARD. */
+/** INTERNAL: imported only by server estimation, never by the public calculator. */
 export const pricing = {
+  version: "2026-11-17-private-v2",
   checkedAt: "2026-11-17",
   currency: "EUR",
-  ownerApproval: "pending",
-  // Не определяем налоговый статус фирмы. included / excluded / not-applicable / unconfirmed.
-  // Статус описывает введённые ставки; автоматического начисления налога нет.
   vat: { status: "unconfirmed" as "included" | "excluded" | "not-applicable" | "unconfirmed" },
-  // Нейтральное значение — не рыночная надбавка. Сложные условия требуют оглед.
-  coefficients: { standardAccess: 1, standardCondition: 1 },
+  // 7% below the midpoint for the SAME scope/unit. Not an extra promotional discount.
+  marketFactor: 0.93,
   sources: {
+    aqua: { name: "Aqua World Bulgaria", url: "https://aqua-worldbg.com/tseni/", checkedAt: "2026-11-17", note: "София; поливни системи 6–12 €/м²; ДДС/точни включвания не са уточнени." },
     heroes: { name: "Greenheroes", url: "https://greenheroes.bg/цени/", checkedAt: "2026-11-17", note: "Сезон 2026; евро без ДДС; София и страната. Изнасяне не означава транспорт до депо." },
     sofia: { name: "Озеленяване София", url: "https://ozeleniavanesofia.bg/kosene-na-treva/", checkedAt: "2026-11-17", note: "София и региона; ориентировъчни цени след оглед; ДДС не е уточнен." },
     grad: { name: "Градинарите", url: "https://gradinarite.com/цени-и-услуги/", checkedAt: "2026-11-17", note: "Сезон 2025/2026; еднократните ставки са само за комбиниран пакет. Не са самостоятелни услуги." },
@@ -18,33 +17,35 @@ export const pricing = {
     dvorove: { name: "Dvorove.com", url: "https://dvorove.com/ceni-kosene-na-treva/", checkedAt: "2026-11-17", note: "Изключен: сайтът изрично посочва неактуални цени; само големи площи." },
   },
   rates: {
-    mowing: { label: "Косене със събиране и изнасяне на остатъците", unit: "м²", min: 0.22, max: 0.22, aboveArea: 1000, largeMin: 0.17, largeMax: 0.17, sources: ["heroes"], checkedAt: "2026-11-17", note: "За едно посещение; без транспорт до депо. Над 1000 м²: 0,17 €/м²." },
-    highMowing: { label: "Косене на висока трева — първо косене", unit: "м²", min: 0.35, max: 0.35, sources: ["heroes"], checkedAt: "2026-11-17", note: "Всяка площ; силно запустял терен е след оглед." },
-    weeding: { label: "Плевене", unit: "м²", min: 1, max: 3, sources: ["sofia"], checkedAt: "2026-11-17", note: "Без общо разчистване, строителни отпадъци и извозване." },
-    aeration: { label: "Аериране на тревни площи", unit: "м²", min: 0.2, max: 0.8, sources: ["sofia"], checkedAt: "2026-11-17", note: "Методът и дълбочината се уточняват; без подсяване и торене." },
-    fertilizing: { label: "Пролетно торене с включен тор", unit: "м²", min: 0.45, max: 0.45, aboveArea: 1000, largeMin: 0.4, largeMax: 0.4, sources: ["heroes"], checkedAt: "2026-11-17", note: "Над 1000 м²: 0,40 €/м²; видът тор се уточнява." },
+    mowing: { market: [0.22, 0.22], largeMarket: [0.17, 0.17], threshold: 1000, unit: "€/м²/посещение", sources: ["heroes"], scope: "Косене със събиране и изнасяне, без транспорт до депо" },
+    highMowing: { market: [0.35, 0.35], unit: "€/м²/посещение", sources: ["heroes"], scope: "Косене на висока трева, без извозване" },
+    weeding: { market: [1, 3], unit: "€/м²/посещение", sources: ["sofia"], scope: "Плевене без разчистване и извозване" },
+    aeration: { market: [0.2, 0.8], unit: "€/м²/посещение", sources: ["sofia"], scope: "Аериране; методът се уточнява" },
+    fertilizing: { market: [0.45, 0.45], largeMarket: [0.4, 0.4], threshold: 1000, unit: "€/м²/посещение", sources: ["heroes"], scope: "Пролетно торене с тор" },
+    overseeding: { market: [6.14, 6.14], unit: "€/м²/изпълнение", sources: ["grad"], scope: "Подсяване с подготовка, почва, торене и поливане; пакетен ориентир, не само семена" },
+    hedge: { market: [6, 6.14], unit: "€/л.м/изпълнение", sources: ["kanali", "grad"], scope: "Подрязване И окопаване в пакет, без транспорт до депо" },
+    shrubs: { market: [4.35, 4.5], unit: "€/м²/изпълнение", sources: ["grad", "kanali"], scope: "Подрязване И окопаване на храстови групи в пакет" },
+    cleaning: { market: [4, 4.09], unit: "€/м²/изпълнение", sources: ["kanali", "grad"], scope: "Разчистване на запустяла площ; извозване отделно" },
+    plantingShrubs: { market: [7.67, 8], unit: "€/бр./изпълнение", sources: ["grad", "kanali"], scope: "Труд за засаждане на единични храсти; растения и доставка отделно" },
+    plantingTrees: { market: [33, 33.23], unit: "€/бр./изпълнение", sources: ["kanali", "grad"], scope: "Труд за дребноразмерни дървета; растения и доставка отделно" },
+    irrigation: { market: [6, 12], unit: "€/м²/проект", sources: ["aqua"], scope: "Ориентир за изграждане; материали, зони и изкопи се уточняват след оглед" },
+    waste: { containerVolume: 4, market: [90, 92.03], unit: "€/контейнер до 4 м³", sources: ["kanali", "grad"], scope: "Контейнерен ориентир; товарене и условия се потвърждават" },
   },
-  quoteOnly: {
-    hedge: "Подрязването зависи от височината и ширината. Сравнените цени включват и окопаване в пакет, затова не ги прилагаме за самостоятелна резитба.",
-    shrubs: "Нужни са вид, размер и брой/площ на храстите. Пакетните ставки не са цена за самостоятелна резитба.",
-    cleaning: "Почистването зависи от вида и количеството отпадъци. Не приравняваме почистване на листа с разчистване на запустял двор.",
-    overseeding: "Нужни са оценка на тревата, смеска, почва и обхват на подготовката. Няма достатъчно съпоставими данни за самостоятелно подсяване.",
-    planting: "Видът, размерът, броят и доставката на растенията се уточняват след оглед. Озеленяването е по индивидуален проект.",
-    irrigation: "Точна цена след оглед: водоизточник, налягане, зони, автоматика и изкопи.",
-    subscription: "Месечната цена се определя след оглед и уточняване на дейностите и честотата. Не умножаваме цена на м² по брой посещения.",
+  // Owner's explicit base: whole yard, not lawn. Not market-derived.
+  subscription: {
+    basePerYardSqmMonth: 0.70,
+    source: "Задание на собственика от 17.11.2026: 200 м² = 140 €/месец при седмични посещения",
+    included: "Редовно косене, обкантване, текущо плевене и обичайна поддръжка на налични растения, храсти и жив плет",
+    // Business workload allowances, NOT measured market coefficients.
+    includedPlantsPer100Sqm: 10, includedHedgePer100Sqm: 10, includedBedsShare: 0.10,
+    // Monthly extra work, frequency multiplier below applies to whole maintenance subtotal.
+    extraPlant: { referenceMarket: [6, 6.14], monthlyWorkloadShare: 0.4, sources: ["kanali", "grad"], unit: "€/допълнително растение/месец", note: "Референция 6–6,14 €/бр. за подрязване и окопаване; 0,4 месечен трудов дял е вътрешно правило, не пазарен коефициент" },
+    extraHedge: { referenceMarket: [6, 6.14], monthlyWorkloadShare: 0.33, sources: ["kanali", "grad"], unit: "€/допълнителен л.м/месец", note: "Референция 6–6,14 €/л.м за подрязване и окопаване; 0,33 месечен трудов дял е вътрешно правило" },
+    extraBeds: { referenceMarket: [7.67, 8], monthlyWorkloadShare: 0.43, sources: ["grad", "kanali"], unit: "€/допълнителен м² лехи/месец", note: "Референция за резитби, плевене, окопаване и почистване на цветни площи; 0,43 месечен дял е вътрешно правило" },
+    frequency: { weekly: 1, fortnightly: 0.78, monthly: 0.55 },
   },
+  // Explicit internal workload decisions, not claims about market averages.
+  coefficients: { condition: { standard: 1, high: 1.20, overgrown: 1.50 }, access: { easy: 1, difficult: 1.15 } },
+  discount: { percent: 30, code: "FIRST-GARDEN-30", appliesTo: ["subscription", "mowing", "hedge", "shrubs", "cleaning", "weeding", "lawn"], note: "Само първа заявка/първи месец за поддръжка; не транспорт, растения, материали или изграждане. Правото се проверява от собственика." },
 };
-
 export type RateKey = keyof typeof pricing.rates;
-export type ServiceKey = "mowing" | "hedge" | "shrubs" | "cleaning" | "weeding" | "lawn" | "planting" | "irrigation" | "subscription";
-export const services: { id: ServiceKey; label: string; unit: string }[] = [
-  { id: "mowing", label: "Косене на трева", unit: "м²" },
-  { id: "hedge", label: "Подрязване на жив плет", unit: "л.м" },
-  { id: "shrubs", label: "Подрязване на храсти", unit: "м²" },
-  { id: "cleaning", label: "Почистване на терен", unit: "м²" },
-  { id: "weeding", label: "Плевене", unit: "м²" },
-  { id: "lawn", label: "Грижа за тревен килим", unit: "м²" },
-  { id: "planting", label: "Засаждане / озеленяване", unit: "бр." },
-  { id: "irrigation", label: "Поливни системи", unit: "м²" },
-  { id: "subscription", label: "Абонаментна поддръжка на градина", unit: "м²" },
-];
