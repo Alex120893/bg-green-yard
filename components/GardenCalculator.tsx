@@ -1,8 +1,8 @@
 "use client";
 import { useRef, useState } from "react";
 import { pricing } from "@/lib/gardenPricing";
-import { conditionLabels, frequencyLabels, frequencyOptions, changeGardenService, gardenLabels, initialGardenInput, services, selectedRate, quantityKind, variantLabels, type EstimateInput } from "@/lib/gardenFields";
-import { estimateGarden, formatEuro, serviceTariffText, tariffText, type Estimate } from "@/lib/gardenEstimate";
+import { conditionLabels, frequencyLabels, frequencyOptions, changeGardenService, gardenLabels, initialGardenInput, services, quantityKind, variantLabels, type EstimateInput } from "@/lib/gardenFields";
+import { estimateGarden, formatEuro, type Estimate } from "@/lib/gardenEstimate";
 
 const fieldClass = "mt-2 block w-full min-w-0 rounded-xl border border-brand/25 bg-white px-3 py-3 text-base text-foreground";
 export function GardenCalculator({ promo = false }: { promo?: boolean }) {
@@ -17,8 +17,6 @@ export function GardenCalculator({ promo = false }: { promo?: boolean }) {
   const sending = useRef(false);
   const selected = services.find(s => s.id === input.service)!;
   const kind = quantityKind(input);
-  const rateKey = selectedRate(input);
-  const minimum = rateKey ? pricing.rates[rateKey].minimum : 0;
   function update<K extends keyof EstimateInput>(key: K, value: EstimateInput[K]) {
     setInput(prev => key === "service" ? changeGardenService(prev, value as string) : key === "variant" ? { ...prev, variant: value as string, yardArea: "", areaUnknown: false, quantity: "", volume: "unknown" } : { ...prev, [key]: value });
     setResult(null); setShowContact(false); setError("");
@@ -51,8 +49,7 @@ export function GardenCalculator({ promo = false }: { promo?: boolean }) {
       <fieldset disabled={status !== "idle"} className="mt-6 min-w-0 space-y-5 disabled:opacity-60">
         <legend className="sr-only">Данни за ориентировъчната оценка</legend>
         <label className="block text-sm font-semibold" htmlFor="calc-service">Вид услуга<select id="calc-service" className={fieldClass} value={input.service} onChange={e => update("service", e.target.value)}>{services.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}</select></label>
-        <p className="rounded-xl border border-brand/15 bg-brand-soft p-3 text-sm leading-relaxed"><strong>Тарифа:</strong> {serviceTariffText(input.service)}{minimum > 0 ? `; минимум ${formatEuro(minimum)}${input.service === "shrubs" ? " при еднократна заявка" : " на заявка"}` : ""}</p>
-        {selected.rates.length > 1 && <label className="block text-sm font-semibold" htmlFor="calc-variant">{input.service === "hedge" ? "Височина на живия плет" : input.service === "mowing" ? "Състояние на тревата" : "Вид услуга"}<select id="calc-variant" className={fieldClass} value={input.variant} onChange={e => update("variant", e.target.value)}>{selected.rates.map(key => <option key={key} value={key}>{variantLabels[key]} — {tariffText(key)}</option>)}</select></label>}
+        {selected.rates.length > 1 && <label className="block text-sm font-semibold" htmlFor="calc-variant">{input.service === "hedge" ? "Височина на живия плет" : input.service === "mowing" ? "Състояние на тревата" : "Вид услуга"}<select id="calc-variant" className={fieldClass} value={input.variant} onChange={e => update("variant", e.target.value)}>{selected.rates.map(key => <option key={key} value={key}>{variantLabels[key]}</option>)}</select></label>}
         {kind === "area" ? <>
           <label className="flex items-start gap-3 text-sm"><input id="calc-areaUnknown" type="checkbox" className="h-5 w-5 shrink-0 accent-brand" checked={input.areaUnknown} onChange={e => update("areaUnknown", e.target.checked)} /><span>Не съм сигурен/на — уточнете с мен</span></label>
           {!input.areaUnknown && <label className="block min-w-0 text-sm font-semibold" htmlFor="calc-yardArea">{input.service === "subscription" ? "Приблизителна обща площ на целия двор (м²)" : "Приблизителна площ за избраната услуга (м²)"}<input id="calc-yardArea" className={fieldClass} type="text" inputMode="decimal" value={input.yardArea} placeholder="Например 200" onChange={e => update("yardArea", e.target.value)} required /><span className="mt-2 block text-xs font-normal leading-relaxed text-muted">{input.service === "subscription" ? "Целият двор, не само тревата. Обичайната грижа за храсти, плет и лехи е включена." : "Само площта за тази работа — не приемаме целия двор за тревна площ. Достатъчна е приблизителна стойност."}</span></label>}
