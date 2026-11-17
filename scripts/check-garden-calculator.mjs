@@ -30,13 +30,16 @@ try {
  test('cleaning',{yardArea:'10'},50);test('cleaning',{yardArea:'500',promo:true},610);
  test('weeding',{yardArea:'100'},185);
  eq(calc({...change(base,'lawn'),yardArea:'100'}).kind,'invalid');
- test('planting',{variant:'plantingFlowers',volume:'small'},50,50);
- test('planting',{variant:'plantingFlowers',volume:'medium'},50,111);
- test('planting',{variant:'plantingHedge',volume:'medium'},50,98);
- test('planting',{variant:'plantingShrubs',volume:'large'},50,88);
- test('planting',{variant:'plantingTrees',treeSize:'standard',volume:'medium'},50,50);
- const big=test('planting',{variant:'plantingTrees',treeSize:'large',volume:'large'},100.8,168);
- assert.ok(estimateText(big).includes('не максимална цена'));checks++;
+ test('planting',{variant:'plantingFlowers',volume:'small'},14.8,37);
+ test('planting',{variant:'plantingFlowers',volume:'medium'},44.4,111);
+ test('planting',{variant:'plantingHedge',volume:'medium'},44.8,98);
+ test('planting',{variant:'plantingShrubs',volume:'large'},45.1,88);
+ test('planting',{variant:'plantingTrees',treeSize:'standard',volume:'medium'},4.4,8.8);
+ for(const volume of ['small','medium','large','unknown']) {
+  const big=calc({...change(base,'planting'),variant:'plantingTrees',treeSize:'large',volume});
+  eq(big.kind,'quote');eq(big.total,null);eq(big.maxTotal,undefined);eq(big.quoteMessage,'Цената се определя след оглед');
+  assert.ok(!estimateText(big).includes('50,00'));checks++;
+ }
  const combined=test('planting',{variant:'plantingPlants',volume:'medium'},69.2,149);
  const supplies=test('planting',{variant:'plantingPlants',volume:'medium',supplies:true},69.2,149);
  eq(combined.total,supplies.total);assert.ok(estimateText(supplies).includes('Поискана отделно'));checks++;
@@ -44,7 +47,7 @@ try {
  eq(calc({...change(base,'planting'),variant:'plantingTrees',treeSize:'invalid',volume:'medium'}).kind,'invalid');
  for(const variant of ['plantingFlowers','plantingShrubs','plantingHedge','plantingTrees','plantingPlants']) {
   for(const volume of ['small','medium','large']) {
-   const r=calc({...change(base,'planting'),variant,volume,treeSize:'standard'});eq(r.kind,'price');assert.ok(r.total>=50&&r.maxTotal>=r.total);checks++;
+   const r=calc({...change(base,'planting'),variant,volume,treeSize:'standard'});eq(r.kind,'price');assert.ok(r.total>0&&r.maxTotal>=r.total);checks++;
   }
   eq(calc({...change(base,'planting'),variant,volume:'unknown',treeSize:'standard'}).total,null);
  }
@@ -78,6 +81,10 @@ try {
  const plantingRequest={...submission,garden:{...change(base,'planting'),variant:'plantingPlants',volume:'medium',supplies:true}};
  const plantingResponse=await handle(request(plantingRequest),async p=>{sent=p;});eq(plantingResponse.status,200);
  for(const text of ['69,20','149,00','Поискана отделно','почвени материали','Комбинирано засаждане']){assert.ok(sent.message.includes(text));checks++;}
+ const largeTreeRequest={...submission,garden:{...change(base,'planting'),variant:'plantingTrees',treeSize:'large',volume:'large'}};
+ eq((await handle(request(largeTreeRequest),async p=>{sent=p;})).status,200);
+ assert.ok(sent.message.includes('Цената се определя след оглед'));checks++;
+ assert.ok(!sent.message.includes('50,00')&&!sent.message.includes('100,80')&&!sent.message.includes('168,00'));checks++;
  const failure=await handle(request(submission),async()=>{throw new Error('failed');});eq(failure.status,500);
  for(const data of [null,[],{...submission,email:'bad'},{...submission,garden:{...base,yardArea:'NaN'}}])eq((await handle(request(data),async()=>{})).status,400);
  console.log(`Service-specific calculator: ${checks} assertions passed. 500 м² запустял терен = 610 €; 200 м² абонамент = 140 €/месец.`);

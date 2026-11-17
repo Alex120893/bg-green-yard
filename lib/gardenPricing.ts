@@ -20,12 +20,12 @@ export const pricing = {
     cleaning: { amount: 1.22, unit: "€/м²", minimum: 50 },
     weeding: { amount: 1.85, unit: "€/м²", minimum: 0 },
     lawn: { amount: 3.70, unit: "€/м²", minimum: 0 },
-    plantingFlowers: { amount: 7.40, unit: "€/м² труд", minimum: 50 },
-    plantingHedge: { amount: 2.80, unit: "€/пог. м труд", minimum: 50 },
-    plantingPlants: { amount: 1.10, unit: "€/бр. труд", minimum: 50 },
-    plantingShrubs: { amount: 1.10, unit: "€/бр. труд", minimum: 50 },
-    plantingTrees: { amount: 1.10, unit: "€/бр. труд за стандартно растение", minimum: 50 },
-    plantingLargeTrees: { amount: 11.20, unit: "€/бр. труд, от", minimum: 50 },
+    plantingFlowers: { amount: 7.40, unit: "€/м² труд", minimum: 0 },
+    plantingHedge: { amount: 2.80, unit: "€/пог. м труд", minimum: 0 },
+    plantingPlants: { amount: 1.10, unit: "€/бр. труд", minimum: 0 },
+    plantingShrubs: { amount: 1.10, unit: "€/бр. труд", minimum: 0 },
+    plantingTrees: { amount: 1.10, unit: "€/бр. труд за стандартно растение", minimum: 0 },
+    plantingLargeTrees: { amount: 11.20, unit: "€/бр. труд, от", minimum: 0 },
     irrigationDrip: { amount: 5.60, unit: "€/м²", minimum: 0 },
     irrigationAuto: { amount: 8.40, unit: "€/м²", minimum: 0 },
     irrigationSprinklers: { amount: 10.70, unit: "€/м²", minimum: 0 },
@@ -44,13 +44,12 @@ export const pricing = {
       plantingTrees: { small: [1, 3], medium: [4, 8], large: [9, 15] },
       plantingLargeTrees: { small: [1, 3], medium: [4, 8], large: [9, 15] },
     },
-    // Combined planting uses a sum of DIFFERENT rates, minimum applied once.
+    // Combined planting uses a sum of DIFFERENT rates, without a minimum.
     combined: {
       small: { flowers: [2, 4], shrubs: [5, 10], hedge: [3, 5], trees: [1, 2] },
       medium: { flowers: [5, 10], shrubs: [11, 25], hedge: [6, 15], trees: [3, 5] },
       large: { flowers: [11, 20], shrubs: [26, 50], hedge: [16, 30], trees: [6, 10] },
     },
-    minimum: 50,
   },
   subscription: {
     included: "Поддръжка на целия двор: косене, обкантване, текущо плевене и обичайна грижа за тревата, храстите, живия плет и цветните лехи",
