@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { pricing } from "@/lib/gardenPricing";
 import { useEffect, useState } from "react";
 
 const SEEN_KEY = "bg-green-yard:discount-gift-seen";
@@ -43,13 +44,13 @@ export function DiscountGiftPopup() {
       <div className="relative w-full max-w-sm animate-[bounce_500ms_ease-out_1] overflow-hidden rounded-[28px] bg-white text-center shadow-2xl ring-4 ring-amber-300">
         <button type="button" onClick={() => setOpened(false)} className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-lg font-bold text-slate-700 shadow hover:bg-white" aria-label="Затвори предложението">×</button>
         <div className="bg-gradient-to-br from-amber-300 via-yellow-400 to-orange-500 px-7 pb-9 pt-10 text-amber-950">
-          <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-2xl bg-rose-600 text-3xl font-extrabold text-white shadow-xl ring-4 ring-amber-200">30%</div>
+          <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-2xl bg-rose-600 text-3xl font-extrabold text-white shadow-xl ring-4 ring-amber-200">{pricing.discount.percent}%</div>
           <p className="mt-5 text-sm font-bold uppercase tracking-[.16em] text-rose-800">Подарък за поддръжка</p>
-          <h2 id="discount-gift-title" className="mt-2 text-3xl font-extrabold">Вашата отстъпка е готова</h2>
+          <h2 id="discount-gift-title" className="mt-2 text-3xl font-extrabold">Вземете отстъпката!</h2>
         </div>
         <div className="p-7">
-          <p className="text-base leading-relaxed text-muted">Получете 30% отстъпка за първата заявка за поддръжка на градина или зелени площи в София. При абонамент — за първия месец, без извозване и материали.</p>
-          <Link href="/bg/calculator?promo=first-garden" onClick={() => setOpened(false)} className="mt-6 inline-flex w-full justify-center rounded-full bg-rose-600 px-4 py-3 text-sm font-bold text-white shadow-md transition hover:bg-rose-700">Към калкулатора с отстъпка</Link>
+          <p className="text-base leading-relaxed text-muted">Получете {pricing.discount.percent}% отстъпка за първата заявка за поддръжка на градина или зелени площи в София. При абонамент — за първия месец, без извозване и материали.</p>
+          <Link href="/bg/calculator?promo=first-garden#calculator-form" onClick={() => setOpened(false)} className="mt-6 inline-flex w-full justify-center rounded-full bg-rose-600 px-4 py-3 text-sm font-bold text-white shadow-md transition hover:bg-rose-700">Изчислете цена</Link>
           <button type="button" onClick={() => setOpened(false)} className="mt-4 block w-full text-sm font-medium text-muted hover:text-foreground">Затвори</button>
         </div>
       </div>

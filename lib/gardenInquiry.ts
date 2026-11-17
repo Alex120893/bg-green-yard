@@ -18,7 +18,7 @@ export async function handleGardenInquiry(request: Request, sendEmail: (payload:
     if (estimate.kind === "invalid") return Response.json({ error: estimate.errors.join(" ") }, { status: 400 });
     await sendEmail({ name, email, phone, service: "green", serviceLabel: "Заявка от калкулатора", locale: "bg",
       message: [`Обект: ${location}`, `Бележка на клиента: ${message || "Няма"}`, "", estimateText(estimate)].join("\n") });
-    // NO internal prices or parameters in response, URL, or confirmation.
+    // The owner receives a fresh server calculation; client-supplied totals are ignored.
     return Response.json({ ok: true });
   } catch {
     return Response.json({ error: "Заявката не е изпратена. Опитайте отново или се свържете с нас по телефона." }, { status: 500 });

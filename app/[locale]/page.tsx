@@ -163,6 +163,11 @@ export default async function HomePage({
         ]}
       />
 
+      {locale === "bg" && <section className="garden-block garden-block-cream px-4 py-10 md:px-6"><div className="mx-auto flex max-w-6xl flex-col gap-6 rounded-3xl border border-brand/20 bg-surface p-6 shadow-sm sm:p-8 md:flex-row md:items-center md:justify-between">
+        <div className="min-w-0"><p className="garden-eyebrow">Планирайте грижата за Вашия двор</p><h2 className="mt-3 text-2xl font-bold md:text-3xl">Колко би струвала поддръжката на Вашата градина?</h2><p className="mt-3 max-w-2xl leading-relaxed text-muted">Получете ориентировъчна цена според площта и типа градина — без измерване на плета и броене на растения.</p></div>
+        <Link href="/bg/calculator#calculator-form" className="garden-button shrink-0 !text-base">Изчисли цена <span aria-hidden>→</span></Link>
+      </div></section>}
+
       {/* ── Features / Why Us ── */}
       <section className="garden-block garden-block-sage bg-surface py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
