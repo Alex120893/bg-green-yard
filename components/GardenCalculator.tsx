@@ -20,7 +20,7 @@ export function GardenCalculator() {
   function submit(e: React.FormEvent) {
     e.preventDefault();
     setResult(estimateGarden(input));
-    requestAnimationFrame(() => { resultRef.current?.focus({ preventScroll: true }); resultRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }); });
+    requestAnimationFrame(() => { resultRef.current?.focus({ preventScroll: true }); resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }); });
   }
   const summary = result && result.kind !== "invalid" ? estimateText(result) : "";
   return <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
