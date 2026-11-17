@@ -6,7 +6,6 @@ export const services = [
   { id: "shrubs", label: "Оформяне на храсти", rates: ["shrubs"] },
   { id: "cleaning", label: "Почистване на запустял терен", rates: ["cleaning"] },
   { id: "weeding", label: "Плевене", rates: ["weeding"] },
-  { id: "lawn", label: "Грижа за тревен килим", rates: ["lawn"] },
   { id: "planting", label: "Засаждане", rates: ["plantingFlowers", "plantingHedge", "plantingPlants"] },
   { id: "irrigation", label: "Изграждане на поливна система", rates: ["irrigationDrip", "irrigationAuto", "irrigationSprinklers"] },
 ] satisfies {id: string; label: string; rates: RateKey[]}[];
