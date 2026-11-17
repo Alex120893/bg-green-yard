@@ -20,7 +20,9 @@ export function ContactForm({
   locale,
   contact,
   serviceOptions,
+  initialMessage = "",
 }: {
+  initialMessage?: string;
   locale: Locale;
   contact: Messages["contact"];
   serviceOptions: Messages["serviceOptions"];
@@ -167,6 +169,7 @@ export function ContactForm({
           {contact.formMessage}
         </label>
         <textarea
+          defaultValue={initialMessage}
           id="message"
           name="message"
           rows={5}

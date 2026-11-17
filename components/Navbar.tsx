@@ -17,6 +17,7 @@ const landscapingLinks = [
   ["/izgrazhdane-na-gradini-sofia", "Изграждане на градини"],
   ["/snegopochistvane-sofia", "Снегопочистване"],
   ["/proekti", "Проекти"],
+  ["/calculator", "Калкулатор за цени"],
 ] as const;
 
 const bgPrimaryLinks = [["", "Начало"], ["/about", "За нас"], ["/blog", "Блог"], ["/inquiries", "Въпроси"], ["/contact", "Контакти"]] as const;

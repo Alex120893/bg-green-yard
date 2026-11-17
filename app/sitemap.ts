@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/bg/services",
     "/bg/gallery",
     "/bg/contact",
+    "/bg/calculator",
     "/bg/inquiries",
     "/bg/ozelenyavane-sofia",
     "/bg/lawn-care",

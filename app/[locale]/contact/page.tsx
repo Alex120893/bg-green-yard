@@ -27,12 +27,16 @@ export async function generateMetadata({
 
 export default async function ContactPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ estimate?: string | string[] }>;
 }) {
   const { locale: loc } = await params;
   const locale = loc as Locale;
   const t = getMessages(locale);
+  const estimate = (await searchParams).estimate;
+  const initialMessage = typeof estimate === "string" ? estimate.slice(0, 5000) : "";
 
   return (
     <>
@@ -51,7 +55,7 @@ export default async function ContactPage({
             <div className="mt-10 grid items-start gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(360px,.9fr)]">
               <div>
                 <h2 className="mb-6 text-2xl font-bold text-foreground">{t.contact.formSubmit}</h2>
-                <ContactForm locale={locale} contact={t.contact} serviceOptions={t.serviceOptions} />
+                <ContactForm initialMessage={initialMessage} locale={locale} contact={t.contact} serviceOptions={t.serviceOptions} />
               </div>
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
                 {/* Address */}
