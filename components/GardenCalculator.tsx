@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
-import { conditionLabels, frequencyLabels, gardenLabels, initialGardenInput, services, type EstimateInput } from "@/lib/gardenFields";
+import { conditionLabels, frequencyLabels, frequencyOptions, changeGardenService, gardenLabels, initialGardenInput, services, type EstimateInput } from "@/lib/gardenFields";
 import { estimateGarden, formatEuro, type Estimate } from "@/lib/gardenEstimate";
 
 const fieldClass = "mt-2 block w-full min-w-0 rounded-xl border border-brand/25 bg-white px-3 py-3 text-base text-foreground";
@@ -15,7 +15,7 @@ export function GardenCalculator({ promo = false }: { promo?: boolean }) {
   const inquiry = useRef<HTMLDivElement>(null);
   const sending = useRef(false);
   function update<K extends keyof EstimateInput>(key: K, value: EstimateInput[K]) {
-    setInput(prev => key === "service" ? { ...prev, service: value as string, lawn: [], frequency: value === "subscription" ? "weekly" : "once" } : { ...prev, [key]: value });
+    setInput(prev => key === "service" ? changeGardenService(prev, value as string) : { ...prev, [key]: value });
     setResult(null); setShowContact(false); setError("");
   }
   function focus(ref: React.RefObject<HTMLDivElement | null>) {
@@ -50,7 +50,7 @@ export function GardenCalculator({ promo = false }: { promo?: boolean }) {
         {!input.areaUnknown && <label className="block min-w-0 text-sm font-semibold" htmlFor="calc-yardArea">Приблизителна обща площ на двора (м²)<input id="calc-yardArea" className={fieldClass} type="text" inputMode="decimal" value={input.yardArea} placeholder="Например 200" onChange={e => update("yardArea", e.target.value)} aria-describedby="calc-area-help" required /><span id="calc-area-help" className="mt-2 block text-xs font-normal leading-relaxed text-muted">Целият двор — не само газонът. Достатъчна е приблизителна стойност.</span></label>}
         <label className="block text-sm font-semibold" htmlFor="calc-gardenType">Тип градина<select id="calc-gardenType" className={fieldClass} value={input.gardenType} onChange={e => update("gardenType", e.target.value)} required><option value="">Изберете тип градина</option>{Object.entries(gardenLabels).map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></label>
         <label className="block text-sm font-semibold" htmlFor="calc-condition">Състояние на градината<select id="calc-condition" className={fieldClass} value={input.condition} onChange={e => update("condition", e.target.value)} required><option value="">Изберете състояние</option>{Object.entries(conditionLabels).map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></label>
-        <label className="block text-sm font-semibold" htmlFor="calc-frequency">Честота на посещенията<select id="calc-frequency" className={fieldClass} value={input.frequency} onChange={e => update("frequency", e.target.value)}>{Object.entries(frequencyLabels).filter(([id]) => input.service !== "subscription" || id !== "once").map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></label>
+        {frequencyOptions(input.service).length > 0 && <label className="block text-sm font-semibold" htmlFor="calc-frequency">Честота на посещенията<select id="calc-frequency" className={fieldClass} value={input.frequency} onChange={e => update("frequency", e.target.value)}>{frequencyOptions(input.service).map(id => <option key={id} value={id}>{frequencyLabels[id]}</option>)}</select></label>}
         {input.service === "lawn" && <fieldset className="min-w-0 rounded-xl border border-brand/20 p-4"><legend className="px-1 text-sm font-semibold">Изберете грижа за тревата</legend>{[["aeration", "Аериране"], ["overseeding", "Подсяване с подготовка, почва и торене"], ["fertilizing", "Пролетно торене"]].map(([id, label]) => <label className="flex items-center gap-3 py-2 text-sm" key={id}><input type="checkbox" className="h-5 w-5 shrink-0 accent-brand" checked={input.lawn.includes(id)} onChange={e => update("lawn", e.target.checked ? [...input.lawn, id] : input.lawn.filter(k => k !== id))} />{label}</label>)}</fieldset>}
         <button className="garden-button w-full !text-base" type="submit">Изчислете цена</button>
       </fieldset>

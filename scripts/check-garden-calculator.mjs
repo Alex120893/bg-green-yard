@@ -10,6 +10,7 @@ try {
   const { default: { estimateGarden: calc, estimateText, vatLabel } } = await import(pathToFileURL(join(dir, 'gardenEstimate.js')).href);
   const { default: { handleGardenInquiry: handle } } = await import(pathToFileURL(join(dir, 'gardenInquiry.js')).href);
   const { default: { pricing } } = await import(pathToFileURL(join(dir, 'gardenPricing.js')).href);
+  const { default: { frequencyOptions, changeGardenService, validateGardenInput } } = await import(pathToFileURL(join(dir, "gardenFields.js")).href);
   const base = {service:'subscription',yardArea:'200',areaUnknown:false,gardenType:'lawn',condition:'standard',frequency:'weekly',lawn:[],promo:false};
   let checks = 0;
   const expect = (patch, kind, total) => {
@@ -41,7 +42,7 @@ try {
   expect({service:'mowing',frequency:'monthly'},'price',56.1); // per visit, never auto monthly
   expect({service:'weeding',frequency:'once'},'price',37.2); // 200×0.1×1.86
   expect({service:'hedge',frequency:'once'},'price',11.16); // modelled 6m, NOT 200m
-  const hedge = expect({service:'hedge'},'price'); assert.match(estimateText(hedge),/не измерване/); checks++;
+  const hedge = expect({service:'hedge',frequency:'once'},'price'); assert.match(estimateText(hedge),/не измерване/); checks++;
   expect({service:'lawn'},'invalid');
   expect({service:'lawn',lawn:['unknown']},'invalid');
   expect({service:'lawn',lawn:['aeration']},'price',79.9);
@@ -54,6 +55,24 @@ try {
   assert.match(vatLabel(),/не е потвърдено/); checks++;
   assert.match(vatLabel('included'),/включен/); checks++;
   assert.match(vatLabel('excluded'),/без ДДС/); checks++;
+  assert.deepEqual(frequencyOptions('subscription'), ['weekly','fortnightly','monthly']); checks++;
+  assert.deepEqual(frequencyOptions('mowing'), ['once','weekly','fortnightly','monthly']); checks++;
+  for (const service of ['planting','irrigation','cleaning','lawn']) {
+    assert.deepEqual(frequencyOptions(service), []); checks++;
+    const changed = changeGardenService({...base, lawn:['aeration'], frequency:'weekly'}, service);
+    assert.equal(changed.frequency, ''); checks++;
+    assert.deepEqual(changed.lawn, []); checks++;
+    const patch = {...changed, lawn:service === 'lawn' ? ['aeration'] : []};
+    assert.equal(validateGardenInput(patch).input.frequency, ''); checks++;
+    const forged = {...patch, frequency:'weekly'};
+    assert.equal(validateGardenInput(forged).input.frequency, ''); checks++;
+    assert.ok(!estimateText(calc(forged)).includes('Честота:')); checks++;
+  }
+  assert.equal(changeGardenService({...base,frequency:'monthly'}, 'subscription').frequency,'weekly'); checks++;
+  assert.equal(changeGardenService(base, 'mowing').frequency,'once'); checks++;
+  expect({service:'weeding',frequency:'weekly'},'invalid');
+  expect({service:'hedge',frequency:'weekly'},'invalid');
+  expect({service:'shrubs',frequency:'fortnightly'},'invalid');
   const request = data => new Request('http://localhost/api/garden-inquiry',{method:'POST',body:JSON.stringify(data)});
   const submission={name:'Calculator test',email:'test@example.com',phone:'+359880000000',location:'София',message:'Тест',garden:base,total:1,recipient:'attacker@example.com'};
   let sent;

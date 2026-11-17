@@ -1,5 +1,5 @@
 import { pricing, type RateKey } from "./gardenPricing";
-import { validateGardenInput, numberValue, services, conditionLabels, frequencyLabels, gardenLabels } from "./gardenFields";
+import { validateGardenInput, numberValue, services, conditionLabels, frequencyLabels, frequencyOptions, gardenLabels } from "./gardenFields";
 export type Estimate = { kind: "invalid"; errors: string[] } | {
   kind: "price" | "quote"; lines: string[]; breakdown: string[]; total: number | null; firstOrderTotal?: number;
   period: string; notes: string[];
@@ -21,7 +21,7 @@ export function estimateGarden(value: unknown): Estimate {
   const service = services.find(s => s.id === i.service)!;
   const garden = pricing.gardenTypes[i.gardenType as keyof typeof pricing.gardenTypes];
   const period = i.service === "subscription" ? "месец" : "посещение";
-  const lines = [`Услуга: ${service.label}`, `Обща площ на двора: ${i.areaUnknown ? "Не съм сигурен/на за площта" : `${i.yardArea} м²`}`, `Състояние: ${conditionLabels[i.condition as keyof typeof conditionLabels]}`, `Тип градина: ${gardenLabels[i.gardenType as keyof typeof gardenLabels]}`, `Честота: ${frequencyLabels[i.frequency as keyof typeof frequencyLabels]}`, `Промоция: ${i.promo ? `${pricing.discount.code} — заявена` : "Не е заявена"}`];
+  const lines = [`Услуга: ${service.label}`, `Обща площ на двора: ${i.areaUnknown ? "Не съм сигурен/на за площта" : `${i.yardArea} м²`}`, `Състояние: ${conditionLabels[i.condition as keyof typeof conditionLabels]}`, `Тип градина: ${gardenLabels[i.gardenType as keyof typeof gardenLabels]}`, ...(frequencyOptions(i.service).length ? [`Честота: ${frequencyLabels[i.frequency as keyof typeof frequencyLabels]}`] : ["Обхват: еднократна работа / проект, без график на посещения"]), `Промоция: ${i.promo ? `${pricing.discount.code} — заявена` : "Не е заявена"}`];
   const breakdown: string[] = [];
   const notes = ["Окончателната оферта се потвърждава след оглед на място.", vatLabel()];
   if (i.areaUnknown || i.service === "planting") {
@@ -42,7 +42,7 @@ export function estimateGarden(value: unknown): Estimate {
     breakdown.push(`Тип градина ×${garden.maintenanceFactor}; честота ×${frequency}`);
     subtotal *= garden.maintenanceFactor * frequency;
   } else {
-    notes.push("Сумата е за едно посещение, не месечен абонамент. Посочената честота се предава в заявката.");
+    notes.push(frequencyOptions(i.service).length ? "Сумата е за едно посещение, не месечен абонамент. Посочената честота се предава в заявката." : "Оценката е за еднократна работа / проект, без абонаментен график.");
     if (["mowing", "lawn"].includes(i.service)) {
       const quantity = area * garden.lawnShare;
       const basis = `Приблизителен модел: ${Math.round(garden.lawnShare * 100)}% от целия двор е трева; това не е измерена площ.`;
@@ -65,7 +65,7 @@ export function estimateGarden(value: unknown): Estimate {
   const eligible = i.promo && pricing.discount.appliesTo.includes(i.service);
   const firstOrderTotal = eligible ? round(total * (1 - pricing.discount.percent / 100)) : undefined;
   if (i.promo) notes.push(pricing.discount.note, eligible ? "Промоционалната оценка е отделна от стандартната цена." : "Избраната услуга не е включена в промоцията.");
-  return { kind: "price", lines, breakdown, total, firstOrderTotal, period: i.service === "irrigation" ? "проект" : period, notes };
+  return { kind: "price", lines, breakdown, total, firstOrderTotal, period: i.service === "irrigation" ? "проект" : frequencyOptions(i.service).length ? period : "изпълнение", notes };
 }
 export function estimateText(r: Exclude<Estimate, { kind: "invalid" }>) {
   return [`ОЦЕНКА BG GREEN YARD — ${pricing.version}`, ...r.lines, "--- За какво е изчислена ---", ...r.breakdown,

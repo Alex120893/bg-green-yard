@@ -17,6 +17,22 @@ export const gardenLabels = {
 };
 export const conditionLabels = { standard: "Поддържана градина", high: "Нужда от повече грижи", overgrown: "Запустяла / силно обрасла градина" };
 export const frequencyLabels = { once: "Еднократно посещение", weekly: "Всяка седмица", fortnightly: "На две седмици", monthly: "Веднъж месечно" };
+export type FrequencyKey = keyof typeof frequencyLabels;
+// Empty list = a one-off project, with no frequency question or stored schedule.
+export const serviceFrequency: Record<string, readonly FrequencyKey[]> = {
+  subscription: ["weekly", "fortnightly", "monthly"],
+  mowing: ["once", "weekly", "fortnightly", "monthly"],
+  weeding: ["once", "fortnightly", "monthly"],
+  hedge: ["once", "monthly"],
+  shrubs: ["once", "monthly"],
+  cleaning: [], lawn: [], planting: [], irrigation: [],
+};
+export function frequencyOptions(service: string): readonly FrequencyKey[] {
+  return Object.hasOwn(serviceFrequency, service) ? serviceFrequency[service] : [];
+}
+export function changeGardenService(input: EstimateInput, service: string): EstimateInput {
+  return { ...input, service, frequency: frequencyOptions(service)[0] ?? "", lawn: [] };
+}
 export const initialGardenInput = { service: "subscription", yardArea: "", areaUnknown: false, gardenType: "", condition: "", frequency: "weekly", lawn: [] as string[], promo: false };
 export type EstimateInput = typeof initialGardenInput;
 export function numberValue(value: string) { return Number(value.trim().replace(",", ".")); }
@@ -34,7 +50,10 @@ export function validateGardenInput(value: unknown): { input?: EstimateInput; er
   if (input.areaUnknown) input.yardArea = ""; // ignore stale or forged area when unknown
   if (!Object.hasOwn(gardenLabels, input.gardenType)) errors.push("Изберете тип градина.");
   if (!Object.hasOwn(conditionLabels, input.condition)) errors.push("Изберете състояние на градината.");
-  if (!Object.hasOwn(frequencyLabels, input.frequency) || (input.service === "subscription" && input.frequency === "once")) errors.push("Изберете честота на посещенията.");
+  const allowed = frequencyOptions(input.service);
+  if (!allowed.length) input.frequency = "";
+  else if (!allowed.includes(input.frequency as FrequencyKey)) errors.push("Изберете подходяща честота за избраната услуга.");
   if (input.service === "lawn" && (!input.lawn.length || input.lawn.some(k => !["aeration", "overseeding", "fertilizing"].includes(k)))) errors.push("Изберете поне една грижа за тревата.");
+  if (input.service !== "lawn") input.lawn = [];
   return { input: errors.length ? undefined : input, errors };
 }
