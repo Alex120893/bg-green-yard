@@ -1,40 +1,72 @@
+import type { RateKey } from "./gardenPricing";
 export const services = [
-  { id: "subscription", label: "Абонаментна поддръжка на двор и градина" },
-  { id: "mowing", label: "Косене на трева" },
-  { id: "hedge", label: "Оформяне на жив плет" },
-  { id: "shrubs", label: "Оформяне на храсти" },
-  { id: "cleaning", label: "Почистване на запустял терен" },
-  { id: "weeding", label: "Плевене" },
-  { id: "lawn", label: "Грижа за тревен килим" },
-  { id: "planting", label: "Засаждане" },
-  { id: "irrigation", label: "Изграждане на поливна система" },
-] as const;
-export const gardenLabels = {
-  lawn: "Предимно тревна площ",
-  light: "Трева с няколко лехи и храсти",
-  mixed: "Смесена градина с жив плет, храсти и цветя",
-  dense: "Градина с много насаждения",
+  { id: "subscription", label: "Абонаментна поддръжка на двор и градина", rates: ["subscription"] },
+  { id: "mowing", label: "Косене на трева", rates: ["mowingStandard", "mowingHigh"] },
+  { id: "hedge", label: "Оформяне на жив плет", rates: ["hedgeLow", "hedgeMedium", "hedgeHigh"] },
+  { id: "shrubs", label: "Оформяне на храсти", rates: ["shrubs"] },
+  { id: "cleaning", label: "Почистване на запустял терен", rates: ["cleaning"] },
+  { id: "weeding", label: "Плевене", rates: ["weeding"] },
+  { id: "lawn", label: "Грижа за тревен килим", rates: ["lawn"] },
+  { id: "planting", label: "Засаждане", rates: ["plantingFlowers", "plantingHedge", "plantingPlants"] },
+  { id: "irrigation", label: "Изграждане на поливна система", rates: ["irrigationDrip", "irrigationAuto", "irrigationSprinklers"] },
+] satisfies {id: string; label: string; rates: RateKey[]}[];
+export const variantLabels: Partial<Record<RateKey, string>> = {
+  mowingStandard: "Поддържана трева", mowingHigh: "Висока / силно израснала трева",
+  hedgeLow: "Височина до 1 м включително", hedgeMedium: "Височина над 1 до 2 м", hedgeHigh: "Височина над 2 м",
+  plantingFlowers: "Засаждане на цветя", plantingHedge: "Засаждане на жив плет", plantingPlants: "Засаждане на стандартни растения",
+  irrigationDrip: "Капково напояване", irrigationAuto: "Автоматична поливна система", irrigationSprinklers: "Система с разпръсквачи",
 };
+export const gardenLabels = { lawn: "Предимно тревна площ", light: "Трева с няколко лехи и храсти", mixed: "Смесена градина с жив плет, храсти и цветя", dense: "Градина с много насаждения" };
 export const conditionLabels = { standard: "Поддържана градина", high: "Нужда от повече грижи", overgrown: "Запустяла / силно обрасла градина" };
 export const frequencyLabels = { once: "Еднократно посещение", weekly: "Всяка седмица", fortnightly: "На две седмици", monthly: "Веднъж месечно" };
-export const initialGardenInput = { service: "subscription", yardArea: "", areaUnknown: false, gardenType: "", condition: "", frequency: "weekly", lawn: [] as string[], promo: false };
+export type FrequencyKey = keyof typeof frequencyLabels;
+export const serviceFrequency: Record<string, readonly FrequencyKey[]> = {
+  subscription: ["weekly", "fortnightly", "monthly"], mowing: ["once", "weekly", "fortnightly", "monthly"],
+  weeding: ["once", "fortnightly", "monthly"], hedge: ["once", "monthly"], shrubs: ["once", "monthly"],
+  cleaning: [], lawn: [], planting: [], irrigation: [],
+};
+export function frequencyOptions(service: string): readonly FrequencyKey[] { return Object.hasOwn(serviceFrequency, service) ? serviceFrequency[service] : []; }
+export const initialGardenInput = { service: "subscription", variant: "subscription", yardArea: "", areaUnknown: false, quantity: "", volume: "unknown", gardenType: "", condition: "", frequency: "weekly", promo: false };
 export type EstimateInput = typeof initialGardenInput;
+export function selectedRate(i: EstimateInput): RateKey | undefined {
+  const service = services.find(s => s.id === i.service);
+  return service?.rates.some(key => key === i.variant) ? i.variant as RateKey : undefined;
+}
+export function quantityKind(i: EstimateInput): "area" | "meters" | "plants" {
+  if (i.service === "hedge" || i.variant === "plantingHedge") return "meters";
+  if (i.service === "shrubs" || i.variant === "plantingPlants") return "plants";
+  return "area";
+}
+export function changeGardenService(input: EstimateInput, service: string): EstimateInput {
+  return { ...initialGardenInput, promo: input.promo, service, variant: services.find(s => s.id === service)?.rates[0] ?? "", frequency: frequencyOptions(service)[0] ?? "" };
+}
 export function numberValue(value: string) { return Number(value.trim().replace(",", ".")); }
 export function validateGardenInput(value: unknown): { input?: EstimateInput; errors: string[] } {
-  if (!value || typeof value !== "object" || Array.isArray(value)) return { errors: ["Невалидни данни за градината."] };
-  const v = value as Record<string, unknown>;
-  const input = { ...initialGardenInput };
-  for (const key of ["service", "yardArea", "gardenType", "condition", "frequency"] as const) input[key] = typeof v[key] === "string" ? v[key].trim() : "";
-  input.areaUnknown = v.areaUnknown === true;
-  input.promo = v.promo === true;
-  input.lawn = Array.isArray(v.lawn) && v.lawn.every(k => typeof k === "string") ? [...new Set(v.lawn)] : [];
+  if (!value || typeof value !== "object" || Array.isArray(value)) return { errors: ["Невалидни данни за услугата."] };
+  const v = value as Record<string, unknown>, input = {...initialGardenInput};
+  for (const key of ["service", "variant", "yardArea", "quantity", "volume", "gardenType", "condition", "frequency"] as const) input[key] = typeof v[key] === "string" ? v[key].trim() : "";
+  input.areaUnknown = v.areaUnknown === true; input.promo = v.promo === true;
   const errors: string[] = [];
   if (!services.some(s => s.id === input.service)) errors.push("Изберете услуга.");
-  if (!input.areaUnknown && (!/^(?:\d+(?:[.,]\d+)?|[.,]\d+)$/.test(input.yardArea) || !Number.isFinite(numberValue(input.yardArea)) || numberValue(input.yardArea) < 1 || numberValue(input.yardArea) > 1000000)) errors.push("Посочете приблизителна обща площ от 1 до 1 000 000 м² или изберете „Не съм сигурен/на за площта“.");
-  if (input.areaUnknown) input.yardArea = ""; // ignore stale or forged area when unknown
-  if (!Object.hasOwn(gardenLabels, input.gardenType)) errors.push("Изберете тип градина.");
-  if (!Object.hasOwn(conditionLabels, input.condition)) errors.push("Изберете състояние на градината.");
-  if (!Object.hasOwn(frequencyLabels, input.frequency) || (input.service === "subscription" && input.frequency === "once")) errors.push("Изберете честота на посещенията.");
-  if (input.service === "lawn" && (!input.lawn.length || input.lawn.some(k => !["aeration", "overseeding", "fertilizing"].includes(k)))) errors.push("Изберете поне една грижа за тревата.");
+  if (!selectedRate(input)) errors.push("Изберете подходящ вид услуга / височина.");
+  const numeric = (raw: string, integer = false) => /^(?:\d+(?:[.,]\d+)?|[.,]\d+)$/.test(raw) && Number.isFinite(numberValue(raw)) && numberValue(raw) >= 1 && numberValue(raw) <= 1000000 && (!integer || Number.isInteger(numberValue(raw)));
+  const kind = quantityKind(input);
+  if (kind === "area") {
+    if (input.areaUnknown) input.yardArea = "";
+    else if (!numeric(input.yardArea)) errors.push("Посочете приблизителна площ от 1 до 1 000 000 м² или изберете „Не съм сигурен/на — уточнете с мен“.");
+    input.quantity = ""; input.volume = "";
+  } else {
+    input.yardArea = ""; input.areaUnknown = false;
+    if (!["exact", "small", "medium", "large", "unknown"].includes(input.volume)) errors.push("Изберете приблизителен обем или „Не съм сигурен/на — уточнете с мен“.");
+    if (input.volume === "exact" && !numeric(input.quantity, kind === "plants")) errors.push(kind === "plants" ? "Въведете положителен цял брой растения." : "Въведете положителна приблизителна дължина.");
+    if (input.volume !== "exact") input.quantity = "";
+  }
+  if (input.service === "subscription") {
+    if (!Object.hasOwn(gardenLabels, input.gardenType)) errors.push("Изберете тип градина.");
+    if (!Object.hasOwn(conditionLabels, input.condition)) errors.push("Изберете състояние на градината.");
+  } else { input.gardenType = ""; input.condition = ""; }
+  const allowed = frequencyOptions(input.service);
+  if (!allowed.length) input.frequency = "";
+  else if (!allowed.includes(input.frequency as FrequencyKey)) errors.push("Изберете подходяща честота за услугата.");
   return { input: errors.length ? undefined : input, errors };
 }

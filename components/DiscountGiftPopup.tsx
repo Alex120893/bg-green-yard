@@ -50,7 +50,7 @@ export function DiscountGiftPopup() {
         </div>
         <div className="p-7">
           <p className="text-base leading-relaxed text-muted">Получете {pricing.discount.percent}% отстъпка за първата заявка за поддръжка на градина или зелени площи в София. При абонамент — за първия месец, без извозване и материали.</p>
-          <Link href="/bg/calculator?promo=first-garden#calculator-form" onClick={() => setOpened(false)} className="mt-6 inline-flex w-full justify-center rounded-full bg-rose-600 px-4 py-3 text-sm font-bold text-white shadow-md transition hover:bg-rose-700">Изчислете цена</Link>
+          <Link href="/bg/calculator?promo=first-garden#calculator-form" onClick={() => setOpened(false)} className="mt-6 inline-flex w-full justify-center rounded-full bg-rose-600 px-4 py-3 text-sm font-bold text-white shadow-md transition hover:bg-rose-700">Вземете своята отстъпка</Link>
           <button type="button" onClick={() => setOpened(false)} className="mt-4 block w-full text-sm font-medium text-muted hover:text-foreground">Затвори</button>
         </div>
       </div>
