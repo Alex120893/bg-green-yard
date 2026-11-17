@@ -16,29 +16,9 @@ export function vatLabel(status:string=pricing.vat.status) {
 }
 function plantingEstimate(i: import("./gardenFields").EstimateInput): Exclude<Estimate,{kind:"invalid"}> {
   const large = i.variant === "plantingTrees" && i.treeSize === "large";
-  const key = i.variant as keyof typeof pricing.planting.ranges;
   const lines = ["Услуга: Засаждане", `Вид: ${variantLabels[i.variant as RateKey]}`, ...(i.variant === "plantingTrees" ? [`Размер: ${large ? "Едроразмерни дървета" : "Стандартни декоративни дървета"}`] : []), `Обем: ${{small:"Малък",medium:"Среден",large:"Голям",unknown:"Не съм сигурен/на — уточнете с мен"}[i.volume]}`, `Оферта за растения, почвени материали и доставка: ${i.supplies ? "Поискана отделно — НЕ са включени в тази сума" : "Не е поискана — НЕ се добавят"}`];
   const notes = ["Цената е само за труд. Растенията, почвените материали и доставката НЕ са включени и се оферират отделно само при Ваше желание.", "Окончателната оферта се потвърждава след оглед на място.", vatLabel()];
-  if (large) return {kind:"quote",lines,breakdown:[],total:null,period:"заявка — само труд",quoteMessage:"Цената се определя след оглед",notes};
-  const breakdown: string[] = [];
-  if (i.volume === "unknown") return {kind:"quote",lines,breakdown,total:null,period:"заявка — само труд",quoteMessage:"Цена след оглед",notes};
-  const volume = i.volume as "small"|"medium"|"large";
-  let low = 0, high = 0;
-  const add = (rateKey: RateKey, range: number[], label: string) => {
-    const rate = pricing.rates[rateKey]; low += range[0]*rate.amount; high += range[1]*rate.amount;
-    breakdown.push(`${label}: ${range[0]}–${range[1]} × ${tariffText(rateKey)} = ${formatEuro(range[0]*rate.amount)} – ${formatEuro(range[1]*rate.amount)}.`);
-  };
-  if (i.variant === "plantingPlants") {
-    const c = pricing.planting.combined[volume];
-    add("plantingFlowers",c.flowers,"Цветни лехи, м²"); add("plantingShrubs",c.shrubs,"Декоративни храсти, бр.");
-    add("plantingHedge",c.hedge,"Жив плет, пог. м"); add("plantingTrees",c.trees,"Стандартни декоративни дървета, бр.");
-    notes.push("Комбинираният обем е примерен състав от цветя, храсти, плет и стандартни дървета. Съставът се уточнява с Вас, без задължително броене или измерване.");
-  } else add(key, pricing.planting.ranges[key][volume], variantLabels[i.variant as RateKey]!);
-  const total = round(low);
-  const maxTotal = round(high);
-  if (!Number.isFinite(total) || !Number.isFinite(maxTotal) || total <= 0 || maxTotal < total) return {kind:"quote",lines,breakdown:[],total:null,period:"заявка — само труд",quoteMessage:"Цена след оглед",notes};
-  notes.push("Малък/среден/голям са приблизителни работни диапазони, не измерени количества. Не се изискват точни размери или бройки.");
-  return {kind:"price",lines,breakdown,total,maxTotal,period:"заявка — само труд",notes};
+  return {kind:"quote",lines,breakdown:[],total:null,period:"заявка",quoteMessage:"Цената се определя след оглед",notes};
 }
 export function estimateGarden(value:unknown):Estimate {
   const parsed=validateGardenInput(value);
