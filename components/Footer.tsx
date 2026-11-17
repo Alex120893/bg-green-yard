@@ -52,7 +52,7 @@ export function Footer({
                 ["/poddruzhka-na-gradini-sofia", "Поддръжка на градини"],
                 ["/polivni-sistemi-sofia", "Поливни системи"],
                 ["/proekti", "Проекти"],
-                ["/calculator", "Калкулатор и оферта"],
+                ["/calculator", "Изчисли цена"],
                 ["/blog", "Блог"],
               ].map(([href, label]) => (
                 <li key={href}><Link href={`/bg${href}`} className="text-sm font-medium text-foreground/80 underline-offset-4 transition-colors hover:text-brand-dark hover:underline">{label}</Link></li>
