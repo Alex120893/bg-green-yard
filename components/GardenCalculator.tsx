@@ -18,7 +18,7 @@ export function GardenCalculator({ promo = false }: { promo?: boolean }) {
   const selected = services.find(s => s.id === input.service)!;
   const kind = quantityKind(input);
   function update<K extends keyof EstimateInput>(key: K, value: EstimateInput[K]) {
-    setInput(prev => key === "service" ? changeGardenService(prev, value as string) : key === "variant" ? { ...prev, variant: value as string, yardArea: "", areaUnknown: false, quantity: "", volume: "unknown" } : { ...prev, [key]: value });
+    setInput(prev => key === "service" ? changeGardenService(prev, value as string) : key === "variant" ? { ...prev, variant: value as string, yardArea: "", areaUnknown: false, quantity: "", volume: "unknown", treeSize: "standard", supplies: false } : { ...prev, [key]: value });
     setResult(null); setShowContact(false); setError("");
   }
   function focus(ref: React.RefObject<HTMLDivElement | null>) {
@@ -50,7 +50,11 @@ export function GardenCalculator({ promo = false }: { promo?: boolean }) {
         <legend className="sr-only">Данни за ориентировъчната оценка</legend>
         <label className="block text-sm font-semibold" htmlFor="calc-service">Вид услуга<select id="calc-service" className={fieldClass} value={input.service} onChange={e => update("service", e.target.value)}>{services.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}</select></label>
         {selected.rates.length > 1 && <label className="block text-sm font-semibold" htmlFor="calc-variant">{input.service === "hedge" ? "Височина на живия плет" : input.service === "mowing" ? "Състояние на тревата" : "Вид услуга"}<select id="calc-variant" className={fieldClass} value={input.variant} onChange={e => update("variant", e.target.value)}>{selected.rates.map(key => <option key={key} value={key}>{variantLabels[key]}</option>)}</select></label>}
-        {kind === "area" ? <>
+        {input.service === "planting" ? <>
+          {input.variant === "plantingTrees" && <label className="block text-sm font-semibold" htmlFor="calc-treeSize">Размер на дърветата<select id="calc-treeSize" className={fieldClass} value={input.treeSize} onChange={e => update("treeSize",e.target.value)}><option value="standard">Стандартни декоративни дървета</option><option value="large">Едроразмерни дървета — цена след оглед</option></select></label>}
+          <label className="block text-sm font-semibold" htmlFor="calc-volume">Приблизителен обем<select id="calc-volume" className={fieldClass} value={input.volume} onChange={e => update("volume",e.target.value)}><option value="unknown">Не съм сигурен/на</option><option value="small">Малък обем</option><option value="medium">Среден обем</option><option value="large">Голям обем</option></select><span className="mt-2 block text-xs font-normal text-muted">Не са нужни точни измервания или брой растения. Ще покажем приблизителен диапазон за труд.</span></label>
+          <label className="flex items-start gap-3 text-sm leading-relaxed"><input id="calc-supplies" type="checkbox" className="mt-1 h-5 w-5 shrink-0 accent-brand" checked={input.supplies} onChange={e => update("supplies",e.target.checked)} /><span>Желая отделна оферта за растения, почвени материали и доставка. Те не се добавят автоматично към цената за труд.</span></label>
+        </> : kind === "area" ? <>
           <label className="flex items-start gap-3 text-sm"><input id="calc-areaUnknown" type="checkbox" className="h-5 w-5 shrink-0 accent-brand" checked={input.areaUnknown} onChange={e => update("areaUnknown", e.target.checked)} /><span>Не съм сигурен/на — уточнете с мен</span></label>
           {!input.areaUnknown && <label className="block min-w-0 text-sm font-semibold" htmlFor="calc-yardArea">{input.service === "subscription" ? "Приблизителна обща площ на целия двор (м²)" : "Приблизителна площ за избраната услуга (м²)"}<input id="calc-yardArea" className={fieldClass} type="text" inputMode="decimal" value={input.yardArea} placeholder="Например 200" onChange={e => update("yardArea", e.target.value)} required /><span className="mt-2 block text-xs font-normal leading-relaxed text-muted">{input.service === "subscription" ? "Целият двор, не само тревата. Обичайната грижа за храсти, плет и лехи е включена." : "Само площта за тази работа — не приемаме целия двор за тревна площ. Достатъчна е приблизителна стойност."}</span></label>}
         </> : <>
@@ -63,7 +67,7 @@ export function GardenCalculator({ promo = false }: { promo?: boolean }) {
         </>}
         {input.service === "cleaning" && <p className="text-sm text-muted">Силно обрасъл / запустял терен. Изчисляваме реалната посочена площ по отделния тариф за разчистване, не по косене.</p>}
         {input.service === "lawn" && <p className="text-sm text-muted">Комплексна сезонна обработка. Семена, тор и други материали се остойностяват отделно и не са включени.</p>}
-        {input.service === "planting" && <p className="text-sm text-muted">Само труд. Растенията и доставката не са включени. За стандартни растения тарифата е „от“.</p>}
+        {input.service === "planting" && <p className="text-sm text-muted">Само труд. Минимална самостоятелна заявка за засаждане — {formatEuro(pricing.planting.minimum)}. Растенията, почвените материали и доставката не са включени; оферират се отделно само по Ваше желание.</p>}
         {input.service === "irrigation" && <p className="text-sm text-muted">Ориентир за избрания тип система. Точна цена след оглед и уточняване на системата.</p>}
         {frequencyOptions(input.service).length > 0 && <label className="block text-sm font-semibold" htmlFor="calc-frequency">Честота на посещенията<select id="calc-frequency" className={fieldClass} value={input.frequency} onChange={e => update("frequency", e.target.value)}>{frequencyOptions(input.service).map(id => <option key={id} value={id}>{frequencyLabels[id]}</option>)}</select></label>}
         <button className="garden-button w-full !text-base" type="submit">Изчислете цена</button>
