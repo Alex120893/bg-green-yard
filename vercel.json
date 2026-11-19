@@ -1,1 +1,17 @@
-{"buildCommand": "npm run build","installCommand": "npm install"}
+{
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "bg-green-yard\\.vercel\\.app"
+        }
+      ],
+      "destination": "https://bg-greenyard.com/:path*",
+      "permanent": true
+    }
+  ]
+}
