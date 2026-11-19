@@ -51,7 +51,7 @@ try {
   assert.ok(!/\d/.test(r.response));checks++;
  }
  for(const message of ['Как да поливам драцена?', 'Драцена', 'How often should I water?', 'Колко често да кося?', 'Листата са жълти', 'Кога се зазимява поливната система?'])eq(isPriceQuestion(message),false);
- for(const service of services){assert.ok(['irrigation','planting'].includes(service.id) ? serviceTariffText(service.id)==='Цената се определя след оглед' : serviceTariffText(service.id).includes('€/'));checks++;}
+ for(const service of services){assert.ok(['irrigation','planting','snow','lighting'].includes(service.id) ? serviceTariffText(service.id)==='Цената се определя след оглед' : serviceTariffText(service.id).includes('€/'));checks++;}
  for(const raw of ['', 'NaN','Infinity','0','-1','1e2','0x10','1000001'])eq(calc({...base,yardArea:raw}).kind,'invalid');
  eq(calc({...base,yardArea:'12,5'}).total,8.75);
  for(const service of ['subscription','mowing','cleaning','weeding','irrigation']){
@@ -87,6 +87,15 @@ try {
  const irrigationRequest={...submission,garden:{...change(base,'irrigation'),irrigationWork:'winter'}};
  eq((await handle(request(irrigationRequest),async p=>{sent=p;})).status,200);
  assert.ok(sent.message.includes(irrigationWorkLabels.winter));checks++;assert.ok(!sent.message.includes('€'));checks++;
+ for(const service of ['snow','lighting']) {
+  const garden={...change(base,service),yardArea:'500',quantity:'25',variant:'cleaning',frequency:'weekly'};
+  const r=calc(garden);eq(r.kind,'quote');eq(r.total,null);eq(r.maxTotal,undefined);eq(r.quoteMessage,'Цената се определя след оглед');
+  assert.ok(!estimateText(r).includes('€'));checks++;
+  eq(validate(garden).input.frequency,'');eq(validate(garden).input.yardArea,'');eq(validate(garden).input.variant,'');
+  eq((await handle(request({...submission,garden}),async p=>{sent=p;})).status,200);
+  assert.ok(sent.message.includes(service==='snow'?'Снегопочистване':'Градинско осветление'));checks++;
+  assert.ok(!sent.message.includes('€'));checks++;
+ }
  const failure=await handle(request(submission),async()=>{throw new Error('failed');});eq(failure.status,500);
  for(const data of [null,[],{...submission,email:'bad'},{...submission,garden:{...base,yardArea:'NaN'}}])eq((await handle(request(data),async()=>{})).status,400);
  console.log(`Service-specific calculator: ${checks} assertions passed. 500 м² запустял терен = 610 €; 200 м² абонамент = 140 €/месец.`);

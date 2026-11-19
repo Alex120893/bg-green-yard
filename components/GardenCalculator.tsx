@@ -1,7 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 import { pricing } from "@/lib/gardenPricing";
-import { conditionLabels, frequencyLabels, frequencyOptions, changeGardenService, gardenLabels, initialGardenInput, services, quantityKind, variantLabels, irrigationWorkLabels, type EstimateInput } from "@/lib/gardenFields";
+import { conditionLabels, frequencyLabels, frequencyOptions, changeGardenService, gardenLabels, initialGardenInput, services, quantityKind, variantLabels, irrigationWorkLabels, inspectionOnlyServices, type EstimateInput } from "@/lib/gardenFields";
 import { estimateGarden, formatEuro, type Estimate } from "@/lib/gardenEstimate";
 
 const fieldClass = "mt-2 block w-full min-w-0 rounded-xl border border-brand/25 bg-white px-3 py-3 text-base text-foreground";
@@ -17,7 +17,7 @@ export function GardenCalculator({ promo = false }: { promo?: boolean }) {
   const sending = useRef(false);
   const selected = services.find(s => s.id === input.service)!;
   const kind = quantityKind(input);
-  const result = ["planting", "irrigation"].includes(input.service) ? estimateGarden(input) : calculatedResult;
+  const result = ["planting", "irrigation", ...inspectionOnlyServices].includes(input.service) ? estimateGarden(input) : calculatedResult;
   function update<K extends keyof EstimateInput>(key: K, value: EstimateInput[K]) {
     setInput(prev => key === "service" ? changeGardenService(prev, value as string) : key === "variant" ? { ...prev, variant: value as string, yardArea: "", areaUnknown: false, quantity: "", volume: "unknown", treeSize: "standard", supplies: false } : { ...prev, [key]: value });
     setResult(null); setShowContact(false); setError("");
@@ -51,7 +51,7 @@ export function GardenCalculator({ promo = false }: { promo?: boolean }) {
         <legend className="sr-only">Данни за ориентировъчната оценка</legend>
         <label className="block text-sm font-semibold" htmlFor="calc-service">Вид услуга<select id="calc-service" className={fieldClass} value={input.service} onChange={e => update("service", e.target.value)}>{services.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}</select></label>
         {selected.rates.length > 1 && <label className="block text-sm font-semibold" htmlFor="calc-variant">{input.service === "hedge" ? "Височина на живия плет" : input.service === "mowing" ? "Състояние на тревата" : "Вид услуга"}<select id="calc-variant" className={fieldClass} value={input.variant} onChange={e => update("variant", e.target.value)}>{selected.rates.map(key => <option key={key} value={key}>{variantLabels[key]}</option>)}</select></label>}
-        {input.service === "irrigation" ? <label className="block text-sm font-semibold" htmlFor="calc-irrigationWork">Дейност по поливната система<select id="calc-irrigationWork" className={fieldClass} value={input.irrigationWork} onChange={e => update("irrigationWork", e.target.value)}>{Object.entries(irrigationWorkLabels).map(([id,label]) => <option key={id} value={id}>{label}</option>)}</select></label> : input.service === "planting" ? <>
+        {inspectionOnlyServices.includes(input.service) ? <p className="text-sm leading-relaxed text-muted">Цената се определя след оглед и уточняване на обекта. Заявете оглед за индивидуална оферта.</p> : input.service === "irrigation" ? <label className="block text-sm font-semibold" htmlFor="calc-irrigationWork">Дейност по поливната система<select id="calc-irrigationWork" className={fieldClass} value={input.irrigationWork} onChange={e => update("irrigationWork", e.target.value)}>{Object.entries(irrigationWorkLabels).map(([id,label]) => <option key={id} value={id}>{label}</option>)}</select></label> : input.service === "planting" ? <>
           {input.variant === "plantingTrees" && <label className="block text-sm font-semibold" htmlFor="calc-treeSize">Размер на дърветата<select id="calc-treeSize" className={fieldClass} value={input.treeSize} onChange={e => update("treeSize",e.target.value)}><option value="standard">Стандартни декоративни дървета</option><option value="large">Едроразмерни дървета — цена след оглед</option></select></label>}
           <label className="block text-sm font-semibold" htmlFor="calc-volume">Приблизителен обем<select id="calc-volume" className={fieldClass} value={input.volume} onChange={e => update("volume",e.target.value)}><option value="unknown">Не съм сигурен/на</option><option value="small">Малък обем</option><option value="medium">Среден обем</option><option value="large">Голям обем</option></select><span className="mt-2 block text-xs font-normal text-muted">Не са нужни точни измервания или брой растения. Цената ще бъде определена след оглед на място.</span></label>
           <label className="flex items-start gap-3 text-sm leading-relaxed"><input id="calc-supplies" type="checkbox" className="mt-1 h-5 w-5 shrink-0 accent-brand" checked={input.supplies} onChange={e => update("supplies",e.target.checked)} /><span>Желая отделна оферта за растения, почвени материали и доставка. Те не се добавят автоматично към цената за труд.</span></label>
@@ -71,7 +71,7 @@ export function GardenCalculator({ promo = false }: { promo?: boolean }) {
         {input.service === "planting" && <p className="text-sm text-muted">За засаждане е необходим оглед. След него ще получите цена. Растенията, почвените материали и доставката не са включени; оферират се отделно само по Ваше желание.</p>}
         {input.service === "irrigation" && <p className="text-sm text-muted">За поливна система е необходим оглед. След уточняване на дейността и обекта ще получите индивидуална цена.</p>}
         {frequencyOptions(input.service).length > 0 && <label className="block text-sm font-semibold" htmlFor="calc-frequency">Честота на посещенията<select id="calc-frequency" className={fieldClass} value={input.frequency} onChange={e => update("frequency", e.target.value)}>{frequencyOptions(input.service).map(id => <option key={id} value={id}>{frequencyLabels[id]}</option>)}</select></label>}
-        {!["planting", "irrigation"].includes(input.service) && <button className="garden-button w-full !text-base" type="submit">Изчислете цена</button>}
+        {!["planting", "irrigation", ...inspectionOnlyServices].includes(input.service) && <button className="garden-button w-full !text-base" type="submit">Изчислете цена</button>}
       </fieldset>
     </form>
     <div ref={feedback} tabIndex={-1} className="min-w-0 scroll-mt-40 rounded-3xl border border-brand/20 bg-surface p-5 [overflow-wrap:anywhere] sm:p-8" aria-live="polite">
