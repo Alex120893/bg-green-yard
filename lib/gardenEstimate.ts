@@ -1,5 +1,5 @@
 import { pricing, type RateKey } from "./gardenPricing";
-import { validateGardenInput, numberValue, services, selectedRate, quantityKind, conditionLabels, frequencyLabels, frequencyOptions, gardenLabels, variantLabels } from "./gardenFields";
+import { validateGardenInput, numberValue, services, selectedRate, quantityKind, conditionLabels, frequencyLabels, frequencyOptions, gardenLabels, variantLabels, irrigationWorkLabels } from "./gardenFields";
 export type Estimate = {kind:"invalid";errors:string[]} | {
   kind: "price" | "quote"; lines: string[]; breakdown: string[]; total: number | null; maxTotal?: number;
   quoteMessage?: string; firstOrderTotal?: number; firstOrderMax?: number; period: string; notes: string[];
@@ -8,6 +8,7 @@ export const formatEuro = (n:number) => new Intl.NumberFormat("bg-BG",{style:"cu
 const round = (n:number) => Math.round((n+Number.EPSILON)*100)/100;
 export function tariffText(key: RateKey) { const r=pricing.rates[key]; return `${r.amount.toLocaleString("bg-BG")} ${r.unit}`; }
 export function serviceTariffText(id:string) {
+  if (["irrigation", "planting"].includes(id)) return "Цената се определя след оглед";
   const s=services.find(s=>s.id===id);
   return s?.rates.map(key=>`${variantLabels[key] ? variantLabels[key]+": " : ""}${tariffText(key)}`).join("; ") ?? "";
 }
@@ -25,8 +26,13 @@ export function estimateGarden(value:unknown):Estimate {
   if(!parsed.input) return {kind:"invalid",errors:parsed.errors};
   const i=parsed.input, key=selectedRate(i)!, r=pricing.rates[key], kind=quantityKind(i);
   if(i.service === "planting") return plantingEstimate(i);
+  if(i.service === "irrigation") return {
+    kind:"quote", total:null, period:"заявка", quoteMessage:"Цената се определя след оглед",
+    lines:["Услуга: Поливна система", `Дейност: ${irrigationWorkLabels[i.irrigationWork as keyof typeof irrigationWorkLabels]}`],
+    breakdown:[], notes:["За избраната дейност е необходим оглед и уточняване на обекта. След това ще получите индивидуална оферта.", "Окончателната оферта се потвърждава след оглед на място."],
+  };
   const service=services.find(s=>s.id===i.service)!;
-  const period=i.service==="subscription" ? "месец" : i.service==="irrigation" ? "проект" : "изпълнение";
+  const period=i.service==="subscription" ? "месец" : "изпълнение";
   const lines=[`Услуга: ${service.label}`, ...(variantLabels[key] ? [`Вид: ${variantLabels[key]}`] : []), `Тарифа: ${tariffText(key)}`];
   if(frequencyOptions(i.service).length) lines.push(`Честота: ${frequencyLabels[i.frequency as keyof typeof frequencyLabels]}`);
   else lines.push("Обхват: еднократна работа / проект, без график на посещения");
@@ -34,8 +40,6 @@ export function estimateGarden(value:unknown):Estimate {
   if(i.service==="subscription") lines.push(`Тип градина: ${gardenLabels[i.gardenType as keyof typeof gardenLabels]}`,`Състояние: ${conditionLabels[i.condition as keyof typeof conditionLabels]}`,`Включено: ${pricing.subscription.included}`);
   if(i.service==="cleaning") notes.push("Тарифата е за силно обрасъл терен. Извозване и извънредни дейности се уточняват отделно; не е обикновено косене.");
   if(i.service==="lawn") notes.push("Комплексна сезонна обработка. Семена, тор и други материали се остойностяват отделно и НЕ са включени в сумата за обработка.");
-  if(i.service==="planting") notes.push("Само труд. Цената на растенията и доставката НЕ са включени. За стандартни растения ставката е „от“ — според вид и размер.");
-  if(i.service==="irrigation") notes.push("Само ориентир за избрания тип система. Точната цена, материалите, трасетата и обхватът се потвърждават след оглед и уточняване на системата.");
   let low:number, high:number;
   if(kind==="area") {
     if(i.areaUnknown) { lines.push("Площ: Не съм сигурен/на — уточнете с мен"); return {kind:"quote",lines,breakdown,total:null,period,notes}; }

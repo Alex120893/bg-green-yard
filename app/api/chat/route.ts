@@ -1,3 +1,4 @@
+import { priceQuestionResponse } from "@/lib/chatPricing";
 import { answerGardenQuestionWithAi } from "@/lib/gardenAi";
 import { saveChatInquiry } from "@/lib/chatInquiries";
 import { searchPlantCatalog } from "@/lib/plantCatalog";
@@ -10,6 +11,12 @@ export async function POST(request: Request) {
 
     if (!question || question.length > 1000) {
       return Response.json({ error: "Невалидно съобщение" }, { status: 400 });
+    }
+
+    const priceResult = priceQuestionResponse(question);
+    if (priceResult) {
+      await saveChatInquiry({ question, answer: priceResult.response, createdAt: new Date().toISOString() });
+      return Response.json(priceResult);
     }
 
     const localResult = searchPlantDatabase(question);
