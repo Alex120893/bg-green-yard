@@ -19,7 +19,7 @@ const landscapingLinks = [
   ["/proekti", "Проекти"],
 ] as const;
 
-const bgPrimaryLinks = [["", "Начало"], ["/calculator", "Ценови калкулатор"], ["/about", "За нас"], ["/blog", "Блог"], ["/inquiries", "Въпроси"], ["/contact", "Контакти"]] as const;
+const bgPrimaryLinks = [["", "Начало"], ["/about", "За нас"], ["/blog", "Блог"], ["/inquiries", "Въпроси"], ["/contact", "Контакти"]] as const;
 const navKeys = [{ href: "", key: "home" as const }, { href: "/about", key: "about" as const }, { href: "/services", key: "services" as const }, { href: "/gallery", key: "gallery" as const }, { href: "/contact", key: "contact" as const }];
 
 export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }) {
@@ -92,7 +92,7 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
       />
     </div>
     <div className={`grid xl:hidden ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"} transition-[grid-template-rows] duration-300`} aria-hidden={!open}><div className="min-h-0 overflow-hidden"><nav id="mobile-nav" inert={!open ? true : undefined} className="max-h-[70dvh] overflow-y-auto border-t border-brand/20 bg-brand px-4 pb-4 pt-2"><div className="mx-auto flex max-w-7xl flex-col gap-1">
-      {locale === "bg" ? <><MobileLink href="/bg" label="Начало" close={() => setOpen(false)} /><MobileLink href="/bg/calculator" label="Ценови калкулатор" close={() => setOpen(false)} /><p className="px-3 pb-1 pt-3 text-xs font-bold uppercase tracking-widest text-white/60">Озеленяване</p>{landscapingLinks.map(([href, label]) => <MobileLink key={href} href={`/bg${href}`} label={label} close={() => setOpen(false)} />)}{bgPrimaryLinks.slice(1).filter(([href]) => href !== "/calculator").map(([href, label]) => <MobileLink key={href} href={`/bg${href}`} label={label} close={() => setOpen(false)} />)}</> : navKeys.map(({ href, key }) => <MobileLink key={key} href={`/${locale}${href}`} label={nav[key]} close={() => setOpen(false)} />)}
+      {locale === "bg" ? <><MobileLink href="/bg" label="Начало" close={() => setOpen(false)} /><p className="px-3 pb-1 pt-3 text-xs font-bold uppercase tracking-widest text-white/60">Озеленяване</p>{landscapingLinks.map(([href, label]) => <MobileLink key={href} href={`/bg${href}`} label={label} close={() => setOpen(false)} />)}{bgPrimaryLinks.slice(1).map(([href, label]) => <MobileLink key={href} href={`/bg${href}`} label={label} close={() => setOpen(false)} />)}</> : navKeys.map(({ href, key }) => <MobileLink key={key} href={`/${locale}${href}`} label={nav[key]} close={() => setOpen(false)} />)}
     </div></nav></div></div>
   </header>
   </>;
