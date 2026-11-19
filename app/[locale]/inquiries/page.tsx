@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { InquiriesList } from "@/components/InquiriesList";
 import { getChatInquiries } from "@/lib/chatInquiries";
-import { searchPlantDatabase } from "@/lib/plantDatabase";
+import { publishedInquiry } from "@/lib/publishedInquiry";
 import { isLocale } from "@/lib/i18n";
 import { PRODUCTION_SITE_ORIGIN } from "@/lib/site";
 
@@ -33,10 +33,7 @@ export default async function InquiriesPage({
 }) {
   const { locale } = await params;
   const savedInquiries = await getChatInquiries();
-  const inquiries = savedInquiries.map((inquiry) => ({
-    ...inquiry,
-    answer: searchPlantDatabase(inquiry.question).response,
-  }));
+  const inquiries = savedInquiries.map(publishedInquiry);
   const isBulgarian = locale !== "en";
 
   const copy = isBulgarian
@@ -44,6 +41,7 @@ export default async function InquiriesPage({
         eyebrow: "Съвети от BG Green Yard",
         title: "Въпроси за градини и растения",
         subtitle: "Практични въпроси и отговори за растения, тревни площи и поливни системи.",
+        calculator: "Към ценовия калкулатор",
         question: "Въпрос",
         answer: "Отговор",
         empty: "Все още няма публикувани запитвания.",
@@ -55,6 +53,7 @@ export default async function InquiriesPage({
         eyebrow: "BG Green Yard assistant",
         title: "Chat inquiries",
         subtitle: "Browse visitor questions and answers from our assistant.",
+        calculator: "Open price calculator",
         question: "Question",
         answer: "Answer",
         empty: "There are no published inquiries yet.",

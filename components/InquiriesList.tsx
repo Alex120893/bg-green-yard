@@ -1,9 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import type { ChatInquiry } from "@/lib/chatInquiries";
 
 type Copy = {
+  calculator: string;
   question: string;
   answer: string;
   searchLabel: string;
@@ -11,7 +13,7 @@ type Copy = {
   noResults: string;
 };
 
-export function InquiriesList({ inquiries, copy }: { inquiries: ChatInquiry[]; copy: Copy }) {
+export function InquiriesList({ inquiries, copy }: { inquiries: (ChatInquiry & { showCalculator: boolean })[]; copy: Copy }) {
   const [query, setQuery] = useState("");
   const filtered = useMemo(() => {
     const term = query.trim().toLocaleLowerCase();
@@ -43,6 +45,7 @@ export function InquiriesList({ inquiries, copy }: { inquiries: ChatInquiry[]; c
               <p className="mt-2 whitespace-pre-wrap text-base font-semibold text-foreground">{inquiry.question}</p>
               <p className="mt-5 border-t border-black/5 pt-4 text-xs font-semibold uppercase tracking-[0.14em] text-brand">{copy.answer}</p>
               <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-muted">{inquiry.answer}</p>
+              {inquiry.showCalculator && <Link href="/bg/calculator#calculator-form" className="mt-4 inline-flex rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand-dark">{copy.calculator}</Link>}
             </article>
           ))}
         </div>
