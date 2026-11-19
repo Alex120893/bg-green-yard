@@ -358,6 +358,37 @@ export default async function HomePage({
 
 
 
+      {locale === "bg" && (
+        <section className="garden-block garden-block-cream bg-white py-20 md:py-28">
+          <div className="mx-auto max-w-6xl px-4 md:px-6">
+            <Reveal>
+              <div className="max-w-3xl">
+                <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+                  Защо да изберете BG.GREEN_YARD?
+                </h2>
+                <p className="mt-4 text-lg leading-relaxed text-muted">
+                  Грижим се за зелените пространства от подготовката и изграждането до редовната поддръжка. Работим с внимание към детайлите и съобразяваме услугите с особеностите на всеки обект.
+                </p>
+              </div>
+            </Reveal>
+            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {clientBenefits.map((benefit, index) => (
+                <Reveal key={benefit} delayMs={index * 45}>
+                  <div className="flex h-full items-start gap-3 rounded-2xl bg-surface p-5 shadow-sm">
+                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-soft text-brand-dark" aria-hidden>
+                      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={2} className="h-3.5 w-3.5">
+                        <path d="m4 10 3.5 3.5L16 5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                    <p className="text-sm font-semibold leading-relaxed text-foreground">{benefit}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ── CTA ── */}
       <section className="garden-block garden-block-forest relative overflow-hidden bg-brand py-20 md:py-28">
         <div
@@ -399,36 +430,7 @@ export default async function HomePage({
         <Link href="/bg/calculator#calculator-form" className="garden-button shrink-0 !text-base">Изчисли цена <span aria-hidden>→</span></Link>
       </div></section>}
 
-      {locale === "bg" && (
-        <section className="garden-block garden-block-cream bg-white py-20 md:py-28">
-          <div className="mx-auto max-w-6xl px-4 md:px-6">
-            <Reveal>
-              <div className="max-w-3xl">
-                <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-                  Защо да изберете BG.GREEN_YARD?
-                </h2>
-                <p className="mt-4 text-lg leading-relaxed text-muted">
-                  Грижим се за зелените пространства от подготовката и изграждането до редовната поддръжка. Работим с внимание към детайлите и съобразяваме услугите с особеностите на всеки обект.
-                </p>
-              </div>
-            </Reveal>
-            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {clientBenefits.map((benefit, index) => (
-                <Reveal key={benefit} delayMs={index * 45}>
-                  <div className="flex h-full items-start gap-3 rounded-2xl bg-surface p-5 shadow-sm">
-                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-soft text-brand-dark" aria-hidden>
-                      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={2} className="h-3.5 w-3.5">
-                        <path d="m4 10 3.5 3.5L16 5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </span>
-                    <p className="text-sm font-semibold leading-relaxed text-foreground">{benefit}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+
     </div>
   );
 }
