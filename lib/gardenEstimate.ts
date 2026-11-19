@@ -1,5 +1,5 @@
 import { pricing, type RateKey } from "./gardenPricing";
-import { validateGardenInput, numberValue, services, selectedRate, quantityKind, conditionLabels, frequencyLabels, frequencyOptions, gardenLabels, variantLabels, irrigationWorkLabels } from "./gardenFields";
+import { validateGardenInput, numberValue, services, selectedRate, quantityKind, conditionLabels, frequencyLabels, frequencyOptions, gardenLabels, variantLabels, irrigationWorkLabels, inspectionOnlyServices } from "./gardenFields";
 export type Estimate = {kind:"invalid";errors:string[]} | {
   kind: "price" | "quote"; lines: string[]; breakdown: string[]; total: number | null; maxTotal?: number;
   quoteMessage?: string; firstOrderTotal?: number; firstOrderMax?: number; period: string; notes: string[];
@@ -8,7 +8,7 @@ export const formatEuro = (n:number) => new Intl.NumberFormat("bg-BG",{style:"cu
 const round = (n:number) => Math.round((n+Number.EPSILON)*100)/100;
 export function tariffText(key: RateKey) { const r=pricing.rates[key]; return `${r.amount.toLocaleString("bg-BG")} ${r.unit}`; }
 export function serviceTariffText(id:string) {
-  if (["irrigation", "planting"].includes(id)) return "Цената се определя след оглед";
+  if (["irrigation", "planting", ...inspectionOnlyServices].includes(id)) return "Цената се определя след оглед";
   const s=services.find(s=>s.id===id);
   return s?.rates.map(key=>`${variantLabels[key] ? variantLabels[key]+": " : ""}${tariffText(key)}`).join("; ") ?? "";
 }
@@ -24,7 +24,13 @@ function plantingEstimate(i: import("./gardenFields").EstimateInput): Exclude<Es
 export function estimateGarden(value:unknown):Estimate {
   const parsed=validateGardenInput(value);
   if(!parsed.input) return {kind:"invalid",errors:parsed.errors};
-  const i=parsed.input, key=selectedRate(i)!, r=pricing.rates[key], kind=quantityKind(i);
+  const i=parsed.input;
+  if (inspectionOnlyServices.includes(i.service)) return {
+    kind:"quote",total:null,period:"заявка",quoteMessage:"Цената се определя след оглед",
+    lines:[`Услуга: ${services.find(service => service.id === i.service)!.label}`],breakdown:[],
+    notes:["Свържете се с нас за уточняване на обекта и индивидуална оферта.", "Окончателната оферта се потвърждава след оглед на място."],
+  };
+  const key=selectedRate(i)!, r=pricing.rates[key], kind=quantityKind(i);
   if(i.service === "planting") return plantingEstimate(i);
   if(i.service === "irrigation") return {
     kind:"quote", total:null, period:"заявка", quoteMessage:"Цената се определя след оглед",

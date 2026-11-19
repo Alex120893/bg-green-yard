@@ -1,5 +1,5 @@
 import type { RateKey } from "./gardenPricing";
-export const services = [
+export const services: {id: string; label: string; rates: RateKey[]}[] = [
   { id: "subscription", label: "Абонаментна поддръжка на двор и градина", rates: ["subscription"] },
   { id: "mowing", label: "Косене на трева", rates: ["mowingStandard", "mowingHigh"] },
   { id: "hedge", label: "Оформяне на жив плет", rates: ["hedgeLow", "hedgeMedium", "hedgeHigh"] },
@@ -7,8 +7,11 @@ export const services = [
   { id: "cleaning", label: "Почистване на запустял терен", rates: ["cleaning"] },
   { id: "weeding", label: "Плевене", rates: ["weeding"] },
   { id: "planting", label: "Засаждане", rates: ["plantingFlowers", "plantingShrubs", "plantingHedge", "plantingTrees", "plantingPlants"] },
+  { id: "snow", label: "Снегопочистване", rates: [] },
+  { id: "lighting", label: "Градинско осветление", rates: [] },
   { id: "irrigation", label: "Поливна система", rates: ["irrigationAuto"] },
-] satisfies {id: string; label: string; rates: RateKey[]}[];
+];
+export const inspectionOnlyServices = ["snow", "lighting"];
 export const variantLabels: Partial<Record<RateKey, string>> = {
   mowingStandard: "Поддържана трева", mowingHigh: "Висока / силно израснала трева",
   hedgeLow: "Височина до 1 м включително", hedgeMedium: "Височина над 1 до 2 м", hedgeHigh: "Височина над 2 м",
@@ -57,10 +60,12 @@ export function validateGardenInput(value: unknown): { input?: EstimateInput; er
   input.areaUnknown = v.areaUnknown === true; input.promo = v.promo === true; input.supplies = v.supplies === true;
   const errors: string[] = [];
   if (!services.some(s => s.id === input.service)) errors.push("Изберете услуга.");
-  if (!selectedRate(input)) errors.push("Изберете подходящ вид услуга / височина.");
+  if (!inspectionOnlyServices.includes(input.service) && !selectedRate(input)) errors.push("Изберете подходящ вид услуга / височина.");
   const numeric = (raw: string, integer = false) => /^(?:\d+(?:[.,]\d+)?|[.,]\d+)$/.test(raw) && Number.isFinite(numberValue(raw)) && numberValue(raw) >= 1 && numberValue(raw) <= 1000000 && (!integer || Number.isInteger(numberValue(raw)));
   const kind = quantityKind(input);
-  if (input.service === "irrigation") {
+  if (inspectionOnlyServices.includes(input.service)) {
+    input.variant = ""; input.yardArea = ""; input.quantity = ""; input.volume = ""; input.areaUnknown = false;
+  } else if (input.service === "irrigation") {
     input.yardArea = ""; input.quantity = ""; input.volume = ""; input.areaUnknown = false;
     if (!Object.hasOwn(irrigationWorkLabels, input.irrigationWork)) errors.push("Изберете дейност за поливната система.");
   } else if (input.service === "planting") {
