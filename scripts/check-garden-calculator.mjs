@@ -6,11 +6,13 @@ import { pathToFileURL } from 'node:url';
 import assert from 'node:assert/strict';
 const dir=mkdtempSync(join(tmpdir(),'garden-calc-'));
 try {
- execFileSync(process.execPath,['node_modules/typescript/bin/tsc','lib/gardenInquiry.ts','--outDir',dir,'--module','commonjs','--target','ES2022','--lib','ES2022,DOM','--esModuleInterop','--skipLibCheck'],{stdio:'inherit'});
+ execFileSync(process.execPath,['node_modules/typescript/bin/tsc','lib/gardenInquiry.ts','lib/chatPricing.ts','--outDir',dir,'--module','commonjs','--target','ES2022','--lib','ES2022,DOM','--esModuleInterop','--skipLibCheck'],{stdio:'inherit'});
  const load=async name=>(await import(pathToFileURL(join(dir,name+'.js')).href)).default;
  const {estimateGarden:calc,estimateText,serviceTariffText}=await load('gardenEstimate');
  const {changeGardenService:change,validateGardenInput:validate,services,frequencyOptions}=await load('gardenFields');
  const {handleGardenInquiry:handle}=await load('gardenInquiry');
+ const {irrigationWorkLabels}=await load('gardenFields');
+ const {priceQuestionResponse,isPriceQuestion}=await load('chatPricing');
  const base={service:'subscription',variant:'subscription',yardArea:'200',areaUnknown:false,quantity:'',volume:'unknown',gardenType:'lawn',condition:'standard',frequency:'weekly',promo:false};
  let checks=0;
  const eq=(a,b)=>{assert.deepEqual(a,b);checks++;};
@@ -36,8 +38,20 @@ try {
    assert.ok(!estimateText(r).includes('€'));checks++;
   }
  }
- for(const [variant,total] of [['irrigationDrip',560],['irrigationAuto',840],['irrigationSprinklers',1070]])test('irrigation',{variant,yardArea:'100'},total);
- for(const service of services){assert.ok(serviceTariffText(service.id).includes('€/'));checks++;}
+ for(const irrigationWork of Object.keys(irrigationWorkLabels)) {
+  const i={...change(base,'irrigation'),irrigationWork,yardArea:'500',frequency:'weekly',quantity:'10'};
+  const r=calc(i);eq(r.kind,'quote');eq(r.total,null);eq(r.maxTotal,undefined);eq(r.quoteMessage,'Цената се определя след оглед');
+  assert.ok(!estimateText(r).includes('€'));checks++;assert.ok(estimateText(r).includes(irrigationWorkLabels[irrigationWork]));checks++;
+  eq(validate(i).input.yardArea,'');eq(validate(i).input.frequency,'');
+ }
+ eq(calc({...change(base,'irrigation'),irrigationWork:'toString'}).kind,'invalid');
+ eq(calc({...change(base,'irrigation'),variant:'irrigationDrip'}).kind,'invalid');
+ for(const message of ['Колко струва косене?', 'Цена за засаждане?', 'Каква е цената за поливна система?', 'Оферта за 200 м2', 'Колко пари за плевене?', 'Сколько стоит покос?', 'Какая цена?', 'Почём посадка?', 'How much is mowing?', 'price for roses', 'irrigation costs', 'бюджет за градина', '0,70 евро?', 'безплатен ли е огледът?']) {
+  const r=priceQuestionResponse(message);assert.ok(r);checks++;eq(r.showCalculator,true);assert.ok(r.response.includes('https://bg-greenyard.com/bg/calculator'));checks++;
+  assert.ok(!/\d/.test(r.response));checks++;
+ }
+ for(const message of ['Как да поливам драцена?', 'Драцена', 'How often should I water?', 'Колко често да кося?', 'Листата са жълти', 'Кога се зазимява поливната система?'])eq(isPriceQuestion(message),false);
+ for(const service of services){assert.ok(['irrigation','planting'].includes(service.id) ? serviceTariffText(service.id)==='Цената се определя след оглед' : serviceTariffText(service.id).includes('€/'));checks++;}
  for(const raw of ['', 'NaN','Infinity','0','-1','1e2','0x10','1000001'])eq(calc({...base,yardArea:raw}).kind,'invalid');
  eq(calc({...base,yardArea:'12,5'}).total,8.75);
  for(const service of ['subscription','mowing','cleaning','weeding','irrigation']){
@@ -70,6 +84,9 @@ try {
  eq((await handle(request(largeTreeRequest),async p=>{sent=p;})).status,200);
  assert.ok(sent.message.includes('Цената се определя след оглед'));checks++;
  assert.ok(!sent.message.includes('50,00')&&!sent.message.includes('100,80')&&!sent.message.includes('168,00'));checks++;
+ const irrigationRequest={...submission,garden:{...change(base,'irrigation'),irrigationWork:'winter'}};
+ eq((await handle(request(irrigationRequest),async p=>{sent=p;})).status,200);
+ assert.ok(sent.message.includes(irrigationWorkLabels.winter));checks++;assert.ok(!sent.message.includes('€'));checks++;
  const failure=await handle(request(submission),async()=>{throw new Error('failed');});eq(failure.status,500);
  for(const data of [null,[],{...submission,email:'bad'},{...submission,garden:{...base,yardArea:'NaN'}}])eq((await handle(request(data),async()=>{})).status,400);
  console.log(`Service-specific calculator: ${checks} assertions passed. 500 м² запустял терен = 610 €; 200 м² абонамент = 140 €/месец.`);

@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { CONTACT } from "@/lib/contact";
 
 interface Message {
@@ -11,12 +12,14 @@ interface Message {
   timestamp: Date;
   needsContact?: boolean;
   showServicePrompt?: boolean;
+  showCalculator?: boolean;
 }
 
 type ChatResponse = {
   response: string;
   needsContact: boolean;
   showServicePrompt: boolean;
+  showCalculator?: boolean;
 };
 
 type SpeechRecognitionInstance = {
@@ -217,6 +220,7 @@ export function ChatBot() {
         timestamp: new Date(),
         needsContact: data.needsContact,
         showServicePrompt: data.showServicePrompt,
+        showCalculator: data.showCalculator,
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
@@ -334,6 +338,7 @@ export function ChatBot() {
                       )}
                     </button>
                   )}
+                  {message.showCalculator && <Link href="/bg/calculator#calculator-form" className="mt-3 block rounded bg-green-600 px-3 py-2 text-center text-sm font-semibold text-white hover:bg-green-700">{locale === "en" ? "Open price calculator" : "Към ценовия калкулатор"}</Link>}
                   {message.showServicePrompt && (
                     <p className="mt-2 border-t border-green-100 pt-2 text-xs font-medium text-green-800">
                       {copy.servicePrompt}
