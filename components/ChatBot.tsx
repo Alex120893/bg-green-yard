@@ -73,9 +73,6 @@ export function ChatBot() {
         stopListening: "Спри гласовото търсене",
         voiceInputUnavailable: "Този браузър не поддържа гласово търсене.",
       };
-  const voiceCopy = locale === "en"
-    ? { read: "Read answer aloud", stop: "Stop reading", unavailable: "Voice playback is not supported by this browser." }
-    : { read: "Прочети отговора на глас", stop: "Спри озвучаването", unavailable: "Този браузър не поддържа озвучаване." };
   const [showPrompt, setShowPrompt] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -87,8 +84,6 @@ export function ChatBot() {
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [speakingMessageId, setSpeakingMessageId] = useState<string | null>(null);
-  const [speechSupported, setSpeechSupported] = useState(false);
   const [recognitionSupported, setRecognitionSupported] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
@@ -101,7 +96,6 @@ export function ChatBot() {
   }, [locale, copy.greeting]);
 
   useEffect(() => {
-    setSpeechSupported("speechSynthesis" in window && "SpeechSynthesisUtterance" in window);
     const SpeechRecognition = (window as SpeechRecognitionWindow).SpeechRecognition
       ?? (window as SpeechRecognitionWindow).webkitSpeechRecognition;
     if (SpeechRecognition) {
@@ -114,39 +108,9 @@ export function ChatBot() {
       setRecognitionSupported(true);
     }
     return () => {
-      window.speechSynthesis?.cancel();
       recognitionRef.current?.stop();
     };
   }, []);
-
-  const toggleSpeech = (message: Message) => {
-    if (!speechSupported) return;
-    if (speakingMessageId === message.id) {
-      window.speechSynthesis.cancel();
-      setSpeakingMessageId(null);
-      return;
-    }
-
-    const language = locale === "en" ? "en-GB" : "bg-BG";
-    const text = message.content
-      .replace(/[*_#>`]/g, "")
-      .replace(/•/g, ". ")
-      .replace(/\s+/g, " ")
-      .trim();
-    const voices = window.speechSynthesis.getVoices();
-    const voice = voices.find((candidate) => candidate.lang.toLowerCase().startsWith(language.toLowerCase().slice(0, 2)));
-
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = language;
-    utterance.voice = voice ?? null;
-    utterance.rate = locale === "en" ? 0.9 : 0.8;
-    utterance.pitch = 1;
-    utterance.onend = () => setSpeakingMessageId((current) => current === message.id ? null : current);
-    utterance.onerror = () => setSpeakingMessageId((current) => current === message.id ? null : current);
-    setSpeakingMessageId(message.id);
-    window.speechSynthesis.speak(utterance);
-  };
 
   const toggleVoiceInput = () => {
     const recognition = recognitionRef.current;
@@ -319,25 +283,6 @@ export function ChatBot() {
                   <p className="text-xs leading-relaxed whitespace-pre-wrap">
                     {message.content}
                   </p>
-                  {message.role === "assistant" && (
-                    <button
-                      type="button"
-                      onClick={() => toggleSpeech(message)}
-                      disabled={!speechSupported}
-                      aria-label={speakingMessageId === message.id ? voiceCopy.stop : voiceCopy.read}
-                      title={!speechSupported ? voiceCopy.unavailable : speakingMessageId === message.id ? voiceCopy.stop : voiceCopy.read}
-                      className="mt-2 inline-flex h-6 w-6 items-center justify-center rounded-full border border-green-200 text-green-700 transition-colors hover:bg-green-50 disabled:cursor-not-allowed disabled:opacity-40"
-                    >
-                      {speakingMessageId === message.id ? (
-                        <span className="h-2.5 w-2.5 rounded-sm bg-current" aria-hidden />
-                      ) : (
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-3.5 w-3.5" aria-hidden>
-                          <path d="M11 5 6 9H2v6h4l5 4V5Z" />
-                          <path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" />
-                        </svg>
-                      )}
-                    </button>
-                  )}
                   {message.showCalculator && <Link href="/bg/calculator#calculator-form" className="mt-3 block rounded bg-green-600 px-3 py-2 text-center text-sm font-semibold text-white hover:bg-green-700">{locale === "en" ? "Open price calculator" : "Към ценовия калкулатор"}</Link>}
                   {message.showServicePrompt && (
                     <p className="mt-2 border-t border-green-100 pt-2 text-xs font-medium text-green-800">
