@@ -7,9 +7,9 @@ export const services: {id: string; label: string; rates: RateKey[]}[] = [
   { id: "cleaning", label: "Почистване на запустял терен", rates: ["cleaning"] },
   { id: "weeding", label: "Плевене", rates: ["weeding"] },
   { id: "planting", label: "Засаждане", rates: ["plantingFlowers", "plantingShrubs", "plantingHedge", "plantingTrees", "plantingPlants"] },
+  { id: "irrigation", label: "Поливна система", rates: ["irrigationAuto"] },
   { id: "snow", label: "Снегопочистване", rates: [] },
   { id: "lighting", label: "Градинско осветление", rates: [] },
-  { id: "irrigation", label: "Поливна система", rates: ["irrigationAuto"] },
 ];
 export const inspectionOnlyServices = ["snow", "lighting"];
 export const variantLabels: Partial<Record<RateKey, string>> = {
