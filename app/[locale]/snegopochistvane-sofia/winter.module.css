@@ -1,0 +1,80 @@
+.page { background: #f8fbff; color: #203548; }
+.container { max-width: 1152px; margin-inline: auto; padding-inline: 24px; }
+.hero { position: relative; isolation: isolate; overflow: hidden; padding-block: 64px; background: radial-gradient(ellipse at 10% 0%, #fff 0%, transparent 55%), linear-gradient(125deg, #e7f2fd, #f3f8fd 55%, #dcebf7); border-bottom: 1px solid #cbdde9; }
+.heroGrid { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 40px; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #397515; }
+.h1 { margin-top: 14px; font-size: clamp(36px, 4.2vw, 54px); line-height: 1.08; letter-spacing: -.035em; font-weight: 800; }
+.lead { margin-top: 22px; font-size: 21px; line-height: 1.5; font-weight: 600; color: #245e83; }
+.intro { margin-top: 14px; font-size: 16px; line-height: 1.8; color: #4c6478; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 26px; }
+.primary { display: inline-flex; align-items: center; justify-content: center; gap: 16px; padding: 14px 23px; border-radius: 10px; background: linear-gradient(#609c2d, #397719); box-shadow: 0 4px 12px #305b1820; color: white; font-size: 15px; font-weight: 700; text-decoration: none; }
+.primary:hover { background: #356d18; }
+.phone { color: #234b35; font-size: 15px; font-weight: 700; white-space: nowrap; text-decoration: none; }
+.phone:hover { text-decoration: underline; }
+.page a:focus-visible, .page summary:focus-visible { outline: 3px solid #287db6; outline-offset: 4px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; padding: 0; list-style: none; }
+.tags li { padding: 6px 10px; border: 1px solid #c9dfeb; border-radius: 20px; background: #ffffffb3; color: #365971; font-size: 11px; font-weight: 600; }
+.videoCard { overflow: hidden; border: 1px solid #d3e1eb; border-radius: 24px; background: white; box-shadow: 0 18px 45px #255a7b20; }
+.videoFrame { position: relative; aspect-ratio: 4 / 3; background: #dcebf7; }
+.videoCard figcaption { padding: 13px 18px; font-size: 12px; font-weight: 600; color: #40617a; }
+.heroFlake { position: absolute; top: -38px; right: -40px; width: 250px; height: 250px; color: #7eb3d9; opacity: .2; z-index: -1; transform: rotate(8deg); }
+.section { padding-block: 64px; }
+.ice { background: linear-gradient(130deg, #eaf3fb, #f0f7fc); border-block: 1px solid #dce8f1; }
+.h2 { margin-top: 10px; font-size: clamp(28px, 3vw, 38px); line-height: 1.2; letter-spacing: -.025em; font-weight: 750; }
+.sectionLead { max-width: 720px; margin-top: 18px; color: #526b80; font-size: 16px; line-height: 1.8; }
+.serviceGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-top: 32px; }
+.serviceCard { padding: 24px 20px; border: 1px solid #d4e3ef; border-radius: 20px; background: linear-gradient(145deg, #fff, #f0f6fc); box-shadow: 0 5px 18px #244c6b08; }
+.cardTop { display: flex; justify-content: space-between; align-items: center; }
+.number { font-size: 13px; font-weight: 700; color: #3981b4; }
+.smallFlake { width: 30px; height: 30px; color: #74a4c7; }
+.serviceCard h3, .steps h3, .gallery h3, .notice h3 { margin-top: 20px; font-size: 19px; line-height: 1.35; font-weight: 700; }
+.serviceCard p, .steps p, .gallery p { margin-top: 12px; color: #526b80; font-size: 14px; line-height: 1.8; }
+.serviceCard ul { display: grid; gap: 10px; padding-left: 17px; margin-top: 18px; list-style: disc; color: #365773; font-size: 12px; line-height: 1.6; }
+.serviceCard li::marker { color: #6b9d35; }
+.gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+.gallery figure { overflow: hidden; border: 1px solid #d4e3ef; border-radius: 22px; background: white; }
+.photo { position: relative; aspect-ratio: 16 / 10; background: #dcebf7; }
+.image { object-fit: cover; }
+.gallery figcaption { padding: 24px; }
+.gallery h3 { margin-top: 0; }
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 26px; list-style: none; margin-top: 34px; padding: 0; }
+.stepNumber { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: #e0edf8; color: #256c9c; font-size: 17px; font-weight: 700; }
+.notice { margin-top: 34px; padding: 24px; border-left: 4px solid #6b9d35; border-radius: 0 14px 14px 0; background: #eef5e8; }
+.notice h3 { margin-top: 0; color: #2c5032; }
+.notice p { margin-top: 10px; color: #4c6353; font-size: 14px; line-height: 1.8; }
+.faqGrid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 48px; }
+.faqs { display: grid; align-content: start; gap: 12px; }
+.faqs details { padding: 18px 20px; border: 1px solid #d0e0ed; border-radius: 14px; background: white; }
+.faqs summary { cursor: pointer; font-size: 15px; font-weight: 700; line-height: 1.6; }
+.faqs summary::marker { color: #4788b4; }
+.faqs p { margin-top: 14px; color: #526b80; font-size: 14px; line-height: 1.8; }
+.articleLink { display: inline-block; margin-top: 24px; color: #317515; font-size: 14px; font-weight: 700; line-height: 1.8; text-underline-offset: 4px; }
+.cta { padding-block: 56px; background: linear-gradient(120deg, #173b2d, #214f3b); color: white; }
+.ctaInner { display: grid; grid-template-columns: 100px 1fr; gap: 32px; align-items: start; }
+.ctaFlake { width: 100px; height: 100px; color: #9dcde9; }
+.cta .eyebrow { color: #b9db92; }
+.cta .h2 { color: white; }
+.cta p:not(.eyebrow) { max-width: 740px; margin-top: 18px; color: #deece7; line-height: 1.8; }
+.cta .phone { color: white; }
+
+@media (max-width: 1023px) {
+  .heroGrid { gap: 24px; }
+  .hero { padding-block: 48px; }
+  .serviceGrid, .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 767px) {
+  .container { padding-inline: 20px; }
+  .hero { padding-block: 36px; }
+  .heroGrid, .gallery, .faqGrid { grid-template-columns: 1fr; gap: 28px; }
+  .h1 { font-size: 38px; }
+  .lead { font-size: 19px; }
+  .section { padding-block: 40px; }
+  .serviceGrid, .steps { grid-template-columns: 1fr; gap: 16px; }
+  .steps li { padding: 20px; border: 1px solid #d4e3ef; border-radius: 16px; background: white; }
+  .steps h3 { margin-top: 14px; }
+  .serviceCard { padding: 22px; }
+  .ctaInner { grid-template-columns: 1fr; gap: 14px; }
+  .ctaFlake { width: 48px; height: 48px; }
+  .cta { padding-block: 38px; }
+  .heroFlake { width: 150px; height: 150px; }
+}
