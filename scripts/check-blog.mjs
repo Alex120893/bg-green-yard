@@ -20,7 +20,7 @@ assert.ok(home.indexOf('winter-maintenance-title') > home.indexOf('<h1'));
 assert.ok(home.indexOf('winter-maintenance-title') < home.indexOf('Защо BG Green Yard'));
 assert.ok(home.includes('Заявете оферта'));
 assert.ok(home.includes('src="/video_2026-11-14_17-19-55.mp4"'));
-assert.ok(home.includes('aria-controls="winter-maintenance-video"'));
+assert.ok(!home.includes('aria-controls="winter-maintenance-video"'), 'No playback button overlays the winter video');
 const videoResponse = await fetch(`${base}/video_2026-11-14_17-19-55.mp4`, { headers: { Range: 'bytes=0-1023' } });
 assert.equal(videoResponse.status, 206, 'Video supports range requests');
 assert.ok(videoResponse.headers.get('content-type').includes('video/mp4'));
