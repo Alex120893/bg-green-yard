@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { WinterVideo } from "./WinterVideo";
 import Link from "next/link";
 import type { Locale } from "@/lib/i18n";
 import { winterPost } from "@/lib/seo-pages";
@@ -22,7 +22,7 @@ export function WinterMaintenance({ locale }: { locale: Locale }) {
     <section aria-labelledby="winter-maintenance-title" className={styles.section}>
       <div className={styles.card}>
         <div className={styles.photo}>
-          <Image src={winterPost.image} alt={bg ? winterPost.imageAlt : "Snow-clearing machinery at work in winter"} fill sizes="(min-width: 768px) 55vw, 100vw" className={styles.image} />
+          <WinterVideo locale={locale} poster={winterPost.image} />
         </div>
         <div className={styles.panel}>
           <Snowflake className={styles.decorationOne} />
