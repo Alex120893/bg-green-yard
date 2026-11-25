@@ -14,11 +14,12 @@ const get = async (path) => {
 const headingCount = (html) => (html.match(/<h1(?:\s|>)/g) ?? []).length;
 const home = await get('/bg');
 assert.equal(headingCount(home), 1);
-assert.ok(home.includes('Зимна поддръжка и снегопочистване'));
+assert.ok(home.replace(/<br\s*\/?\s*>/g, ' ').includes('Зимна поддръжка и снегопочистване'));
+assert.ok(!home.includes('>✓</span>'), 'Winter checkmarks must not depend on a font glyph');
 assert.ok(home.indexOf('winter-maintenance-title') > home.indexOf('<h1'));
 assert.ok(home.indexOf('winter-maintenance-title') < home.indexOf('Защо BG Green Yard'));
 assert.ok(home.includes('Заявете оферта'));
-assert.ok((await get('/en')).includes('Winter maintenance and snow removal'));
+assert.ok((await get('/en')).replace(/<br\s*\/?\s*>/g, ' ').includes('Winter maintenance and snow removal'));
 
 const redirect = await fetch(`${base}/blog`, { redirect: 'manual' });
 assert.equal(redirect.status, 307);
