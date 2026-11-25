@@ -1,48 +1,56 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
+import { locales } from "../lib/i18n";
+import { posts, projects } from "../lib/seo-pages";
+import { PRODUCTION_SITE_ORIGIN } from "../lib/site";
 
-const siteUrl = "https://bg-greenyard.com";
+// Only pair pages that actually exist in both languages. The calculator and
+// Bulgarian SEO content do not have English equivalents.
+const translatedPaths = [
+  "",
+  "/about",
+  "/services",
+  "/gallery",
+  "/contact",
+  "/plant-care",
+  "/inquiries",
+];
+
+const bulgarianPaths = [
+  "/calculator",
+  "/ozelenyavane-sofia",
+  "/lawn-care",
+  "/poddruzhka-na-gradini-sofia",
+  "/polivni-sistemi-sofia",
+  "/ozelenyavane-na-dvorove-sofia",
+  "/trevni-ploshti-sofia",
+  "/izgrazhdane-na-gradini-sofia",
+  "/snegopochistvane-sofia",
+  "/proekti",
+  "/blog",
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = [
-    "/bg",
-    "/bg/about",
-    "/bg/services",
-    "/bg/gallery",
-    "/bg/contact",
-    "/bg/calculator",
-    "/bg/inquiries",
-    "/bg/ozelenyavane-sofia",
-    "/bg/lawn-care",
-    "/bg/plant-care",
-    "/bg/poddruzhka-na-gradini-sofia",
-    "/bg/polivni-sistemi-sofia",
-    "/bg/ozelenyavane-na-dvorove-sofia",
-    "/bg/trevni-ploshti-sofia",
-    "/bg/izgrazhdane-na-gradini-sofia",
-    "/bg/snegopochistvane-sofia",
-    "/bg/proekti",
-    "/bg/proekti/aura-1",
-    "/bg/proekti/prima",
-    "/bg/proekti/synergy-tower",
-    "/bg/blog",
-    "/bg/blog/grizha-za-trevata-prez-lyatoto",
-    "/bg/blog/kolko-chesto-da-kosim-trevata",
-    "/bg/blog/podgotovka-na-gradina-za-zimata",
-    "/bg/blog/koga-da-zasazhdame-tui",
-    "/bg/blog/kak-raboti-avtomatichna-polivna-sistema",
-    "/bg/blog/treven-chim-ili-zasyavane",
-    "/en",
-    "/en/about",
-    "/en/services",
-    "/en/gallery",
-    "/en/contact",
-    "/en/plant-care",
-  ];
+  const translatedPages = translatedPaths.flatMap((path) => {
+    const languages = Object.fromEntries(
+      locales.map((locale) => [
+        locale,
+        `${PRODUCTION_SITE_ORIGIN}/${locale}${path}`,
+      ]),
+    );
 
-  return pages.map((path) => ({
-    url: `${siteUrl}${path}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly",
-    priority: path === "/bg" || path === "/en" ? 1 : path === "/bg/ozelenyavane-sofia" ? 0.9 : 0.8,
-  }));
+    return locales.map((locale) => ({
+      url: languages[locale],
+      alternates: { languages },
+    }));
+  });
+
+  const bulgarianPages = [
+    ...bulgarianPaths,
+    ...projects.map(({ slug }) => `/proekti/${slug}`),
+    ...posts.map(({ slug }) => `/blog/${slug}`),
+  ].map((path) => ({ url: `${PRODUCTION_SITE_ORIGIN}/bg${path}` }));
+
+  // There is no reliable per-page modification date in the content model.
+  // Omit lastModified rather than claim that every build changes every page.
+  return [...translatedPages, ...bulgarianPages];
 }
