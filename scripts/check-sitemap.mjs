@@ -18,7 +18,7 @@ try {
   const { PRODUCTION_SITE_ORIGIN: origin } = await load('lib/site.js');
   const entries = sitemap();
   const urls = new Set(entries.map(({ url }) => url));
-  assert.equal(entries.length, 34);
+  assert.equal(entries.length, 25 + projects.length + posts.length);
   assert.equal(urls.size, entries.length, 'No duplicate canonical URLs');
   assert.deepEqual(sitemap(), entries, 'Repeated generation must not change dates');
 
@@ -70,7 +70,7 @@ try {
 
   const robots = readFileSync('public/robots.txt', 'utf8');
   assert.ok(robots.includes(`Sitemap: ${origin}/sitemap.xml`));
-  console.log('Sitemap: 34 unique canonical URLs, 7 reciprocal language pairs, content generation and robots discovery passed.');
+  console.log(`Sitemap: ${entries.length} unique canonical URLs, 7 reciprocal language pairs, content generation and robots discovery passed.`);
 } finally {
   rmSync(dir, { recursive: true, force: true });
 }
