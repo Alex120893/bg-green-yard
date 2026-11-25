@@ -26,7 +26,7 @@ export function WinterMaintenance({ locale }: { locale: Locale }) {
               {(bg
                 ? ["Почистване на сняг от паркинги и алеи", "Грижа за входове и пешеходни зони", "Обработка против заледяване"]
                 : ["Snow clearance for car parks and paths", "Care for entrances and pedestrian areas", "De-icing treatments"]
-              ).map((item) => <li key={item} className="flex gap-3"><span aria-hidden="true" className="font-bold text-brand">✓</span>{item}</li>)}
+              ).map((item) => <li key={item} className="flex gap-3"><svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" className="mt-0.5 h-4 w-4 shrink-0 text-brand"><path d="m4 10 4 4 8-8" /></svg>{item}</li>)}
             </ul>
             <Link href={`/${locale}/contact`} className="garden-button mt-7 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">
               {bg ? "Заявете оферта" : "Request a quote"}<span aria-hidden="true">→</span>
