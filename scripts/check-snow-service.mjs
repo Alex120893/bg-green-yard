@@ -9,6 +9,7 @@ assert.equal(response.status, 200);
 const html = await response.text();
 assert.equal((html.match(/<h1(?:\s|>)/g) ?? []).length, 1);
 assert.ok(html.includes('Снегопочистване София'));
+assert.ok(!html.includes('Важно при сняг и повторно замръзване'), 'Removed warning must not render');
 for (const title of ['Зимна поддръжка за целия обект', 'Как организираме работата', 'Често задавани въпроси', 'Подгответе обекта преди снега']) {
   assert.ok(html.includes(title));
 }
