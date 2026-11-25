@@ -1,0 +1,84 @@
+.section {
+  padding: 28px 24px;
+  background: #faf6ec;
+}
+
+.card {
+  position: relative;
+  isolation: isolate;
+  max-width: 1152px;
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #e6eff8;
+  box-shadow: 0 5px 18px #203e2520;
+}
+
+.photo {
+  position: absolute;
+  inset: 0 0 0 44%;
+}
+
+.image { object-fit: cover; object-position: 58% center; }
+
+.panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: 70px minmax(0, 1fr);
+  align-items: start;
+  gap: 18px;
+  width: 59%;
+  padding: 30px 64px 28px 28px;
+  border-right: 15px solid #70a931;
+  border-top-right-radius: 145px 100%;
+  background: radial-gradient(ellipse at 4% 0%, #f3f8fd 0%, #e4eef9 60%, #dce9f6 100%);
+}
+
+.badge {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 70px;
+  height: 70px;
+  margin-top: 3px;
+  border: 1px solid #ffffff80;
+  border-radius: 50%;
+  color: white;
+  background: linear-gradient(145deg, #6fb5ed, #1669ae);
+  box-shadow: 0 3px 9px #24669830, inset 0 1px 2px #ffffff90;
+}
+
+.badge svg { width: 48px; height: 48px; }
+.copy { position: relative; min-width: 0; }
+.title { margin: 0; color: #182b3c; font-size: clamp(23px, 2.4vw, 32px); line-height: 1.12; font-weight: 800; letter-spacing: -.025em; }
+.description { max-width: 355px; margin-top: 12px; color: #283c4b; font-size: 12px; line-height: 1.5; }
+.services { display: grid; gap: 6px; margin-top: 12px; padding: 0; list-style: none; color: #293d47; font-size: 12px; line-height: 1.35; }
+.services li { display: flex; align-items: flex-start; gap: 7px; }
+.check { flex: none; width: 16px; height: 16px; color: #72a52d; }
+.cta { display: inline-flex; align-items: center; justify-content: center; gap: 14px; margin-top: 15px; padding: 9px 17px; border-radius: 8px; background: linear-gradient(#619b29, #397817); box-shadow: 0 2px 5px #31581920; color: white; font-size: 13px; font-weight: 700; text-decoration: none; }
+.cta:hover { background: #356e18; }
+.cta:focus-visible { outline: 3px solid #1669ae; outline-offset: 4px; }
+.decorationOne, .decorationTwo { position: absolute; pointer-events: none; color: #91b8e0; opacity: .28; }
+.decorationOne { width: 65px; height: 65px; bottom: 27px; left: 17px; transform: rotate(12deg); }
+.decorationTwo { width: 34px; height: 34px; top: 9px; right: 98px; transform: rotate(-8deg); }
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .panel { width: 64%; grid-template-columns: 48px minmax(0, 1fr); gap: 12px; padding: 24px 55px 24px 18px; border-right-width: 12px; }
+  .badge { width: 48px; height: 48px; }
+  .badge svg { width: 34px; height: 34px; }
+  .title { font-size: 25px; }
+}
+
+@media (max-width: 767px) {
+  .section { padding: 20px 16px; }
+  .card { display: flex; flex-direction: column; border-radius: 16px; }
+  .panel { order: 0; width: 100%; padding: 24px 20px 27px; grid-template-columns: 48px minmax(0, 1fr); gap: 12px; border-right: 0; border-bottom: 9px solid #70a931; border-top-right-radius: 0; border-bottom-right-radius: 60px 24px; }
+  .badge { width: 48px; height: 48px; }
+  .badge svg { width: 34px; height: 34px; }
+  .title { font-size: clamp(21px, 5.9vw, 29px); }
+  .description { font-size: 12px; }
+  .services { font-size: 12px; }
+  .photo { position: relative; order: 1; inset: auto; width: 100%; aspect-ratio: 16 / 9; }
+  .decorationOne { bottom: 30px; left: 8px; width: 42px; height: 42px; }
+  .decorationTwo { right: 14px; }
+}
