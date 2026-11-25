@@ -92,7 +92,6 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           <p className={styles.eyebrow}>Ясен план преди първия снеговалеж</p>
           <h2 id="snow-process" className={styles.h2}>Как организираме работата</h2>
           <ol className={styles.steps}>{snowSteps.map((step, index) => <li key={step.title}><span className={styles.stepNumber}>{index + 1}</span><h3>{step.title}</h3><p>{step.text}</p></li>)}</ol>
-          <aside className={styles.notice}><h3>Важно при сняг и повторно замръзване</h3><p>Времето може да се променя бързо. Обработката против заледяване не премахва напълно риска от подхлъзване. При продължаващ снеговалеж или замръзване може да са необходими повторно почистване и допълнителна обработка.</p></aside>
         </div>
       </section>
 
