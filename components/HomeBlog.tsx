@@ -1,14 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { posts } from "@/lib/seo-pages";
+import { homeArticles } from "@/lib/home-articles";
 
 export function HomeBlog() {
-  const latest = posts
-    .filter((post) => post.datePublished)
-    .map((post, index) => ({ post, index }))
-    .sort((a, b) => b.post.datePublished!.localeCompare(a.post.datePublished!) || a.index - b.index)
-    .slice(0, 3)
-    .map(({ post }) => post);
+  const latest = homeArticles;
 
   return (
     <section aria-labelledby="home-blog-title" className="garden-block garden-block-cream px-4 py-12 md:px-6 md:py-20">

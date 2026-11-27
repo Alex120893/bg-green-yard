@@ -12,12 +12,16 @@ assert.equal((block.match(/<article/g) ?? []).length, 3);
 assert.equal((block.match(/<time /g) ?? []).length, 3);
 assert.ok(block.includes('Блог за градини и сезонна поддръжка'));
 assert.ok(block.includes('Всички статии'));
-for (const slug of ['snegopochistvane-i-zimna-poddruzhka-sofia', 'gradinsko-osvetlenie-idei-za-dvora', 'polivni-sistemi-planirane-na-gradinata']) {
+const expectedDates = { 'snegopochistvane-i-zimna-poddruzhka-sofia': '2026-11-27', 'gradinsko-osvetlenie-idei-za-dvora': '2026-11-26', 'polivni-sistemi-planirane-na-gradinata': '2026-11-25' };
+assert.deepEqual([...block.matchAll(/<time dateTime="([^"]+)"/g)].map(m => m[1]), Object.values(expectedDates));
+for (const [slug, date] of Object.entries(expectedDates)) {
   assert.ok(block.includes(`/bg/blog/${slug}`));
   const page = await fetch(`${base}/bg/blog/${slug}`);
   assert.equal(page.status, 200);
   const content = await page.text();
-  assert.ok(content.includes('2026-11-27'));
+  assert.ok(content.includes(`<time dateTime="${date}"`));
+  const schemas = [...content.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m => JSON.parse(m[1]));
+  assert.equal(schemas.find(s => s['@type'] === 'BlogPosting')?.datePublished, date);
   assert.ok(content.includes('Повече за услугата'));
   assert.ok(content.includes('BlogPosting'));
 }
