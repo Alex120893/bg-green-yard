@@ -40,7 +40,7 @@ export function WinterMaintenance({ locale }: { locale: Locale }) {
             <ul className={styles.services}>
               {services.map((item) => <li key={item}><svg aria-hidden="true" viewBox="0 0 20 20" className={styles.check}><circle cx="10" cy="10" r="10" fill="currentColor" /><path d="m5.5 10 3 3 6-6" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg><span>{item}</span></li>)}
             </ul>
-            <Link href={`/${locale}/contact`} className={styles.cta}>{bg ? "Заявете оферта" : "Request a quote"}<span aria-hidden="true">→</span></Link>
+            <div className={styles.actions}><Link href={`/${locale}/contact`} className={styles.cta}>{bg ? "Заявете оферта" : "Request a quote"}</Link><Link href="/bg/snegopochistvane-sofia" className={styles.more}>{bg ? "Повече за услугата" : "Explore the service (BG)"}</Link></div>
           </div>
         </div>
       </div>

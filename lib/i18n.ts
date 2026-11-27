@@ -148,6 +148,7 @@ const dictionaryBg = {
   },
   serviceOptions: {
     snow: "Снегопочистване",
+    lighting: "Градинско осветление",
     green: "Озеленяване и поддръжка",
     irrigation: "Поливни системи",
     other: "Друго / комбинирано",
@@ -295,6 +296,7 @@ const dictionaryEn: Messages = {
   },
   serviceOptions: {
     snow: "Snow removal",
+    lighting: "Garden lighting",
     green: "Landscaping & maintenance",
     irrigation: "Irrigation systems",
     other: "Other / combined",

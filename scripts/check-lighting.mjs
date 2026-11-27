@@ -7,6 +7,10 @@ assert.ok(home.includes('garden-lighting-title'));
 assert.ok(home.indexOf('garden-lighting-title') > home.indexOf('winter-maintenance-title'));
 assert.ok(home.includes(`href="${path}"`));
 assert.ok(home.includes('Осветление'));
+const winterBlock = home.match(/<section[^>]*aria-labelledby="winter-maintenance-title"[\s\S]*?<\/section>/)?.[0];
+assert.ok(winterBlock?.includes('href="/bg/snegopochistvane-sofia"'));
+assert.ok(winterBlock?.includes('Повече за услугата'));
+assert.ok(!winterBlock?.includes('aria-hidden="true">→</span>'));
 const en = await get('/en');
 assert.ok(en.includes('Lighting'));
 const services = await get('/bg/services');
@@ -16,7 +20,13 @@ const html = await get(path);
 assert.equal((html.match(/<h1(?:\s|>)/g) ?? []).length, 1);
 assert.ok(html.includes('Осветление в градината и двора'));
 assert.ok(html.includes(`rel="canonical" href="https://bg-greenyard.com${path}"`));
-assert.ok(html.includes('href="/bg/contact"'));
+assert.ok(html.includes('href="/bg/contact?service=lighting"'));
+assert.ok(!html.includes('aria-hidden="true">→</span>'));
+assert.ok(html.includes('lighting-examples'));
+for (const locale of ['bg', 'en']) {
+  const form = await get(`/${locale}/contact?service=lighting`);
+  assert.ok(/<option[^>]*(?:value="lighting"[^>]*selected|selected[^>]*value="lighting")/.test(form), 'Lighting is preselected');
+}
 assert.ok(html.includes('property="og:image" content="https://bg-greenyard.com/images/garden-lighting.webp"'));
 assert.equal((html.match(/<details/g) ?? []).length, 3);
 const schemas = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m => JSON.parse(m[1]));
