@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { HomeCalculatorCta } from "@/components/HomeCalculatorCta";
 import { HomeBlog } from "@/components/HomeBlog";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
@@ -167,14 +168,10 @@ export default async function HomePage({
         ]}
       />
 
-      {locale === "bg" && <section aria-labelledby="home-services-title" className="garden-block garden-block-cream px-4 py-10 md:px-6"><div className="mx-auto max-w-6xl"><h2 id="home-services-title" className="text-3xl font-bold">Грижа за Вашия двор през всеки сезон</h2><div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{[
-        ["/bg/ozelenyavane-sofia", "Озеленяване"], ["/bg/snegopochistvane-sofia", "Снегопочистване"], ["/bg/gradinsko-osvetlenie-sofia", "Градинско осветление"], ["/bg/polivni-sistemi-sofia", "Поливни системи"],
-      ].map(([href, label]) => <Link key={href} href={href} className="flex min-h-14 items-center rounded-2xl border border-brand/15 bg-white/70 p-5 font-semibold text-brand-dark hover:bg-brand-soft">{label}</Link>)}</div></div></section>}
-
       <WinterMaintenance locale={locale} />
       <GardenLighting locale={locale} />
       <GardenIrrigation locale={locale} />
-      {locale === "bg" && <div className="bg-background px-4 py-6 text-center"><Link href="/bg/calculator#calculator-form" className="garden-button min-h-12 w-full !text-base sm:w-auto">Изчислете ориентировъчна цена</Link><p className="mt-3 text-sm text-muted">За услуги с индивидуална оферта цената се определя след оглед.</p></div>}
+      {locale === "bg" && <HomeCalculatorCta />}
 
       {/* ── Features / Why Us ── */}
       <section className="garden-block garden-block-sage bg-surface py-20 md:py-28">
@@ -404,10 +401,7 @@ export default async function HomePage({
 
       {locale === "bg" && <HomeBlog />}
 
-      {locale === "bg" && <section className="garden-block garden-block-cream px-4 py-10 md:px-6"><div className="mx-auto flex max-w-6xl flex-col gap-6 rounded-3xl border border-brand/20 bg-surface p-6 shadow-sm sm:p-8 md:flex-row md:items-center md:justify-between">
-        <div className="min-w-0"><p className="garden-eyebrow">Планирайте грижата за Вашия двор</p><h2 className="mt-3 text-2xl font-bold md:text-3xl">Колко би струвала поддръжката на Вашата градина?</h2><p className="mt-3 max-w-2xl leading-relaxed text-muted">Получете ориентировъчна цена според площта и типа градина — без измерване на плета и броене на растения.</p></div>
-        <Link href="/bg/calculator#calculator-form" className="garden-button shrink-0 !text-base">Изчисли цена <span aria-hidden>→</span></Link>
-      </div></section>}
+
 
       {/* ── CTA ── */}
       <section className="garden-block garden-block-forest relative overflow-hidden bg-brand py-20 md:py-28">

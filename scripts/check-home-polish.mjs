@@ -27,6 +27,12 @@ assert.ok(html.includes('Препоръчвам на всички приятел
 assert.ok(html.includes('направи чудесна работа с градината ми.'));
 assert.ok(html.indexOf('home-blog-title') > html.indexOf('Отзиви на клиентите'));
 assert.ok(html.indexOf('home-blog-title') < html.lastIndexOf('Вашият партньор за зелени пространства'));
-assert.ok((html.match(/href="\/bg\/calculator#calculator-form"/g) ?? []).length >= 2);
+assert.equal((html.match(/href="\/bg\/calculator#calculator-form"/g) ?? []).length, 1);
 assert.ok((html.match(/<video[^>]*preload="none"/g) ?? []).length >= 3);
 console.log('Home polish: real three dated articles, routes, service links, retained review sentences, block order, calculator CTAs, canonical, H1 and deferred videos passed.');
+
+assert.ok(!html.includes('home-services-title'));
+assert.ok(!html.includes('За услуги с индивидуална оферта цената се определя след оглед.'));
+assert.ok(!html.includes('Колко би струвала поддръжката на Вашата градина?'));
+assert.ok(html.includes('Изчислете цената'));
+assert.ok(html.includes('Изберете желаните услуги и получете бърза ориентировъчна оценка на цената.'));
