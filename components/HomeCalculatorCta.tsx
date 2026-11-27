@@ -14,7 +14,6 @@ export function HomeCalculatorCta() {
           <span className={styles.info} aria-hidden="true">i</span>
           <div><p className={styles.lead}>Изчислете ориентировъчната стойност на избраните услуги за Вашата градина.</p></div>
         </div>
-        <span className={styles.swoosh} aria-hidden="true" />
       </div>
     </section>
   );
