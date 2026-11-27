@@ -1,7 +1,7 @@
 .overlay { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; padding: 20px; background: #10271fb3; backdrop-filter: blur(2px); }
-.dialog { position: relative; isolation: isolate; overflow: auto; width: 100%; max-width: 390px; max-height: calc(100dvh - 40px); border: 1px solid #d9e1cf; border-radius: 24px; background: linear-gradient(150deg,#fffcf2,#f0f4e9); box-shadow: 0 20px 65px #10271f55; text-align: center; }
+.dialog { position: relative; isolation: isolate; overflow-x: hidden; overflow-y: auto; width: 100%; max-width: 390px; max-height: calc(100dvh - 40px); border: 1px solid #d9e1cf; border-radius: 24px; background: linear-gradient(150deg,#fffcf2,#f0f4e9); box-shadow: 0 20px 65px #10271f55; text-align: center; }
 .close { position: absolute; top: 10px; right: 10px; z-index: 2; display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #dce5d4; border-radius: 50%; background: #fffdf5ed; color: #38513a; font-size: 22px; cursor: pointer; }
-.header { position: relative; isolation: isolate; padding: 32px 30px 24px; border-bottom: 1px solid #b4c3a850; }
+.header { position: relative; isolation: isolate; overflow: hidden; padding: 32px 30px 24px; border-bottom: 1px solid #b4c3a850; }
 .header::before,.header::after { content: ''; position: absolute; z-index: -1; pointer-events: none; width: 130px; height: 160px; background: url('/garden-leaves.svg') center/contain no-repeat; opacity: .7; }
 .header::before { top: -25px; left: -40px; transform: rotate(25deg); }
 .header::after { top: -15px; right: -45px; transform: rotate(205deg); }
