@@ -1,0 +1,17 @@
+.section { padding: 24px; background: #faf6ec; }
+.card { position: relative; isolation: isolate; overflow: hidden; max-width: 1152px; margin-inline: auto; border: 1px solid #d5e1ce; border-radius: 22px; background: #edf3e9; box-shadow: 0 5px 20px #193d2010; }
+.photo { position: absolute; inset: 0 0 0 47%; }
+.image { object-fit: cover; object-position: center; }
+.panel { position: relative; display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 20px; width: 60%; padding: 32px 74px 32px 30px; background: linear-gradient(90deg, #edf3e9 0%, #edf3e9 83%, #edf3e900 100%); }
+.icon { width: 48px; height: 64px; color: #43872c; }
+.panel h2 { color: #163e25; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.12; font-weight: 800; letter-spacing: -.025em; }
+.panel p { margin-top: 14px; max-width: 390px; color: #405347; font-size: 13px; line-height: 1.65; }
+.panel ul { display: grid; gap: 8px; list-style: none; padding: 0; margin-top: 16px; }
+.panel li { display: flex; align-items: start; gap: 8px; color: #304e3a; font-size: 12px; line-height: 1.5; }
+.panel li svg { width: 16px; height: 16px; flex: none; margin-top: 1px; color: #75ac37; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 20px; }
+.actions > a:first-child { font-size: 13px; padding: 10px 17px; }
+.more { color: #315e32; font-size: 12px; font-weight: 700; text-underline-offset: 4px; }
+.more:hover { text-decoration: underline; }
+@media (max-width: 1023px) and (min-width: 768px) { .panel { width: 65%; padding: 26px 55px 26px 22px; gap: 14px; grid-template-columns: 36px minmax(0,1fr); } .icon { width: 36px; height: 48px; } }
+@media (max-width: 767px) { .section { padding: 16px; } .card { display: flex; flex-direction: column; } .panel { order: 0; width: 100%; padding: 24px 20px; grid-template-columns: 36px minmax(0,1fr); gap: 12px; background: #edf3e9; } .icon { width: 36px; height: 48px; } .panel h2 { font-size: 25px; } .photo { order: 1; position: relative; inset: auto; width: 100%; aspect-ratio: 16 / 10; } }

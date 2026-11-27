@@ -18,7 +18,7 @@ try {
   const { PRODUCTION_SITE_ORIGIN: origin } = await load('lib/site.js');
   const entries = sitemap();
   const urls = new Set(entries.map(({ url }) => url));
-  assert.equal(entries.length, 25 + projects.length + posts.length);
+  assert.equal(entries.length, 26 + projects.length + posts.length);
   assert.equal(urls.size, entries.length, 'No duplicate canonical URLs');
   assert.deepEqual(sitemap(), entries, 'Repeated generation must not change dates');
 
