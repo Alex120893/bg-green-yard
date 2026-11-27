@@ -256,3 +256,9 @@ a, button, input, textarea, select { -webkit-tap-highlight-color: transparent; }
 .garden-care-page .garden-block h2 { color: #163e25; }
 .garden-care-page .garden-block-forest h2 { color: #faf8e9; }
 .garden-care-page .garden-block .bg-white { background: linear-gradient(135deg, #fffdf4, #edf1e1); border: 1px solid #688b3c26; border-radius: 18px; }
+
+/* Homepage service titles must fit narrow phone screens without clipping. */
+.home-page h1,
+.home-page h2,
+.home-page h3 { overflow-wrap: anywhere; }
+.home-page .garden-button { max-width: 100%; white-space: normal; text-align: center; }
