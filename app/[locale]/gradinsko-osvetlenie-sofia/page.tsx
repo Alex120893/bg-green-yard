@@ -31,15 +31,13 @@ export default async function LightingPage({ params }: { params: Promise<{ local
       <section className="garden-block garden-block-cream py-12 md:py-16" aria-labelledby="lighting-examples">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <h2 id="lighting-examples" className="text-3xl font-bold">Идеи за осветяване на външни пространства</h2>
-          <p className="mt-4 max-w-3xl leading-relaxed text-muted">Илюстративни примери за осветление на алеи и открити пространства. Снимките са от външни автори и не представят изпълнени от BG GREEN YARD обекти.</p>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             {[
-              { file: "Outdoor_solar_lighting_of_a_trail.jpg", title: "Осветление по протежение на алея", author: "Klau1983", width: 2576, height: 1932 },
-              { file: "Mammoth_Lakes_CA_Solar_Pathway_Lighting.jpg", title: "Самостоятелни осветители за пешеходен маршрут", author: "Miltondawson", width: 2448, height: 3264 },
-            ].map((photo) => <figure key={photo.file} className="overflow-hidden rounded-2xl border border-brand/15 bg-white/70">
-              <Image src={`https://commons.wikimedia.org/wiki/Special:FilePath/${photo.file}`} alt={photo.title} width={photo.width} height={photo.height} unoptimized className="aspect-[4/3] w-full bg-surface object-contain" />
-              <figcaption className="p-5"><h3 className="font-bold">{photo.title}</h3><p className="mt-2 text-xs leading-relaxed text-muted">Снимка: {photo.author} / Wikimedia Commons. <a href={`https://commons.wikimedia.org/wiki/File:${photo.file}`} target="_blank" rel="noreferrer" className="underline">Оригинал, автор и лиценз CC BY-SA</a>. Оригинално изображение без редакция.</p></figcaption>
-            </figure>)}
+              { id: "39465540", alt: "Декоративно осветена градинска пътека през нощта" },
+              { id: "34469281", alt: "Вечерна алея сред зеленина с градинско осветление" },
+            ].map((photo) => <div key={photo.id} className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-surface">
+              <Image src={`https://images.pexels.com/photos/${photo.id}/pexels-photo-${photo.id}.jpeg?auto=compress&cs=tinysrgb&w=1200`} alt={photo.alt} fill unoptimized className="object-cover" />
+            </div>)}
           </div>
         </div>
       </section>
