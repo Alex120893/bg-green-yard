@@ -3,9 +3,9 @@
 .section::before { left: -65px; bottom: -40px; transform: rotate(20deg); }
 .section::after { right: -70px; top: 5px; transform: rotate(190deg); }
 .inner { max-width: 760px; margin-inline: auto; }
-.button { display: flex; align-items: center; justify-content: center; gap: 26px; max-width: 650px; min-height: 108px; margin-inline: auto; padding: 18px 28px; border: 1px solid #7fc22f; border-radius: 28px; background: linear-gradient(175deg, #64b713 0%, #298b08 40%, #075c16 100%); box-shadow: inset 0 2px 3px #c7f47e80, 0 5px 24px #69ae4b50; color: #fffef4; text-decoration: none; }
+.button { display: flex; align-items: center; justify-content: center; gap: 26px; max-width: 650px; min-height: 108px; margin-inline: auto; padding: 18px 28px; border: 1px solid #214d32; border-radius: 28px; background: #245538; box-shadow: 0 2px 6px #183c2714; color: #fffef4; text-decoration: none; }
 .button span { flex: 1; font-size: clamp(24px, 3vw, 34px); font-weight: 750; line-height: 1.06; text-align: left; }
-.button:hover { filter: brightness(1.06); }
+.button:hover { background: #1b432c; }
 .button:focus-visible { outline: 3px solid #163e25; outline-offset: 5px; }
 .calculator { width: 42px; height: 55px; flex: none; }
 .chevron { width: 22px; height: 34px; flex: none; }
@@ -13,9 +13,8 @@
 .info { display: grid; place-items: center; width: 48px; height: 48px; flex: none; border: 8px solid #d7e9d5; border-radius: 50%; background: #164e32; color: white; font: 700 24px Georgia, serif; }
 .note > div { min-width: 0; border-left: 1px solid #9db79b; padding-left: 19px; }
 .lead { color: #183c27; font-size: 18px; line-height: 1.3; font-weight: 750; }
-.description { margin-top: 5px; color: #46544b; font-size: 15px; line-height: 1.5; }
 .swoosh { display: block; width: 44%; height: 17px; margin: 17px auto 0; border-top: 4px solid #74af27; border-radius: 50%; transform: rotate(-3deg); }
-@media (max-width: 480px) { .section { padding: 28px 16px 24px; } .button { min-height: 90px; gap: 13px; padding: 17px 16px; border-radius: 21px; } .button span { font-size: 22px; } .calculator { width: 29px; height: 40px; } .chevron { width: 14px; height: 24px; } .note { gap: 10px; margin-top: 24px; } .info { width: 36px; height: 36px; border-width: 5px; font-size: 20px; } .note > div { padding-left: 11px; } .lead { font-size: 15px; } .description { font-size: 13px; } }
+@media (max-width: 480px) { .section { padding: 28px 16px 24px; } .button { min-height: 90px; gap: 13px; padding: 17px 16px; border-radius: 21px; } .button span { font-size: 22px; } .calculator { width: 29px; height: 40px; } .chevron { width: 14px; height: 24px; } .note { gap: 10px; margin-top: 24px; } .info { width: 36px; height: 36px; border-width: 5px; font-size: 20px; } .note > div { padding-left: 11px; } .lead { font-size: 15px; } }
 
 .section, .inner, .button, .note { min-width: 0; box-sizing: border-box; }
 .section, .inner, .note { width: 100%; }

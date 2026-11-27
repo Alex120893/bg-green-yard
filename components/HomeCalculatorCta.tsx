@@ -12,7 +12,7 @@ export function HomeCalculatorCta() {
         </Link>
         <div className={styles.note}>
           <span className={styles.info} aria-hidden="true">i</span>
-          <div><p className={styles.lead}>Изберете желаните услуги и получете бърза ориентировъчна оценка на цената.</p><p className={styles.description}>За индивидуални проекти изготвяме персонална оферта след оглед.</p></div>
+          <div><p className={styles.lead}>Изберете желаните услуги и получете бърза ориентировъчна оценка на цената.</p></div>
         </div>
         <span className={styles.swoosh} aria-hidden="true" />
       </div>
