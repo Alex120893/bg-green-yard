@@ -3,18 +3,19 @@
 .section::before { left: -65px; bottom: -40px; transform: rotate(20deg); }
 .section::after { right: -70px; top: 5px; transform: rotate(190deg); }
 .inner { max-width: 760px; margin-inline: auto; }
-.button { display: flex; align-items: center; justify-content: center; gap: 26px; max-width: 650px; min-height: 108px; margin-inline: auto; padding: 18px 28px; border: 1px solid #214d32; border-radius: 28px; background: #245538; box-shadow: 0 2px 6px #183c2714; color: #fffef4; text-decoration: none; }
-.button span { flex: 1; font-size: clamp(24px, 3vw, 34px); font-weight: 750; line-height: 1.06; text-align: left; }
-.button:hover { background: #1b432c; }
+.button { display: flex; align-items: center; justify-content: center; gap: 30px; max-width: 680px; min-height: 116px; margin-inline: auto; padding: 24px 34px; border: 1px solid #32613e; border-radius: 22px; background: linear-gradient(110deg, #19492f 0%, #2c613b 58%, #477344 100%); box-shadow: 0 5px 12px #183c271c; color: #fffef4; text-decoration: none; }
+.button span { flex: 1; font-size: clamp(24px, 2.6vw, 30px); font-weight: 500; line-height: 1.18; text-align: left; }
+.button strong { font-weight: 700; }
+.button:hover { background: linear-gradient(110deg, #163f29 0%, #275735 58%, #3d673b 100%); }
 .button:focus-visible { outline: 3px solid #163e25; outline-offset: 5px; }
-.calculator { width: 42px; height: 55px; flex: none; }
-.chevron { width: 22px; height: 34px; flex: none; }
+.calculator { width: 38px; height: 50px; flex: none; }
+.chevron { width: 18px; height: 30px; flex: none; }
 .note { display: flex; align-items: flex-start; gap: 19px; margin: 30px auto 0; max-width: 720px; }
 .info { display: grid; place-items: center; width: 48px; height: 48px; flex: none; border: 8px solid #d7e9d5; border-radius: 50%; background: #164e32; color: white; font: 700 24px Georgia, serif; }
 .note > div { min-width: 0; border-left: 1px solid #9db79b; padding-left: 19px; }
 .lead { color: #183c27; font-size: 18px; line-height: 1.3; font-weight: 750; }
 .swoosh { display: block; width: 44%; height: 17px; margin: 17px auto 0; border-top: 4px solid #74af27; border-radius: 50%; transform: rotate(-3deg); }
-@media (max-width: 480px) { .section { padding: 28px 16px 24px; } .button { min-height: 90px; gap: 13px; padding: 17px 16px; border-radius: 21px; } .button span { font-size: 22px; } .calculator { width: 29px; height: 40px; } .chevron { width: 14px; height: 24px; } .note { gap: 10px; margin-top: 24px; } .info { width: 36px; height: 36px; border-width: 5px; font-size: 20px; } .note > div { padding-left: 11px; } .lead { font-size: 15px; } }
+@media (max-width: 480px) { .section { padding: 28px 16px 24px; } .button { min-height: 100px; gap: 15px; padding: 22px 18px; border-radius: 18px; } .button span { font-size: 22px; } .calculator { width: 29px; height: 40px; } .chevron { width: 14px; height: 24px; } .note { gap: 10px; margin-top: 24px; } .info { width: 36px; height: 36px; border-width: 5px; font-size: 20px; } .note > div { padding-left: 11px; } .lead { font-size: 15px; } }
 
 .section, .inner, .button, .note { min-width: 0; box-sizing: border-box; }
 .section, .inner, .note { width: 100%; }
@@ -24,6 +25,6 @@
 @media (max-width: 480px) {
   .section { display: grid; grid-template-columns: minmax(0, 1fr); padding-inline: 16px; }
   .inner { width: 100%; max-width: calc(100vw - 32px); margin: 0; }
-  .button { gap: 10px; padding-inline: 14px; }
+  .button { gap: 14px; padding-inline: 18px; }
   .button span { font-size: 20px; }
 }
