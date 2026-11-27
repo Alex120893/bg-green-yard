@@ -14,9 +14,10 @@ export function GardenIrrigation({ locale }: { locale: Locale }) {
       <div className={styles.card}>
         <div className={styles.photo}><IrrigationVideo locale={locale} /></div>
         <div className={styles.panel}>
-          <svg className={styles.icon} viewBox="0 0 64 76" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M32 4S16 22 16 33a16 16 0 0 0 32 0C48 22 32 4 32 4Z" />
-            <path d="M24 33a8 8 0 0 0 8 8M5 43c1 15 10 24 24 25M59 43c-1 15-10 24-24 25M8 58l-3-15 15 3M56 58l3-15-15 3" />
+          <svg className={styles.icon} viewBox="0 0 64 76" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" data-irrigation-icon="sprinkler">
+            <path d="M27 49h10v18H27zM22 45h20v5H22zM20 68h24M32 44v-7" />
+            <path d="M27 35C22 24 15 20 6 20M37 35c5-11 12-15 21-15M29 29C25 15 17 10 8 8M35 29C39 15 47 10 56 8M32 25V6" strokeDasharray="3 5" />
+            <path d="M6 34c7-1 12 2 16 6M58 34c-7-1-12 2-16 6" strokeDasharray="3 5" />
           </svg>
           <div>
             <p className="!mt-0 !text-xs font-bold uppercase tracking-widest !text-brand">{bg ? "Поливни системи" : "Irrigation systems"}</p>
