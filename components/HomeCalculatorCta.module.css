@@ -22,3 +22,9 @@
 .button { width: 100%; }
 .button span { min-width: 0; overflow-wrap: anywhere; }
 @media (max-width: 480px) { .section::before, .section::after { opacity: .15; } }
+@media (max-width: 480px) {
+  .section { display: grid; grid-template-columns: minmax(0, 1fr); padding-inline: 16px; }
+  .inner { width: 100%; max-width: calc(100vw - 32px); margin: 0; }
+  .button { gap: 10px; padding-inline: 14px; }
+  .button span { font-size: 20px; }
+}
