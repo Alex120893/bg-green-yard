@@ -52,7 +52,7 @@ export function Navbar({ locale, nav }: { locale: Locale; nav: Messages["nav"] }
   {locale === "bg" && <DiscountGiftPopup />}
   <header className="garden-header sticky top-0 z-50">
     <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 md:gap-4 md:px-6 md:py-4">
-      <Link href={`/${locale}`} className="flex shrink-0 items-center gap-3 transition-opacity hover:opacity-90" onClick={() => setOpen(false)}>
+      <Link href={`/${locale}`} className="header-logo-link flex shrink-0 items-center gap-3 transition-opacity hover:opacity-90" onClick={() => setOpen(false)}>
         <BrandLogo english={locale === "en"} />
       </Link>
 
