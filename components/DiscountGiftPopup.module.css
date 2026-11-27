@@ -1,0 +1,17 @@
+.overlay { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; padding: 20px; background: #10271fb3; backdrop-filter: blur(2px); }
+.dialog { position: relative; isolation: isolate; overflow: auto; width: 100%; max-width: 390px; max-height: calc(100dvh - 40px); border: 1px solid #d9e1cf; border-radius: 24px; background: linear-gradient(150deg,#fffcf2,#f0f4e9); box-shadow: 0 20px 65px #10271f55; text-align: center; }
+.close { position: absolute; top: 10px; right: 10px; z-index: 2; display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #dce5d4; border-radius: 50%; background: #fffdf5ed; color: #38513a; font-size: 22px; cursor: pointer; }
+.header { position: relative; isolation: isolate; padding: 32px 30px 24px; border-bottom: 1px solid #b4c3a850; }
+.header::before,.header::after { content: ''; position: absolute; z-index: -1; pointer-events: none; width: 130px; height: 160px; background: url('/garden-leaves.svg') center/contain no-repeat; opacity: .7; }
+.header::before { top: -25px; left: -40px; transform: rotate(25deg); }
+.header::after { top: -15px; right: -45px; transform: rotate(205deg); }
+.badge { display: grid; place-items: center; width: 100px; height: 100px; margin: 0 auto; background: linear-gradient(145deg,#ef7c4b,#ce4c30); color: #fffdf1; clip-path: polygon(50% 0,60% 7%,72% 5%,79% 16%,91% 20%,92% 33%,100% 43%,95% 55%,98% 67%,87% 75%,83% 88%,70% 90%,60% 100%,48% 95%,35% 99%,27% 89%,14% 85%,13% 72%,3% 63%,7% 50%,0 38%,10% 29%,12% 16%,25% 13%,34% 3%,46% 7%); font-size: 30px; font-weight: 800; }
+.eyebrow { margin-top: 20px; color: #71845c; font-size: 10px; letter-spacing: .16em; font-weight: 700; text-transform: uppercase; }
+.title { margin-top: 9px; font-size: 30px; line-height: 1.1; color: #23452d; font-weight: 800; letter-spacing: -.025em; }
+.body { padding: 24px 28px 20px; }
+.copy { color: #465643; font-size: 14px; line-height: 1.7; }
+.cta { display: flex; align-items: center; justify-content: center; min-height: 48px; margin-top: 22px; padding: 12px 16px; border-radius: 12px; background: linear-gradient(100deg,#d54d35,#ed8052); box-shadow: 0 3px 10px #b64d2920; color: #fff; font-size: 14px; line-height: 1.4; font-weight: 700; text-decoration: none; }
+.cta:hover { background: #c64e35; }
+.decline { display: block; width: 100%; min-height: 44px; margin-top: 6px; color: #52634b; font-size: 13px; font-weight: 600; cursor: pointer; }
+.dialog a:focus-visible,.dialog button:focus-visible { outline: 2px solid #315e39; outline-offset: 3px; }
+@media (max-width: 380px) { .overlay { padding: 14px; } .dialog { max-height: calc(100dvh - 28px); } .header { padding: 26px 24px 20px; } .badge { width: 84px; height: 84px; font-size: 27px; } .title { font-size: 27px; } .body { padding: 20px; } }
