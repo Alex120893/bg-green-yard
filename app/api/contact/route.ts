@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { sendContactEmail } from "@/lib/email";
 
-const serviceValues = ["snow", "green", "irrigation", "other"] as const;
+import { contactServiceValues as serviceValues } from "@/lib/contact-services";
 
 type ContactBody = {
   name?: string;

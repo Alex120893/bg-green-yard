@@ -14,15 +14,17 @@ declare global {
   }
 }
 
-const serviceValues = ["snow", "green", "irrigation", "other"] as const;
+import { contactServiceValues as serviceValues } from "@/lib/contact-services";
 
 export function ContactForm({
   locale,
   contact,
   serviceOptions,
   initialMessage = "",
+  initialService = "",
 }: {
   initialMessage?: string;
+  initialService?: string;
   locale: Locale;
   contact: Messages["contact"];
   serviceOptions: Messages["serviceOptions"];
@@ -150,7 +152,7 @@ export function ContactForm({
         <select
           id="service"
           name="service"
-          defaultValue=""
+          defaultValue={initialService}
           disabled={sending}
           className="rounded-xl border border-border bg-surface px-4 py-3 text-sm outline-none ring-brand/30 transition-all duration-200 focus:border-brand/40 focus:ring-2 disabled:opacity-60"
         >

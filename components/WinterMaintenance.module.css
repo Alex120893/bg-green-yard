@@ -82,3 +82,7 @@
   .decorationOne { bottom: 30px; left: 8px; width: 42px; height: 42px; }
   .decorationTwo { right: 14px; }
 }
+
+.actions { display: flex; flex-wrap: wrap; align-items: baseline; gap: 14px; }
+.more { color: #315e32; font-size: 12px; font-weight: 700; text-underline-offset: 4px; }
+.more:hover { text-decoration: underline; }
