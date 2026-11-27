@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import styles from "./DiscountGiftPopup.module.css";
 import { pricing } from "@/lib/gardenPricing";
 import { useEffect, useState } from "react";
 
@@ -40,18 +41,18 @@ export function DiscountGiftPopup() {
   if (!opened) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/60 p-4" role="dialog" aria-modal="true" aria-labelledby="discount-gift-title">
-      <div className="relative w-full max-w-sm animate-[bounce_500ms_ease-out_1] overflow-hidden rounded-[28px] bg-white text-center shadow-2xl ring-4 ring-amber-300">
-        <button type="button" onClick={() => setOpened(false)} className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-lg font-bold text-slate-700 shadow hover:bg-white" aria-label="Затвори предложението">×</button>
-        <div className="bg-gradient-to-br from-amber-300 via-yellow-400 to-orange-500 px-7 pb-9 pt-10 text-amber-950">
-          <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-2xl bg-rose-600 text-3xl font-extrabold text-white shadow-xl ring-4 ring-amber-200">{pricing.discount.percent}%</div>
-          <p className="mt-5 text-sm font-bold uppercase tracking-[.16em] text-rose-800">Подарък за поддръжка</p>
-          <h2 id="discount-gift-title" className="mt-2 text-3xl font-extrabold">Вземете отстъпката!</h2>
+    <div className={styles.overlay} role="dialog" aria-modal="true" aria-labelledby="discount-gift-title" aria-describedby="discount-gift-description">
+      <div className={styles.dialog}>
+        <button type="button" onClick={() => setOpened(false)} className={styles.close} aria-label="Затвори предложението">×</button>
+        <div className={styles.header}>
+          <div className={styles.badge}>−{pricing.discount.percent}%</div>
+          <p className={styles.eyebrow}>Подарък за Вашата градина</p>
+          <h2 id="discount-gift-title" className={styles.title}>Вземете<br />отстъпката!</h2>
         </div>
-        <div className="p-7">
-          <p className="text-base leading-relaxed text-muted">Получете {pricing.discount.percent}% отстъпка за първата заявка за поддръжка на градина или зелени площи в София. При абонамент — за първия месец, без извозване и материали.</p>
-          <Link href="/bg/calculator?promo=first-garden#calculator-form" onClick={() => setOpened(false)} className="mt-6 inline-flex w-full justify-center rounded-full bg-rose-600 px-4 py-3 text-sm font-bold text-white shadow-md transition hover:bg-rose-700">Вземете своята отстъпка</Link>
-          <button type="button" onClick={() => setOpened(false)} className="mt-4 block w-full text-sm font-medium text-muted hover:text-foreground">Затвори</button>
+        <div className={styles.body}>
+          <p id="discount-gift-description" className={styles.copy}>Получете {pricing.discount.percent}% отстъпка за първата заявка за поддръжка на градина или зелени площи в София. При абонамент — за първия месец, без извозване и материали.</p>
+          <Link href="/bg/calculator?promo=first-garden#calculator-form" onClick={() => setOpened(false)} className={styles.cta}>Вземете своята отстъпка</Link>
+          <button type="button" onClick={() => setOpened(false)} className={styles.decline}>Не, благодаря</button>
         </div>
       </div>
     </div>
