@@ -1,3 +1,4 @@
+import { homeArticles } from "./home-articles";
 import { seasonalPosts } from "./seasonal-posts";
 
 export type SeoPage = {
@@ -106,6 +107,7 @@ export type BlogPost = {
   sections?: readonly { title: string; paragraphs: readonly string[] }[];
   keywords?: readonly string[];
   datePublished?: string;
+  servicePath?: string;
 };
 
 export const winterPost: BlogPost = {
@@ -138,4 +140,4 @@ export const winterPost: BlogPost = {
 };
 
 // Keep the seasonal article first while preserving every existing article URL.
-export const posts: readonly BlogPost[] = [winterPost, ...seasonalPosts, ...gardenPosts];
+export const posts: readonly BlogPost[] = [...homeArticles, winterPost, ...seasonalPosts, ...gardenPosts];

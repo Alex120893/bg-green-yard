@@ -10,10 +10,13 @@ export function WinterVideo({ locale, poster }: { locale: Locale; poster: string
 
   useEffect(() => {
     const video = videoRef.current;
-    if (video && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      // If autoplay is blocked, keep the poster visible.
-      void video.play().catch(() => {});
-    }
+    if (!video || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) void video.play().catch(() => {});
+      else video.pause();
+    }, { threshold: 0.1 });
+    observer.observe(video);
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -24,7 +27,7 @@ export function WinterVideo({ locale, poster }: { locale: Locale; poster: string
       muted
       loop
       playsInline
-      preload="metadata"
+      preload="none"
       poster={poster}
       aria-label={bg ? "Видео от зимната поддръжка на BG GREEN YARD" : "BG GREEN YARD winter maintenance video"}
     >

@@ -33,9 +33,9 @@ assert.equal(new URL(redirect.headers.get('location'), base).pathname, '/bg/blog
 const blog = await get('/bg/blog');
 assert.equal(headingCount(blog), 1);
 const links = [...new Set([...blog.matchAll(/href="(\/bg\/blog\/[^"#?]+)"/g)].map((match) => match[1]))];
-assert.equal(links.length, 11, 'All seven existing articles and four new articles remain linked');
-assert.equal(links[0], `/bg/blog/${slug}`, 'Winter article comes first');
-assert.equal((blog.match(/<article(?:\s|>)/g) ?? []).length, 11);
+assert.equal(links.length, 14, 'All eleven existing articles and three new articles remain linked');
+assert.equal(links[0], '/bg/blog/snegopochistvane-i-zimna-poddruzhka-sofia', 'Newest service articles come first');
+assert.equal((blog.match(/<article(?:\s|>)/g) ?? []).length, 14);
 
 const expectedImages = {
   'grizha-za-trevata-prez-lyatoto': '/images/gallery/ozelenyavane-gradina-sofia-04.jpg',
@@ -78,4 +78,4 @@ const sitemap = await get('/sitemap.xml');
 for (const path of links) assert.ok(sitemap.includes(`${origin}${path}`));
 assert.equal((await fetch(`${base}/bg/blog/not-a-real-post`)).status, 404);
 assert.equal((await fetch(`${base}/en/blog`)).status, 404);
-console.log('Blog: seasonal placement, /blog redirect, eleven illustrated posts, H1/H2, canonical, article metadata, JSON-LD, sitemap and 404 checks passed.');
+console.log('Blog: seasonal placement, /blog redirect, fourteen illustrated posts, H1/H2, canonical, article metadata, JSON-LD, sitemap and 404 checks passed.');
