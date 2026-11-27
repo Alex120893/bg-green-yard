@@ -119,9 +119,9 @@ a, button, input, textarea, select { -webkit-tap-highlight-color: transparent; }
   text-decoration-thickness: 2px;
   text-underline-offset: 6px;
 }
-.garden-header a:focus-visible .brand-logo-name {
-  text-decoration: underline 2px #faf8eb;
-  text-underline-offset: 6px;
+.garden-header .header-logo-link:focus-visible {
+  text-decoration: none;
+  filter: brightness(1.3);
 }
 .garden-header button[aria-controls="mobile-nav"]:focus-visible {
   box-shadow: inset 0 -3px 0 #faf8eb;
