@@ -33,10 +33,19 @@ assert.equal(new URL(redirect.headers.get('location'), base).pathname, '/bg/blog
 const blog = await get('/bg/blog');
 assert.equal(headingCount(blog), 1);
 const links = [...new Set([...blog.matchAll(/href="(\/bg\/blog\/[^"#?]+)"/g)].map((match) => match[1]))];
-assert.equal(links.length, 7, 'All six old articles and the winter article remain linked');
+assert.equal(links.length, 11, 'All seven existing articles and four new articles remain linked');
 assert.equal(links[0], `/bg/blog/${slug}`, 'Winter article comes first');
-assert.equal((blog.match(/<article(?:\s|>)/g) ?? []).length, 7);
+assert.equal((blog.match(/<article(?:\s|>)/g) ?? []).length, 11);
 
+const expectedImages = {
+  'grizha-za-trevata-prez-lyatoto': '/images/gallery/ozelenyavane-gradina-sofia-04.jpg',
+  'kolko-chesto-da-kosim-trevata': '/images/gallery/ozelenyavane-gradina-sofia-04.jpg',
+  'kak-raboti-avtomatichna-polivna-sistema': '/images/gallery/trevna-plosht-sofia.jpg',
+  'treven-chim-ili-zasyavane': '/images/gallery/ozelenyavane-gradina-sofia-04.jpg',
+};
+for (const slug of ['zazimyavane-na-polivna-sistema', 'zashtita-na-rasteniyata-ot-stud', 'proletno-vazstanovyavane-na-trevni-ploshti', 'podryazvane-i-grizha-za-zhiv-plet']) {
+  assert.ok(links.includes(`/bg/blog/${slug}`));
+}
 for (const path of links) {
   const html = await get(path);
   assert.equal(headingCount(html), 1);
@@ -53,6 +62,9 @@ for (const path of links) {
   assert.ok(json.articleBody.length > 100);
   const imagePath = new URL(json.image[0]).pathname;
   assert.ok(existsSync(`public${imagePath}`));
+  const postSlug = path.split('/').pop();
+  if (expectedImages[postSlug]) assert.equal(imagePath, expectedImages[postSlug]);
+  assert.ok(blog.includes(imagePath.replaceAll('/', '%2F')), 'Card uses the same image as the article');
   assert.ok(html.includes(`property="og:image" content="${origin}${imagePath}"`));
   if (path.endsWith(slug)) {
     assert.equal(json.headline, title);
@@ -63,7 +75,7 @@ for (const path of links) {
   }
 }
 const sitemap = await get('/sitemap.xml');
-assert.ok(sitemap.includes(`${origin}/bg/blog/${slug}`));
+for (const path of links) assert.ok(sitemap.includes(`${origin}${path}`));
 assert.equal((await fetch(`${base}/bg/blog/not-a-real-post`)).status, 404);
 assert.equal((await fetch(`${base}/en/blog`)).status, 404);
-console.log('Blog: seasonal placement, /blog redirect, seven illustrated posts, H1/H2, canonical, article metadata, JSON-LD, sitemap and 404 checks passed.');
+console.log('Blog: seasonal placement, /blog redirect, eleven illustrated posts, H1/H2, canonical, article metadata, JSON-LD, sitemap and 404 checks passed.');
