@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { VideoHero } from "@/components/VideoHero";
+import { GardenLighting } from "@/components/GardenLighting";
 import { WinterMaintenance } from "@/components/WinterMaintenance";
 import type { Locale } from "@/lib/i18n";
 import { getMessages } from "@/lib/i18n";
@@ -165,6 +166,7 @@ export default async function HomePage({
       />
 
       <WinterMaintenance locale={locale} />
+      <GardenLighting locale={locale} />
 
       {/* ── Features / Why Us ── */}
       <section className="garden-block garden-block-sage bg-surface py-20 md:py-28">

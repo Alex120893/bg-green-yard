@@ -25,6 +25,7 @@ const bulgarianPaths = [
   "/trevni-ploshti-sofia",
   "/izgrazhdane-na-gradini-sofia",
   "/snegopochistvane-sofia",
+  "/gradinsko-osvetlenie-sofia",
   "/proekti",
   "/blog",
 ];

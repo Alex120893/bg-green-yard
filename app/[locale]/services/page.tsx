@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { LightingIcon } from "@/components/GardenLighting";
+import { lightingPath } from "@/lib/lighting";
 import type { Metadata } from "next";
 import { Reveal } from "@/components/Reveal";
 import type { Locale } from "@/lib/i18n";
@@ -30,6 +32,15 @@ export default async function ServicesPage({
   const t = getMessages(locale);
 
   const services = [
+    {
+      title: locale === "bg" ? "Градинско осветление" : "Garden lighting",
+      body: locale === "bg" ? "Декоративно и функционално LED осветление за алеи, тераси, растения и дворове. Решение и оферта след оглед." : "Decorative and functional LED lighting for paths, terraces, plants and gardens. A tailored proposal after a site visit.",
+      icon: <LightingIcon className="h-9 w-8" />,
+      gradient: "from-lime-50 to-emerald-50",
+      iconBg: "bg-lime-100 text-emerald-700",
+      accentColor: "bg-lime-600",
+      features: locale === "bg" ? ["LED решения", "Алеи и тераси", "Декоративни акценти", "Монтаж след оглед"] : ["LED solutions", "Paths and terraces", "Decorative accents", "Installation after inspection"],
+    },
     {
       ...t.services.green,
       icon: (
@@ -121,7 +132,7 @@ export default async function ServicesPage({
       {/* ── Service Cards ── */}
       <section className="garden-block garden-block-sage bg-surface py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
             {services.map((s, i) => (
               <Reveal key={s.title} delayMs={i * 80}>
                 <article className={`group flex h-full flex-col rounded-3xl bg-gradient-to-br ${s.gradient} p-8 shadow-[0_8px_30px_rgba(0,0,0,0.07)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.1)]`}>
@@ -129,7 +140,7 @@ export default async function ServicesPage({
                     {s.icon}
                   </div>
                   <h2 className="mt-6 text-xl font-bold text-foreground">
-                    {s.title}
+                    {i === 0 ? <Link href={`/bg${lightingPath}`} className="hover:underline">{s.title}</Link> : s.title}
                   </h2>
                   <p className="mt-3 flex-grow text-sm leading-relaxed text-muted">
                     {s.body}
