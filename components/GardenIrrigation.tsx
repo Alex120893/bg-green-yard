@@ -17,8 +17,8 @@ export function GardenIrrigation({ locale }: { locale: Locale }) {
         <div className={styles.panel}>
           <IrrigationIcon className={styles.icon} />
           <div>
-            <p className="!mt-0 !text-xs font-bold uppercase tracking-widest !text-brand">{bg ? "Поливни системи" : "Irrigation systems"}</p>
-            <h2 id="garden-irrigation-title" className="mt-2">{bg ? <>Ефективно поливане<br />за по-зелена градина</> : <>Efficient watering<br />for a greener garden</>}</h2>
+            <h2 id="garden-irrigation-title">{bg ? "Поливни системи" : "Irrigation systems"}</h2>
+            <p className="!mt-3 !text-lg font-semibold !text-brand-dark">{bg ? "Ефективно поливане за по-зелена градина" : "Efficient watering for a greener garden"}</p>
             <p>{bg ? "Проектиране, монтаж и поддръжка на поливни системи — автоматични и подземни, за здрави растения и красива градина през цялата година." : "Design, installation and maintenance of automatic and underground irrigation systems for healthy plants and a beautiful garden throughout the year."}</p>
             <ul>{features.map((feature) => <li key={feature}><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="currentColor" /><path d="m5 10 3 3 7-7" fill="none" stroke="white" strokeWidth="2" /></svg>{feature}</li>)}</ul>
             <div className={styles.actions}>

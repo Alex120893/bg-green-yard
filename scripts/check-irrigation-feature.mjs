@@ -7,6 +7,7 @@ for (const locale of ['bg', 'en']) {
   assert.equal((html.match(/<section[^>]*aria-labelledby="garden-irrigation-title"/g) ?? []).length, 1);
   const block = html.match(/<section[^>]*aria-labelledby="garden-irrigation-title"[\s\S]*?<\/section>/)?.[0];
   assert.ok(block);
+  assert.ok(new RegExp(`<h2[^>]*id="garden-irrigation-title"[^>]*>${locale === "bg" ? "Поливни системи" : "Irrigation systems"}</h2>`).test(block));
   assert.ok(block.includes('data-irrigation-icon="sprinkler"'));
   assert.ok(!block.includes("19-25-55.mp4"));
   assert.ok(block.includes('/video_2026-11-27_19-38-23.mp4'));
