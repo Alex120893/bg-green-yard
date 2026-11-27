@@ -8,14 +8,18 @@ import styles from "./GardenLighting.module.css";
 export function LightingVideo({ locale }: { locale: Locale }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      // Keep the poster if browser policy prevents autoplay.
-      void videoRef.current?.play().catch(() => {});
-    }
+    const video = videoRef.current;
+    if (!video || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) void video.play().catch(() => {});
+      else video.pause();
+    }, { threshold: 0.1 });
+    observer.observe(video);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <video ref={videoRef} className={styles.video} muted loop playsInline preload="metadata" poster={lightingImage} aria-label={locale === "bg" ? "Видео на градинско осветление" : "Garden lighting video"}>
+    <video ref={videoRef} className={styles.video} muted loop playsInline preload="none" poster={lightingImage} aria-label={locale === "bg" ? "Видео на градинско осветление" : "Garden lighting video"}>
       <source src="/video_2026-11-27_19-04-02.mp4" type="video/mp4" />
       {locale === "bg" ? "Вашият браузър не поддържа видео." : "Your browser does not support video."}
     </video>

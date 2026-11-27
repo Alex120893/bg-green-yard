@@ -86,6 +86,7 @@ export default async function PostPage({ params }: { params: Promise<{ locale: s
               </div>
             </section>
           ))}
+          {post.servicePath && <Link href={post.servicePath} className="mt-8 inline-flex min-h-11 items-center font-semibold text-brand underline underline-offset-4">Повече за услугата</Link>}
           <section className="garden-block garden-block-sage mt-12 rounded-3xl p-6 md:p-8">
             <h2 className="text-2xl font-bold">Заявете оглед и индивидуална оферта</h2>
             <p className="mt-3 leading-relaxed text-muted">Разкажете ни за обекта в София. Екипът на BG GREEN YARD ще уточни необходимите дейности и условията след оглед.</p>
