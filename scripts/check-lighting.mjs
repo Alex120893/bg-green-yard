@@ -27,6 +27,9 @@ assert.ok(html.includes(`rel="canonical" href="https://bg-greenyard.com${path}"`
 assert.ok(html.includes('href="/bg/contact?service=lighting"'));
 assert.ok(!html.includes('aria-hidden="true">→</span>'));
 assert.ok(html.includes('lighting-examples'));
+assert.equal((html.match(/<li[^>]*data-lighting-step/g) ?? []).length, 3);
+const steps = html.match(/<ol[^>]*>[\s\S]*?<\/ol>/)?.[0];
+assert.equal((steps?.match(/<svg/g) ?? []).length, 3, 'Each work step has a bulb icon');
 for (const file of ['photo_2026-11-27_19-10-38.jpg', 'photo_2026-11-27_19-10-42.jpg']) {
   assert.ok(html.includes(file));
   assert.equal((await fetch(base + '/' + file, { method: 'HEAD' })).status, 200);
