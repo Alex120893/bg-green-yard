@@ -33,10 +33,10 @@ export default async function LightingPage({ params }: { params: Promise<{ local
           <h2 id="lighting-examples" className="text-3xl font-bold">Идеи за осветяване на външни пространства</h2>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             {[
-              { id: "39465540", alt: "Декоративно осветена градинска пътека през нощта" },
-              { id: "34469281", alt: "Вечерна алея сред зеленина с градинско осветление" },
-            ].map((photo) => <div key={photo.id} className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-surface">
-              <Image src={`https://images.pexels.com/photos/${photo.id}/pexels-photo-${photo.id}.jpeg?auto=compress&cs=tinysrgb&w=1200`} alt={photo.alt} fill unoptimized className="object-cover" />
+              { src: "/photo_2026-11-27_19-10-38.jpg", alt: "Декоративно осветена градинска пътека през нощта" },
+              { src: "/photo_2026-11-27_19-10-42.jpg", alt: "Вечерна алея сред зеленина с градинско осветление" },
+            ].map((photo) => <div key={photo.src} className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-surface">
+              <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
             </div>)}
           </div>
         </div>

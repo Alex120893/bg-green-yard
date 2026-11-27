@@ -27,6 +27,11 @@ assert.ok(html.includes(`rel="canonical" href="https://bg-greenyard.com${path}"`
 assert.ok(html.includes('href="/bg/contact?service=lighting"'));
 assert.ok(!html.includes('aria-hidden="true">→</span>'));
 assert.ok(html.includes('lighting-examples'));
+for (const file of ['photo_2026-11-27_19-10-38.jpg', 'photo_2026-11-27_19-10-42.jpg']) {
+  assert.ok(html.includes(file));
+  assert.equal((await fetch(base + '/' + file, { method: 'HEAD' })).status, 200);
+}
+assert.ok(!html.includes('images.pexels.com'));
 for (const locale of ['bg', 'en']) {
   const form = await get(`/${locale}/contact?service=lighting`);
   assert.ok(/<option[^>]*(?:value="lighting"[^>]*selected|selected[^>]*value="lighting")/.test(form), 'Lighting is preselected');
