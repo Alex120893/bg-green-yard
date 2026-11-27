@@ -10,7 +10,7 @@ const block = html.match(/<section[^>]*aria-labelledby="home-blog-title"[\s\S]*?
 assert.ok(block);
 assert.equal((block.match(/<article/g) ?? []).length, 3);
 assert.equal((block.match(/<time /g) ?? []).length, 3);
-assert.ok(block.includes('Полезно за вашата градина'));
+assert.ok(block.includes('Блог за градини и сезонна поддръжка'));
 assert.ok(block.includes('Всички статии'));
 for (const slug of ['snegopochistvane-i-zimna-poddruzhka-sofia', 'gradinsko-osvetlenie-idei-za-dvora', 'polivni-sistemi-planirane-na-gradinata']) {
   assert.ok(block.includes(`/bg/blog/${slug}`));
@@ -38,3 +38,5 @@ assert.ok(html.includes('Изчислете цената'));
 assert.ok(html.includes('Изчислете ориентировъчната стойност на избраните услуги за Вашата градина.'));
 
 assert.ok(!html.includes('За индивидуални проекти изготвяме персонална оферта след оглед.'));
+
+assert.ok(block.includes("Професионален поглед към снегопочистването, зимната поддръжка и грижата за зелените пространства в София — през всеки сезон."));
