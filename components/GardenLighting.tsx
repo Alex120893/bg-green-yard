@@ -1,7 +1,7 @@
-import Image from "next/image";
+import { LightingVideo } from "./LightingVideo";
 import Link from "next/link";
 import type { Locale } from "@/lib/i18n";
-import { lightingFeatures, lightingImage, lightingPath } from "@/lib/lighting";
+import { lightingFeatures, lightingPath } from "@/lib/lighting";
 import styles from "./GardenLighting.module.css";
 
 export function LightingIcon({ className }: { className?: string }) {
@@ -14,7 +14,7 @@ export function GardenLighting({ locale }: { locale: Locale }) {
   return (
     <section className={styles.section} aria-labelledby="garden-lighting-title">
       <div className={styles.card}>
-        <div className={styles.photo}><Image src={lightingImage} alt={bg ? "Градинска алея с декоративно вечерно осветление" : "Garden path with decorative evening lighting"} fill sizes="(min-width: 768px) 50vw, 100vw" className={styles.image} /></div>
+        <div className={styles.photo}><LightingVideo locale={locale} /></div>
         <div className={styles.panel}>
           <LightingIcon className={styles.icon} />
           <div>
