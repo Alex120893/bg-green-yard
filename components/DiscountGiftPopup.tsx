@@ -50,7 +50,7 @@ export function DiscountGiftPopup() {
           <h2 id="discount-gift-title" className={styles.title}>Вземете<br />отстъпката!</h2>
         </div>
         <div className={styles.body}>
-          <p id="discount-gift-description" className={styles.copy}>Получете {pricing.discount.percent}% отстъпка за първата заявка за поддръжка на градина или зелени площи в София. При абонамент — за първия месец, без извозване и материали.</p>
+          <p id="discount-gift-description" className={styles.copy}>Получете {pricing.discount.percent}% отстъпка за първата заявка за поддръжка на градина или зелени площи</p>
           <Link href="/bg/calculator?promo=first-garden#calculator-form" onClick={() => setOpened(false)} className={styles.cta}>Вземете своята отстъпка</Link>
           <button type="button" onClick={() => setOpened(false)} className={styles.decline}>Не, благодаря</button>
         </div>
